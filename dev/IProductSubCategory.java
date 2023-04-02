@@ -1,3 +1,9 @@
 public interface IProductSubCategory {
-//    Yuval
+
+    int amount = 0;
+    String unit = null;
+
+    public int getAmount();
+    public int getUnit();
+
 }
