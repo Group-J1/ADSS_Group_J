@@ -9,5 +9,13 @@ public class Store {
     public Shelf[] getShelves() {
         return shelves;
     }
+
+    public void updateStoreShelvesNumber(int newNumberOfShelves){
+        Shelf[] newShelves = new Shelf[newNumberOfShelves];
+        for(int i = 0; i<this.shelves.length; i++){
+            newShelves[i] = this.shelves[i];
+        }
+        this.shelves = newShelves;
+    }
 }
 
