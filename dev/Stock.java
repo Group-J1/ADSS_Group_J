@@ -17,6 +17,7 @@ public class Stock {
     public Stock() {
         this.stock = new HashMap<>();
     }
+
     public Integer getGreenLine(Product product){
        Integer[] val = stock.get(product);
        if (val == null){
@@ -55,7 +56,7 @@ public class Stock {
         if(val == null){
             return -1;      // if -1 the item was not found in the stock
         }
-        int quantity = product.getQuantity();       // getQuantity is form Product
+        int quantity = product.getStorageQuantity() + product.getStoreQuantity();
         if(quantity <= val[2]){
             status = 1;
         }

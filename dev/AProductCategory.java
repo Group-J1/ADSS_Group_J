@@ -1,21 +1,14 @@
-public abstract class AProductCategory extends AProduct implements IProductSubCategory{
+public abstract class AProductCategory {
 
-    private String name;
+    protected String name;
     private double discount;
-    public int getAmount() {
-        return amount;
-    }
 
-    public int getUnit() {
-        return amount;
+    public AProductCategory(String name) {
+        this.name = name;
     }
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public double getDiscount() {

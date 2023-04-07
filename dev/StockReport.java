@@ -22,7 +22,7 @@ public class StockReport extends Report{
             Set<Product> allProducts = itemsInStock.keySet();
             for (Product product : allProducts) {
 //            itemsInStock.forEach((key, value) -> {
-                if (product.getCategoryName().equals(category)) {
+                if (product.getCategory().getName().equals(category)) {
                     newCategory.put(product.getName(), product.getStoreQuantity() + product.getStorageQuantity());
                 }
             }
