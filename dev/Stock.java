@@ -1,5 +1,4 @@
-import java.util.HashMap;
-
+import java.util.*;
 
 /**
  * here is the stock.
@@ -13,7 +12,7 @@ import java.util.HashMap;
 
 
 public class Stock {
-    private  HashMap<Product ,Integer[] > stock;
+    private HashMap<Product ,Integer[] > stock;
 
     public Stock() {
         this.stock = new HashMap<>();
@@ -67,5 +66,9 @@ public class Stock {
             status = 3;
         }
             return status;
+    }
+
+    public HashMap<Product ,Integer[] > getItemsInStock() {
+        return stock;
     }
 }

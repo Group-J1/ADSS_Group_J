@@ -2,7 +2,7 @@ import java.util.*;
 
 public class StockReport extends Report{
     // < products category name, <product name (subCategory) and size (subSubCategory), quantity> >
-    protected Map<String, Map<String, Integer>> products;
+    protected HashMap<String, Map<String, Integer>> products;
 
     public StockReport(Stock stock, ArrayList <String> categories) {
 //        Date currentDate = new Date();
@@ -34,14 +34,17 @@ public class StockReport extends Report{
     @Override
     public String toString() {
         StringBuilder stringBuilderStockReport = new StringBuilder();
+        String title = "";
+        String productInString = "";
         for (String category : products.keySet()) {
-            System.out.println("Category: " + category);
+            title = "Category: " + category;
+            stringBuilderStockReport.append(title).append(System.lineSeparator());
             Map<String, Integer> categoryData = products.get(category);
             for (String dataName : categoryData.keySet()) {
                 Integer dataQuantity = categoryData.get(dataName);
-                System.out.println("- " + dataName + ": " + dataQuantity);
+                productInString = "- " + dataName + ": " + dataQuantity;
+                stringBuilderStockReport.append(productInString).append(System.lineSeparator());
             }
-            System.out.println();
         }
         return stringBuilderStockReport.toString();
     }

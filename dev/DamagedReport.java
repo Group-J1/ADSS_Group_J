@@ -3,7 +3,7 @@ import java.util.*;
 public class DamagedReport extends Report {
 
     // < product name, <product id (barCode/ id), cause> >
-    protected Map<String, Map<Integer, String>> products;
+    protected HashMap<String, Map<Integer, String>> products;
 
     public DamagedReport(Stock stock) {
 //        Date currentDate = new Date();
@@ -31,14 +31,17 @@ public class DamagedReport extends Report {
     @Override
     public String toString() {
         StringBuilder stringBuilderStockReport = new StringBuilder();
+        String productInString = "";
+        String productDetails = "";
         for (String productName : products.keySet()) {
-            System.out.println("Product: " + productName);
+            productInString = "Product: " + productName;
+            stringBuilderStockReport.append(productInString).append(System.lineSeparator());
             Map<Integer, String> productNameData = products.get(productName);
             for (Integer dataBarCode : productNameData.keySet()) {
                 String dataCause = productNameData.get(dataBarCode);
-                System.out.println("- " + dataBarCode + ": " + dataCause);
+                productDetails = "- " + dataBarCode + ": " + dataCause;
+                stringBuilderStockReport.append(productDetails).append(System.lineSeparator());
             }
-            System.out.println();
         }
         return stringBuilderStockReport.toString();
     }

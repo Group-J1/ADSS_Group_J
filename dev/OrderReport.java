@@ -2,7 +2,7 @@ import java.util.*;
 
 public class OrderReport extends Report {
     // <product name (subCategory) and size (subSubCategory), quantity>
-    protected Map<String, Integer> products;
+    protected HashMap<String, Integer> products;
 
     public OrderReport(Stock stock) {
 //        Date currentDate = new Date();
@@ -27,10 +27,11 @@ public class OrderReport extends Report {
     @Override
     public String toString() {
         StringBuilder stringBuilderStockReport = new StringBuilder();
+        String productInString = "";
         for (String productName : products.keySet()) {
             Integer dataQuantity = products.get(productName);
-            System.out.println("- " + productName + ": " + dataQuantity);
-            System.out.println();
+            productInString = "- " + productName + ": " + dataQuantity;
+            stringBuilderStockReport.append(productInString).append(System.lineSeparator());
         }
         return stringBuilderStockReport.toString();
     }
