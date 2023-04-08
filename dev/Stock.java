@@ -6,16 +6,19 @@ import java.util.*;
  *       1.Integer getGreenLine(Product)
  *       2.Integer getRedLine(Product)
  *       3.Integer getBlackLine(Product)
- *       4.void addProductToStock(Product , Integer green, Integer red, Integer black)
+ *       4.void addNewProductToStock(Product , Integer green, Integer red, Integer black)
  *       5.Integer getStatusInStock(Product )
+ *       6. HashMap<Product ,Integer[] > getItemsInStock()
  */
 
 
 public class Stock {
     private HashMap<Product ,Integer[] > stock;
+    private  HashMap<String, Integer> categories;
 
     public Stock() {
         this.stock = new HashMap<>();
+        this.categories = new HashMap<>();
     }
 
     public Integer getGreenLine(Product product){
@@ -42,13 +45,25 @@ public class Stock {
         return val[2];
     }
 
-    public void addProductToStock(Product product, Integer green, Integer red, Integer black){
+    public void addNewProductToStock(Product product, Integer green, Integer red, Integer black){
         if (green < red || red  < black || black < 1 || stock.get(product) != null){
             return;
+        }
+        String cat = product.getCategory().getName();
+        if(categories.containsKey(cat)){
+            categories.replace(cat,categories.get(cat) + 1 );
+        }
+        else{
+            categories.put(cat,1);
         }
         Integer[] val = {green,red,black};
         stock.put(product, val);
 
+    }
+
+    public ArrayList<String> getCategories(){
+        ArrayList<String> lst = new ArrayList<>(categories.keySet());
+        return lst;
     }
 
     public int getStatusInStock(Product product){
@@ -68,6 +83,11 @@ public class Stock {
             status = 3;
         }
             return status;
+    }
+
+    public ArrayList<Product> getListOfProducts(){
+        ArrayList<Product> products = new ArrayList<>(stock.keySet());
+        return products;
     }
 
     public HashMap<Product ,Integer[] > getItemsInStock() {

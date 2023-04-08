@@ -1,38 +1,35 @@
-import java.util.HashMap;
+import java.util.ArrayList;
 
 
-/**
- * here is the Shortages:
- *      1.void addProductToShortages(Product, Integer)
- *      2.void resetMissingProduct(Product)
- *      3.void updateMissingValue(Product, Integer)
- *      4.Integer getMissingValue(Product)
- */
+
 public class Shortages {
-    private  HashMap<Product,Integer> missing;
+    private ArrayList<Product> missing;
 
     public Shortages() {
-        this.missing = new HashMap<>();
+        this.missing = new ArrayList<>();
     }
 
-    public void addProductToShortages(Product product, Integer miss){
-        missing.putIfAbsent(product, miss);
-    }
-
-    public void resetMissingProduct(Product product){
-        missing.replace(product,0);
-    }
-
-    public void updateMissingValue(Product product,Integer newVal){
-        missing.replace(product,newVal);
-    }
-
-    public Integer getMissingValue(Product product){
-        int val = -1;
-        if(missing.get(product) != null){
-            val = missing.get(product);
+    public void addProductToShortages(Product product){
+        if(!missing.contains(product)){
+            missing.add(product);
         }
-        return val;
+    }
+
+
+
+    public boolean isMissing(Product product){
+        return missing.contains(product);
+    }
+
+    public void updateMissing(ArrayList<Product> products){
+        ArrayList<Product> newMissing = new ArrayList<>();
+        for(Product product: products){
+            if(product.getStoreQuantity() == 0 && product.getStorageQuantity() == 0){
+                newMissing.add(product);
+            }
+        }
+        this.missing = newMissing;
+
     }
 
 }
