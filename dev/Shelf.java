@@ -1,19 +1,25 @@
 import java.util.ArrayList;
 public class Shelf {
-    private ArrayList<Product> items;
+    private Product[] items;
+    private int counter;
 
-    public Shelf() {
-        items = new ArrayList<>();
+
+    public Shelf(int numberOfPlaces) {
+        items = new Product[numberOfPlaces];
+        counter = 0;
     }
 
-    public ArrayList<Product> getItems() {
+    public Product[] getItems() {
         return items;
     }
-    public void addItemToShelf(Product newItem){
-        this.items.add(newItem);
+    public void addItemToShelf(Product newItem, int indexInShelfIndex){
+        this.items[indexInShelfIndex] = newItem;
+        counter++;
     }
-    public int numberOfItems(){
-        return items.size();
+    public int nextFreeIndex(){
+        if(counter < 30)
+            return counter;
+        return -1;    //if no space in the shelf.
     }
 
 

@@ -48,6 +48,7 @@ public class Stock {
         }
         Integer[] val = {green,red,black};
         stock.put(product, val);
+
     }
 
     public int getStatusInStock(Product product){

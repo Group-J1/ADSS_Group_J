@@ -1,5 +1,3 @@
-import jdk.jfr.Category;
-
 import java.util.Date;
 import java.util.HashMap;
 
@@ -19,7 +17,11 @@ public class Product {
     // 1 liter
     private AProductSubCategory subSubCategory;
 
-    private int location;
+    private Location storageLocation;
+
+    private Location storeLocation;
+
+
     private String manufacturer;
     private int storeQuantity;
     private int storageQuantity;
@@ -34,14 +36,15 @@ public class Product {
 
     private HashMap<Integer, String> damagedProducts;
 
-    public Product(AProductCategory category, AProductCategory subCategory, AProductSubCategory subSubCategory, int location,
-                   String manufacturer, int quantity, int minimumQuantity, double weight, Date expiration) {
+    public Product(AProductCategory category, AProductCategory subCategory, AProductSubCategory subSubCategory, Location storageLocation,
+                   Location storeLocation, String manufacturer, int quantity, int minimumQuantity, double weight, Date expiration) {
         // TODO: finish constructor
         this.name = subCategory.getName() + subSubCategory.getName();
         this.category = category;
         this.subCategory = subCategory;
         this.subSubCategory = subSubCategory;
-        this.location = location;
+        this.storageLocation = storageLocation;
+        this.storeLocation = storeLocation;
         this.manufacturer = manufacturer;
         if (quantity > 30) {
             this.storeQuantity = 30;
@@ -76,12 +79,21 @@ public class Product {
         return subSubCategory;
     }
 
-    public int getLocation() {
-        return location;
+    public Location getStoreLocation() {
+        return storeLocation;
     }
 
-    public void setLocation(int location) {
-        this.location = location;
+    public void setStoreLocation(Location storeLocation) {
+        this.storeLocation = storeLocation;
+    }
+
+    public Location getStorageLocation() {
+        return storageLocation;
+    }
+
+
+    public void setStorageLocation(Location storageLocation) {
+        this.storageLocation = storageLocation;
     }
 
     public String getManufacturer() {
