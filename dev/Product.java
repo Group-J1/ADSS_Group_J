@@ -188,7 +188,28 @@ public class Product {
         priority = stock.getStatusInStock(this);
     }
 
+    public void setQuantity(int addedQuantity){
+        addToStorage(addedQuantity);
+        if(getStoreQuantity() < 30){
+            int neededQuentity = 30 - getStoreQuantity();
+            addToStore(neededQuentity);
+
+
+        }
+    }
+
+    public boolean getUniqeProduct(Integer barcode){
+        return(expirationDates.containsKey(barcode));
+    }
+
+
+
     public void addMoreItemsToProduct(int quantity) {
         // TODO : finish that method
+    }
+
+
+    public void markAsDamaged(Integer barcode, String reason){
+        damagedProducts.put(barcode,reason);
     }
 }
