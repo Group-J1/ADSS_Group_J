@@ -7,4 +7,8 @@ public class Chain {
         markets = new Market[numberOfMarkets];
     }
     public Market getMarketByIndex(int index){return markets[index];}
+
+    public int getNumberOfMarkets() {
+        return numberOfMarkets;
+    }
 }

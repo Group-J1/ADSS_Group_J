@@ -18,10 +18,6 @@ import java.text.SimpleDateFormat;
  */
 
 
-
-
-
-
 public class UI {
     public void startMenu() {
         Chain chain;
@@ -40,7 +36,7 @@ public class UI {
         running = true;
         while (running){
             String categoryStr,subCategoryStr,subSubCategoryStr,manufacturer,productID,reason;
-            int quantity,minQuantity,uniqeCode;
+            int quantity,minQuantity,uniqueCode;
             double weight,discount;
             int marketNum;
             Date expirationDate;
@@ -123,7 +119,9 @@ public class UI {
                             +product.getSubSubCategory().getName()+ " you want to add? ");
                     quantity = input.nextInt();
 
-                    product.setQuantity(quantity);
+                    expirationDate = dateInput();
+
+                    product.addMoreItemsToProduct(quantity, expirationDate);
 
                     break;
                 case '3':
@@ -202,14 +200,14 @@ public class UI {
                     }
                     System.out.println("What is the unique code of the item? ");
                     // the unique id for each instance of the product
-                    uniqeCode = input.nextInt();
-                    if(defected.getUniqeProduct(uniqeCode)){
+                    uniqueCode = input.nextInt();
+                    if(defected.getUniqueProduct(uniqueCode)){
                         System.out.println("What is the Problem with the product? ");
                         reason = input.next();
-                        defected.markAsDamaged(uniqeCode,reason);
+                        defected.markAsDamaged(uniqueCode,reason);
                     }
                     else {
-                        System.out.println("the Uniqe Code is invalid!");
+                        System.out.println("the Unique Code is invalid!");
                     }
 
                     break;

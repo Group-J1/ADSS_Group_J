@@ -1,9 +1,6 @@
-import java.util.Date;
-import java.util.HashMap;
+import java.util.*;
 
 public class Product {
-    //TODO finish this class
-
     static int productsCounter = 0;
 
     private String name;
@@ -176,6 +173,10 @@ public class Product {
         return catalogNumber;
     }
 
+    public void setCatalogNumber() {
+        catalogNumber = UniqueStringGenerator.generateUniqueString(name);
+    }
+
     public HashMap<Integer, Date> getExpirationDates() {
         return expirationDates;
     }
@@ -188,28 +189,72 @@ public class Product {
         priority = stock.getStatusInStock(this);
     }
 
-    public void setQuantity(int addedQuantity){
-        addToStorage(addedQuantity);
-        if(getStoreQuantity() < 30){
-            int neededQuentity = 30 - getStoreQuantity();
-            addToStore(neededQuentity);
+    //    public void setQuantity(int addedQuantity){
+//        addToStorage(addedQuantity);
+//        if(getStoreQuantity() < 30){
+//            int neededQuentity = 30 - getStoreQuantity();
+//            addToStore(neededQuentity);
+//
+//
+//        }
+//    }
 
-
-        }
-    }
-
-    public boolean getUniqeProduct(Integer barcode){
+    public boolean getUniqueProduct(Integer barcode){
         return(expirationDates.containsKey(barcode));
     }
 
-
-
-    public void addMoreItemsToProduct(int quantity) {
-        // TODO : finish that method
+    public void addMoreItemsToProduct(int quantity, Date expiration) {
+        addToStorage(quantity);
+        // store quantity between 0 - 29
+        if (storeQuantity < 30) {
+            if (storeQuantity + storageQuantity <= 30) {
+                addToStore(storageQuantity);
+            }
+            else {
+                int howMuchToAddToStore = 30 - storeQuantity;
+                addToStore(howMuchToAddToStore);
+            }
+        }
+        for (int i = 0; i < quantity; i++) {
+            this.expirationDates.put(++productsCounter, expiration);
+        }
     }
 
+    public void sellMultipleItemsFromProduct(int quantity) {
+        if (storeQuantity < quantity) {
+            return;
+        }
+        List<Date> datesList = new ArrayList<>(expirationDates.values());
+        Collections.sort(datesList);
+        int count = 0;
+        for (int i = 0; i < quantity; i++) {
+            Date smallestDate = datesList.get(i);
+            for (Map.Entry<Integer, Date> entry : expirationDates.entrySet()) {
+                if (entry.getValue().equals(smallestDate)) {
+                    expirationDates.remove(entry.getKey());
+                    count++;
+                    if (count == quantity) {
+                        break;
+                    }
+                }
+            }
+            if (count == quantity) {
+                break;
+            }
+        }
+        storeQuantity -= quantity;
+        // TODO: decide with freshi if we want to refill store from storage
+//        if (storeQuantity + storageQuantity <= 30) {
+//            addToStore(storageQuantity);
+//        }
+//        else {
+//            int howMuchToAddToStore = 30 - storeQuantity;
+//            addToStore(howMuchToAddToStore);
+//        }
+    }
 
     public void markAsDamaged(Integer barcode, String reason){
         damagedProducts.put(barcode,reason);
     }
+
 }
