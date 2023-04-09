@@ -1,8 +1,8 @@
 public class Store {
 
     private Shelf[] shelves;
-    int currShelf;
-    int amountOfShelves;
+    private int currShelf;
+    private int amountOfShelves;
 
     public Store(int numberOfShelves) {
         this.shelves = new Shelf[numberOfShelves];
@@ -14,6 +14,13 @@ public class Store {
         return shelves;
     }
 
+    public int getCurrShelf() {
+        return currShelf;
+    }
+
+    public int getAmountOfShelves() {
+        return amountOfShelves;
+    }
 
     public Location addProductToStore(Product product){
         Location loc = null;

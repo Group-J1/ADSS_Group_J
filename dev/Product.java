@@ -33,9 +33,9 @@ public class Product {
 
     private HashMap<Integer, String> damagedProducts;
 
-    public Product(AProductCategory category, AProductCategory subCategory, AProductSubCategory subSubCategory, Location storageLocation,
-                   Location storeLocation, String manufacturer, int quantity, int minimumQuantity, double weight, Date expiration) {
-        // TODO: finish constructor
+    public Product(AProductCategory category, AProductCategory subCategory, AProductSubCategory subSubCategory,
+                   Location storageLocation, Location storeLocation, String manufacturer, int quantity,
+                   int minimumQuantity, double weight, Date expiration) {
         this.name = subCategory.getName() + subSubCategory.getName();
         this.category = category;
         this.subCategory = subCategory;
@@ -243,14 +243,13 @@ public class Product {
             }
         }
         storeQuantity -= quantity;
-        // TODO: decide with freshi if we want to refill store from storage
-//        if (storeQuantity + storageQuantity <= 30) {
-//            addToStore(storageQuantity);
-//        }
-//        else {
-//            int howMuchToAddToStore = 30 - storeQuantity;
-//            addToStore(howMuchToAddToStore);
-//        }
+        if (storeQuantity + storageQuantity <= 30) {
+            addToStore(storageQuantity);
+        }
+        else {
+            int howMuchToAddToStore = 30 - storeQuantity;
+            addToStore(howMuchToAddToStore);
+        }
     }
 
     public void markAsDamaged(Integer barcode, String reason){

@@ -1,15 +1,15 @@
-public abstract class AProductSubCategory extends  AProductCategory{
+public class AProductSubCategory extends  AProductCategory{
 
-    private int amount;
+    private double amount;
     private String unit;
 
-    public AProductSubCategory(int amount, String unit) {
+    public AProductSubCategory(double amount, String unit) {
         super((amount + unit));
         this.amount = amount;
         this.unit = unit;
     }
 
-    public int getAmount() { return amount;}
+    public double getAmount() { return amount;}
     public String getUnit() { return unit;}
 
 }

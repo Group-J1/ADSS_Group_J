@@ -1,7 +1,7 @@
 public class Storage {
     private Shelf[] shelves;
-    int currShelf;
-    int amountOfShelves;
+    private int currShelf;
+    private int amountOfShelves;
 
     public Storage(int numberOfShelves) {
         this.shelves = new Shelf[numberOfShelves];
@@ -12,6 +12,14 @@ public class Storage {
 
     public Shelf[] getShelves() {
         return shelves;
+    }
+
+    public int getCurrShelf() {
+        return currShelf;
+    }
+
+    public int getAmountOfShelves() {
+        return amountOfShelves;
     }
 
     public Location addProductToStorage(Product product){
@@ -35,10 +43,6 @@ public class Storage {
         return loc;
     }
 
-
-
-
-
     public void updateStorageShelvesNumber(int newNumberOfShelves){
         Shelf[] newShelves = new Shelf[newNumberOfShelves];
         for(int i = 0; i<this.shelves.length; i++){
@@ -46,5 +50,4 @@ public class Storage {
         }
         this.shelves = newShelves;
     }
-
 }

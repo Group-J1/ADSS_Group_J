@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 
-
-
 public class Shortages {
     private ArrayList<Product> missing;
 
@@ -15,8 +13,6 @@ public class Shortages {
         }
     }
 
-
-
     public boolean isMissing(Product product){
         return missing.contains(product);
     }
@@ -29,7 +25,9 @@ public class Shortages {
             }
         }
         this.missing = newMissing;
-
     }
 
+    public ArrayList<Product> getMissing() {
+        return missing;
+    }
 }

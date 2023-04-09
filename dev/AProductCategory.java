@@ -1,4 +1,4 @@
-public abstract class AProductCategory {
+public class AProductCategory {
 
     protected String name;
     private double discount;
