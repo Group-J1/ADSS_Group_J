@@ -10,7 +10,7 @@ class ShelfTest {
     Shelf shelf = new Shelf(30);
     Product[] example;
     AProductCategory category = new AProductCategory("Milk Products");
-    AProductSubCategory subCategory = new AProductCategory("Milk 3%");
+    AProductCategory subCategory = new AProductCategory("Milk 3%");
     AProductSubCategory subSubCategory = new AProductSubCategory(1,"Litter") ;
     Location storeLocation = new Location(3,3);
     Location storageLocation = new Location(2,2);

@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class StorageTest {
 
     AProductCategory category = new AProductCategory("Milk Products");
-    AProductSubCategory subCategory = new AProductCategory("Milk 3%");
+    AProductCategory subCategory = new AProductCategory("Milk 3%");
     AProductSubCategory subSubCategory = new AProductSubCategory(1,"Litter") ;
 
     Location storeLocation = new Location(3,3);
@@ -18,7 +18,7 @@ class StorageTest {
 
 
     AProductCategory category1 = new AProductCategory("Meat");
-    AProductSubCategory subCategory1 = new AProductCategory("Burgers");
+    AProductCategory subCategory1 = new AProductCategory("Burgers");
     AProductSubCategory subSubCategory1 = new AProductSubCategory(1,"Kg") ;
 
     Location storeLocation1 = new Location(3,3);
