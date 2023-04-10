@@ -6,7 +6,12 @@ public class DamagedReport extends Report {
     protected HashMap<String, Map<Integer, String>> products;
 
     public DamagedReport(Stock stock) {
-//        Date currentDate = new Date();
+        /**
+         * Constructs a new DamagedReport object based on the given Stock object.
+         * @param stock The Stock object to generate the DamagedReport from.
+         * @return None
+         * @throws None
+         */
         products = new HashMap<>();;
         this.date = new Date();;
         this.id = ++reportsCounter;
@@ -14,8 +19,13 @@ public class DamagedReport extends Report {
     }
 
     public void addProductsToDamagedReport(Stock stock) {
+        /**
+         * Adds the damaged products from the given Stock object to the current DamagedReport object.
+         * @param stock The Stock object to extract damaged products from.
+         * @return None
+         * @throws None
+         */
         Map<Product, Integer []> itemsInStock = stock.getItemsInStock();
-//            Map<String, Integer> newCategory = new HashMap<String, Integer>();
         Map<Integer, String> newProduct = new HashMap<>();
         Set<Product> allProducts = itemsInStock.keySet();
         for (Product product : allProducts) {
@@ -32,6 +42,12 @@ public class DamagedReport extends Report {
 
     @Override
     public String toString() {
+        /**
+         * Returns a string representation of the current DamagedReport object.
+         * @param None.
+         * @return A string containing the list of products with their associated damaged products and causes, separated by new lines. If the DamagedReport object doesn't contain any products, the function returns a string stating that there are no damaged items.
+         * @throws None
+         */
         StringBuilder stringBuilderStockReport = new StringBuilder();
         String productInString = "";
         String productDetails = "";

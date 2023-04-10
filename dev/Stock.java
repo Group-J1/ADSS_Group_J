@@ -19,20 +19,41 @@ public class Stock {
     private ArrayList<AProductCategory> categoriesAsInstances;
 
     public Stock() {
+        /**
+         * Constructs a new Stock object.
+         */
         this.stock = new HashMap<>();
         this.categoriesAsStrings = new HashMap<>();
         this.categoriesAsInstances = new ArrayList<>();
     }
 
     public Integer getGreenLine(Product product){
-       Integer[] val = stock.get(product);
-       if (val == null){
+        /**
+         * Returns the green line value for the specified product.
+         *
+         * This method returns the green line value for the specified Product object. If the product is not found in the stock map,
+         * the method returns -1.
+         *
+         * @param product the Product object to get the green line value for
+         * @return the green line value for the specified product, or -1 if the product is not found in the stock map
+         */
+        Integer[] val = stock.get(product);
+        if (val == null){
             return  -1;     // if return -1 the item not in the Map
-       }
-       return val[0];
+        }
+        return val[0];
     }
 
     public Integer getRedLine(Product product){
+        /**
+         * Returns the red line value for the specified product.
+         *
+         * This method returns the red line value for the specified Product object. If the product is not found in the stock map,
+         * the method returns -1.
+         *
+         * @param product the Product object to get the red line value for
+         * @return the red line value for the specified product, or -1 if the product is not found in the stock map
+         */
         Integer[] val = stock.get(product);
         if (val == null){
             return  -1;     // if return -1 the item not in the Map
@@ -41,6 +62,11 @@ public class Stock {
     }
 
     public Integer getBlackLine(Product product){
+        /**
+         * Returns the black line value for the specified product.
+         * @param product the Product object to get the black line value for
+         * @return the black line value for the specified product, or -1 if the product is not found in the stock map
+         */
         Integer[] val = stock.get(product);
         if (val == null){
             return  -1;     // if return -1 the item not in the Map
@@ -49,6 +75,17 @@ public class Stock {
     }
 
     public void addNewProductToStock(Product product, Integer green, Integer red, Integer black){
+        /**
+         * Adds a new product to the stock.
+         *
+         * This method adds a new product to the stock with the specified green, red, and black line values. If any of the line values
+         * are invalid or the product is already in the stock, the method does nothing.
+         *
+         * @param product the Product object to add to the stock
+         * @param green the green line value for the product
+         * @param red the red line value for the product
+         * @param black the black line value for the product
+         */
         if (green < red || red  < black || black < 1 || stock.get(product) != null){
             return;
         }
@@ -66,11 +103,23 @@ public class Stock {
     }
 
     public ArrayList<String> getCategories(){
+        /**
+         * Returns a list of categories in the stock.
+         * @return a list of categories as strings
+         */
         ArrayList<String> lst = new ArrayList<>(categoriesAsStrings.keySet());
         return lst;
     }
 
     public int getStatusInStock(Product product){
+        /**
+         * Returns the status of the specified product in the stock.
+         *
+         * This method returns an integer representing the status of the specified product in the stock. The status is determined based on the quantity of the product in storage and store, and the red, green, and black lines of the product.
+         *
+         * @param product the product to check the status for
+         * @return an integer representing the status of the product in the stock: 1 if the product quantity is below the black line, 2 if the product quantity is above the black line but below the red line, 3 if the product quantity is above the red line, and -1 if the product was not found in the stock
+         */
         int status = 0;
         Integer[] val = stock.get(product);
         if(val == null){
@@ -90,6 +139,12 @@ public class Stock {
     }
 
     public Product findProductByCatalogNumber(String catalogNumber) {
+        /**
+         * Finds a product in the stock by its catalog number.
+         *
+         * @param catalogNumber the catalog number of the product to find
+         * @return the product with the given catalog number, or null if not found
+         */
         for (Product product : stock.keySet()) {
             if (product.getCatalogNumber().equals(catalogNumber)) {
                 return product;
@@ -108,10 +163,26 @@ public class Stock {
     }
 
     public boolean isCategoryExist(String categoryStr) {
+        /**
+         * Checks if a given category exists in the stock.
+         *
+         * @param categoryStr a string representing the name of the category to search for
+         * @return true if the category exists in the stock, false otherwise
+         */
         return categoriesAsStrings.containsKey(categoryStr);
     }
 
     public AProductCategory getAProductCategory(String categoryStr) {
+        /**
+         * Given a string representing a product category, returns an instance of
+         * AProductCategory that corresponds to that category. Searches through the
+         * list of categories currently in stock and returns the first match. If no
+         * category matches the given string, returns null.
+         *
+         * @param categoryStr a string representing the name of the category to look for
+         * @return an instance of AProductCategory representing the matching category,
+         *         or null if no match is found
+         */
         for (AProductCategory category : categoriesAsInstances) {
             if (category.getName().equals(categoryStr)) {
                 return category;

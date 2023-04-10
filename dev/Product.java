@@ -36,6 +36,20 @@ public class Product {
     public Product(AProductCategory category, AProductCategory subCategory, AProductSubCategory subSubCategory,
                    Location storageLocation, Location storeLocation, String manufacturer, int quantity,
                    int minimumQuantity, double weight, Date expiration) {
+        /**
+         * Constructs a new Product object with the given parameters.
+         *
+         * @param category         the category of the product
+         * @param subCategory      the sub-category of the product
+         * @param subSubCategory   the sub-sub-category of the product
+         * @param storageLocation  the location where the product is stored
+         * @param storeLocation    the location where the product is sold
+         * @param manufacturer     the name of the product's manufacturer
+         * @param quantity         the total quantity of the product
+         * @param minimumQuantity  the minimum quantity required to keep in stock
+         * @param weight           the weight of the product
+         * @param expiration       the expiration date of the product
+         */
         this.name = subCategory.getName() + " " + subSubCategory.getName();
         this.category = category;
         this.subCategory = subCategory;
@@ -108,6 +122,10 @@ public class Product {
 
     // Add to store from storage
     public void addToStore(int howMuchToAddToStore) {
+        /**
+         * Adds a specified quantity of the product to the store. If the quantity to add is greater than the quantity in storage, nothing happens.
+         * @param howMuchToAddToStore the quantity of the product to add to the store
+         */
         if (howMuchToAddToStore > this.storageQuantity) {
             return;
         }
@@ -120,6 +138,10 @@ public class Product {
     }
 
     public void addToStorage(int howMuchToAddToStorage) {
+        /**
+         * Adds a specified quantity of the product to the storage.
+         * @param howMuchToAddToStorage the quantity of the product to add to the storage
+         */
         this.storageQuantity += howMuchToAddToStorage;
     }
 
@@ -197,6 +219,14 @@ public class Product {
 
     // Add quantity to exist product from UI menu
     public void addMoreItemsToProduct(int quantity, Date expiration) {
+        /**
+         * Adds a specified quantity of the product to the storage and store, with the given expiration date.
+         * If the quantity to add is greater than the remaining storage capacity, the product is not added to the storage.
+         * If the store is already at its maximum capacity of 30, the product is not added to the store.
+         *
+         * @param quantity   the quantity of the product to add
+         * @param expiration the expiration date of the product to add
+         */
         addToStorage(quantity);
         // store quantity between 0 - 29
         if (storeQuantity < 30) {
@@ -214,6 +244,16 @@ public class Product {
     }
 
     public int[] sellMultipleItemsFromProduct(int quantity) {
+        /**
+         * Sells a specified quantity of the product from the store, and returns an array of integers representing the IDs of the sold products.
+         * If the quantity to sell is greater than the available quantity in the store, returns null.
+         * Removes the sold items from the expiration dates map.
+         * If the store quantity plus the storage quantity is less than or equal to 30, moves all available items to the store.
+         * Otherwise, moves items from the storage to the store until the store is at its maximum capacity of 30.
+         *
+         * @param quantity the quantity of the product to sell
+         * @return an array of integers representing the IDs of the sold products, or null if the requested quantity is not available in the store.
+         */
         if (storeQuantity < quantity) {
             return null;
         }
@@ -254,6 +294,13 @@ public class Product {
     }
 
     public void markAsDamaged(Integer barcode, String reason){
+        /**
+         * Marks a product with the given barcode as damaged, with the specified reason.
+         * Adds the barcode and reason to the map of damaged products.
+         *
+         * @param barcode the barcode of the product to mark as damaged
+         * @param reason  the reason why the product was marked as damaged
+         */
         damagedProducts.put(barcode,reason);
     }
 

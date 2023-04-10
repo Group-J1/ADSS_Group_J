@@ -25,8 +25,17 @@ import java.text.SimpleDateFormat;
  */
 
 
+/**
+ * This class represents the user interface for managing a chain of markets and their stock.
+ * The user can add and update products, change store and storage sizes, report defects and
+ * expirations, generate reports, and more.
+ */
 public class UI {
     public void startMenu() {
+        /**
+         * Displays the initial menu for selecting the market to manage and entering the number of shelves.
+         * Prompts the user to create a default market and then displays the stock menu for managing products.
+         */
         Chain chain;
         Market market;
         boolean running = true;
@@ -221,6 +230,10 @@ public class UI {
                         break;
                     }
                     market.sellProductsByID(productID, Integer.parseInt(quantity));
+                    if(sold.getStoreQuantity() + sold.getStorageQuantity() < market.stock.getBlackLine(sold)){
+                        System.out.println("ALERT!!!!\nthe product: " + sold.getName()+" is under the minimum quantity");
+
+                    }
 
                     break;
 
@@ -635,6 +648,14 @@ public class UI {
     }
 
     Boolean checkSubSubCategory(String subSubCategoryStr) {
+        /**
+         * Checks if a given string matches the format of a sub-sub category.
+         * A sub-sub category should consist of a number followed by a space and a word.
+         * Example: "5 g", "1 l", "10 p".
+         *
+         * @param subSubCategoryStr the sub-sub category string to be checked
+         * @return true if the string matches the format of a sub-sub category, false otherwise
+         */
         String[] parts = subSubCategoryStr.split(" ");
         double number;
         if (parts.length == 2) {
@@ -657,6 +678,12 @@ public class UI {
     }
 
     Date dateInput() {
+        /**
+         * Prompts the user to enter a date in the format "dd/MM/yyyy" and returns it as a Date object.
+         * If the date is invalid or in the past, it prints an error message and returns null.
+         *
+         * @return the date entered by the user as a Date object, or null if it is invalid or in the past.
+         */
         Scanner input = new Scanner(System.in);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -683,6 +710,12 @@ public class UI {
     }
 
     public void defaultMarket(Market market) {
+        /**
+         * Adds several default products to the provided market object.
+         * The products include dairy, bakery, meat, fruits, vegetables, snacks, and beverages.
+         * Each product has a name, a brand, a weight or volume, a supplier, a price, a quantity, a discount, and an expiration date.
+         * @param market The market object to which the products will be added.
+         */
         Date d1 = new Date(2024, Calendar.MAY, 23);
         Date d2 = new Date(2023, Calendar.JUNE, 12);
         Date d3 = new Date(2023, Calendar.JULY, 1);

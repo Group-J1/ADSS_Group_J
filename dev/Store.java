@@ -5,6 +5,11 @@ public class Store {
     private int amountOfShelves;
 
     public Store(int numberOfShelves) {
+        /**
+         * Constructs a new Store object with the specified number of shelves.
+         *
+         * @param numberOfShelves the number of shelves to create in the Store object
+         */
         this.shelves = new Shelf[numberOfShelves];
         currShelf = 0;
         amountOfShelves = numberOfShelves;
@@ -27,6 +32,12 @@ public class Store {
 
     // Add new product from UI menu
     public Location addProductToStore(Product product){
+        /**
+         * Adds the specified product to the Store object by placing it on the next available shelf.
+         *
+         * @param product the product to add to the Store object
+         * @return the Location object representing the location where the product was placed in the Store object, or null if no location was available
+         */
         Location loc = null;
         boolean running = true;
         while (running) {
@@ -51,6 +62,12 @@ public class Store {
     
     
     public void updateStoreShelvesNumber(int NumberOfShelvesToAdd){
+        /**
+         * Updates the number of shelves in the store by adding the specified number of shelves.
+         *
+         * @param numberOfShelvesToAdd The number of shelves to add to the store.
+         *                             Must be a positive integer.
+         */
         Shelf[] newShelves = new Shelf[amountOfShelves + NumberOfShelvesToAdd];
         for (int i = 0 ; i < amountOfShelves + NumberOfShelvesToAdd; i++){
             newShelves[i] = new Shelf(30);

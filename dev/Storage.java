@@ -4,6 +4,11 @@ public class Storage {
     private int amountOfShelves;
 
     public Storage(int numberOfShelves) {
+        /**
+         * Constructs a new Storage object with the specified number of shelves.
+         *
+         * @param numberOfShelves the number of shelves to create in the Storage object
+         */
         this.shelves = new Shelf[numberOfShelves];
         currShelf = 0;
         amountOfShelves = numberOfShelves;
@@ -26,6 +31,12 @@ public class Storage {
 
     // Add new product from UI menu
     public Location addProductToStorage(Product product){
+        /**
+         * Adds a given Product object to the first available location in the Storage object.
+         *
+         * @param product the Product object to add to the Storage object
+         * @return a Location object representing the location where the product was added, or null if the Storage object is full
+         */
         Location loc = null;
         boolean running = true;
         while (running) {
@@ -49,6 +60,11 @@ public class Storage {
     }
 
     public void updateStorageShelvesNumber(int NumberOfShelvesToAdd){
+        /**
+         * Updates the number of shelves in the Storage object by adding the specified number of new shelves.
+         *
+         * @param numberOfShelvesToAdd the number of new shelves to add to the Storage object
+         */
         Shelf[] newShelves = new Shelf[amountOfShelves + NumberOfShelvesToAdd];
         for(int i = 0; i < amountOfShelves + NumberOfShelvesToAdd; i++){
             newShelves[i] = newShelves[30];

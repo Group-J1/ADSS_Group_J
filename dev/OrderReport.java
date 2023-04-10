@@ -5,7 +5,10 @@ public class OrderReport extends Report {
     protected HashMap<String, Integer> products;
 
     public OrderReport(Stock stock) {
-//        Date currentDate = new Date();
+        /**
+         * Constructs a new instance of an OrderReport.
+         * @param stock the Stock object that contains the inventory information.
+         */
         products = new HashMap<>();;
         this.date = new Date();;
         this.id = ++reportsCounter;
@@ -26,6 +29,10 @@ public class OrderReport extends Report {
 
     @Override
     public String toString() {
+        /**
+         * Returns a string representation of the StockReport object. The string includes the names and quantities of all the products in the report.
+         * @return a string containing the names and quantities of all the products in the report
+         */
         StringBuilder stringBuilderStockReport = new StringBuilder();
         String productInString = "";
         for (String productName : products.keySet()) {
