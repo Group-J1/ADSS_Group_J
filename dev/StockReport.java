@@ -12,9 +12,7 @@ public class StockReport extends Report{
         addProductsToStockReport(stock, categories);
     }
 
-    // categories would be ArrayList of names for all the categories.
-    // maybe arrayList as arg
-    public void addProductsToStockReport(Stock stock, List <String> categories) {
+    public void addProductsToStockReport(Stock stock, ArrayList <String> categories) {
         Map<Product, Integer []> itemsInStock = stock.getItemsInStock();
         for (String category : categories) {
 //            Map<String, Integer> newCategory = new HashMap<String, Integer>();

@@ -3,8 +3,6 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.Scanner;
 import java.text.SimpleDateFormat;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 /**
@@ -295,42 +293,48 @@ public class UI {
                         System.out.println("The unique code (barcode) is invalid!");
                     }
                     break;
-//                case '6':
-//                    flag = true;
-//                    while(flag){
-//                        System.out.println("which report you want to create? ");
-//                        System.out.println("1) Create order report.");
-//                        System.out.println("2) Create shortages report.");
-//                        System.out.println("3) Create damaged products report.");
-//                        System.out.println("4) return to menu.");
-//                        int report = input.nextInt();
-//                        switch (report){
-//                            case 1:
-//                                market.createOrderReport();
-//                                flag = false;
-//                                break;
-//
-//                            case 2:
-//                                market.createShortageReport();
-//                                flag = false;
-//                                break;
-//
-//                            case 3:
-//                                market.createDamagedReport();
-//                                flag = false;
-//                                break;
-//
-//                            case 4:
-//                                flag = false;
-//
-//                            default:
-//                                System.out.println("Wrong input");
-//                                break;
-//
-//                        }
-//
-//                    }
-//                    break;
+                case '6':
+                    char report;
+                    flag = true;
+                    while(flag){
+                        System.out.println("which report you want to create? ");
+                        System.out.println("1) Create order report.");
+                        System.out.println("2) Create shortages report.");
+                        System.out.println("3) Create damaged products report.");
+                        System.out.println("4) return to menu.");
+                        report = input.next().charAt(0);
+                        input.nextLine();
+                        switch (report){
+                            case 1:
+                                if (!market.createStockReport()) {
+                                    System.out.println("-------- Error in creation of stock report --------");
+                                }
+                                flag = false;
+                                break;
+
+                            case 2:
+                                if (!market.createOrderReport()) {
+                                    System.out.println("-------- Error in creation of order report --------");
+                                }
+                                flag = false;
+                                break;
+
+                            case 3:
+                                if (!market.createDamagedReport()) {
+                                    System.out.println("-------- Error in creation of damaged report --------");
+                                }
+                                flag = false;
+                                break;
+
+                            case 4:
+                                flag = false;
+
+                            default:
+                                System.out.println("Wrong input");
+                                break;
+                        }
+                    }
+                    break;
 //                case '7':
 //                    // information about spesific product.
 //                    marketNum = getMarketNumber(chain.numberOfMarkets);

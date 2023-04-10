@@ -139,7 +139,6 @@ class ProductTest {
         product.addMoreItemsToProduct(30,new Date(2024, Calendar.MAY,20));
         assertTrue(product.getUniqueProduct(50));       // added 30 to storage
         assertFalse(product.getUniqueProduct(71));
-
     }
 
     @Test

@@ -31,6 +31,7 @@ public class Market {
         Location storeLocation = new Location(-1, -1);
         Product product = new Product(Ccategory, CsubCategoryStr, CsubSubCategoryStr, storageLocation, storeLocation,
                 manufacturer, quantity, minQuantity, weight, expirationDate);
+        stock.addNewProductToStock(product, minQuantity + 100, minQuantity + 30, minQuantity);
         product.setStoreLocation(store.addProductToStore(product));
         product.setStorageLocation(storage.addProductToStorage(product));
         product.setCatalogNumber();
@@ -62,5 +63,47 @@ public class Market {
         return stock.findProductByCatalogNumber(productCatalogNumber);
     }
 
+    // Case 6 in UI
+    public boolean createStockReport() {
+        try {
+            StockReport stockReport = new StockReport(stock, stock.getCategories());
+            stockReport.addProductsToStockReport(stock, stock.getCategories());
+            allReports.add(stockReport);
+            System.out.println("-------- Stock Report: --------");
+            System.out.println(stockReport);
+        }
+        catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean createOrderReport() {
+        try {
+            OrderReport orderReport = new OrderReport(stock);
+            orderReport.addProductsToOrderReport(stock);
+            allReports.add(orderReport);
+            System.out.println("-------- Order Report: --------");
+            System.out.println(orderReport);
+        }
+        catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean createDamagedReport() {
+        try {
+            DamagedReport damagedReport = new DamagedReport(stock);
+            damagedReport.addProductsToDamagedReport(stock);
+            allReports.add(damagedReport);
+            System.out.println("-------- Damaged Report: --------");
+            System.out.println(damagedReport);
+        }
+        catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
 
 }
