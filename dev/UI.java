@@ -10,11 +10,11 @@ import java.text.SimpleDateFormat;
  *         UI menu:
  *         1) Add a new product. ---done---
  *         2) Update quantity of existing product. ---done---
- *         3) sell/remove from stock a single product.
+ *         3) sell/remove from stock a single product. ---done---
  *         4) change store and storage sizes. ---done---
  *         5) inform on a defected/expired product. ---done---
  *         6) Reports. ---done---
- *         7) get information on selected product.
+ *         7) get information on selected product. ---done---
  *         8) update the discounts: on category and on product.
  *         9) Show all the products that sold
  *         10) Change min quantity to product
