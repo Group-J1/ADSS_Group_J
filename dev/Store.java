@@ -52,6 +52,9 @@ public class Store {
     
     public void updateStoreShelvesNumber(int NumberOfShelvesToAdd){
         Shelf[] newShelves = new Shelf[amountOfShelves + NumberOfShelvesToAdd];
+        for (int i = 0 ; i < amountOfShelves + NumberOfShelvesToAdd; i++){
+            newShelves[i] = new Shelf(30);
+        }
         for(int i = 0; i<this.shelves.length; i++){
             newShelves[i] = this.shelves[i];
         }
