@@ -213,18 +213,22 @@ public class Product {
         }
     }
 
-    public void sellMultipleItemsFromProduct(int quantity) {
+    public int[] sellMultipleItemsFromProduct(int quantity) {
         if (storeQuantity < quantity) {
-            return;
+            return null;
         }
         List<Date> datesList = new ArrayList<>(expirationDates.values());
+        int[] sold = new int[quantity];
         Collections.sort(datesList);
         int count = 0;
         for (int i = 0; i < quantity; i++) {
             Date smallestDate = datesList.get(i);
-            for (Map.Entry<Integer, Date> entry : expirationDates.entrySet()) {
-                if (entry.getValue().equals(smallestDate)) {
-                    expirationDates.remove(entry.getKey());
+            for (Integer entryInt : expirationDates.keySet()) {
+                Date entry = expirationDates.get(entryInt);
+                if (entry != null && entry.equals(smallestDate)) {
+//
+                    sold[count] = Integer.parseInt(entryInt.toString());
+//                    expirationDates.remove(Integer.parseInt(entryInt.toString()));
                     count++;
                     if (count == quantity) {
                         break;
@@ -243,6 +247,10 @@ public class Product {
             int howMuchToAddToStore = 30 - storeQuantity;
             addToStore(howMuchToAddToStore);
         }
+        for(int i = 0 ; i < quantity ; i++){
+            expirationDates.remove(sold[i]);
+        }
+        return sold;
     }
 
     public void markAsDamaged(Integer barcode, String reason){

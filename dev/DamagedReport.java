@@ -24,7 +24,9 @@ public class DamagedReport extends Report {
                     newProduct.put(damagedProductsId, value);
                 });
             }
-            products.put(product.getName(), newProduct);
+            if(!newProduct.isEmpty()) {
+                products.put(product.getName(), newProduct);
+            }
         }
     }
 
@@ -41,7 +43,11 @@ public class DamagedReport extends Report {
                 String dataCause = productNameData.get(dataBarCode);
                 productDetails = "- " + dataBarCode + ": " + dataCause;
                 stringBuilderStockReport.append(productDetails).append(System.lineSeparator());
+                System.out.println("here");
             }
+        }
+        if (stringBuilderStockReport.toString().isEmpty()){
+            stringBuilderStockReport.append("There are no damaged items").append(System.lineSeparator());
         }
         return stringBuilderStockReport.toString();
     }

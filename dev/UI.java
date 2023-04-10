@@ -201,22 +201,27 @@ public class UI {
                     product.addMoreItemsToProduct(Integer.parseInt(quantity), expirationDate);
                     System.out.println("Product's quantity updated! ");
                     break;
-//                case '3':
-//                    System.out.println("What is the ID of the product you sell/remove? ");
-//                    productID = input.nextLine();
-//                    Product sold = market.getByProductID(productID);
-//                    // looks for product if found return it else return null
-//                    if (sold == null){
-//                        System.out.println("The product was not found!");
-//                        break;
-//                    }
-//                    System.out.println("What is the  product  quantity you sell/remove? ");
-//                    quantity = input.nextInt();
-//                    sold.sell(quantity);
-//
-//                    break;
-//
-//
+                case '3':
+                    System.out.println("What is the ID of the product you sell/remove? ");
+                    String productID = input.nextLine();
+                    Product sold = market.getByProductID(productID);
+                    // looks for product if found return it else return null
+                    if (sold == null){
+                        System.out.println("The product was not found!");
+                        break;
+                    }
+                    System.out.println("What is the  product  quantity you sell/remove? ");
+
+                    quantity = input.nextLine();
+                    if (!quantity.matches("[0-9]+") && Integer.parseInt(quantity) > 0) {
+                        System.out.println("The quantity value was invalid!");
+                        break;
+                    }
+                    market.sellProductsByID(productID,Integer.parseInt(quantity));
+
+                    break;
+
+
                 case '4':
                     String addedShelves;
                     char option;
@@ -301,28 +306,28 @@ public class UI {
                     flag = true;
                     while(flag){
                         System.out.println("which report you want to create? ");
-                        System.out.println("1) Create order report.");
-                        System.out.println("2) Create shortages report.");
+                        System.out.println("1) Create stock report.");
+                        System.out.println("2) Create order report.");
                         System.out.println("3) Create damaged products report.");
                         System.out.println("4) return to menu.");
                         report = input.next().charAt(0);
                         input.nextLine();
                         switch (report){
-                            case 1:
+                            case '1':
                                 if (!market.createStockReport()) {
                                     System.out.println("-------- Error in creation of stock report --------");
                                 }
                                 flag = false;
                                 break;
 
-                            case 2:
+                            case '2':
                                 if (!market.createOrderReport()) {
                                     System.out.println("-------- Error in creation of order report --------");
                                 }
                                 flag = false;
                                 break;
 
-                            case 3:
+                            case '3':
                                 if (!market.createDamagedReport()) {
                                     System.out.println("-------- Error in creation of damaged report --------");
                                 }
@@ -338,70 +343,69 @@ public class UI {
                         }
                     }
                     break;
-//                case '7':
-//                    // information about spesific product.
-//                    marketNum = getMarketNumber(chain.numberOfMarkets);
-//                    market = chain.getMarketByIndex(marketNum);
-//
-//                    flag = true;
-//                    while(flag){
-//                        System.out.println("which report you want to create? ");
-//                        System.out.println("1) Information by product's categories.");
-//                        System.out.println("2)  Information by product's ID.");
-//                        System.out.println("3) return to menu.");
-//                        int check = input.nextInt();
-//                        switch (check){
-//                            case 1:
-//                                marketNum = getMarketNumber(chain.numberOfMarkets);
-//                                market = chain.getMarketByIndex(marketNum);
-//
-//                                System.out.println("Whats is your product's category? ");
-//                                categoryStr = input.next();
-//
-//                                System.out.println("Whats is your product's sub-category? ");
-//                                subCategoryStr = input.next();
-//
-//
-//                                System.out.println("Whats is your product's sub-sub-category? ");
-//                                subSubCategoryStr = input.next();
-//
-//                                product = market.getProductByCategories(categoryStr,subCategoryStr,subSubCategoryStr);
-//
-//                                if(product == null){
-//                                    System.out.println("Product was not found.");
-//                                    flag = false;
-//                                    break;
-//                                }
-//                                product.printProductInformation();
-//                                flag = false;
-//                                break;
-//                            case 2:
-//                                System.out.println("What is the ID of the defected product? ");
-//                                productID = input.next();
-//                                product = market.getByProductID(productID);
-//                                // looks for product by ID if found return it else return null
-//                                if (product == null){
-//                                    System.out.println("The product was not found!");
-//                                    flag = false;
-//                                    break;
-//
-//                                }
-//                                product.printProductInformation();
-//                                flag = false;
-//                                break;
-//                            case 3:
-//                                flag = false;
-//
-//                            default:
-//                                System.out.println("Wrong input");
-//                                break;
-//
-//                        }
-//
-//                    }
-//
-//                    break;
-//                case '8':
+                case '7':
+                    // information about specific product.
+                    flag = true;
+                    char check;
+                    while(flag){
+                        System.out.println("which report you want to create? ");
+                        System.out.println("1) Information by product's categories.");
+                        System.out.println("2)  Information by product's ID.");
+                        System.out.println("3) return to menu.");
+                        check = input.next().charAt(0);
+                        input.nextLine();
+                        switch (check){
+                            case '1':
+                                System.out.println("Whats is your product's category? ");
+                                categoryStr = input.nextLine();
+                                if (!categoryStr.matches("[a-zA-Z' ]+")) {
+                                    System.out.println("your product's category is not a valid string ");
+                                    break;
+                                }
+                                System.out.println("Whats is your product's sub-category? ");
+                                subCategoryStr = input.nextLine();
+                                if (!subCategoryStr.matches("[a-zA-Z0-9% ]+")) {
+                                    System.out.println("your product's subCategory is not a valid string ");
+                                    break;
+                                }
+                                System.out.println("Whats is your product's sub-sub-category, in <double string> format? ");
+                                subSubCategoryStr = input.nextLine();
+                                validSubSubCategory = checkSubSubCategory(subSubCategoryStr);
+                                if (!validSubSubCategory) {
+                                    break;
+                                }
+
+                                product = market.getProductByCategories(categoryStr,subCategoryStr,subSubCategoryStr);
+                                if(product == null){
+                                    System.out.println("Product was not found.");
+                                    flag = false;
+                                    break;
+                                }
+                                market.printProductInformation(1, product);
+                                flag = false;
+                                break;
+                            case 2:
+                                System.out.println("What is the catalog number of the product? ");
+                                productCatalogNumber = input.nextLine();
+                                product = market.getByProductID(productCatalogNumber);
+//                              // looks for product by ID if found return it else return null
+                                if (product == null){
+                                    System.out.println("The product was not found!");
+                                    flag = false;
+                                    break;
+                                }
+                                market.printProductInformation(2, product);
+                                flag = false;
+                                break;
+                            case 3:
+                                flag = false;
+                                break;
+                            default:
+                                System.out.println("Wrong input");
+                                break;
+                        }
+                    }
+                    break;//                case '8':
 //                    //update the discounts
 //                    marketNum = getMarketNumber(chain.numberOfMarkets);
 //                    market = chain.getMarketByIndex(marketNum);

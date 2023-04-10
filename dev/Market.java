@@ -129,7 +129,7 @@ public class Market {
             System.out.println(product.getCatalogNumber());
         }
         if (productInformationCase == 2) {
-            System.out.println(product.getNa());
+            System.out.println(product.getName());
         }
     }
 
