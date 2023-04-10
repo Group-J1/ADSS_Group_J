@@ -94,9 +94,6 @@ class ProductTest {
         assertEquals(product.getStorageQuantity() + product.getStoreQuantity(),70);
     }
 
-    @Test
-    void getMinimumQuantity() {
-    }
 
     @Test
     void setMinimumQuantity() {
@@ -108,9 +105,6 @@ class ProductTest {
 
     }
 
-    @Test
-    void getWeight() {
-    }
 
     @Test
     void setWeight() {
@@ -120,9 +114,7 @@ class ProductTest {
         assertEquals(product.getWeight(),1.5);
     }
 
-    @Test
-    void getDiscount() {
-    }
+
 
     @Test
     void setDiscount() {
@@ -141,17 +133,6 @@ class ProductTest {
         assertFalse(product.getUniqueProduct(71));
     }
 
-    @Test
-    void getValue() {
-    }
-
-    @Test
-    void setValue() {
-    }
-
-    @Test
-    void getPrice() {
-    }
 
     @Test
     void setPrice() {
@@ -164,30 +145,13 @@ class ProductTest {
         //assertEquals(product.getExpiration(1),expDate);
     }
 
-    @Test
-    void getPriority() {
-    }
-
-    @Test
-    void getCatalogNumber() {
-    }
-
-    @Test
-    void setCatalogNumber() {
-    }
 
     @Test
     void getExpirationDates() {
        //  assertEquals(product.getExpirationDates().get(1),expDate);
    }
 
-    @Test
-    void getDamagedProducts() {
-    }
 
-    @Test
-    void setPriority() {
-    }
 
     @Test
     void getUniqueProduct() {
@@ -200,13 +164,6 @@ class ProductTest {
 
     }
 
-    @Test
-    void addMoreItemsToProduct() {
-    }
-
-    @Test
-    void sellMultipleItemsFromProduct() {
-    }
 
     @Test
     void markAsDamaged() {
