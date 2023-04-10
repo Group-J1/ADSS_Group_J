@@ -41,7 +41,7 @@ public class Market {
 
     // Case 2 in UI
     public Product getProductByCategories(String categoryStr, String subCategoryStr,String subSubCategoryStr) {
-        String name = subCategoryStr + subSubCategoryStr;
+        String name = subCategoryStr +" "+ subSubCategoryStr;
         String catalogNumber = UniqueStringGenerator.generateUniqueString(name);
         return stock.findProductByCatalogNumber(catalogNumber);
     }
