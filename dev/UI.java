@@ -77,7 +77,7 @@ public class UI {
         System.out.println("if you want to create the default market, write yes: ");
         String answer = input.nextLine();
         if(answer.equals("yes")){
-
+            System.out.println("The BarCodes are:");
             defaultMarket(market);
         }
         running = true;
@@ -160,6 +160,7 @@ public class UI {
                     if (!market.addNewProduct(categoryStr,subCategoryStr,subSubCategoryStr,manufacturer,
                             Integer.parseInt(quantity), Integer.parseInt(minQuantity), Double.parseDouble(weight),
                             expirationDate)) {
+                        System.out.println("The product already exist in stock! ");
                         break;
                     }
                     else {
