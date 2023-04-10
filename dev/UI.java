@@ -595,7 +595,6 @@ public class UI {
         return dateToReturn;
     }
 
-
     public void defaultMarket(Market market){
         Date d1 = new Date(2024, Calendar.MAY,23);
         Date d2 = new Date(2023, Calendar.JUNE, 12);
@@ -712,8 +711,5 @@ public class UI {
         market.addNewProduct("Fruits", "Mangoes", "1 kg", "Fruit Farms", 100, 20, 1, d4);
         market.addNewProduct("Vegetables", "Cucumbers", "500 g", "Veggie Co.", 20, 4, 0.5, d22);
         market.addNewProduct("Snacks", "Pretzel sticks", "200 g", "Pretzel Co.", 50, 10, 0.2, d7);
-
     }
-
-
 }

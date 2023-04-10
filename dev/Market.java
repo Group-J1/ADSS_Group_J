@@ -126,9 +126,6 @@ public class Market {
         return true;
     }
 
-
-
-    //// --------here i'm starting (11:54)--------
     // Case 7 in UI
     public void printProductInformation(int productInformationCase, Product product) {
         if (productInformationCase == 1) {
