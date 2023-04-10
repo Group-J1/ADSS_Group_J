@@ -37,11 +37,15 @@ class StorageTest {
     @Test
     void addProductToStorage() {
         product.setStorageLocation(storage.addProductToStorage(product));
-        product.setStoreLocation(storage.addProductToStorage(product));
+        product1.setStorageLocation(storage.addProductToStorage(product1));
         assertEquals(storage.getShelves()[0].getItems()[0], product);
         assertEquals(storage.getShelves()[0].getItems()[1], product1);
-        assertEquals(product.getStorageLocation().getLocation(), firstItem.getLocation());
-        assertEquals(product1.getStorageLocation().getLocation(), secondItem.getLocation());
+        assertEquals(product.getStorageLocation().getLocation()[0], firstItem.getLocation()[0]);
+        assertEquals(product.getStorageLocation().getLocation()[1], firstItem.getLocation()[1]);
+
+        assertEquals(product1.getStorageLocation().getLocation()[0], secondItem.getLocation()[0]);
+        assertEquals(product1.getStorageLocation().getLocation()[1], secondItem.getLocation()[1]);
+
         storage.updateStorageShelvesNumber(40);
         assertEquals(storage.getShelves()[0].getItems()[0], product);
         assertEquals(storage.getShelves()[0].getItems()[1], product1);

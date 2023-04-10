@@ -33,12 +33,16 @@ class StoreTest {
 
     @Test
     void addProductToStore() {
-        product.setStorageLocation(store.addProductToStore(product));
         product.setStoreLocation(store.addProductToStore(product));
+        product1.setStoreLocation(store.addProductToStore(product1));
         assertEquals(store.getShelves()[0].getItems()[0], product);
         assertEquals(store.getShelves()[0].getItems()[1], product1);
-        assertEquals(product.getStorageLocation().getLocation(), firstItem.getLocation());
-        assertEquals(product1.getStorageLocation().getLocation(), secondItem.getLocation());
+        assertEquals(product.getStoreLocation().getLocation()[0], firstItem.getLocation()[0]);
+        assertEquals(product.getStoreLocation().getLocation()[1], firstItem.getLocation()[1]);
+
+        assertEquals(product1.getStoreLocation().getLocation()[0], secondItem.getLocation()[0]);
+        assertEquals(product1.getStoreLocation().getLocation()[1], secondItem.getLocation()[1]);
+
         store.updateStoreShelvesNumber(40);
         assertEquals(store.getShelves()[0].getItems()[0], product);
         assertEquals(store.getShelves()[0].getItems()[1], product1);

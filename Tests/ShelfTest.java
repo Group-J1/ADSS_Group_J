@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ShelfTest {
 
     Shelf shelf = new Shelf(30);
-    Product[] example;
+
     AProductCategory category = new AProductCategory("Milk Products");
     AProductCategory subCategory = new AProductCategory("Milk 3%");
     AProductSubCategory subSubCategory = new AProductSubCategory(1,"Litter") ;
@@ -18,11 +18,7 @@ class ShelfTest {
 
     Product product = new Product(category,subCategory,subSubCategory,storageLocation,storeLocation,"Yotvata",40,10,1.2,expDate);
 
-
-    @Test
-    void getItems() {
-        assertEquals(example.getClass(),shelf.getItems().getClass());
-    }
+    Product[] example = {product};
 
     @Test
     void addItemToShelf() {
@@ -32,5 +28,10 @@ class ShelfTest {
         assertNotEquals(shelf.nextFreeIndex(),0);
         assertEquals(shelf.nextFreeIndex(),1);
     }
+    @Test
+    void getItems() {
+        assertEquals(example.getClass(),shelf.getItems().getClass());
+    }
+
 
 }

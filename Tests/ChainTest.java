@@ -8,6 +8,10 @@ class ChainTest {
     void getMarketByIndex() {
         Market market = new Market(30);
         Chain chain = new Chain(3);
+        Market[] marketArray = chain.getMarkets();
+        for(int i = 0;i<3;i++){
+            marketArray[i] = new Market(30);
+        }
         assertEquals(chain.getNumberOfMarkets(),3);
         assertNotEquals(chain.getNumberOfMarkets(),2);
         assertEquals(chain.getMarketByIndex(0).getClass(),market.getClass());
@@ -17,7 +21,4 @@ class ChainTest {
 
     }
 
-    @Test
-    void getNumberOfMarkets() {
-    }
 }

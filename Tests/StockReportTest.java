@@ -39,7 +39,7 @@ class StockReportTest {
         String secondReport = stockReport.toString();
 
 
-        stock.addNewProductToStock(product,100,30,10);
+        stock.addNewProductToStock(product1,100,30,10);
         stockReport.addProductsToStockReport(stock,stock.getCategories());
         String thirdReport = stockReport.toString();
 

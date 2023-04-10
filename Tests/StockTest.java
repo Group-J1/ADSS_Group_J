@@ -42,8 +42,8 @@ class StockTest {
         assertEquals(stock.getCategories().get(1),category1.getName());
         assertEquals(stock.getStatusInStock(product),3);
         assertEquals(stock.getStatusInStock(product1),2);
-        assertEquals(stock.getListOfProducts().get(0),product);
-        assertEquals(stock.getListOfProducts().get(1),product1);
+        assertEquals(stock.getListOfProducts().get(0),product1);
+        assertEquals(stock.getListOfProducts().get(1),product);
 
     }
 

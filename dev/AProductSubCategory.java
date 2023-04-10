@@ -4,7 +4,7 @@ public class AProductSubCategory extends  AProductCategory{
     private String unit;
 
     public AProductSubCategory(double amount, String unit) {
-        super((amount + unit));
+        super((amount + " " + unit));
         this.amount = amount;
         this.unit = unit;
     }

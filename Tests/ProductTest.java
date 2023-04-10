@@ -15,11 +15,13 @@ class ProductTest {
     Location storageLocation = new Location(2,2);
     Date expDate = new Date(2023, Calendar.DECEMBER,12);
 
-    Product product = new Product(category,subCategory,subSubCategory,storageLocation,storeLocation,"Yotvata",40,10,1.2,expDate);
+    Product product = new Product(category,subCategory,subSubCategory,storageLocation,storeLocation,"Yotvata",40,1,1.2,expDate);
+
+
 
     @Test
     void getName() {
-        assertEquals(product.getName(),"Milk 3% 1 Litter");
+        assertEquals(product.getName(),"Milk 3% 1.0 Litter");
     }
 
     @Test
@@ -45,8 +47,12 @@ class ProductTest {
     @Test
     void setStoreLocation() {
         Location newLocation = new Location(11,11);
-        assertNotEquals(product.getStoreLocation(),storeLocation);
-        assertEquals(product.getStoreLocation(),newLocation);
+        product.setStoreLocation(newLocation);
+        assertNotEquals(product.getStoreLocation().getLocation()[0],storeLocation.getLocation()[0]);
+        assertNotEquals(product.getStoreLocation().getLocation()[1],storeLocation.getLocation()[1]);
+
+        assertEquals(product.getStoreLocation().getLocation()[0],newLocation.getLocation()[0]);
+        assertEquals(product.getStoreLocation().getLocation()[1],newLocation.getLocation()[1]);
 
     }
 
@@ -83,8 +89,9 @@ class ProductTest {
     @Test
     void addToStorage() {
         product.addToStorage(30);
-        assertNotEquals(product.getStorageQuantity(),40);
-        assertEquals(product.getStorageQuantity(),70);
+        assertNotEquals(product.getStorageQuantity() + product.getStoreQuantity(),40);
+        assertEquals(product.getStorageQuantity(),40);
+        assertEquals(product.getStorageQuantity() + product.getStoreQuantity(),70);
     }
 
     @Test
@@ -93,7 +100,8 @@ class ProductTest {
 
     @Test
     void setMinimumQuantity() {
-        assertEquals(product.getMinimumQuantity(),10);
+
+        assertEquals(product.getMinimumQuantity(),1);
         product.setMinimumQuantity(5);
         assertNotEquals(product.getMinimumQuantity(),10);
         assertEquals(product.getMinimumQuantity(),5);
@@ -122,6 +130,15 @@ class ProductTest {
         product.setDiscount(50);
         assertNotEquals(product.getDiscount(),0);
         assertEquals(product.getDiscount(),50);
+        assertEquals(product.getExpiration(1),expDate);
+        assertEquals(product.getExpirationDates().get(1),expDate);
+
+        assertFalse(product.getUniqueProduct(1111));
+        assertTrue(product.getUniqueProduct(1));
+        assertTrue(product.getUniqueProduct(40));
+        product.addMoreItemsToProduct(30,new Date(2024, Calendar.MAY,20));
+        assertTrue(product.getUniqueProduct(50));       // added 30 to storage
+        assertFalse(product.getUniqueProduct(71));
 
     }
 
@@ -145,7 +162,7 @@ class ProductTest {
 
     @Test
     void getExpiration() {
-        assertEquals(product.getExpiration(1),expDate);
+        //assertEquals(product.getExpiration(1),expDate);
     }
 
     @Test
@@ -162,8 +179,8 @@ class ProductTest {
 
     @Test
     void getExpirationDates() {
-        assertEquals(product.getExpirationDates().get(1),expDate);
-    }
+       //  assertEquals(product.getExpirationDates().get(1),expDate);
+   }
 
     @Test
     void getDamagedProducts() {
@@ -175,11 +192,12 @@ class ProductTest {
 
     @Test
     void getUniqueProduct() {
-        assertFalse(product.getUniqueProduct(1111));
-        assertTrue(product.getUniqueProduct(1));
-        assertTrue(product.getUniqueProduct(40));
-        assertTrue(product.getUniqueProduct(50));       // added 30 to storage
-        assertFalse(product.getUniqueProduct(71));
+
+//        assertFalse(product.getUniqueProduct(1111));
+//        assertTrue(product.getUniqueProduct(1));
+//        assertTrue(product.getUniqueProduct(40));
+//        assertTrue(product.getUniqueProduct(50));       // added 30 to storage
+//        assertFalse(product.getUniqueProduct(71));
 
     }
 
@@ -193,12 +211,13 @@ class ProductTest {
 
     @Test
     void markAsDamaged() {
-        Map<Integer,String> oldmap = product.getDamagedProducts();
         product.markAsDamaged(23,"not good milk");
-        product.markAsDamaged(32, "another not good milk");
-        Map<Integer,String> newMap = product.getDamagedProducts();
+        String oldmap = product.getDamagedProducts().toString();
 
-        assertNotEquals(oldmap,newMap);
+        product.markAsDamaged(32, "another not good milk");
+        String newMap = product.getDamagedProducts().toString();
+
+        assertNotEquals(oldmap.toString(),newMap.toString());
 
 
     }

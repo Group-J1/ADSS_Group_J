@@ -36,7 +36,8 @@ class LocationTest {
     void getLocation() {
         int[] loc = {1, 5};
         Location location = new Location(1,5);
-        assertEquals(location.getLocation(),loc);
+        assertEquals(location.getLocation()[0],loc[0]);
+        assertEquals(location.getLocation()[1],loc[1]);
 
     }
 }
