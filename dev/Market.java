@@ -20,23 +20,28 @@ public class Market {
 
     // Case 1 in UI
     public boolean addNewProduct(String categoryStr, String subCategoryStr, String subSubCategoryStr, String manufacturer,
-                              int quantity, int minQuantity, double weight, Date expirationDate) {
-        AProductCategory Ccategory = new AProductCategory(categoryStr);
-        AProductCategory CsubCategoryStr = new AProductCategory(subCategoryStr);
-        String[] parts = subSubCategoryStr.split(" ");
-        double number = Double.parseDouble(parts[0]);
-        String unit = parts[1];
-        AProductSubCategory CsubSubCategoryStr = new AProductSubCategory(number, unit);
-        Location storageLocation  = new Location(-1, -1);
-        Location storeLocation = new Location(-1, -1);
-        Product product = new Product(Ccategory, CsubCategoryStr, CsubSubCategoryStr, storageLocation, storeLocation,
-                manufacturer, quantity, minQuantity, weight, expirationDate);
-        stock.addNewProductToStock(product, minQuantity + 100, minQuantity + 30, minQuantity);
-        product.setStoreLocation(store.addProductToStore(product));
-        product.setStorageLocation(storage.addProductToStorage(product));
-        product.setCatalogNumber();
-        System.out.println(  product.getName() + " : " + (Product.productsCounter-quantity+1) + "-" + Product.productsCounter);
-        return true;
+                                 int quantity, int minQuantity, double weight, Date expirationDate) {
+        if (getProductByCategories(categoryStr, subCategoryStr, subSubCategoryStr) == null) {
+            AProductCategory Ccategory = new AProductCategory(categoryStr);
+            AProductCategory CsubCategoryStr = new AProductCategory(subCategoryStr);
+            String[] parts = subSubCategoryStr.split(" ");
+            double number = Double.parseDouble(parts[0]);
+            String unit = parts[1];
+            AProductSubCategory CsubSubCategoryStr = new AProductSubCategory(number, unit);
+            Location storageLocation  = new Location(-1, -1);
+            Location storeLocation = new Location(-1, -1);
+            Product product = new Product(Ccategory, CsubCategoryStr, CsubSubCategoryStr, storageLocation, storeLocation,
+                    manufacturer, quantity, minQuantity, weight, expirationDate);
+            stock.addNewProductToStock(product, minQuantity + 100, minQuantity + 30, minQuantity);
+            product.setStoreLocation(store.addProductToStore(product));
+            product.setStorageLocation(storage.addProductToStorage(product));
+            product.setCatalogNumber();
+            System.out.println(  product.getName() + " : " + (Product.productsCounter-quantity+1) + "-" + Product.productsCounter);
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
 
