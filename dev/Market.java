@@ -35,6 +35,7 @@ public class Market {
         product.setStoreLocation(store.addProductToStore(product));
         product.setStorageLocation(storage.addProductToStorage(product));
         product.setCatalogNumber();
+        System.out.println(  product.getName() + " : " + (Product.productsCounter-quantity+1) + "-" + Product.productsCounter);
         return true;
     }
 

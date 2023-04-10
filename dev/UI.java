@@ -78,6 +78,7 @@ public class UI {
         String answer = input.nextLine();
         if(answer.equals("yes")){
 
+            System.out.println("The BarCodes are:");
             defaultMarket(market);
         }
         running = true;
@@ -711,6 +712,7 @@ public class UI {
         market.addNewProduct("Fruits", "Mangoes", "1 kg", "Fruit Farms", 100, 20, 1, d4);
         market.addNewProduct("Vegetables", "Cucumbers", "500 g", "Veggie Co.", 20, 4, 0.5, d22);
         market.addNewProduct("Snacks", "Pretzel sticks", "200 g", "Pretzel Co.", 50, 10, 0.2, d7);
+
 
     }
 
