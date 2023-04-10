@@ -20,7 +20,7 @@ public class Market {
 
     // Case 1 in UI
     public boolean addNewProduct(String categoryStr, String subCategoryStr, String subSubCategoryStr, String manufacturer,
-                              int quantity, int minQuantity, double weight, Date expirationDate) {
+                                 int quantity, int minQuantity, double weight, Date expirationDate) {
         if (getProductByCategories(categoryStr, subCategoryStr, subSubCategoryStr) == null) {
             AProductCategory Ccategory = new AProductCategory(categoryStr);
             AProductCategory CsubCategoryStr = new AProductCategory(subCategoryStr);

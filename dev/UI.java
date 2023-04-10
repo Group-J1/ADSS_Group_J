@@ -21,7 +21,7 @@ import java.text.SimpleDateFormat;
  *         11) Show all shortages in stock
  *         12) Exit.
  *
-// */
+ // */
 
 
 public class UI {
@@ -77,7 +77,6 @@ public class UI {
         System.out.println("if you want to create the default market, write yes: ");
         String answer = input.nextLine();
         if(answer.equals("yes")){
-
             System.out.println("The BarCodes are:");
             defaultMarket(market);
         }
@@ -161,6 +160,7 @@ public class UI {
                     if (!market.addNewProduct(categoryStr,subCategoryStr,subSubCategoryStr,manufacturer,
                             Integer.parseInt(quantity), Integer.parseInt(minQuantity), Double.parseDouble(weight),
                             expirationDate)) {
+                        System.out.println("The product already exist in stock! ");
                         break;
                     }
                     else {
@@ -713,9 +713,7 @@ public class UI {
         market.addNewProduct("Vegetables", "Cucumbers", "500 g", "Veggie Co.", 20, 4, 0.5, d22);
         market.addNewProduct("Snacks", "Pretzel sticks", "200 g", "Pretzel Co.", 50, 10, 0.2, d7);
 
-
     }
 
 
 }
-
