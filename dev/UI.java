@@ -27,6 +27,7 @@ public class UI {
         Chain chain;
         Market market;
         boolean running = true;
+        boolean validSubSubCategory;
         String numOfMarkets = "0";
         String numOfShelves = "0";
         String numOfMarketToManagement = "0";
@@ -73,7 +74,7 @@ public class UI {
         market = new Market(Integer.parseInt(numOfShelves));
         running = true;
         while (running) {
-            String categoryStr, subCategoryStr, subSubCategoryStr, manufacturer, productID, reason, quantity,
+            String categoryStr, subCategoryStr, subSubCategoryStr, manufacturer, productCatalogNumber, reason, quantity,
                     minQuantity, uniqueCode, weight, discount;
             int marketNum;
             Date expirationDate;
@@ -110,7 +111,7 @@ public class UI {
                     }
                     System.out.println("Whats is your product's sub-sub-category, in <double string> format? ");
                     subSubCategoryStr = input.nextLine();
-                    boolean validSubSubCategory = checkSubSubCategory(subSubCategoryStr);
+                    validSubSubCategory = checkSubSubCategory(subSubCategoryStr);
                     if (!validSubSubCategory) {
                         break;
                     }
@@ -158,41 +159,50 @@ public class UI {
                     }
                     break;
 
-//                case '2':
-//                    marketNum = getMarketNumber(chain.numberOfMarkets);
-//                    market = chain.getMarketByIndex(marketNum);
-//
-//                    System.out.println("Whats is your product's category? ");
-//                    categoryStr = input.next();
-//
-//                    System.out.println("Whats is your product's sub-category? ");
-//                    subCategoryStr = input.next();
-//
-//
-//                    System.out.println("Whats is your product's sub-sub-category? ");
-//                    subSubCategoryStr = input.next();
-//
-//                    product = market.getProductByCategories(categoryStr,subCategoryStr,subSubCategoryStr);
-//
-//                    if(product == null){
-//                        System.out.println("Product was not found.");
-//                        break;
-//                    }
-//
-//                    System.out.println("How many "+product.getSubCategoryName().getName()+ " "
-//                            +product.getSubSubCategory().getName()+ " you want to add? ");
-//                    quantity = input.nextInt();
-//
-//                    expirationDate = dateInput();
-//
-//                    product.addMoreItemsToProduct(quantity, expirationDate);
-//
-//                    break;
+                case '2':
+                    System.out.println("Whats is your product's category? ");
+                    categoryStr = input.nextLine();
+                    if (!categoryStr.matches("[a-zA-Z' ]+")) {
+                        System.out.println("your product's category is not a valid string ");
+                        break;
+                    }
+
+                    System.out.println("Whats is your product's sub-category? ");
+                    subCategoryStr = input.nextLine();
+                    if (!subCategoryStr.matches("[a-zA-Z0-9% ]+")) {
+                        System.out.println("your product's subCategory is not a valid string ");
+                        break;
+                    }
+
+                    System.out.println("What is your product's sub-sub-category? ");
+                    subSubCategoryStr = input.nextLine();
+                    validSubSubCategory = checkSubSubCategory(subSubCategoryStr);
+                    if (!validSubSubCategory) {
+                        break;
+                    }
+                    product = market.getProductByCategories(categoryStr,subCategoryStr,subSubCategoryStr);
+                    if(product == null){
+                        System.out.println("Product was not found.");
+                        break;
+                    }
+
+                    System.out.println("How many " + product.getSubCategoryName().getName()+ " "
+                            + product.getSubSubCategory().getName()+ " do you want to add? ");
+                    quantity = input.nextLine();
+                    if (!(quantity.matches("[0-9]+") && Integer.parseInt(quantity) > 0)) {
+                        System.out.println("You have to add a positive number for quantity ");
+                        break;
+                    }
+                    expirationDate = dateInput();
+                    if (expirationDate == null) {
+                        break;
+                    }
+                    product.addMoreItemsToProduct(Integer.parseInt(quantity), expirationDate);
+                    System.out.println("Product's quantity updated! ");
+                    break;
 //                case '3':
-//                    marketNum = getMarketNumber(chain.numberOfMarkets);
-//                    market = chain.getMarketByIndex(marketNum);
 //                    System.out.println("What is the ID of the product you sell/remove? ");
-//                    productID = input.next();
+//                    productID = input.nextLine();
 //                    Product sold = market.getByProductID(productID);
 //                    // looks for product if found return it else return null
 //                    if (sold == null){
@@ -206,81 +216,86 @@ public class UI {
 //                    break;
 //
 //
-//                case '4':
-//
-//
-//                    marketNum = getMarketNumber(chain.numberOfMarkets);
-//                    market = chain.getMarketByIndex(marketNum);
-//
-//                    int addedShelves;
-//                    int option;
-//                    boolean flag = true;
-//                    while(flag) {
-//                        System.out.println("which part of the store you want to update?");
-//                        System.out.println("1) Update the size of the storage.");
-//                        System.out.println("2) Update the size of the store.");
-//                        System.out.println("3) return to menu.");
-//                        option = input.nextInt();
-//                        switch (option) {
-//                            case 1:
-//                                System.out.println("How many shelves you want to add to the storage? ");
-//                                addedShelves = input.nextInt();
-//                                market.appendStorage(addedShelves);
-//                                flag = false;
-//                                break;
-//                            case 2:
-//                                System.out.println("How many shelves you want to add to the store? ");
-//                                addedShelves = input.nextInt();
-//                                market.appendStore(addedShelves);
-//                                flag = false;
-//                                break;
-//                            case 3:
-//                                flag = false;
-//                                break;
-//
-//                            default:
-//                                System.out.println("Wrong input");
-//                                break;
-//
-//                        }
-//
-//
-//                    }
-//
-//                    break;
-//                case '5':
-//
-//                    marketNum = getMarketNumber(chain.numberOfMarkets);
-//                    market = chain.getMarketByIndex(marketNum);
-//
-//                    System.out.println("What is the ID of the defected product? ");
-//                    productID = input.next();
-//                    Product defected = market.getByProductID(productID);
+                case '4':
+                    String addedShelves;
+                    char option;
+                    boolean flag = true;
+                    while(flag) {
+                        System.out.println("which part of the store you want to update?");
+                        System.out.println("1) Update the size of the storage.");
+                        System.out.println("2) Update the size of the store.");
+                        System.out.println("3) return to menu.");
+                        option = input.next().charAt(0);
+                        input.nextLine();
+                        switch (option) {
+                            case '1':
+                                System.out.println("How many shelves you want to add to the storage? ");
+                                addedShelves = input.nextLine();
+                                if (!(addedShelves.matches("[0-9]+") && Integer.parseInt(addedShelves) > 0)) {
+                                    System.out.println("You have to add a positive number of shelves ");
+                                    break;
+                                }
+                                if (!market.appendStorage(Integer.parseInt(addedShelves))) {
+                                    break;
+                                }
+                                else {
+                                    System.out.println("The shelves added to the storage! ");
+                                }
+                                flag = false;
+                                break;
+                            case '2':
+                                System.out.println("How many shelves you want to add to the store? ");
+                                addedShelves = input.nextLine();
+                                if (!(addedShelves.matches("[0-9]+") && Integer.parseInt(addedShelves) > 0)) {
+                                    System.out.println("You have to add a positive number of shelves ");
+                                    break;
+                                }
+                                if (!market.appendStore(Integer.parseInt(addedShelves))) {
+                                    break;
+                                }
+                                else {
+                                    System.out.println("The shelves added to the store! ");
+                                }                                flag = false;
+                                break;
+                            case '3':
+                                flag = false;
+                                break;
+                            default:
+                                System.out.println("Wrong input");
+                                break;
+                        }
+                    }
+                    break;
+                case '5':
+                    System.out.println("What is the catalog number of the defected product? ");
+                    productCatalogNumber = input.nextLine();
+                    Product defected = market.getByProductID(productCatalogNumber);
 //                    // looks for product by ID if found return it else return null
-//                    if (defected == null){
-//                        System.out.println("The product was not found!");
-//                        break;
-//
-//                    }
-//                    System.out.println("What is the unique code of the item? ");
-//                    // the unique id for each instance of the product
-//                    uniqueCode = input.nextInt();
-//                    if(defected.getUniqueProduct(uniqueCode)){
-//                        System.out.println("What is the Problem with the product? ");
-//                        reason = input.next();
-//                        defected.markAsDamaged(uniqueCode,reason);
-//                    }
-//                    else {
-//                        System.out.println("the Unique Code is invalid!");
-//                    }
-//
-//                    break;
-//
+                    if (defected == null){
+                        System.out.println("The product was not found!");
+                        break;
+                    }
+                    System.out.println("What is the unique code (barcode) of the product? ");
+                    // the unique idb(barcode) for each instance of the product
+                    uniqueCode = input.nextLine();
+                    if (!(uniqueCode.matches("[0-9]+") && Integer.parseInt(uniqueCode) > 0)) {
+                        System.out.println("You have to enter a positive number of barcode ");
+                        break;
+                    }
+                    if (defected.getUniqueProduct(Integer.parseInt(uniqueCode))) {
+                        System.out.println("What is the Problem with the product? ");
+                        reason = input.nextLine();
+                        if (!reason.matches("[a-zA-Z0-9/ ]+")) {
+                            System.out.println("The Problem with the product is not a valid string ");
+                            break;
+                        }
+                        defected.markAsDamaged(Integer.parseInt(uniqueCode),reason);
+                    }
+                    else {
+                        System.out.println("The unique code (barcode) is invalid!");
+                    }
+                    break;
 //                case '6':
-//
-//                    marketNum = getMarketNumber(chain.numberOfMarkets);
-//                    market = chain.getMarketByIndex(marketNum);
-//
 //                    flag = true;
 //                    while(flag){
 //                        System.out.println("which report you want to create? ");

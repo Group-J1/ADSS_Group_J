@@ -36,7 +36,7 @@ public class Product {
     public Product(AProductCategory category, AProductCategory subCategory, AProductSubCategory subSubCategory,
                    Location storageLocation, Location storeLocation, String manufacturer, int quantity,
                    int minimumQuantity, double weight, Date expiration) {
-        this.name = subCategory.getName() + subSubCategory.getName();
+        this.name = subCategory.getName() + " " + subSubCategory.getName();
         this.category = category;
         this.subCategory = subCategory;
         this.subSubCategory = subSubCategory;
@@ -105,6 +105,8 @@ public class Product {
         return storeQuantity;
     }
 
+
+    // Add to store from storage
     public void addToStore(int howMuchToAddToStore) {
         if (howMuchToAddToStore > this.storageQuantity) {
             return;
@@ -189,20 +191,11 @@ public class Product {
         priority = stock.getStatusInStock(this);
     }
 
-    //    public void setQuantity(int addedQuantity){
-//        addToStorage(addedQuantity);
-//        if(getStoreQuantity() < 30){
-//            int neededQuentity = 30 - getStoreQuantity();
-//            addToStore(neededQuentity);
-//
-//
-//        }
-//    }
-
     public boolean getUniqueProduct(Integer barcode){
         return(expirationDates.containsKey(barcode));
     }
 
+    // Add quantity to exist product from UI menu
     public void addMoreItemsToProduct(int quantity, Date expiration) {
         addToStorage(quantity);
         // store quantity between 0 - 29

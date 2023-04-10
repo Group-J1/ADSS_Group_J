@@ -7,7 +7,9 @@ public class Storage {
         this.shelves = new Shelf[numberOfShelves];
         currShelf = 0;
         amountOfShelves = numberOfShelves;
-
+        for(int i =0; i< numberOfShelves; i++){
+            shelves[i] = new Shelf(30);
+        }
     }
 
     public Shelf[] getShelves() {
@@ -22,6 +24,7 @@ public class Storage {
         return amountOfShelves;
     }
 
+    // Add new product from UI menu
     public Location addProductToStorage(Product product){
         Location loc = null;
         boolean running = true;
@@ -31,11 +34,13 @@ public class Storage {
                 loc = new Location(currShelf,indexInShelf);
                 product.setStorageLocation(loc);
                 shelves[currShelf].addItemToShelf(product,indexInShelf);
-
-            } else if (currShelf == amountOfShelves - 1) {
+                running = false;
+            }
+            else if (currShelf == amountOfShelves - 1) {
                 running = false;
 
-            } else if (currShelf < amountOfShelves - 1){
+            }
+            else if (currShelf < amountOfShelves - 1){
                 currShelf++;
             }
         }
@@ -43,11 +48,12 @@ public class Storage {
         return loc;
     }
 
-    public void updateStorageShelvesNumber(int newNumberOfShelves){
-        Shelf[] newShelves = new Shelf[newNumberOfShelves];
+    public void updateStorageShelvesNumber(int NumberOfShelvesToAdd){
+        Shelf[] newShelves = new Shelf[amountOfShelves + NumberOfShelvesToAdd];
         for(int i = 0; i<this.shelves.length; i++){
             newShelves[i] = this.shelves[i];
         }
         this.shelves = newShelves;
+        amountOfShelves = amountOfShelves + NumberOfShelvesToAdd;
     }
 }

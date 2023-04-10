@@ -85,6 +85,15 @@ public class Stock {
             return status;
     }
 
+    public Product findProductByCatalogNumber(String catalogNumber) {
+        for (Product product : stock.keySet()) {
+            if (product.getCatalogNumber().equals(catalogNumber)) {
+                return product;
+            }
+        }
+        return null;
+    }
+
     public ArrayList<Product> getListOfProducts(){
         ArrayList<Product> products = new ArrayList<>(stock.keySet());
         return products;

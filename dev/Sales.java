@@ -1,7 +1,6 @@
 import java.util.HashMap;
 import java.util.ArrayList;
 
-
 /*
  * here is  the Sales:
  *      1.void addSale(Product , Integer id)

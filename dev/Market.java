@@ -18,7 +18,7 @@ public class Market {
         allReports = new ArrayList<>();
     }
 
-
+    // Case 1 in UI
     public boolean addNewProduct(String categoryStr, String subCategoryStr, String subSubCategoryStr, String manufacturer,
                               int quantity, int minQuantity, double weight, Date expirationDate) {
         AProductCategory Ccategory = new AProductCategory(categoryStr);
@@ -33,6 +33,34 @@ public class Market {
                 manufacturer, quantity, minQuantity, weight, expirationDate);
         product.setStoreLocation(store.addProductToStore(product));
         product.setStorageLocation(storage.addProductToStorage(product));
+        product.setCatalogNumber();
         return true;
     }
+
+
+    // Case 2 in UI
+    public Product getProductByCategories(String categoryStr, String subCategoryStr,String subSubCategoryStr) {
+        String name = subCategoryStr + subSubCategoryStr;
+        String catalogNumber = UniqueStringGenerator.generateUniqueString(name);
+        return stock.findProductByCatalogNumber(catalogNumber);
+    }
+
+    // TODO: Case 3 in UI
+
+    // Case 4 in UI
+    public boolean appendStorage(int addedShelves) {
+        storage.updateStorageShelvesNumber(addedShelves);
+        return true;
+    }
+    public boolean appendStore(int addedShelves) {
+        store.updateStoreShelvesNumber(addedShelves);
+        return true;
+    }
+
+    // Case 5 in UI
+    public Product getByProductID(String productCatalogNumber) {
+        return stock.findProductByCatalogNumber(productCatalogNumber);
+    }
+
+
 }
