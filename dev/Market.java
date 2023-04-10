@@ -143,17 +143,20 @@ public class Market {
         aProductCategory.setDiscount(discount);
     }
 
-    // Case 9 in UI
+
+    // case 9
     public void printSold(){
         System.out.println("-----Sold-----");
         System.out.println(sales.toString());
     }
 
-    // Case 11 in UI
+    // case 11
     public void printShortages(){
         System.out.println("-----Shortages-----");
         System.out.println(shortages.toString());
 
     }
+
+
 
 }

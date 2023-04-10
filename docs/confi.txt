@@ -1,14 +1,84 @@
-1
-1
-1
-1
-Meat
-Burgers
-1 Kg
-BBB
-40
-1.1
-30
-11/12/2023
-6
-1
+The BarCodes are:
+Milk 3% 1.0 l : 1-100
+White bread 500.0 g : 101-140
+Milk 1% 1.5 l : 141-190
+Bagels 100.0 g : 191-230
+Beef 300.0 g : 231-250
+Bananas 50.0 g : 251-310
+Carrots 500.0 g : 311-340
+Cookies 250.0 g : 341-420
+Soda 2.0 l : 421-520
+Soda 1.0 l : 521-620
+Yogurt 200.0 g : 621-670
+Croissants 150.0 g : 671-710
+Chicken 400.0 g : 711-730
+Baguette 400.0 g : 731-760
+Oranges 1.0 kg : 761-830
+Tomatoes 1.0 kg : 831-870
+Cheese 100.0 g : 871-930
+Potato chips 200.0 g : 931-1030
+Milkshake 500.0 ml : 1031-1080
+Juice 1.0 l : 1081-1160
+Butter 250.0 g : 1161-1200
+Croissants 100.0 g : 1201-1220
+Pork 500.0 g : 1221-1250
+Apples 500.0 g : 1251-1310
+Onions 500.0 g : 1311-1330
+Nuts 300.0 g : 1331-1380
+Energy drink 250.0 ml : 1381-1480
+Sour cream 250.0 g : 1481-1520
+Cheese 250.0 g : 1521-1580
+Multigrain bread 1.0 kg : 1581-1625
+Butter 500.0 g : 1626-1695
+Cinnamon rolls 300.0 g : 1696-1745
+Pork chops 400.0 g : 1746-1770
+Apples 1.0 kg : 1771-1850
+Broccoli 250.0 g : 1851-1885
+Potato chips 1.0 kg : 1886-1955
+Coffee 1.0 kg : 1956-2075
+Sour cream 200.0 g : 2076-2120
+Lamb 500.0 g : 2121-2150
+Oranges 500.0 g : 2151-2220
+Cucumbers 100.0 g : 2221-2245
+Pretzels 50.0 g : 2246-2295
+Juice 2.0 l : 2296-2375
+Energy drink 500.0 ml : 2376-2465
+Whipped cream 200.0 g : 2466-2515
+Croissants 250.0 g : 2516-2560
+Greek Yogurt 500.0 g : 2561-2630
+Cinnamon Rolls 200.0 g : 2631-2675
+Strawberries 250.0 g : 2676-2755
+Broccoli 500.0 g : 2756-2790
+Potato Chips 100.0 g : 2791-2840
+Orange Juice 1.0 l : 2841-2930
+Baguette 500.0 g : 2931-2960
+Butter 100.0 g : 2961-3020
+Ground Beef 1.0 kg : 3021-3080
+Pineapple 500.0 g : 3081-3120
+Potatoes 2.0 kg : 3121-3140
+Trail Mix 250.0 g : 3141-3195
+Apple Cider 2.0 l : 3196-3295
+Cheese 200.0 g : 3296-3360
+Lamb Chops 400.0 g : 3361-3395
+Watermelon 1.0 kg : 3396-3425
+Lettuce 200.0 g : 3426-3450
+Pretzels 250.0 g : 3451-3500
+Iced Tea 1.5 l : 3501-3580
+Tea 100.0 g : 3581-3610
+Cottage cheese 500.0 g : 3611-3660
+Pineapple 1.0 kg : 3661-3740
+Potatoes 1.0 kg : 3741-3760
+Popcorn 200.0 g : 3761-3820
+Coffee 500.0 g : 3821-3920
+Mozzarella 250.0 g : 3921-3990
+Brownies 200.0 g : 3991-4040
+Salmon 400.0 g : 4041-4120
+Grapes 500.0 g : 4121-4160
+Lettuce 500.0 g : 4161-4190
+Crackers 200.0 g : 4191-4250
+Wine 750.0 ml : 4251-4400
+Cream cheese 200.0 g : 4401-4440
+Turkey 500.0 g : 4441-4470
+Mangoes 1.0 kg : 4471-4570
+Cucumbers 500.0 g : 4571-4590
+Pretzel sticks 200.0 g : 4591-4640

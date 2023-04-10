@@ -41,4 +41,22 @@ public class Sales {
     public HashMap<Product, ArrayList<Integer>> getSold() {
         return sold;
     }
+
+
+    @Override
+    public String toString(){
+        StringBuilder report = new StringBuilder();
+        for (Product product: sold.keySet()) {
+            report.append(product.getName()).append(" : ");
+            for (Integer barcode: sold.get(product)){
+                report.append(barcode + ", ");
+            }
+            report.append('\n');
+        }
+        if (report.toString().isEmpty())
+            report.append("No item were sold");
+        return report.toString();
+    }
+
+
 }
