@@ -102,7 +102,6 @@ public class UI {
             System.out.println("Select the number you would like to access.");
             System.out.println("-----------------------");
             String selection = input.nextLine();
-//            selection.substring(0, 2);
             switch (selection) {
                 case "1":
                     System.out.println("Whats is your product's category? ");
