@@ -14,11 +14,14 @@ import java.util.*;
 
 public class Stock {
     private HashMap<Product ,Integer[] > stock;
-    private  HashMap<String, Integer> categories;
+    private  HashMap<String, Integer> categoriesAsStrings;
+
+    private ArrayList<AProductCategory> categoriesAsInstances;
 
     public Stock() {
         this.stock = new HashMap<>();
-        this.categories = new HashMap<>();
+        this.categoriesAsStrings = new HashMap<>();
+        this.categoriesAsInstances = new ArrayList<>();
     }
 
     public Integer getGreenLine(Product product){
@@ -50,11 +53,12 @@ public class Stock {
             return;
         }
         String cat = product.getCategory().getName();
-        if(categories.containsKey(cat)){
-            categories.replace(cat,categories.get(cat) + 1 );
+        if(categoriesAsStrings.containsKey(cat)){
+            categoriesAsStrings.replace(cat,categoriesAsStrings.get(cat) + 1 );
         }
         else{
-            categories.put(cat,1);
+            categoriesAsStrings.put(cat,1);
+            categoriesAsInstances.add(product.getCategory());
         }
         Integer[] val = {green,red,black};
         stock.put(product, val);
@@ -62,7 +66,7 @@ public class Stock {
     }
 
     public ArrayList<String> getCategories(){
-        ArrayList<String> lst = new ArrayList<>(categories.keySet());
+        ArrayList<String> lst = new ArrayList<>(categoriesAsStrings.keySet());
         return lst;
     }
 
@@ -101,5 +105,18 @@ public class Stock {
 
     public HashMap<Product ,Integer[] > getItemsInStock() {
         return stock;
+    }
+
+    public boolean isCategoryExist(String categoryStr) {
+        return categoriesAsStrings.containsKey(categoryStr);
+    }
+
+    public AProductCategory getAProductCategory(String categoryStr) {
+        for (AProductCategory category : categoriesAsInstances) {
+            if (category.getName().equals(categoryStr)) {
+                return category;
+            }
+        }
+        return null; // Category not found
     }
 }
