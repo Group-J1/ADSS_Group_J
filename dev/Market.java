@@ -46,7 +46,21 @@ public class Market {
         return stock.findProductByCatalogNumber(catalogNumber);
     }
 
-    // TODO: Case 3 in UI
+    public boolean sellProductsByID(String productCatalogNumber,int quantitySold){
+        Product product = getByProductID(productCatalogNumber);
+        if(product == null){
+            return false;
+        }
+        int[] sold = product.sellMultipleItemsFromProduct(quantitySold);
+        for(int i = 0 ; i < quantitySold; i++){
+            sales.addSale(product,sold[i]);
+        }
+        if(product.getStoreQuantity()== 0){
+            shortages.addProductToShortages(product);
+        }
+
+        return true;
+    }
 
     // Case 4 in UI
     public boolean appendStorage(int addedShelves) {
@@ -105,5 +119,19 @@ public class Market {
         }
         return true;
     }
+
+
+
+    //// --------here i'm starting (11:54)--------
+    // Case 7 in UI
+    public void printProductInformation(int productInformationCase, Product product) {
+        if (productInformationCase == 1) {
+            System.out.println(product.getCatalogNumber());
+        }
+        if (productInformationCase == 2) {
+            System.out.println(product.getNa());
+        }
+    }
+
 
 }
