@@ -1,4 +1,6 @@
-public class AProductSubCategory extends  AProductCategory{
+import Business.AProductCategory;
+
+public class AProductSubCategory extends AProductCategory {
 
     private double amount;
     private String unit;

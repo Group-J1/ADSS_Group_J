@@ -1,3 +1,5 @@
+import Business.AProductCategory;
+
 import java.util.*;
 
 /**
@@ -175,12 +177,12 @@ public class Stock {
     public AProductCategory getAProductCategory(String categoryStr) {
         /**
          * Given a string representing a product category, returns an instance of
-         * AProductCategory that corresponds to that category. Searches through the
+         * Bussiness.AProductCategory that corresponds to that category. Searches through the
          * list of categories currently in stock and returns the first match. If no
          * category matches the given string, returns null.
          *
          * @param categoryStr a string representing the name of the category to look for
-         * @return an instance of AProductCategory representing the matching category,
+         * @return an instance of Bussiness.AProductCategory representing the matching category,
          *         or null if no match is found
          */
         for (AProductCategory category : categoriesAsInstances) {

@@ -1,3 +1,5 @@
+package Business;
+
 public class AProductCategory {
 
     protected String name;
@@ -5,7 +7,7 @@ public class AProductCategory {
 
     public AProductCategory(String name) {
         /**
-         * Creates an instance of the AProductCategory class with the given name.
+         * Creates an instance of the Bussiness.AProductCategory class with the given name.
          * @param name The name of the product category.
          * @return None
          * @throws None
