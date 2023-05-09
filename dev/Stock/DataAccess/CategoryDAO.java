@@ -50,7 +50,7 @@ public class CategoryDAO {
         }
     }
 
-    public static void writeCategory(){
+    public static void writeCategories(){
         for(AProductCategory category: CategoryMap.values()){
             String name;
             double discount;
