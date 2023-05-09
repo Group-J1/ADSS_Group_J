@@ -1,14 +1,15 @@
-public class Store {
+package Business;
 
+public class Storage {
     private Shelf[] shelves;
     private int currShelf;
     private int amountOfShelves;
 
-    public Store(int numberOfShelves) {
+    public Storage(int numberOfShelves) {
         /**
-         * Constructs a new Store object with the specified number of shelves.
+         * Constructs a new Business.Storage object with the specified number of shelves.
          *
-         * @param numberOfShelves the number of shelves to create in the Store object
+         * @param numberOfShelves the number of shelves to create in the Business.Storage object
          */
         this.shelves = new Shelf[numberOfShelves];
         currShelf = 0;
@@ -31,12 +32,12 @@ public class Store {
     }
 
     // Add new product from UI menu
-    public Location addProductToStore(Product product){
+    public Location addProductToStorage(Product product){
         /**
-         * Adds the specified product to the Store object by placing it on the next available shelf.
+         * Adds a given Business.Product object to the first available location in the Business.Storage object.
          *
-         * @param product the product to add to the Store object
-         * @return the Location object representing the location where the product was placed in the Store object, or null if no location was available
+         * @param product the Business.Product object to add to the Business.Storage object
+         * @return a Business.Location object representing the location where the product was added, or null if the Business.Storage object is full
          */
         Location loc = null;
         boolean running = true;
@@ -44,7 +45,7 @@ public class Store {
             int indexInShelf = shelves[currShelf].nextFreeIndex();
             if (indexInShelf != -1) {
                 loc = new Location(currShelf,indexInShelf);
-                product.setStoreLocation(loc);
+                product.setStorageLocation(loc);
                 shelves[currShelf].addItemToShelf(product,indexInShelf);
                 running = false;
             }
@@ -59,18 +60,16 @@ public class Store {
 
         return loc;
     }
-    
-    
-    public void updateStoreShelvesNumber(int NumberOfShelvesToAdd){
+
+    public void updateStorageShelvesNumber(int NumberOfShelvesToAdd){
         /**
-         * Updates the number of shelves in the store by adding the specified number of shelves.
+         * Updates the number of shelves in the Business.Storage object by adding the specified number of new shelves.
          *
-         * @param numberOfShelvesToAdd The number of shelves to add to the store.
-         *                             Must be a positive integer.
+         * @param numberOfShelvesToAdd the number of new shelves to add to the Business.Storage object
          */
         Shelf[] newShelves = new Shelf[amountOfShelves + NumberOfShelvesToAdd];
-        for (int i = 0 ; i < amountOfShelves + NumberOfShelvesToAdd; i++){
-            newShelves[i] = new Shelf(30);
+        for(int i = 0; i < amountOfShelves + NumberOfShelvesToAdd; i++){
+            newShelves[i] = newShelves[30];
         }
         for(int i = 0; i<this.shelves.length; i++){
             newShelves[i] = this.shelves[i];
@@ -79,4 +78,3 @@ public class Store {
         amountOfShelves = amountOfShelves + NumberOfShelvesToAdd;
     }
 }
-

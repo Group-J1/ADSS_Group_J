@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+package Business;
+
 public class Shelf {
     private Product[] items;
     private int counter;
@@ -6,9 +7,9 @@ public class Shelf {
 
     public Shelf(int numberOfPlaces) {
         /**
-         * Constructs a new Shelf object with the specified number of places.
+         * Constructs a new Business.Shelf object with the specified number of places.
          *
-         * This constructor creates a new Shelf object with the specified number of places to hold Product items. The shelf is
+         * This constructor creates a new Business.Shelf object with the specified number of places to hold Business.Product items. The shelf is
          * initially empty, with all places being null. The number of places must be a non-negative integer.
          *
          * @param numberOfPlaces the number of places on the shelf
@@ -26,11 +27,11 @@ public class Shelf {
         /**
          * Adds a new item to the specified index on the shelf.
          *
-         * This method adds the specified Product item to the shelf at the specified index. If the index is already occupied by
+         * This method adds the specified Business.Product item to the shelf at the specified index. If the index is already occupied by
          * another item, the previous item will be overwritten. The counter of items on the shelf is incremented by 1 after the
          * addition of the new item.
          *
-         * @param newItem the new Product item to add to the shelf
+         * @param newItem the new Business.Product item to add to the shelf
          * @param indexInShelfIndex the index in the shelf where the item will be added
          * @throws ArrayIndexOutOfBoundsException if the specified index is out of bounds for the shelf
          */

@@ -1,3 +1,5 @@
+package Business;
+
 import Business.AProductCategory;
 
 public class AProductSubCategory extends AProductCategory {
@@ -7,7 +9,7 @@ public class AProductSubCategory extends AProductCategory {
 
     public AProductSubCategory(double amount, String unit) {
         /**
-         * Creates an instance of the AProductSubCategory class with the given amount and unit.
+         * Creates an instance of the Business.AProductSubCategory class with the given amount and unit.
          * @param amount The amount of the subcategory as a double.
          * @param unit The unit of measurement for the subcategory as a string.
          * @return None

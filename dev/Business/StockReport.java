@@ -1,3 +1,5 @@
+package Business;
+
 import java.util.*;
 
 public class StockReport extends Report{
@@ -6,10 +8,10 @@ public class StockReport extends Report{
 
     public StockReport(Stock stock, ArrayList <String> categories) {
         /**
-         * Constructs a new StockReport object that summarizes the current state of a given Stock object
+         * Constructs a new Business.StockReport object that summarizes the current state of a given Business.Stock object
          * by category, as specified in the provided list of categories.
          *
-         * @param stock the Stock object to be summarized in the report
+         * @param stock the Business.Stock object to be summarized in the report
          * @param categories a list of categories by which to group the products in the report
          */
         products = new HashMap<>();;
@@ -20,9 +22,9 @@ public class StockReport extends Report{
 
     public void addProductsToStockReport(Stock stock, ArrayList <String> categories) {
         /**
-         * Adds products from a given Stock object to the current StockReport object, grouped by the provided list of categories.
+         * Adds products from a given Business.Stock object to the current Business.StockReport object, grouped by the provided list of categories.
          *
-         * @param stock the Stock object to add products from
+         * @param stock the Business.Stock object to add products from
          * @param categories a list of categories by which to group the products in the report
          */
         Map<Product, Integer []> itemsInStock = stock.getItemsInStock();
@@ -41,9 +43,9 @@ public class StockReport extends Report{
     @Override
     public String toString() {
         /**
-         * Returns a string representation of the current StockReport object, displaying its contents in a readable format.
+         * Returns a string representation of the current Business.StockReport object, displaying its contents in a readable format.
          *
-         * @return a string containing the contents of the StockReport object, grouped by category and product name/quantity
+         * @return a string containing the contents of the Business.StockReport object, grouped by category and product name/quantity
          */
         StringBuilder stringBuilderStockReport = new StringBuilder();
         String title = "";

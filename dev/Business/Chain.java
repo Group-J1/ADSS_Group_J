@@ -1,10 +1,12 @@
+package Business;
+
 public class Chain {
     private int numberOfMarkets;
     private Market[] markets;
 
     public Chain(Integer numberOfMarkets) {
         /**
-         * Creates an instance of the Chain class with the given number of markets.
+         * Creates an instance of the Business.Chain class with the given number of markets.
          * @param numberOfMarkets The number of markets in the chain as an integer.
          * @return None
          * @throws None

@@ -1,3 +1,5 @@
+package Business;
+
 import java.util.*;
 
 public class OrderReport extends Report {
@@ -6,8 +8,8 @@ public class OrderReport extends Report {
 
     public OrderReport(Stock stock) {
         /**
-         * Constructs a new instance of an OrderReport.
-         * @param stock the Stock object that contains the inventory information.
+         * Constructs a new instance of an Business.OrderReport.
+         * @param stock the Business.Stock object that contains the inventory information.
          */
         products = new HashMap<>();;
         this.date = new Date();;
@@ -30,7 +32,7 @@ public class OrderReport extends Report {
     @Override
     public String toString() {
         /**
-         * Returns a string representation of the StockReport object. The string includes the names and quantities of all the products in the report.
+         * Returns a string representation of the Business.StockReport object. The string includes the names and quantities of all the products in the report.
          * @return a string containing the names and quantities of all the products in the report
          */
         StringBuilder stringBuilderStockReport = new StringBuilder();

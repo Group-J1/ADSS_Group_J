@@ -1,10 +1,12 @@
+package Business;
+
 public class Location {
     private int[] location;
 
 
     public Location(int shelfNumber, int indexInShelf){
         /**
-         * Constructs a new Location object with the given shelf number and index in shelf.
+         * Constructs a new Business.Location object with the given shelf number and index in shelf.
          * @param shelfNumber the shelf number of the location, where the shelf number is represented as an integer
          * @param indexInShelf the index in the shelf of the location, where the index in shelf is represented as an integer
          * @throws None

@@ -1,16 +1,16 @@
-import Business.AProductCategory;
+package Business;
 
 import java.util.*;
 
 /**
  * here is the stock.
  * functions:
- *       1.Integer getGreenLine(Product)
- *       2.Integer getRedLine(Product)
- *       3.Integer getBlackLine(Product)
- *       4.void addNewProductToStock(Product , Integer green, Integer red, Integer black)
- *       5.Integer getStatusInStock(Product )
- *       6. HashMap<Product ,Integer[] > getItemsInStock()
+ *       1.Integer getGreenLine(Business.Product)
+ *       2.Integer getRedLine(Business.Product)
+ *       3.Integer getBlackLine(Business.Product)
+ *       4.void addNewProductToStock(Business.Product , Integer green, Integer red, Integer black)
+ *       5.Integer getStatusInStock(Business.Product )
+ *       6. HashMap<Business.Product ,Integer[] > getItemsInStock()
  */
 
 
@@ -22,7 +22,7 @@ public class Stock {
 
     public Stock() {
         /**
-         * Constructs a new Stock object.
+         * Constructs a new Business.Stock object.
          */
         this.stock = new HashMap<>();
         this.categoriesAsStrings = new HashMap<>();
@@ -33,10 +33,10 @@ public class Stock {
         /**
          * Returns the green line value for the specified product.
          *
-         * This method returns the green line value for the specified Product object. If the product is not found in the stock map,
+         * This method returns the green line value for the specified Business.Product object. If the product is not found in the stock map,
          * the method returns -1.
          *
-         * @param product the Product object to get the green line value for
+         * @param product the Business.Product object to get the green line value for
          * @return the green line value for the specified product, or -1 if the product is not found in the stock map
          */
         Integer[] val = stock.get(product);
@@ -50,10 +50,10 @@ public class Stock {
         /**
          * Returns the red line value for the specified product.
          *
-         * This method returns the red line value for the specified Product object. If the product is not found in the stock map,
+         * This method returns the red line value for the specified Business.Product object. If the product is not found in the stock map,
          * the method returns -1.
          *
-         * @param product the Product object to get the red line value for
+         * @param product the Business.Product object to get the red line value for
          * @return the red line value for the specified product, or -1 if the product is not found in the stock map
          */
         Integer[] val = stock.get(product);
@@ -66,7 +66,7 @@ public class Stock {
     public Integer getBlackLine(Product product){
         /**
          * Returns the black line value for the specified product.
-         * @param product the Product object to get the black line value for
+         * @param product the Business.Product object to get the black line value for
          * @return the black line value for the specified product, or -1 if the product is not found in the stock map
          */
         Integer[] val = stock.get(product);
@@ -83,7 +83,7 @@ public class Stock {
          * This method adds a new product to the stock with the specified green, red, and black line values. If any of the line values
          * are invalid or the product is already in the stock, the method does nothing.
          *
-         * @param product the Product object to add to the stock
+         * @param product the Business.Product object to add to the stock
          * @param green the green line value for the product
          * @param red the red line value for the product
          * @param black the black line value for the product
