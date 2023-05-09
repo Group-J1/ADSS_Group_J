@@ -1,4 +1,4 @@
-package Business;
+package Stock.Business;
 
 public class Chain {
     private int numberOfMarkets;
@@ -6,7 +6,7 @@ public class Chain {
 
     public Chain(Integer numberOfMarkets) {
         /**
-         * Creates an instance of the Business.Chain class with the given number of markets.
+         * Creates an instance of the Stock.Business.Chain class with the given number of markets.
          * @param numberOfMarkets The number of markets in the chain as an integer.
          * @return None
          * @throws None

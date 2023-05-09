@@ -1,4 +1,4 @@
-package Business;
+package Stock.Business;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,8 +13,8 @@ public class Market {
 
     public Market(int numberOfShelves) {
         /**
-         * Creates a new Business.Market object with a specified number of shelves.
-         * @param numberOfShelves The number of shelves in the Business.Market.
+         * Creates a new Stock.Business.Market object with a specified number of shelves.
+         * @param numberOfShelves The number of shelves in the Stock.Business.Market.
          */
         store = new Store(numberOfShelves);
         storage = new Storage(numberOfShelves);
@@ -142,7 +142,7 @@ public class Market {
             StockReport stockReport = new StockReport(stock, stock.getCategories());
             stockReport.addProductsToStockReport(stock, stock.getCategories());
             allReports.add(stockReport);
-            System.out.println("-------- Business.Stock Business.Report: --------");
+            System.out.println("-------- Stock.Business.Stock Stock.Business.Report: --------");
             System.out.println(stockReport);
         } catch (Exception e) {
             return false;
@@ -160,7 +160,7 @@ public class Market {
             OrderReport orderReport = new OrderReport(stock);
             orderReport.addProductsToOrderReport(stock);
             allReports.add(orderReport);
-            System.out.println("-------- Order Business.Report: --------");
+            System.out.println("-------- Order Stock.Business.Report: --------");
             System.out.println(orderReport);
         } catch (Exception e) {
             return false;
@@ -179,7 +179,7 @@ public class Market {
             DamagedReport damagedReport = new DamagedReport(stock);
             damagedReport.addProductsToDamagedReport(stock);
             allReports.add(damagedReport);
-            System.out.println("-------- Damaged Business.Report: --------");
+            System.out.println("-------- Damaged Stock.Business.Report: --------");
             System.out.println(damagedReport);
         } catch (Exception e) {
             return false;
@@ -239,7 +239,7 @@ public class Market {
         /**
          * Prints the list of products that are currently in shortage to the console.
          */
-        System.out.println("-----Business.Shortages-----");
+        System.out.println("-----Stock.Business.Shortages-----");
         System.out.println(shortages.toString());
     }
 

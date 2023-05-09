@@ -40,7 +40,7 @@ public class Connect {
 //            String createExpDate = "CREATE TABLE ExpDates (QRCode INTEGER PRIMARY KEY, catalog_number TEXT, Date DATE)";
 //            String createCategory =  "CREATE TABLE Category (Category TEXT PRIMARY KEY, Discount DOUBLE )";
 //            String createProducts = "CREATE TABLE Products(QRCode INTEGER PRIMARY KEY, catalog_number TEXT,Manufacturer TEXT, StorageQuantity INTEGER, StoreQuantity INTEGER, MinimumQuantity INTEGER, ProductDiscount DOUBLE, Weight DOUBLE, Value DOUBLE, Category STRING)";
-//            String createShortages = "CREATE TABLE Business.Shortages(CatalogNumber TEXT PRIMARY KEY)";
+//            String createShortages = "CREATE TABLE Stock.Business.Shortages(CatalogNumber TEXT PRIMARY KEY)";
 //
 //
 //            stmt.executeUpdate(createDamaged);

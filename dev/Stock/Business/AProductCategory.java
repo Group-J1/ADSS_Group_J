@@ -1,4 +1,4 @@
-package Business;
+package Stock.Business;
 
 public class AProductCategory {
 

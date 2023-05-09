@@ -1,4 +1,4 @@
-package Business;
+package Stock.Business;
 
 import java.util.Date;
 public abstract class Report {

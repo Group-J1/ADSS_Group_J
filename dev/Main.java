@@ -1,4 +1,4 @@
-import Business.StockMainUI;
+import Stock.Presentation.StockMainUI;
 
 public class Main {
     public static void main(String[] args) {

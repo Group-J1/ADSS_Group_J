@@ -1,4 +1,4 @@
-package Business;
+package Stock.Business;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;

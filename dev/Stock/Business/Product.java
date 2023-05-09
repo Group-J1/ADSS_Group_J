@@ -1,4 +1,4 @@
-package Business;
+package Stock.Business;
 
 import java.util.*;
 
@@ -39,7 +39,7 @@ public class Product {
                    Location storageLocation, Location storeLocation, String manufacturer, int quantity,
                    int minimumQuantity, double weight, Date expiration) {
         /**
-         * Constructs a new Business.Product object with the given parameters.
+         * Constructs a new Stock.Business.Product object with the given parameters.
          *
          * @param category         the category of the product
          * @param subCategory      the sub-category of the product

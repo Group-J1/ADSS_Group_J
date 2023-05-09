@@ -1,4 +1,8 @@
-package Business;
+package Stock.Presentation;
+
+import Stock.Business.Chain;
+import Stock.Business.Market;
+import Stock.Business.Product;
 
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -96,7 +100,7 @@ public class StockMainUI {
             int marketNum;
             Date expirationDate;
             Product product;
-            System.out.println("-------- Welcome to the Business.Stock menu of market number " + Integer.parseInt(numOfMarketToManagement) + " --------");
+            System.out.println("-------- Welcome to the Stock.Business.Stock menu of market number " + Integer.parseInt(numOfMarketToManagement) + " --------");
             System.out.println("1) Add a new product. ");
             System.out.println("2) Update quantity of existing product. ");
             System.out.println("3) Sell/remove from stock a single product. ");
@@ -170,7 +174,7 @@ public class StockMainUI {
                         System.out.println("The product already exist in stock! ");
                         break;
                     } else {
-                        System.out.println("Business.Product added! ");
+                        System.out.println("Stock.Business.Product added! ");
                     }
                     break;
 
@@ -197,7 +201,7 @@ public class StockMainUI {
                     }
                     product = market.getProductByCategories(categoryStr, subCategoryStr, subSubCategoryStr);
                     if (product == null) {
-                        System.out.println("Business.Product was not found.");
+                        System.out.println("Stock.Business.Product was not found.");
                         break;
                     }
 
@@ -212,7 +216,7 @@ public class StockMainUI {
                         break;
                     }
                     product.addMoreItemsToProduct(Integer.parseInt(quantity), expirationDate);
-                    System.out.println("Business.Product's quantity updated! ");
+                    System.out.println("Stock.Business.Product's quantity updated! ");
                     break;
                 case "3":
                     System.out.println("What is the ID of the product you sell/remove? ");
@@ -392,7 +396,7 @@ public class StockMainUI {
 
                                 product = market.getProductByCategories(categoryStr, subCategoryStr, subSubCategoryStr);
                                 if (product == null) {
-                                    System.out.println("Business.Product was not found.");
+                                    System.out.println("Stock.Business.Product was not found.");
                                     flag = false;
                                     break;
                                 }
@@ -492,7 +496,7 @@ public class StockMainUI {
                                             }
                                             product = market.getProductByCategories(categoryStr, subCategoryStr, subSubCategoryStr);
                                             if (product == null) {
-                                                System.out.println("Business.Product was not found.");
+                                                System.out.println("Stock.Business.Product was not found.");
                                                 flag1 = false;
                                                 break;
                                             }
@@ -586,7 +590,7 @@ public class StockMainUI {
 
                                 product = market.getProductByCategories(categoryStr, subCategoryStr, subSubCategoryStr);
                                 if (product == null) {
-                                    System.out.println("Business.Product was not found.");
+                                    System.out.println("Stock.Business.Product was not found.");
                                     flag = false;
                                     break;
                                 }

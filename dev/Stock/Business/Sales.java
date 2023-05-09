@@ -1,12 +1,12 @@
-package Business;
+package Stock.Business;
 
 import java.util.HashMap;
 import java.util.ArrayList;
 
 /*
- * here is  the Business.Sales:
- *      1.void addSale(Business.Product , Integer id)
- *      2.boolean checkIfSold(Business.Product , Integer id)
+ * here is  the Stock.Business.Sales:
+ *      1.void addSale(Stock.Business.Product , Integer id)
+ *      2.boolean checkIfSold(Stock.Business.Product , Integer id)
  */
 public class Sales {
     private HashMap<Product,ArrayList<Integer>> sold;
@@ -14,7 +14,7 @@ public class Sales {
 
     public Sales() {
         /**
-         * Constructs a new Business.Sales object with an empty map of sold items.
+         * Constructs a new Stock.Business.Sales object with an empty map of sold items.
          */
         this.sold = new HashMap<>();
     }

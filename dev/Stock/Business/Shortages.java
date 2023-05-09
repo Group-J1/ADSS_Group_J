@@ -1,4 +1,4 @@
-package Business;
+package Stock.Business;
 
 import java.util.ArrayList;
 
@@ -7,7 +7,7 @@ public class Shortages {
 
     public Shortages() {
         /**
-         * Constructs a new Business.Shortages object.
+         * Constructs a new Stock.Business.Shortages object.
          */
         this.missing = new ArrayList<>();
     }
@@ -16,10 +16,10 @@ public class Shortages {
         /**
          * Adds a missing product to the list of shortages.
          *
-         * This method adds the specified Business.Product object to the list of missing items. If the specified product is already in the
+         * This method adds the specified Stock.Business.Product object to the list of missing items. If the specified product is already in the
          * list of missing items, it will not be added again.
          *
-         * @param product the Business.Product object to add to the list of missing items
+         * @param product the Stock.Business.Product object to add to the list of missing items
          */
         if(!missing.contains(product)){
             missing.add(product);
@@ -30,7 +30,7 @@ public class Shortages {
         /**
          * Checks if a product is on the list of missing items.
          *
-         * @param product the Business.Product object to check for in the list of missing items
+         * @param product the Stock.Business.Product object to check for in the list of missing items
          * @return true if the product is on the list of missing items, false otherwise
          */
         return missing.contains(product);
@@ -44,7 +44,7 @@ public class Shortages {
          * has a store quantity and a storage quantity of 0, it will be added to the list of missing items. The missing list is
          * then updated to only contain the new missing items found.
          *
-         * @param products the list of Business.Product objects to check for missing items
+         * @param products the list of Stock.Business.Product objects to check for missing items
          */
         ArrayList<Product> newMissing = new ArrayList<>();
         for(Product product: products){

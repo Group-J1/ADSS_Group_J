@@ -1,4 +1,4 @@
-package DataAccess;
+package Stock.DataAccess;
 
 public class ShortageDAO {
 }

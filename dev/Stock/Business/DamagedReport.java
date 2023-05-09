@@ -1,4 +1,4 @@
-package Business;
+package Stock.Business;
 
 import java.util.*;
 
@@ -9,8 +9,8 @@ public class DamagedReport extends Report {
 
     public DamagedReport(Stock stock) {
         /**
-         * Constructs a new Business.DamagedReport object based on the given Business.Stock object.
-         * @param stock The Business.Stock object to generate the Business.DamagedReport from.
+         * Constructs a new Stock.Business.DamagedReport object based on the given Stock.Business.Stock object.
+         * @param stock The Stock.Business.Stock object to generate the Stock.Business.DamagedReport from.
          * @return None
          * @throws None
          */
@@ -22,8 +22,8 @@ public class DamagedReport extends Report {
 
     public void addProductsToDamagedReport(Stock stock) {
         /**
-         * Adds the damaged products from the given Business.Stock object to the current Business.DamagedReport object.
-         * @param stock The Business.Stock object to extract damaged products from.
+         * Adds the damaged products from the given Stock.Business.Stock object to the current Stock.Business.DamagedReport object.
+         * @param stock The Stock.Business.Stock object to extract damaged products from.
          * @return None
          * @throws None
          */
@@ -45,16 +45,16 @@ public class DamagedReport extends Report {
     @Override
     public String toString() {
         /**
-         * Returns a string representation of the current Business.DamagedReport object.
+         * Returns a string representation of the current Stock.Business.DamagedReport object.
          * @param None.
-         * @return A string containing the list of products with their associated damaged products and causes, separated by new lines. If the Business.DamagedReport object doesn't contain any products, the function returns a string stating that there are no damaged items.
+         * @return A string containing the list of products with their associated damaged products and causes, separated by new lines. If the Stock.Business.DamagedReport object doesn't contain any products, the function returns a string stating that there are no damaged items.
          * @throws None
          */
         StringBuilder stringBuilderStockReport = new StringBuilder();
         String productInString = "";
         String productDetails = "";
         for (String productName : products.keySet()) {
-            productInString = "Business.Product: " + productName;
+            productInString = "Stock.Business.Product: " + productName;
             stringBuilderStockReport.append(productInString).append(System.lineSeparator());
             Map<Integer, String> productNameData = products.get(productName);
             for (Integer dataBarCode : productNameData.keySet()) {
