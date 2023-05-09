@@ -80,5 +80,16 @@ public class CategoryDAO {
         // should be added to the db?
     }
 
+    public static void deleteCategory(String categoryName){
+        CategoryMap.remove(categoryName);
+        try{
+            java.sql.Statement statement = connection.createStatement();
+            statement.executeQuery("DELETE  FROM Category WHERE Catrgory ==" + categoryName);
+
+        }catch (SQLException e){
+            System.out.println("theres a problem with the database");
+        }
+    }
+
 
 }

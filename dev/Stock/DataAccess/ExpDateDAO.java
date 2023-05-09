@@ -92,12 +92,12 @@ public class ExpDateDAO {
         for(Integer qr: ExpDateMap.keySet()){
             try{
                 java.sql.Statement statement = connection.createStatement();
-                java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM ExpDate WHERE QRCode ==" + qr);
+                java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM ExpDates WHERE QRCode ==" + qr);
                 if(!resultSet.next()){
                     statement.executeUpdate("INSERT INTO ExpDates (QRCode, catalog_number, Date) VALUES (" + qr  + ","+"'" + qrToCatalogNumber.get(qr) +"'"+","+ExpDateMap.get(qr)+ ")");
                 }
                 else{
-                    statement.executeUpdate("UPDATE Category SET Date ="  + ExpDateMap.get(qr)+ " WHERE QRCode = "+ qr);
+                    statement.executeUpdate("UPDATE ExpDates SET Date ="  + ExpDateMap.get(qr)+ " WHERE QRCode = "+ Integer.toString(qr));
                 }
             }catch (SQLException e){
                 System.out.println("there is a problem with the database");
@@ -113,6 +113,19 @@ public class ExpDateDAO {
 
         }
         else{System.out.println("the qr is not new");}
+    }
+
+    public static void deleteExpDate(int qr){
+        ExpDateMap.remove(qr);
+        qrToCatalogNumber.remove(qr);
+        try{
+            java.sql.Statement statement = connection.createStatement();
+            java.sql.ResultSet resultSet = statement.executeQuery("DELETE  FROM ExpDates WHERE QRCode ==" + Integer.toString(qr));
+
+        }catch (SQLException e){
+            System.out.println("theres a problem with the database");
+        }
+
     }
 
 }
