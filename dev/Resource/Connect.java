@@ -6,7 +6,6 @@ import java.sql.Statement;
 
 
 public class Connect {
-    private static int productID = 0;
     private static Connection connection;
 
     private Connect(){
@@ -28,9 +27,6 @@ public class Connect {
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
-    }
-    public static void addOneToProductID(){
-        productID++;
     }
 
     public static Connection getConnection(){
