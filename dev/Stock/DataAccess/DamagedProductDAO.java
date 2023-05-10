@@ -102,14 +102,14 @@ public class DamagedProductDAO {
         }
     }
 
-    public static void writeNewDamagedProduct(int QR,String catalogNumber, String reason){
+    public static void writeDamagedProduct(int QR,String catalogNumber, String reason){
         if(!damagedMap.containsKey(QR)){
             damagedMap.put(QR,reason);
             qrToCatalogNumber.put(QR,catalogNumber);
             // should be added to the database ?
 
         }
-        else{System.out.println("this qr is already a damaged product");}
+//        else{System.out.println("this qr is already a damaged product");}
     }
 
     public static void deleteExpDate(int qr){

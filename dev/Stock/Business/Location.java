@@ -37,4 +37,8 @@ public class Location {
          */
         return location;
     }
+
+    public String toString(){
+        return Integer.toString(getShelfNumber())+" "+Integer.toString(getIndexInShelf());
+    }
 }

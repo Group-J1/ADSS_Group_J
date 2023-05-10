@@ -110,14 +110,14 @@ public class ExpDateDAO {
         }
     }
 
-    public static void writeExpDateForNewQR(int QR,String catalogNumber, Date date){
+    public static void writeExpDateForQR(int QR,String catalogNumber, Date date){
         if(!ExpDateMap.containsKey(QR)){
             ExpDateMap.put(QR,date);
             qrToCatalogNumber.put(QR,catalogNumber);
             // should be added to the database ?
 
         }
-        else{System.out.println("the qr is not new");}
+       // else{System.out.println("the qr is not new");}
     }
 
     public static void deleteExpDate(int qr){

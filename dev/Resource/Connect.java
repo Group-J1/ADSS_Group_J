@@ -6,6 +6,7 @@ import java.sql.Statement;
 
 
 public class Connect {
+    private static int productID = 0;
     private static Connection connection;
 
     private Connect(){
@@ -28,6 +29,9 @@ public class Connect {
             System.out.println(e.getMessage());
         }
     }
+    public static void addOneToProductID(){
+        productID++;
+    }
 
     public static Connection getConnection(){
         return connection;
@@ -42,6 +46,8 @@ public class Connect {
 //            String createProducts = "CREATE TABLE Products(QRCode INTEGER PRIMARY KEY, catalog_number TEXT,Manufacturer TEXT, StorageQuantity INTEGER, StoreQuantity INTEGER, MinimumQuantity INTEGER, ProductDiscount DOUBLE, Weight DOUBLE, Value DOUBLE, Category STRING)";
 //            String createShortages = "CREATE TABLE Stock.Business.Shortages(CatalogNumber TEXT PRIMARY KEY)";
 //
+
+    // NEED TO CREATE DB TO THE STATIC INT, THE NAME IS: ProductID, the fields are ID, Value
 //
 //            stmt.executeUpdate(createDamaged);
 //            stmt.executeUpdate(createExpDate);
