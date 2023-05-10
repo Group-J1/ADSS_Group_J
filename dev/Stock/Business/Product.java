@@ -306,4 +306,11 @@ public class Product {
         damagedProducts.put(barcode,reason);
     }
 
+    public void setExpirationDates(HashMap<Integer, Date> expirationDates) {
+        this.expirationDates = expirationDates;
+    }
+
+    public void setDamagedProducts(HashMap<Integer, String> damagedProducts) {
+        this.damagedProducts = damagedProducts;
+    }
 }

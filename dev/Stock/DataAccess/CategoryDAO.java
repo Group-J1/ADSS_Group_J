@@ -24,7 +24,7 @@ public class CategoryDAO {
         return instance;
     }
 
-    private static AProductCategory getCategory(String category){
+    public static AProductCategory getCategory(String category){
         if(CategoryMap.get(category) == null){
             // look for item in the database
             lookForCategory(category);

@@ -12,13 +12,15 @@ import java.util.Map;
 public class ExpDateDAO {
     private static ExpDateDAO instance = new ExpDateDAO();
     private  static Map<Integer, Date> ExpDateMap;
-    private static  Map<String, Map<Integer,Date>> catalogExpDate;
+    private static  Map<String, HashMap<Integer,Date>> catalogExpDate;
     private static  Map<Integer,String> qrToCatalogNumber;
     private static Connection connection;
 
     private ExpDateDAO(){
         connection = Connect.getConnection();
         ExpDateMap = new HashMap<>();
+        qrToCatalogNumber = new HashMap<>();
+        catalogExpDate = new HashMap<>();
     }
 
     public static ExpDateDAO getInstance() {
@@ -56,7 +58,7 @@ public class ExpDateDAO {
         }
     }
 
-    public static Map<Integer,Date> readExpForCatalogNumber(String catalogNumber){
+    public static HashMap<Integer,Date> readExpForCatalogNumber(String catalogNumber){
         if(catalogExpDate.get(catalogNumber) == null){
             getExpForCatalogNumber(catalogNumber);
         }
@@ -64,7 +66,7 @@ public class ExpDateDAO {
     }
 
     private static void getExpForCatalogNumber(String catalogNumber){
-        Map<Integer,Date> productExpDates = new HashMap<>();
+        HashMap<Integer,Date> productExpDates = new HashMap<>();
         int barcode;
         Date expDate;
         try{
@@ -88,7 +90,8 @@ public class ExpDateDAO {
 
     }
 
-    public static void writeExpDate(){
+
+    public static void writeExpDates(){
         for(Integer qr: ExpDateMap.keySet()){
             try{
                 java.sql.Statement statement = connection.createStatement();
@@ -98,6 +101,8 @@ public class ExpDateDAO {
                 }
                 else{
                     statement.executeUpdate("UPDATE ExpDates SET Date ="  + ExpDateMap.get(qr)+ " WHERE QRCode = "+ Integer.toString(qr));
+                    statement.executeUpdate("UPDATE ExpDates SET catalog_number ="  + qrToCatalogNumber.get(qr)+ " WHERE QRCode = "+ Integer.toString(qr));
+
                 }
             }catch (SQLException e){
                 System.out.println("there is a problem with the database");
@@ -117,6 +122,8 @@ public class ExpDateDAO {
 
     public static void deleteExpDate(int qr){
         ExpDateMap.remove(qr);
+        catalogExpDate.get(qrToCatalogNumber.get(qr)).remove(qr);
+
         qrToCatalogNumber.remove(qr);
         try{
             java.sql.Statement statement = connection.createStatement();
