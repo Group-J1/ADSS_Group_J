@@ -20,6 +20,9 @@ public class ProductDAO {
     }
 
     public static ProductDAO getInstance() {
+        if(instance == null){
+            instance = new ProductDAO();
+        }
         return instance;
     }
     public static Product getProduct(String catalogNumber){
@@ -39,7 +42,7 @@ public class ProductDAO {
 
         try{
             java.sql.Statement statement = connection.createStatement();
-            java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM Damaged WHERE catalog_number ==" + "'" + catalogNumber + "'");
+            java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM Producs WHERE catalog_number ==" + "'" + catalogNumber + "'");
             while(resultSet.next()){
                 storageQuantity = resultSet.getInt("storageQuantity");
                 storeQuantity = resultSet.getInt("storeQuantity");

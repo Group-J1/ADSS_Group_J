@@ -3,10 +3,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+import java.sql.*;
+import java.util.Arrays;
 
 public class Connect {
-    private static Connection connection;
+    private static Connection connection ;
 
     private Connect(){
         connect();
@@ -19,6 +20,7 @@ public class Connect {
         }
         catch (SQLException e){
             System.out.println(e.getMessage());
+            System.out.println(Arrays.toString(e.getStackTrace()));
         }
     }
     public static void disconnect(){
@@ -30,6 +32,9 @@ public class Connect {
     }
 
     public static Connection getConnection(){
+        if(connection == null){
+            connect();
+        }
         return connection;
     }
 //    public static void main(String[] args) {
@@ -61,5 +66,18 @@ public class Connect {
 }
 
 
+//12
+//1
+//12
+//no
+//1
+//1
+//Dairy
+//Milk 3%
+//1 l
+//XXX
+//23
+//1
+//12
 
 
