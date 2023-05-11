@@ -1,8 +1,7 @@
 package Stock.Business;
 
 import Stock.DataAccess.ProductDAO;
-import Stock.DataAccess.ProductIDDAO;
-import Stock.Service.ProductService;
+import Stock.DataAccess.ProductDetailsDAO;
 
 import java.util.Date;
 
@@ -49,7 +48,7 @@ public class ProductManager {
 
         String name = subCategoryStr + " " + Double.toString(Double.parseDouble(subsubSplited[subsubSplited.length-2])) + " " + subsubSplited[subsubSplited.length - 1];
         String productCatalogNumber = UniqueStringGenerator.generateUniqueString(name);
-        if (productDAO.getProduct(productCatalogNumber) == null) {
+        if (ProductDAO.getProduct(productCatalogNumber) == null) {
         // Old one
         //if (getProductByCategories(categoryStr, subCategoryStr, subSubCategoryStr) == null) {
             AProductCategory Ccategory = new AProductCategory(categoryStr);
@@ -63,7 +62,7 @@ public class ProductManager {
             Product product = new Product(Ccategory, CsubCategoryStr, CsubSubCategoryStr, storageLocation, storeLocation,
                     manufacturer, quantity, minQuantity, weight, expirationDate);
             // New one
-            productDAO.addNewProductToProducts(product);
+            ProductDAO.addNewProductToProducts(product);
 
             // Old one
             //stock.addNewProductToStock(product, minQuantity + 100, minQuantity + 30, minQuantity);
@@ -72,7 +71,8 @@ public class ProductManager {
             product.setStorageLocation(storage.addProductToStorage(product));
             product.setCatalogNumber();
             ProductDAO.writeProducts(); // Freshie check
-            System.out.println(product.getName() + " : " + (ProductIDDAO.getCurrNoUpdate() - quantity + 1) + "-" + ProductIDDAO.getCurrNoUpdate());
+            ProductDetailsDAO.saveDetails(); // Freshie check
+            System.out.println(product.getName() + " : " + (ProductDetailsDAO.getProductIdNoUpdate() - quantity + 1) + "-" + ProductDetailsDAO.getProductIdNoUpdate());
             return true;
         } else {
             return false;

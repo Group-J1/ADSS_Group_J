@@ -1,8 +1,10 @@
 package Stock.Business;
 
+import Stock.DataAccess.ProductDetailsDAO;
+
 public class Storage {
     private Shelf[] shelves;
-    private int currShelf;
+//    private int currShelf;
     private int amountOfShelves;
 
     public Storage(int numberOfShelves) {
@@ -12,10 +14,10 @@ public class Storage {
          * @param numberOfShelves the number of shelves to create in the Stock.Business.Storage object
          */
         this.shelves = new Shelf[numberOfShelves];
-        currShelf = 0;
+//        currShelf = 0;
         amountOfShelves = numberOfShelves;
         for(int i =0; i< numberOfShelves; i++){
-            shelves[i] = new Shelf(30);
+            shelves[i] = new Shelf(30);    // DRAMATIC CHANGE !!! CHANGING FOR TEST SHOULD BE 30 -> test passed
         }
     }
 
@@ -24,7 +26,8 @@ public class Storage {
     }
 
     public int getCurrShelf() {
-        return currShelf;
+        ProductDetailsDAO.getInstance();
+        return ProductDetailsDAO.getStorageShelfNumber();
     }
 
     public int getAmountOfShelves() {
@@ -41,22 +44,49 @@ public class Storage {
          */
         Location loc = null;
         boolean running = true;
+        ProductDetailsDAO.getInstance();
         while (running) {
-            int indexInShelf = shelves[currShelf].nextFreeIndex();
-            if (indexInShelf != -1) {
-                loc = new Location(currShelf,indexInShelf);
-                product.setStorageLocation(loc);
-                shelves[currShelf].addItemToShelf(product,indexInShelf);
-                running = false;
-            }
-            else if (currShelf == amountOfShelves - 1) {
+
+            int currShelf = ProductDetailsDAO.getStoreShelfNumber();
+            if (currShelf == amountOfShelves - 1) {
                 running = false;
 
             }
-            else if (currShelf < amountOfShelves - 1){
-                currShelf++;
+            else {
+                int indexInShelf = shelves[currShelf].nextFreeIndex();
+                if (indexInShelf != -1) {
+                    loc = new Location(currShelf, indexInShelf);
+                    product.setStoreLocation(loc);
+                    shelves[currShelf].addItemToShelf(product, indexInShelf);
+                    running = false;
+                } else {
+
+                    //reset indexInShelf
+
+                    ProductDetailsDAO.resetIndexInShelf();
+                    ProductDetailsDAO.updateStoreShelfNumber();
+                }
             }
         }
+//            int currShelf = ProductDetailsDAO.getStorageShelfNumber();
+//            int indexInShelf = shelves[currShelf].nextFreeIndex();
+//            if (indexInShelf != -1) {
+//                loc = new Location(currShelf,indexInShelf);
+//                product.setStorageLocation(loc);
+//                shelves[currShelf].addItemToShelf(product,indexInShelf);
+//                running = false;
+//            }
+//            else if (currShelf == amountOfShelves - 1) {
+//                running = false;
+//
+//            }
+//            else if (currShelf < amountOfShelves - 1){
+////                currShelf++;
+//                ProductDetailsDAO.resetIndexInShelf();
+//
+//                ProductDetailsDAO.updateStorageShelfNumber();
+//            }
+//        }
 
         return loc;
     }

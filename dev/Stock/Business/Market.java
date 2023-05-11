@@ -1,6 +1,6 @@
 package Stock.Business;
 
-import Stock.DataAccess.ProductIDDAO;
+import Stock.DataAccess.ProductDetailsDAO;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -56,7 +56,7 @@ public class Market {
             product.setStoreLocation(store.addProductToStore(product));
             product.setStorageLocation(storage.addProductToStorage(product));
             product.setCatalogNumber();
-            System.out.println(product.getName() + " : " + (ProductIDDAO.getCurrNoUpdate() - quantity + 1) + "-" + ProductIDDAO.getCurrNoUpdate());
+            System.out.println(product.getName() + " : " + (ProductDetailsDAO.getProductIdNoUpdate() - quantity + 1) + "-" + ProductDetailsDAO.getProductIdNoUpdate());
             return true;
         } else {
             return false;

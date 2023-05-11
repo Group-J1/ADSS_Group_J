@@ -1,8 +1,10 @@
 package Stock.Business;
 
+import Stock.DataAccess.ProductDetailsDAO;
+
 public class Shelf {
     private Product[] items;
-    private int counter;
+//    private int counter;
     private int places;
 
     public Shelf(int numberOfPlaces) {
@@ -17,7 +19,7 @@ public class Shelf {
          */
         items = new Product[numberOfPlaces];
         places = numberOfPlaces;
-        counter = 0;
+//        counter = 0;
     }
 
     public Product[] getItems() {
@@ -36,7 +38,9 @@ public class Shelf {
          * @throws ArrayIndexOutOfBoundsException if the specified index is out of bounds for the shelf
          */
         this.items[indexInShelfIndex] = newItem;
-        counter++;
+//        counter++;
+        ProductDetailsDAO.getInstance();
+        ProductDetailsDAO.updateStorageIndexInShelf();
     }
 
     public int nextFreeIndex(){
@@ -48,8 +52,11 @@ public class Shelf {
          *
          * @return the index of the next free place on the shelf, or -1 if the shelf is full
          */
-        if(counter < places)
-            return counter;
+        ProductDetailsDAO.getInstance();
+
+        if(ProductDetailsDAO.getStorageIndexInShelf() < places)
+            return ProductDetailsDAO.getStorageIndexInShelf();
+        ProductDetailsDAO.resetIndexInShelf();
         return -1;    //if no space in the shelf.
     }
 }
