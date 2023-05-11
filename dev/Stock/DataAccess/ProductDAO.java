@@ -4,6 +4,7 @@ import Resource.Connect;
 import Stock.Business.*;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
@@ -42,7 +43,7 @@ public class ProductDAO {
 
         try{
             java.sql.Statement statement = connection.createStatement();
-            java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM Producs WHERE catalog_number ==" + "'" + catalogNumber + "'");
+            java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM Products WHERE catalog_number ==" + "'" + catalogNumber + "'");
             while(resultSet.next()){
                 storageQuantity = resultSet.getInt("storageQuantity");
                 storeQuantity = resultSet.getInt("storeQuantity");
@@ -102,7 +103,7 @@ public class ProductDAO {
        }
 
         }catch (SQLException e){
-            System.out.println("there is a problem with the database");
+            System.out.println(e.getMessage());
         }
     }
 
@@ -110,28 +111,64 @@ public class ProductDAO {
         for(Product product: productMap.values()){
             try{
                 java.sql.Statement statement = connection.createStatement();
-                java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM Products WHERE catalog_number ==" + product.getCatalogNumber());
+                java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM Products WHERE catalog_number = '" + product.getCatalogNumber() + "'");
                 if(!resultSet.next()){
-                    statement.executeUpdate("INSERT INTO Products (catalog_number, Manufacturer, StorageQuantity,StoreQuantity,MinimumQuantity,ProductDiscount,Weight,Value,Category,StorageLocation,StoreLocation) VALUES " +
-                            "(" + product.getCatalogNumber()  + ","+"'" + product.getManufacturer() +"'"+","+product.getStorageQuantity()+ ","+ product.getStoreQuantity() + "," + product.getMinimumQuantity() + ","+ product.getDiscount()+","+product.getWeight()+","+product.getValue()+"," +product.getCategory()+"," + "'"+ product.getStorageLocation().toString()+"'"+","+"'"+product.getStoreLocation()+"'"+ ")");
+//                    statement.executeUpdate("INSERT INTO Products (catalog_number, Manufacturer, StorageQuantity,StoreQuantity,MinimumQuantity,ProductDiscount,Weight,Value,Category,StorageLocation,StoreLocation) VALUES " +
+//                            "(" + product.getCatalogNumber()  + ","+"'" + product.getManufacturer() +"'"+","+product.getStorageQuantity()+ ","+ product.getStoreQuantity() + "," + product.getMinimumQuantity() + ","+ product.getDiscount()+","+product.getWeight()+","+product.getValue()+"," +product.getCategory()+"," + "'"+ product.getStorageLocation().toString()+"'"+","+"'"+product.getStoreLocation().toString()+"'"+ ")");
+                    String sql = "INSERT INTO Products (catalog_number, Manufacturer, StorageQuantity, StoreQuantity, MinimumQuantity, ProductDiscount, Weight, Value, Category, StorageLocation, StoreLocation) " +
+                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+                    try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+                        stmt.setString(1, product.getCatalogNumber());
+                        stmt.setString(2, product.getManufacturer());
+                        stmt.setInt(3, product.getStorageQuantity());
+                        stmt.setInt(4, product.getStoreQuantity());
+                        stmt.setInt(5, product.getMinimumQuantity());
+                        stmt.setDouble(6, product.getDiscount());
+                        stmt.setDouble(7, product.getWeight());
+                        stmt.setDouble(8, product.getValue());
+                        stmt.setString(9, product.getCategory().getName().toString());
+                        stmt.setString(10, product.getStorageLocation().toString());
+                        stmt.setString(11, product.getStoreLocation().toString());
+
+                        stmt.executeUpdate();
+                    } catch (SQLException e) {
+                        System.out.println(e.getMessage());
+                    }
+
+
                 }
                 else{
-                    statement.executeUpdate("UPDATE Products SET Manufacturer ="  + product.getManufacturer()+ " WHERE catalog_number = "+ "'" + product.getCatalogNumber() + "'");
-                    statement.executeUpdate("UPDATE Products SET StorageQuantity ="  + product.getStorageQuantity()+ " WHERE catalog_number = "+ "'" + product.getCatalogNumber() + "'");
-                    statement.executeUpdate("UPDATE Products SET StoreQuantity ="  + product.getStoreQuantity()+ " WHERE catalog_number = "+ "'" + product.getCatalogNumber() + "'");
-                    statement.executeUpdate("UPDATE Products SET MinimumQuantity ="  + product.getMinimumQuantity()+ " WHERE catalog_number = "+ "'" + product.getCatalogNumber() + "'");
-                    statement.executeUpdate("UPDATE Products SET ProductDiscount ="  + product.getDiscount()+ " WHERE catalog_number = "+ "'" + product.getCatalogNumber() + "'");
-                    statement.executeUpdate("UPDATE Products SET Weight ="  + product.getWeight()+ " WHERE catalog_number = "+ "'" + product.getCatalogNumber() + "'");
-                    statement.executeUpdate("UPDATE Products SET Value ="  + product.getValue()+ " WHERE catalog_number = "+ "'" + product.getCatalogNumber() + "'");
-                    statement.executeUpdate("UPDATE Products SET Category ="  + product.getCategory()+ " WHERE catalog_number = "+ "'" + product.getCatalogNumber() + "'");
-                    statement.executeUpdate("UPDATE Products SET StoreLocation ="  + product.getStoreLocation().toString()+ " WHERE catalog_number = "+ "'" + product.getCatalogNumber() + "'");
-                    statement.executeUpdate("UPDATE Products SET StorageLocation ="  + product.getStorageLocation().toString()+ " WHERE catalog_number = "+ "'" + product.getCatalogNumber() + "'");
+                    String updateQuery = "UPDATE Products SET Manufacturer = ?, StorageQuantity = ?, StoreQuantity = ?, MinimumQuantity = ?, ProductDiscount = ?, Weight = ?, Value = ?, Category = ?, StoreLocation = ?, StorageLocation = ? WHERE catalog_number = ?";
+                    PreparedStatement preparedStatement = connection.prepareStatement(updateQuery);
+
+                    preparedStatement.setString(1, product.getManufacturer());
+                    preparedStatement.setInt(2, product.getStorageQuantity());
+                    preparedStatement.setInt(3, product.getStoreQuantity());
+                    preparedStatement.setInt(4, product.getMinimumQuantity());
+                    preparedStatement.setDouble(5, product.getDiscount());
+                    preparedStatement.setDouble(6, product.getWeight());
+                    preparedStatement.setDouble(7, product.getValue());
+                    preparedStatement.setString(8, product.getCategory().getName().toString());
+                    preparedStatement.setString(9, product.getStoreLocation().toString());
+                    preparedStatement.setString(10, product.getStorageLocation().toString());
+                    preparedStatement.setString(11, product.getCatalogNumber());
+
+                    preparedStatement.executeUpdate();
                 }
             }catch (SQLException e){
-                System.out.println("there is a problem with the database");
+                System.out.println(e.getMessage());
+            }
+            ExpDateDAO.getInstance();
+            DamagedProductDAO.getInstance();
+            ExpDateDAO.updateExpDate(product.getCatalogNumber(),product.getExpirationDates());
+            for(Integer qr: product.getDamagedProducts().keySet()){
+                DamagedProductDAO.writeDamagedProduct(qr,product.getCatalogNumber(),product.getDamagedProducts().get(qr));
             }
 
-            // update expDate,  damaged on write
+            // for thr checking:
+            DamagedProductDAO.writeDamagedProducts();
+            ExpDateDAO.writeExpDates();
         }
     }
 

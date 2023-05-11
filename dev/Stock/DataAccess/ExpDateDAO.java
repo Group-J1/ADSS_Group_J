@@ -4,6 +4,7 @@ import Stock.Business.Product;
 import Resource.Connect;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
@@ -71,7 +72,11 @@ public class ExpDateDAO {
         Date expDate;
         try{
             java.sql.Statement statement = connection.createStatement();
-            java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM ExpDates WHERE catalog_number ==" + catalogNumber);
+//            java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM ExpDates WHERE catalog_number ==" + catalogNumber);
+            String sql = "SELECT * FROM ExpDates WHERE catalog_number = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, catalogNumber);
+            java.sql.ResultSet resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){
                 barcode = resultSet.getInt("QRCode");
@@ -97,7 +102,13 @@ public class ExpDateDAO {
                 java.sql.Statement statement = connection.createStatement();
                 java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM ExpDates WHERE QRCode ==" + qr);
                 if(!resultSet.next()){
-                    statement.executeUpdate("INSERT INTO ExpDates (QRCode, catalog_number, Date) VALUES (" + qr  + ","+"'" + qrToCatalogNumber.get(qr) +"'"+","+ExpDateMap.get(qr)+ ")");
+//                    statement.executeUpdate("INSERT INTO ExpDates (QRCode, catalog_number, Date) VALUES (" + qr  + ","+"'" + qrToCatalogNumber.get(qr) +"'"+","+ExpDateMap.get(qr)+ ")");
+                    PreparedStatement pstmt = connection.prepareStatement("INSERT INTO ExpDates (QRCode, catalog_number, Date) VALUES (?, ?, ?)");
+                    pstmt.setInt(1, qr);
+                    pstmt.setString(2, qrToCatalogNumber.get(qr));
+                    pstmt.setDate(3, new java.sql.Date(ExpDateMap.get(qr).getTime()));
+                    pstmt.executeUpdate();
+
                 }
                 else{
                     statement.executeUpdate("UPDATE ExpDates SET Date ="  + ExpDateMap.get(qr)+ " WHERE QRCode = "+ Integer.toString(qr));
@@ -105,7 +116,7 @@ public class ExpDateDAO {
 
                 }
             }catch (SQLException e){
-                System.out.println("there is a problem with the database");
+                System.out.println(e.getMessage());
             }
         }
     }

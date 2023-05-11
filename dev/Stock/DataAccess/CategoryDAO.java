@@ -4,6 +4,8 @@ import Stock.Business.AProductCategory;
 import Resource.Connect;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Locale;
@@ -37,9 +39,14 @@ public class CategoryDAO {
         double discount;
         try{
             java.sql.Statement statement = connection.createStatement();
-            java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM Category WHERE Category ==" + categoryStr);
+//            java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM Category WHERE Category ==" + categoryStr);
+            String sql = "SELECT * FROM Category WHERE Category = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, categoryStr);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
             while(resultSet.next()){
-                category = resultSet.getString("ID");
+                category = resultSet.getString("Category");
                 discount = resultSet.getDouble("Discount");
                 AProductCategory found = new AProductCategory(category);
                 found.setDiscount(discount);

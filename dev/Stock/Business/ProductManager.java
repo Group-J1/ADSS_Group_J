@@ -11,8 +11,8 @@ public class ProductManager {
 
     private static ProductManager instance = null;
 
-    Store store;
-    Storage storage;
+    Store store = new Store(30);
+    Storage storage = new Storage(30);
 
     private ProductManager() {
         // private constructor
@@ -44,7 +44,9 @@ public class ProductManager {
          */
 
         // New one
-        String name = subCategoryStr + " " + subSubCategoryStr;
+        String[] subsubSplited = subSubCategoryStr.split(" ");
+
+        String name = subCategoryStr + " " + Double.toString(Double.parseDouble(subsubSplited[subsubSplited.length-2])) + " " + subsubSplited[subsubSplited.length - 1];
         String productCatalogNumber = UniqueStringGenerator.generateUniqueString(name);
         if (productDAO.getProduct(productCatalogNumber) == null) {
         // Old one
@@ -68,6 +70,7 @@ public class ProductManager {
             product.setStoreLocation(store.addProductToStore(product));
             product.setStorageLocation(storage.addProductToStorage(product));
             product.setCatalogNumber();
+            ProductDAO.writeProducts();
             System.out.println(product.getName() + " : " + (Product.productsCounter - quantity + 1) + "-" + Product.productsCounter);
             return true;
         } else {

@@ -61,7 +61,26 @@ public class Connect {
 //            System.out.println(e.getMessage());
 //        }
     public static void main(String[] args) {
-        connect();
+        try {
+            Connection conn = getConnection();
+            Statement stmt = conn.createStatement();
+//            String sql = "DROP TABLE IF EXISTS Products";
+//            stmt.executeUpdate(sql);
+//            String createProducts = "CREATE TABLE Products(catalog_number TEXT PRIMARY KEY,Manufacturer TEXT, StorageQuantity INTEGER, StoreQuantity INTEGER, MinimumQuantity INTEGER, ProductDiscount DOUBLE, Weight DOUBLE, Value DOUBLE, Category STRING, StorageLocation TEXT, StoreLocation TEXT)";
+//            stmt.executeUpdate(createProducts);
+//            stmt.executeUpdate("DELETE FROM Products");
+//            stmt.executeUpdate("DELETE  FROM ExpDates");
+
+//            stmt.executeUpdate("INSERT INTO Category (Category, Discount) VALUES (" + "'" + "Dairy" + "'" + "," + 0 + ")");
+//            stmt.executeUpdate("INSERT INTO Category (Category, Discount) VALUES (" + "'" + "Meat" + "'" + "," + 0 + ")");
+
+
+//            stmt.executeUpdate("DELETE FROM Products WHERE catalog_number = null");
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 }
 
