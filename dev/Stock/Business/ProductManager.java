@@ -1,6 +1,7 @@
 package Stock.Business;
 
 import Stock.DataAccess.ProductDAO;
+import Stock.DataAccess.ProductIDDAO;
 import Stock.Service.ProductService;
 
 import java.util.Date;
@@ -11,8 +12,8 @@ public class ProductManager {
 
     private static ProductManager instance = null;
 
-    Store store = new Store(30);
-    Storage storage = new Storage(30);
+    Store store = new Store(30); // Freshie check
+    Storage storage = new Storage(30);// Freshie check
 
     private ProductManager() {
         // private constructor
@@ -70,8 +71,8 @@ public class ProductManager {
             product.setStoreLocation(store.addProductToStore(product));
             product.setStorageLocation(storage.addProductToStorage(product));
             product.setCatalogNumber();
-            ProductDAO.writeProducts();
-            System.out.println(product.getName() + " : " + (Product.productsCounter - quantity + 1) + "-" + Product.productsCounter);
+            ProductDAO.writeProducts(); // Freshie check
+            System.out.println(product.getName() + " : " + (ProductIDDAO.getCurrNoUpdate() - quantity + 1) + "-" + ProductIDDAO.getCurrNoUpdate());
             return true;
         } else {
             return false;

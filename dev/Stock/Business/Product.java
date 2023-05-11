@@ -1,9 +1,11 @@
 package Stock.Business;
 
+import Stock.DataAccess.ProductIDDAO;
+
 import java.util.*;
 
 public class Product {
-    static int productsCounter = 0;
+//    static int productsCounter = 0;
 
     private String name;
 
@@ -70,8 +72,10 @@ public class Product {
         this.minimumQuantity = minimumQuantity;
         this.weight = weight;
         expirationDates = new HashMap<>();
+        ProductIDDAO.getInstance();
+
         for (int i = 0; i < quantity; i++) {
-            this.expirationDates.put(++productsCounter, expiration);
+            this.expirationDates.put(ProductIDDAO.getCurr(), expiration);
         }
         damagedProducts = new HashMap<>();
     }
@@ -240,8 +244,9 @@ public class Product {
                 addToStore(howMuchToAddToStore);
             }
         }
+        ProductIDDAO.getInstance();
         for (int i = 0; i < quantity; i++) {
-            this.expirationDates.put(++productsCounter, expiration);
+            this.expirationDates.put(ProductIDDAO.getCurr(), expiration);
         }
     }
 

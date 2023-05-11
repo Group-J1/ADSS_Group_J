@@ -70,8 +70,13 @@ public class Connect {
 //            stmt.executeUpdate(createProducts);
 //            stmt.executeUpdate("DELETE FROM Products");
 //            stmt.executeUpdate("DELETE  FROM ExpDates");
+//            stmt.executeUpdate("CREATE TABLE ProductID ( ID INTEGER PRIMARY KEY, Value  INTEGER )");
+//            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "1" + "," + 0 + ")");
+
+
 
 //            stmt.executeUpdate("INSERT INTO Category (Category, Discount) VALUES (" + "'" + "Dairy" + "'" + "," + 0 + ")");
+            stmt.executeUpdate("INSERT INTO Category (Category, Discount) VALUES (" + "'" + "Fruits" + "'" + "," + 0 + ")");
 //            stmt.executeUpdate("INSERT INTO Category (Category, Discount) VALUES (" + "'" + "Meat" + "'" + "," + 0 + ")");
 
 

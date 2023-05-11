@@ -46,7 +46,10 @@ public class ProductIDDAO {
     }
 
     public static int getCurr() {
-        return curr++;
+        return ++curr;
 
+    }
+    public static int getCurrNoUpdate(){
+        return curr;
     }
 }

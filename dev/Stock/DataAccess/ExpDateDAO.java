@@ -111,8 +111,13 @@ public class ExpDateDAO {
 
                 }
                 else{
-                    statement.executeUpdate("UPDATE ExpDates SET Date ="  + ExpDateMap.get(qr)+ " WHERE QRCode = "+ Integer.toString(qr));
-                    statement.executeUpdate("UPDATE ExpDates SET catalog_number ="  + qrToCatalogNumber.get(qr)+ " WHERE QRCode = "+ Integer.toString(qr));
+                    String updateExpDatesQuery = "UPDATE ExpDates SET Date = ?, catalog_number = ? WHERE QRCode = ?";
+                    PreparedStatement updateExpDatesStmt = connection.prepareStatement(updateExpDatesQuery);
+                    updateExpDatesStmt.setDate(1, new java.sql.Date(ExpDateMap.get(qr).getTime()));
+                    updateExpDatesStmt.setString(2, qrToCatalogNumber.get(qr));
+                    updateExpDatesStmt.setInt(3, qr);
+
+                    updateExpDatesStmt.executeUpdate();
 
                 }
             }catch (SQLException e){

@@ -182,6 +182,8 @@ public class ProductDAO {
         for(Integer qr: product.getExpirationDates().keySet()){
             ExpDateDAO.writeExpDateForQR(qr,product.getCatalogNumber(),product.getExpirationDates().get(qr));
         }
+        ProductIDDAO.getInstance();
+        ProductIDDAO.saveCurrID();
 
     }
 
