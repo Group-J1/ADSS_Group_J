@@ -10,12 +10,12 @@ public class ProductUI {
 
     private static final ProductService productService = ProductService.getInstance();
 
+    String categoryStr, subCategoryStr, subSubCategoryStr, manufacturer, quantity, minQuantity, weight;
+    Date expirationDate;
+    Scanner input = new Scanner(System.in);
+
     public void startMenu(String numOfMarketToManagement) {
         boolean running = true;
-        Scanner input = new Scanner(System.in);
-        String categoryStr, subCategoryStr, subSubCategoryStr, manufacturer, quantity, minQuantity, weight;
-        boolean validSubSubCategory;
-        Date expirationDate;
         while (running) {
             System.out.println("-------- Welcome to the Product menu of market number " + Integer.parseInt(numOfMarketToManagement) + " --------");
             // case 1 at MainUI
@@ -27,77 +27,20 @@ public class ProductUI {
             // case 7 at MainUI
             System.out.println("4) Get information on selected product ");
             // case 10 at MainUI
-            System.out.println("5) Change min quantity to product. ");
+            System.out.println("5) Change min quantity to product ");
+            // Exit from product's menu to stock's menu
             System.out.println("6) Go back to Stock menu ");
-            System.out.println("Select the number you would like to access.");
+
+            System.out.println("Select the number you would like to access ");
             System.out.println("-----------------------");
             String selection = input.nextLine();
             switch (selection) {
                 case "1":
-                    System.out.println("Whats is your product's category? ");
-                    categoryStr = input.nextLine();
-                    if (!categoryStr.matches("[a-zA-Z' ]+")) {
-                        System.out.println("your product's category is not a valid string ");
-                        break;
-                    }
-                    System.out.println("Whats is your product's sub-category? ");
-                    subCategoryStr = input.nextLine();
-                    if (!subCategoryStr.matches("[a-zA-Z0-9% ]+")) {
-                        System.out.println("your product's subCategory is not a valid string ");
-                        break;
-                    }
-                    System.out.println("Whats is your product's sub-sub-category, in <double string> format? ");
-                    subSubCategoryStr = input.nextLine();
-                    validSubSubCategory = checkSubSubCategory(subSubCategoryStr);
-                    if (!validSubSubCategory) {
-                        break;
-                    }
-
-                    System.out.println("Whats is your product's manufacturer? ");
-                    manufacturer = input.nextLine();
-                    if (!manufacturer.matches("[a-zA-Z' ]+")) {
-                        System.out.println("your product's manufacturer is not a valid string ");
-                        break;
-                    }
-
-                    System.out.println("Whats is your product's quantity? ");
-                    quantity = input.nextLine();
-                    if (!(quantity.matches("[0-9]+") && Integer.parseInt(quantity) > 0)) {
-                        System.out.println("your product's quantity is not a positive number ");
-                        break;
-                    }
-
-
-                    System.out.println("Whats is your product's weight? ");
-                    weight = input.nextLine();
-                    if (!(weight.matches("[0-9.]+") && Double.parseDouble(weight) > 0)) {
-                        System.out.println("your product's weight is not a positive number ");
-                        break;
-                    }
-
-                    System.out.println("Whats is your product's minimum quantity? ");
-                    minQuantity = input.nextLine();
-                    if (!(minQuantity.matches("[0-9]+") && Integer.parseInt(minQuantity) > 0)) {
-                        System.out.println("your product's minimum quantity is not a positive number ");
-                        break;
-                    }
-
-                    expirationDate = dateInput();
-                    if (expirationDate == null) {
-                        break;
-                    }
-                    if (!productService.addNewProduct(categoryStr, subCategoryStr, subSubCategoryStr, manufacturer,
-                            Integer.parseInt(quantity), Integer.parseInt(minQuantity), Double.parseDouble(weight), expirationDate)) {
-                        System.out.println("The product already exist in stock! ");
-                        break;
-                    } else {
-                        System.out.println("Stock.Business.Product added! ");
-                    }
+                    addNewProductCase1();
                     break;
 
                 case "2":
-                    ReportsUI reportsUi = new ReportsUI();
-                    //reportsUi.startMenu();
+                    addMoreItemsToProductCase2();
                     break;
 
                 case "3":
@@ -106,6 +49,16 @@ public class ProductUI {
                     break;
 
                 case "4":
+                    //MarketUI marketUI = new MarketUI();
+                    //marketUI.startMenu();
+                    break;
+
+                case "5":
+                    //MarketUI marketUI = new MarketUI();
+                    //marketUI.startMenu();
+                    break;
+
+                case "6":
                     running = false;
                     break;
 
@@ -114,6 +67,125 @@ public class ProductUI {
                     break;
             }
         }
+    }
+
+    // Case 1 in product's menu
+    void addNewProductCase1() {
+        System.out.println("Whats is your product's category? ");
+        categoryStr = input.nextLine();
+        if (!checkIfOnlyLetters(categoryStr)) {
+            System.out.println("your product's category is not a valid string ");
+            return;
+        }
+        System.out.println("Whats is your product's sub-category? ");
+        subCategoryStr = input.nextLine();
+        if (!checkSubCategory(subCategoryStr)) {
+            System.out.println("your product's subCategory is not a valid string ");
+            return;
+        }
+        System.out.println("Whats is your product's sub-sub-category, in <double string> format? ");
+        subSubCategoryStr = input.nextLine();
+        if (!checkSubSubCategory(subSubCategoryStr)) {
+            return;
+        }
+
+        System.out.println("Whats is your product's manufacturer? ");
+        manufacturer = input.nextLine();
+        if (!checkIfOnlyLetters(manufacturer)) {
+            System.out.println("your product's manufacturer is not a valid string ");
+            return;
+        }
+
+        System.out.println("Whats is your product's quantity? ");
+        quantity = input.nextLine();
+        if (!checkIfPositiveIntegerNumber(quantity)) {
+            System.out.println("your product's quantity is not a positive number ");
+            return;
+        }
+
+        System.out.println("Whats is your product's weight? ");
+        weight = input.nextLine();
+        if (!checkIfPositiveDoubleNumber(weight)) {
+            System.out.println("your product's weight is not a positive number ");
+            return;
+        }
+
+        System.out.println("Whats is your product's minimum quantity? ");
+        minQuantity = input.nextLine();
+        if (!checkIfPositiveIntegerNumber(minQuantity)) {
+            System.out.println("your product's minimum quantity is not a positive number ");
+            return;
+        }
+
+        expirationDate = dateInput();
+        if (expirationDate == null) {
+            return;
+        }
+        if (!productService.addNewProduct(categoryStr, subCategoryStr, subSubCategoryStr, manufacturer,
+                Integer.parseInt(quantity), Integer.parseInt(minQuantity), Double.parseDouble(weight), expirationDate)) {
+            System.out.println("The product already exist in stock! ");
+        }
+        else {
+            System.out.println("Product added! ");
+        }
+    }
+
+    // Case 2 in product's menu
+    void addMoreItemsToProductCase2() {
+        System.out.println("Whats is your product's category? ");
+        categoryStr = input.nextLine();
+        if (!categoryStr.matches("[a-zA-Z' ]+")) {
+            System.out.println("your product's category is not a valid string ");
+            return;
+        }
+        System.out.println("Whats is your product's sub-category? ");
+        subCategoryStr = input.nextLine();
+        if (!subCategoryStr.matches("[a-zA-Z0-9% ]+")) {
+            System.out.println("your product's subCategory is not a valid string ");
+            return;
+        }
+
+        System.out.println("What is your product's sub-sub-category? ");
+        subSubCategoryStr = input.nextLine();
+        if (!checkSubSubCategory(subSubCategoryStr)) {
+            return;
+        }
+        product = market.getProductByCategories(categoryStr, subCategoryStr, subSubCategoryStr);
+        if (product == null) {
+            System.out.println("Stock.Business.Product was not found.");
+            return;
+        }
+
+        System.out.println("How many " + product.getSubCategoryName().getName() + " " + product.getSubSubCategory().getName() + " do you want to add? ");
+        quantity = input.nextLine();
+        if (!(quantity.matches("[0-9]+") && Integer.parseInt(quantity) > 0)) {
+            System.out.println("You have to add a positive number for quantity ");
+            return;
+        }
+        expirationDate = dateInput();
+        if (expirationDate == null) {
+            return;
+        }
+        product.addMoreItemsToProduct(Integer.parseInt(quantity), expirationDate);
+        System.out.println("Stock.Business.Product's quantity updated! ");
+    }
+
+
+
+    Boolean checkIfPositiveIntegerNumber(String number) {
+        return number.matches("[0-9]+") && Integer.parseInt(number) > 0;
+    }
+
+    Boolean checkIfPositiveDoubleNumber(String number) {
+        return number.matches("[0-9]+") && Integer.parseInt(number) > 0;
+    }
+
+    Boolean checkIfOnlyLetters(String str) {
+        return str.matches("[a-zA-Z' ]+");
+    }
+
+    Boolean checkSubCategory(String subCategoryStr) {
+        return subCategoryStr.matches("[a-zA-Z0-9% ]+");
     }
 
     Boolean checkSubSubCategory(String subSubCategoryStr) {
