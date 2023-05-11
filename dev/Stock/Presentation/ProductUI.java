@@ -40,7 +40,7 @@ public class ProductUI {
                     break;
 
                 case "2":
-                    addMoreItemsToProductCase2();
+                    //addMoreItemsToProductCase2();
                     break;
 
                 case "3":
@@ -131,44 +131,44 @@ public class ProductUI {
     }
 
     // Case 2 in product's menu
-    void addMoreItemsToProductCase2() {
-        System.out.println("Whats is your product's category? ");
-        categoryStr = input.nextLine();
-        if (!categoryStr.matches("[a-zA-Z' ]+")) {
-            System.out.println("your product's category is not a valid string ");
-            return;
-        }
-        System.out.println("Whats is your product's sub-category? ");
-        subCategoryStr = input.nextLine();
-        if (!subCategoryStr.matches("[a-zA-Z0-9% ]+")) {
-            System.out.println("your product's subCategory is not a valid string ");
-            return;
-        }
-
-        System.out.println("What is your product's sub-sub-category? ");
-        subSubCategoryStr = input.nextLine();
-        if (!checkSubSubCategory(subSubCategoryStr)) {
-            return;
-        }
-        product = market.getProductByCategories(categoryStr, subCategoryStr, subSubCategoryStr);
-        if (product == null) {
-            System.out.println("Stock.Business.Product was not found.");
-            return;
-        }
-
-        System.out.println("How many " + product.getSubCategoryName().getName() + " " + product.getSubSubCategory().getName() + " do you want to add? ");
-        quantity = input.nextLine();
-        if (!(quantity.matches("[0-9]+") && Integer.parseInt(quantity) > 0)) {
-            System.out.println("You have to add a positive number for quantity ");
-            return;
-        }
-        expirationDate = dateInput();
-        if (expirationDate == null) {
-            return;
-        }
-        product.addMoreItemsToProduct(Integer.parseInt(quantity), expirationDate);
-        System.out.println("Stock.Business.Product's quantity updated! ");
-    }
+//    void addMoreItemsToProductCase2() {
+//        System.out.println("Whats is your product's category? ");
+//        categoryStr = input.nextLine();
+//        if (!categoryStr.matches("[a-zA-Z' ]+")) {
+//            System.out.println("your product's category is not a valid string ");
+//            return;
+//        }
+//        System.out.println("Whats is your product's sub-category? ");
+//        subCategoryStr = input.nextLine();
+//        if (!subCategoryStr.matches("[a-zA-Z0-9% ]+")) {
+//            System.out.println("your product's subCategory is not a valid string ");
+//            return;
+//        }
+//
+//        System.out.println("What is your product's sub-sub-category? ");
+//        subSubCategoryStr = input.nextLine();
+//        if (!checkSubSubCategory(subSubCategoryStr)) {
+//            return;
+//        }
+//        product = market.getProductByCategories(categoryStr, subCategoryStr, subSubCategoryStr);
+//        if (product == null) {
+//            System.out.println("Stock.Business.Product was not found.");
+//            return;
+//        }
+//
+//        System.out.println("How many " + product.getSubCategoryName().getName() + " " + product.getSubSubCategory().getName() + " do you want to add? ");
+//        quantity = input.nextLine();
+//        if (!(quantity.matches("[0-9]+") && Integer.parseInt(quantity) > 0)) {
+//            System.out.println("You have to add a positive number for quantity ");
+//            return;
+//        }
+//        expirationDate = dateInput();
+//        if (expirationDate == null) {
+//            return;
+//        }
+//        product.addMoreItemsToProduct(Integer.parseInt(quantity), expirationDate);
+//        System.out.println("Stock.Business.Product's quantity updated! ");
+//    }
 
 
 
