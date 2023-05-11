@@ -119,6 +119,12 @@ public class ExpDateDAO {
         }
        // else{System.out.println("the qr is not new");}
     }
+    public static void updateExpDate(String catalogNumber, HashMap<Integer,Date> updatedExpDates){
+        for(Integer qr: updatedExpDates.keySet()){
+            ExpDateMap.putIfAbsent(qr,updatedExpDates.get(qr));
+            qrToCatalogNumber.putIfAbsent(qr,catalogNumber);
+        }
+    }
 
     public static void deleteExpDate(int qr){
         ExpDateMap.remove(qr);

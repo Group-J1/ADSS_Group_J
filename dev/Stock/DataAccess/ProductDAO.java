@@ -130,6 +130,8 @@ public class ProductDAO {
             }catch (SQLException e){
                 System.out.println("there is a problem with the database");
             }
+
+            // update expDate,  damaged on write
         }
     }
 
