@@ -11,8 +11,8 @@ public class ProductManager {
 
     private static ProductManager instance = null;
 
-    Store store = new Store(30); // Freshie check
-    Storage storage = new Storage(30);// Freshie check
+    private static Store store;//= new Store(30); // Freshie check
+    private static Storage storage;// = new Storage(30);// Freshie check
 
     private ProductManager() {
         // private constructor
@@ -46,11 +46,11 @@ public class ProductManager {
         // New one
         String[] subsubSplited = subSubCategoryStr.split(" ");
 
-        String name = subCategoryStr + " " + Double.toString(Double.parseDouble(subsubSplited[subsubSplited.length-2])) + " " + subsubSplited[subsubSplited.length - 1];
+        String name = subCategoryStr + " " + Double.toString(Double.parseDouble(subsubSplited[subsubSplited.length - 2])) + " " + subsubSplited[subsubSplited.length - 1];
         String productCatalogNumber = UniqueStringGenerator.generateUniqueString(name);
         if (ProductDAO.getProduct(productCatalogNumber) == null) {
-        // Old one
-        //if (getProductByCategories(categoryStr, subCategoryStr, subSubCategoryStr) == null) {
+            // Old one
+            //if (getProductByCategories(categoryStr, subCategoryStr, subSubCategoryStr) == null) {
             AProductCategory Ccategory = new AProductCategory(categoryStr);
             AProductCategory CsubCategoryStr = new AProductCategory(subCategoryStr);
             String[] parts = subSubCategoryStr.split(" ");
@@ -77,5 +77,13 @@ public class ProductManager {
         } else {
             return false;
         }
+    }
+
+    public static void setStore(Store store) {          // freshie change
+        ProductManager.store = store;
+    }
+
+    public static void setStorage(Storage storage) {
+        ProductManager.storage = storage;               // freshie change
     }
 }

@@ -246,5 +246,11 @@ public class Market {
     }
 
 
+    public Store getStore() {       // freshie change
+        return store;
+    }
 
+    public Storage getStorage() {       // freshie change
+        return storage;
+    }
 }

@@ -3,6 +3,7 @@ package Stock.Presentation;
 import Stock.Business.Chain;
 import Stock.Business.Market;
 import Stock.Business.Product;
+import Stock.Business.ProductManager;
 
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -85,8 +86,11 @@ public class StockMainUI {
                 running = false;
             }
         }
-        market = chain.getMarketByIndex(Integer.parseInt(numOfMarketToManagement) - 1);
+//        market = chain.getMarketByIndex(Integer.parseInt(numOfMarketToManagement) - 1);
         market = new Market(Integer.parseInt(numOfShelves));
+        ProductManager.getInstance();
+        ProductManager.setStorage(market.getStorage());     // freshie change
+        ProductManager.setStore(market.getStore());         // freshie change
         System.out.println("if you want to create the default market, write yes: ");
         String answer = input.nextLine();
         if (answer.equals("yes")) {
@@ -107,7 +111,9 @@ public class StockMainUI {
             String selection = input.nextLine();
             switch (selection) {
                 case "1":
-                    ProductUI productUi = new ProductUI();
+                     ProductUI productUi = new ProductUI();
+                     ProductManager.setStorage(market.getStorage());
+                     ProductManager.setStorage(market.getStorage());
                      productUi.startMenu(numOfMarketToManagement);
                     break;
 
