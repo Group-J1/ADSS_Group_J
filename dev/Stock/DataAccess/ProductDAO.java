@@ -243,8 +243,6 @@ public class ProductDAO {
 
         }
         ProductDAO.getInstance().writeProducts();
-        ShortageDAO.getInstance().writeShortages();
-
     }
     private void loadAllDataToCache(){
         String catalogNumber;

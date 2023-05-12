@@ -360,6 +360,8 @@ public class Product {
     }
 
     public boolean isShortage(){
-        return getStorageQuantity()+getStoreQuantity()<=damagedProducts.size();
+        return getStorageQuantity()+getStoreQuantity() <= damagedProducts.size();
     }
+
+    public int getGreenLine(){return getMinimumQuantity() + 100;}
 }

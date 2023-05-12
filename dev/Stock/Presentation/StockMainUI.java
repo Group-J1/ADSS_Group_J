@@ -4,6 +4,7 @@ import Stock.Business.Chain;
 import Stock.Business.Market;
 import Stock.Business.Product;
 import Stock.Business.ProductManager;
+import Stock.DataAccess.ProductDetailsDAO;
 
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -50,60 +51,79 @@ public class StockMainUI {
          */
         Chain chain;
         Market market;
-        boolean running = true;
-        boolean validSubSubCategory;
-        String numOfMarkets = "0";
-        String numOfShelves = "0";
-        String numOfMarketToManagement = "0";
+        String numOfMarkets;
+        String numOfShelves ;
+        String numOfMarketToManagement;
         Scanner input = new Scanner(System.in);
-        while (running) {
-            System.out.println("Enter the amount of markets in the chain: ");
-            numOfMarkets = input.nextLine();
-            if (checkIfPositiveNumber(numOfMarkets)) {
-                running = false;
-            } else {
-                System.out.print("Your number of markets is not valid, ");
+        boolean running;
+
+        if(ProductDetailsDAO.getNumberOfMarketsInChain() != 0 && ProductDetailsDAO.getManagedMarket() != 0 && ProductDetailsDAO.getNumOfShelves() != 0){
+            chain = new Chain(ProductDetailsDAO.getNumberOfMarketsInChain());
+            market = new Market(ProductDetailsDAO.getNumOfShelves());
+            numOfMarketToManagement = Integer.toString(ProductDetailsDAO.getManagedMarket());
+        }
+        else {
+            running = true;
+            boolean validSubSubCategory;
+            numOfMarkets = "0";
+            numOfShelves = "0";
+            numOfMarketToManagement = "0";
+            input = new Scanner(System.in);
+            while (running) {
+                System.out.println("Enter the amount of markets in the chain: ");
+                numOfMarkets = input.nextLine();
+                if (checkIfPositiveNumber(numOfMarkets)) {
+                    running = false;
+                } else {
+                    System.out.print("Your number of markets is not valid, ");
+                }
             }
-        }
-        chain = new Chain(Integer.parseInt(numOfMarkets));
-        running = true;
-        System.out.println("Enter the the number of the market you want to management: ");
-        numOfMarketToManagement = input.nextLine();
-        if (checkIfPositiveNumber(numOfMarketToManagement) && Integer.parseInt(numOfMarketToManagement) <= Integer.parseInt(numOfMarkets)) {
-            running = false;
-        }
-        while (running) {
-            System.out.println("The number of market is not valid, please enter a valid number of market: ");
+            chain = new Chain(Integer.parseInt(numOfMarkets));
+            ProductDetailsDAO.setNumberOfMarketsInChain(Integer.parseInt(numOfMarkets));
+            running = true;
+            System.out.println("Enter the the number of the market you want to management: ");
             numOfMarketToManagement = input.nextLine();
             if (checkIfPositiveNumber(numOfMarketToManagement) && Integer.parseInt(numOfMarketToManagement) <= Integer.parseInt(numOfMarkets)) {
                 running = false;
             }
-        }
-        running = true;
-        System.out.println("Enter the number of shelves you have in store and in storage");
-        numOfShelves = input.nextLine();
-        if (checkIfPositiveNumber(numOfShelves)) {
-            running = false;
-        }
-        while (running) {
-            System.out.println("The number of shelves is not valid, please enter a valid number: ");
+            while (running) {
+                System.out.println("The number of market is not valid, please enter a valid number of market: ");
+                numOfMarketToManagement = input.nextLine();
+                if (checkIfPositiveNumber(numOfMarketToManagement) && Integer.parseInt(numOfMarketToManagement) <= Integer.parseInt(numOfMarkets)) {
+                    running = false;
+                }
+            }
+            ProductDetailsDAO.setManagedMarket(Integer.parseInt(numOfMarketToManagement));
+            running = true;
+            System.out.println("Enter the number of shelves you have in store and in storage");
             numOfShelves = input.nextLine();
             if (checkIfPositiveNumber(numOfShelves)) {
                 running = false;
             }
-        }
-        //market = chain.getMarketByIndex(Integer.parseInt(numOfMarketToManagement) - 1);
-        market = new Market(Integer.parseInt(numOfShelves));
+            while (running) {
+                System.out.println("The number of shelves is not valid, please enter a valid number: ");
+                numOfShelves = input.nextLine();
+                if (checkIfPositiveNumber(numOfShelves)) {
+                    running = false;
+                }
+            }
+            //market = chain.getMarketByIndex(Integer.parseInt(numOfMarketToManagement) - 1);
+            market = new Market(Integer.parseInt(numOfShelves));
+            ProductDetailsDAO.setNumOfShelves(Integer.parseInt(numOfShelves));
+            ProductDetailsDAO.getInstance().saveDetails();
 
-        ProductManager.getInstance();
-        ProductManager.setStorage(market.getStorage());     // freshie change
-        ProductManager.setStore(market.getStore());         // freshie change
-        System.out.println("if you want to create the default market, write yes: ");
-        String answer = input.nextLine();
-        if (answer.equals("yes")) {
-            System.out.println("The BarCodes are: \n");
-            defaultMarket(market);
-            System.out.println("");
+
+
+            ProductManager.getInstance();
+            ProductManager.setStorage(market.getStorage());     // freshie change
+            ProductManager.setStore(market.getStore());         // freshie change
+            System.out.println("if you want to create the default market, write yes: ");
+            String answer = input.nextLine();
+            if (answer.equals("yes")) {
+                System.out.println("The BarCodes are: \n");
+                defaultMarket(market);
+                System.out.println("");
+            }
         }
         running = true;
 
@@ -118,13 +138,14 @@ public class StockMainUI {
             String selection = input.nextLine();
             switch (selection) {
                 case "1":
-                     ProductManager.setStorage(market.getStorage());
+                     ProductManager.setStore(market.getStore());
                      ProductManager.setStorage(market.getStorage());
                      productUi.startMenu(numOfMarketToManagement);
                     break;
 
                 case "2":
                     ReportsUI reportsUi = new ReportsUI();
+                    reportsUi.startMenu(numOfMarketToManagement);
                     //reportsUi.startMenu(numOfMarketToManagement);
                     break;
 

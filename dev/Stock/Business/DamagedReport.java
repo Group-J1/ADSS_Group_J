@@ -12,7 +12,7 @@ public class DamagedReport extends Report {
     private DamagedProductDAO damagedProductDAO;
     private ProductDAO productDAO;
 
-    public DamagedReport(Stock stock) {
+    public DamagedReport(HashMap<String,Product> allProducts) {
         /**
          * Constructs a new Stock.Business.DamagedReport object based on the given Stock.Business.Stock object.
          * @param stock The Stock.Business.Stock object to generate the Stock.Business.DamagedReport from.
@@ -24,7 +24,7 @@ public class DamagedReport extends Report {
         products = new HashMap<>();;
         this.date = new Date();
         this.id = ++Report.reportsCounter;
-        HashMap<String,Product> allProducts = productDAO.getAllProducts();
+//        HashMap<String,Product> allProducts = productDAO.getAllProducts();
         for(Product product:allProducts.values()){
             products.put(product.getName(),product.getDamagedProducts());
         }
@@ -75,14 +75,16 @@ public class DamagedReport extends Report {
         String productInString = "";
         String productDetails = "";
         for (String productName : products.keySet()) {
-            productInString = "Stock.Business.Product: " + productName;
-            stringBuilderStockReport.append(productInString).append(System.lineSeparator());
+            productInString = "Product: " + productName;
+            if(!products.get(productName).isEmpty()) {
+                stringBuilderStockReport.append(productInString).append(System.lineSeparator());
+            }
             Map<Integer, String> productNameData = products.get(productName);
             for (Integer dataBarCode : productNameData.keySet()) {
                 String dataCause = productNameData.get(dataBarCode);
-                productDetails = "- " + dataBarCode + ": " + dataCause;
+                productDetails = "- " + dataBarCode + " : " + dataCause;
                 stringBuilderStockReport.append(productDetails).append(System.lineSeparator());
-                System.out.println("here");
+//                System.out.println("here");
             }
         }
         if (stringBuilderStockReport.toString().isEmpty()){

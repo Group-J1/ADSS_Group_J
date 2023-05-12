@@ -81,6 +81,8 @@ public class Connect {
             stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "3" + "," + 0 + ")");
             stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "4" + "," + 0 + ")");
             stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "5" + "," + 0 + ")");
+            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "6" + "," + 0 + ")");
+            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "7" + "," + 0 + ")");
 
 
 

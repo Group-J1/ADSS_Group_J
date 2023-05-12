@@ -134,60 +134,60 @@ public class Market {
     }
 
     // Case 6 in UI
-    public boolean createStockReport() {
-        /**
-         * Generates a stock report and adds it to the list of all reports.
-         * @return {@code true} if the stock report is successfully created and added to the list of all reports,
-         *         {@code false} otherwise
-         */
-        try {
-            StockReport stockReport = new StockReport(stock, stock.getCategories());
-            stockReport.addProductsToStockReport(stock, stock.getCategories());
-            allReports.add(stockReport);
-            System.out.println("-------- Stock.Business.Stock Stock.Business.Report: --------");
-            System.out.println(stockReport);
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
-    }
+//    public boolean createStockReport() {
+//        /**
+//         * Generates a stock report and adds it to the list of all reports.
+//         * @return {@code true} if the stock report is successfully created and added to the list of all reports,
+//         *         {@code false} otherwise
+//         */
+//        try {
+//            StockReport stockReport = new StockReport(stock, stock.getCategories());
+//            stockReport.addProductsToStockReport(stock, stock.getCategories());
+//            allReports.add(stockReport);
+//            System.out.println("-------- Stock.Business.Stock Stock.Business.Report: --------");
+//            System.out.println(stockReport);
+//        } catch (Exception e) {
+//            return false;
+//        }
+//        return true;
+//    }
 
-    public boolean createOrderReport() {
-        /**
-         * Generates an order report and adds it to the list of all reports.
-         * @return {@code true} if the order report is successfully created and added to the list of all reports,
-         *         {@code false} otherwise
-         */
-        try {
-            OrderReport orderReport = new OrderReport(stock);
-            orderReport.addProductsToOrderReport(stock);
-            allReports.add(orderReport);
-            System.out.println("-------- Order Stock.Business.Report: --------");
-            System.out.println(orderReport);
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
-    }
+//    public boolean createOrderReport() {
+//        /**
+//         * Generates an order report and adds it to the list of all reports.
+//         * @return {@code true} if the order report is successfully created and added to the list of all reports,
+//         *         {@code false} otherwise
+//         */
+//        try {
+//            OrderReport orderReport = new OrderReport(stock);
+//            orderReport.addProductsToOrderReport(stock);
+//            allReports.add(orderReport);
+//            System.out.println("-------- Order Stock.Business.Report: --------");
+//            System.out.println(orderReport);
+//        } catch (Exception e) {
+//            return false;
+//        }
+//        return true;
+//    }
 
-    public boolean createDamagedReport() {
-        /**
-         * Generates a damaged report and adds it to the list of all reports.
-         *
-         * @return {@code true} if the damaged report is successfully created and added to the list of all reports,
-         *         {@code false} otherwise
-         */
-        try {
-            DamagedReport damagedReport = new DamagedReport(stock);
-            damagedReport.addProductsToDamagedReport(stock);
-            allReports.add(damagedReport);
-            System.out.println("-------- Damaged Stock.Business.Report: --------");
-            System.out.println(damagedReport);
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
-    }
+//    public boolean createDamagedReport() {
+//        /**
+//         * Generates a damaged report and adds it to the list of all reports.
+//         *
+//         * @return {@code true} if the damaged report is successfully created and added to the list of all reports,
+//         *         {@code false} otherwise
+//         */
+//        try {
+//            DamagedReport damagedReport = new DamagedReport(stock);
+//            damagedReport.addProductsToDamagedReport(stock);
+//            allReports.add(damagedReport);
+//            System.out.println("-------- Damaged Stock.Business.Report: --------");
+//            System.out.println(damagedReport);
+//        } catch (Exception e) {
+//            return false;
+//        }
+//        return true;
+//    }
 
     // Case 7 in UI
     public void printProductInformation(int productInformationCase, Product product) {

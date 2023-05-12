@@ -13,14 +13,18 @@ public class ProductDetailsDAO {
     //  2           StorageLocation: ShelfNumber
     //  3           StorageLocation: IndexInShelf
     //  4           StoreLocation: ShelfNumber
-    //  5           StoreLocation: IndexInShelf
+    //  5           numberOfMarketsInChain
+    //  6           ManagedMarket
+    //  7           number of shelves
 
     private static ProductDetailsDAO instance = null;
     private static int curr;
     private static int storageShelfNumber;
-    private static int storageIndexInShelf;
+    private static int IndexInShelf;
     private static int storeShelfNumber;
-    private static int storeIndexInShelf;
+    private static int numberOfMarketsInChain;
+    private static int managedMarket;
+    private static int numOfShelves;
     private static Connection connection;
 
     private ProductDetailsDAO(){
@@ -38,7 +42,7 @@ public class ProductDetailsDAO {
             }
             resultSet = statement.executeQuery("SELECT * FROM ProductID WHERE ID =="  + "3" );
             if(resultSet.next()){
-                storageIndexInShelf = resultSet.getInt("Value");
+                IndexInShelf = resultSet.getInt("Value");
             }
             resultSet = statement.executeQuery("SELECT * FROM ProductID WHERE ID =="  + "4" );
             if(resultSet.next()){
@@ -46,7 +50,15 @@ public class ProductDetailsDAO {
             }
             resultSet = statement.executeQuery("SELECT * FROM ProductID WHERE ID =="  + "5" );
             if(resultSet.next()){
-                storeIndexInShelf = resultSet.getInt("Value");
+                numberOfMarketsInChain = resultSet.getInt("Value");
+            }
+            resultSet = statement.executeQuery("SELECT * FROM ProductID WHERE ID =="  + "6" );
+            if(resultSet.next()){
+                managedMarket = resultSet.getInt("Value");
+            }
+            resultSet = statement.executeQuery("SELECT * FROM ProductID WHERE ID =="  + "7" );
+            if(resultSet.next()){
+                numOfShelves = resultSet.getInt("Value");
             }
 
         }catch (SQLException e){
@@ -61,7 +73,31 @@ public class ProductDetailsDAO {
         return instance;
     }
 
-//    public static void saveDetails(){
+    public static void setNumberOfMarketsInChain(int numberOfMarketsInChain) {
+        ProductDetailsDAO.numberOfMarketsInChain = numberOfMarketsInChain;
+    }
+
+    public static void setManagedMarket(int managedMarket) {
+        ProductDetailsDAO.managedMarket = managedMarket;
+    }
+
+    public static void setNumOfShelves(int numOfShelves) {
+        ProductDetailsDAO.numOfShelves = numOfShelves;
+    }
+
+    public static int getNumberOfMarketsInChain() {
+        return numberOfMarketsInChain;
+    }
+
+    public static int getManagedMarket() {
+        return managedMarket;
+    }
+
+    public static int getNumOfShelves() {
+        return numOfShelves;
+    }
+
+    //    public static void saveDetails(){
 //        try{
 //            java.sql.Statement statement = connection.createStatement();
 //            java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM ProductID WHERE ID =="  + "1" );
@@ -117,9 +153,11 @@ public void saveDetails(){
         // Update or insert values for each ID in ProductID table
         updateOrInsertValue(statement, insertStmt, updateStmt, 1, curr);
         updateOrInsertValue(statement, insertStmt, updateStmt, 2, storageShelfNumber);
-        updateOrInsertValue(statement, insertStmt, updateStmt, 3, storageIndexInShelf);
+        updateOrInsertValue(statement, insertStmt, updateStmt, 3, IndexInShelf);
         updateOrInsertValue(statement, insertStmt, updateStmt, 4, storeShelfNumber);
-        updateOrInsertValue(statement, insertStmt, updateStmt, 5, storeIndexInShelf);
+        updateOrInsertValue(statement, insertStmt, updateStmt, 5, numberOfMarketsInChain);
+        updateOrInsertValue(statement, insertStmt, updateStmt, 6, managedMarket);
+        updateOrInsertValue(statement, insertStmt, updateStmt, 7, numOfShelves);
 
     }catch (SQLException e){
         System.out.println("there is a problem with the database");
@@ -153,13 +191,13 @@ public void saveDetails(){
     }
 
     public int getStorageIndexInShelf() {
-        return storageIndexInShelf/2;           // always add 1 from store and one from storage
+        return IndexInShelf /2;           // always add 1 from store and one from storage
     }
     public void updateStorageIndexInShelf(){
-        storageIndexInShelf++;
+        IndexInShelf++;
     }
     public void resetIndexInShelf(){
-        storageIndexInShelf = 0;
+        IndexInShelf = 0;
     }
     public int getStoreShelfNumber() {
         return storeShelfNumber;
@@ -172,6 +210,6 @@ public void saveDetails(){
     }
 
     public int getStoreIndexInShelf() {
-        return storeIndexInShelf;
+        return numberOfMarketsInChain;
     }
 }

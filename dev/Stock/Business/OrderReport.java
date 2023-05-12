@@ -6,7 +6,7 @@ public class OrderReport extends Report {
     // <product name (subCategory) and size (subSubCategory), quantity>
     protected HashMap<String, Integer> products;
 
-    public OrderReport(Stock stock) {
+    public OrderReport(HashMap<String,Product> stock) {
         /**
          * Constructs a new instance of an Stock.Business.OrderReport.
          * @param stock the Stock.Business.Stock object that contains the inventory information.
@@ -17,13 +17,14 @@ public class OrderReport extends Report {
         addProductsToOrderReport(stock);
     }
 
-    public void addProductsToOrderReport(Stock stock) {
-        Map<Product, Integer []> itemsInStock = stock.getItemsInStock();
-        Set<Product> allProducts = itemsInStock.keySet();
+    public void addProductsToOrderReport(HashMap<String,Product> stock) {
+//        Map<Product, Integer []> itemsInStock = stock.getItemsInStock();
+//        Set<Product> allProducts = itemsInStock.keySet();
         int howMuchToOrder;
-        for (Product product : allProducts) {
-            if (stock.getStatusInStock(product) <= 2) {
-                howMuchToOrder = stock.getGreenLine(product) - (product.getStoreQuantity() + product.getStorageQuantity());
+        for (Product product : stock.values()) {
+            int quantity = product.getStorageQuantity()+product.getStoreQuantity();
+            if (Integer.compare(quantity,product.getGreenLine()) < 0 ) {
+                howMuchToOrder = product.getGreenLine() - (product.getStoreQuantity() + product.getStorageQuantity());
                 products.put(product.getName(),howMuchToOrder);
             }
         }

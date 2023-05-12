@@ -6,7 +6,7 @@ public class StockReport extends Report{
     // < products category name, <product name (subCategory) and size (subSubCategory), quantity> >
     protected HashMap<String, Map<String, Integer>> products;
 
-    public StockReport(Stock stock, ArrayList <String> categories) {
+    public StockReport(Map<String,Product> stock, ArrayList <String> categories) {
         /**
          * Constructs a new Stock.Business.StockReport object that summarizes the current state of a given Stock.Business.Stock object
          * by category, as specified in the provided list of categories.
@@ -20,18 +20,16 @@ public class StockReport extends Report{
         addProductsToStockReport(stock, categories);
     }
 
-    public void addProductsToStockReport(Stock stock, ArrayList <String> categories) {
+    public void addProductsToStockReport(Map<String,Product> stock, ArrayList <String> categories) {
         /**
          * Adds products from a given Stock.Business.Stock object to the current Stock.Business.StockReport object, grouped by the provided list of categories.
          *
          * @param stock the Stock.Business.Stock object to add products from
          * @param categories a list of categories by which to group the products in the report
          */
-        Map<Product, Integer []> itemsInStock = stock.getItemsInStock();
         for (String category : categories) {
             Map<String, Integer> newCategory = new HashMap<>();
-            Set<Product> allProducts = itemsInStock.keySet();
-            for (Product product : allProducts) {
+            for (Product product : stock.values()) {
                 if (product.getCategory().getName().equals(category)) {
                     newCategory.put(product.getName(), product.getStoreQuantity() + product.getStorageQuantity());
                 }
