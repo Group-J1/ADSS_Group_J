@@ -74,8 +74,8 @@ public class ProductManager {
             product.setCatalogNumber();
             productDAO.writeProducts(); // Freshie check
             productDetailsDAO.saveDetails(); // Freshie check
-            System.out.println(product.getName() + " : " + (ProductDetailsDAO.getProductIdNoUpdate() - quantity + 1)
-                    + "-" + ProductDetailsDAO.getProductIdNoUpdate());
+            System.out.println(product.getName() + " : " + (ProductDetailsDAO.getInstance().getProductIdNoUpdate() - quantity + 1)
+                    + "-" + ProductDetailsDAO.getInstance().getProductIdNoUpdate());
             return true;
         } else {
             return false;
@@ -98,6 +98,7 @@ public class ProductManager {
         productDAO.writeProducts();
         //ExpDateDAO.getInstance();
         expDateDAO.writeExpDates();
+        productDetailsDAO.saveDetails(); // Freshie check
     }
 
 
@@ -108,11 +109,16 @@ public class ProductManager {
 
     // Case 3 at Product's menu
     public void markAsDamaged(Product defectedProduct, int uniqueCode, String reason){
-        defectedProduct.markAsDamaged(uniqueCode, reason);
-        //productDAO.getInstance();
-        productDAO.writeProducts();
-        //ExpDateDAO.getInstance();
-        damagedProductDAO.writeDamagedProducts();
+        if (expDateDAO.isQRfromCatalogNumber(defectedProduct.getCatalogNumber(),uniqueCode)) {
+            defectedProduct.markAsDamaged(uniqueCode, reason);
+            //productDAO.getInstance();
+            productDAO.writeProducts();
+            //ExpDateDAO.getInstance();
+            damagedProductDAO.writeDamagedProducts();
+        }
+        else {
+            System.out.println("the QR is does not belong to this Catalog Number! ");
+        }
     }
 
 

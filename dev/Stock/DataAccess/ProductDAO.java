@@ -53,7 +53,6 @@ public class ProductDAO {
         // store/storage location are like this :    "1 2"
 
         double weight, value,discount;
-        Date expDate = new Date();
 
         try{
             java.sql.Statement statement = connection.createStatement();
@@ -108,7 +107,7 @@ public class ProductDAO {
                 storeLoc = new Location(Integer.parseInt(storeLocArr[0]),Integer.parseInt(storeLocArr[1]));
                 storageLoc = new Location(Integer.parseInt(storageLocArr[0]),Integer.parseInt(storageLocArr[1]));
 
-                Product product = new Product(productCategory,aProductSubCategory,aProductSubSubCategory,storageLoc,storeLoc,manufacturer,storageQuantity+storeQuantity,minimumQuantity,weight,expDate);
+                Product product = new Product(productCategory,aProductSubCategory,aProductSubSubCategory,storageLoc,storeLoc,manufacturer,storageQuantity+storeQuantity,minimumQuantity,weight);
                 product.setCatalogNumber();
                 product.setExpirationDates(exp);
                 product.setDamagedProducts(damagedBarcodes);

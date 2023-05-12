@@ -48,7 +48,7 @@ public class Storage {
         //ProductDetailsDAO.getInstance();
         while (running) {
 
-            int currShelf = productDetailsDAO.getStoreShelfNumber();
+            int currShelf = productDetailsDAO.getStorageShelfNumber();
             if (currShelf == amountOfShelves - 1) {
                 running = false;
 
@@ -63,9 +63,8 @@ public class Storage {
                 } else {
 
                     //reset indexInShelf
-
                     productDetailsDAO.resetIndexInShelf();
-                    productDetailsDAO.updateStoreShelfNumber();
+                    productDetailsDAO.updateStorageShelfNumber();
                 }
             }
         }

@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class ExpDateDAO {
     private static ExpDateDAO instance = null;
@@ -152,5 +153,10 @@ public class ExpDateDAO {
         }
 
     }
+    public Boolean isQRfromCatalogNumber(String catalogNumber, int qr){
+        lookForExpDate(qr);
+        return Objects.equals(qrToCatalogNumber.get(qr), catalogNumber);
+    }
+
 
 }

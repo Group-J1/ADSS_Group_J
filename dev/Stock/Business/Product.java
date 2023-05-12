@@ -79,9 +79,45 @@ public class Product {
         ProductDetailsDAO.getInstance();
 
         for (int i = 0; i < quantity; i++) {
-            this.expirationDates.put(ProductDetailsDAO.getProductId(), expiration);
+            this.expirationDates.put(ProductDetailsDAO.getInstance().getProductId(), expiration);
         }
         damagedProducts = new HashMap<>();
+    }
+        // constructor for db
+        public Product(AProductCategory category, AProductCategory subCategory, AProductSubCategory subSubCategory,
+                   Location storageLocation, Location storeLocation, String manufacturer, int quantity,
+                   int minimumQuantity, double weight) {
+        /**
+         * Constructs a new Stock.Business.Product object with the given parameters.
+         *
+         * @param category         the category of the product
+         * @param subCategory      the sub-category of the product
+         * @param subSubCategory   the sub-sub-category of the product
+         * @param storageLocation  the location where the product is stored
+         * @param storeLocation    the location where the product is sold
+         * @param manufacturer     the name of the product's manufacturer
+         * @param quantity         the total quantity of the product
+         * @param minimumQuantity  the minimum quantity required to keep in stock
+         * @param weight           the weight of the product
+         * @param expiration       the expiration date of the product
+         */
+        this.name = subCategory.getName() + " " + subSubCategory.getName();
+        this.category = category;
+        this.subCategory = subCategory;
+        this.subSubCategory = subSubCategory;
+        this.storageLocation = storageLocation;
+        this.storeLocation = storeLocation;
+        this.manufacturer = manufacturer;
+        if (quantity > 30) {
+            this.storeQuantity = 30;
+            this.storageQuantity = quantity - this.storeQuantity;
+        }
+        else {
+            this.storeQuantity = quantity;
+            this.storageQuantity = 0;
+        }
+        this.minimumQuantity = minimumQuantity;
+        this.weight = weight;
     }
 
     public String getName() {
@@ -250,7 +286,7 @@ public class Product {
         }
         ProductDetailsDAO.getInstance();
         for (int i = 0; i < quantity; i++) {
-            this.expirationDates.put(ProductDetailsDAO.getProductId(), expiration);
+            this.expirationDates.put(ProductDetailsDAO.getInstance().getProductId(), expiration);
         }
         expDateDAO.updateExpDate(this.getCatalogNumber(),getExpirationDates());
     }

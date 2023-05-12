@@ -56,7 +56,7 @@ public class Market {
             product.setStoreLocation(store.addProductToStore(product));
             product.setStorageLocation(storage.addProductToStorage(product));
             product.setCatalogNumber();
-            System.out.println(product.getName() + " : " + (ProductDetailsDAO.getProductIdNoUpdate() - quantity + 1) + "-" + ProductDetailsDAO.getProductIdNoUpdate());
+            System.out.println(product.getName() + " : " + (ProductDetailsDAO.getInstance().getProductIdNoUpdate() - quantity + 1) + "-" + ProductDetailsDAO.getInstance().getProductIdNoUpdate());
             return true;
         } else {
             return false;

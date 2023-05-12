@@ -141,10 +141,10 @@ public void saveDetails(){
     }
 
 
-    public static int getProductId() {
+    public  int getProductId() {
         return ++curr;
     }
-    public static int getProductIdNoUpdate(){
+    public  int getProductIdNoUpdate(){
         return curr;
     }
 
