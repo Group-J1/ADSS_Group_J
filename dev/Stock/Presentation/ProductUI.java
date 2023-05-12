@@ -53,11 +53,9 @@ public class ProductUI {
                     break;
 
                 case "4":
-                    ProductDAO.getInstance().updateForNextDay();
                     //MarketUI marketUI = new MarketUI();
                     //marketUI.startMenu();
                     break;
-
                 case "5":
                     //MarketUI marketUI = new MarketUI();
                     //marketUI.startMenu();

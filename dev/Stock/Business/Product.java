@@ -302,7 +302,7 @@ public class Product {
          * @param quantity the quantity of the product to sell
          * @return an array of integers representing the IDs of the sold products, or null if the requested quantity is not available in the store.
          */
-        if (storeQuantity < quantity) {
+        if (expirationDates.size() - damagedProducts.size() < quantity) {
             return null;
         }
         List<Date> datesList = new ArrayList<>(expirationDates.values());
@@ -313,10 +313,9 @@ public class Product {
             Date smallestDate = datesList.get(i);
             for (Integer entryInt : expirationDates.keySet()) {
                 Date entry = expirationDates.get(entryInt);
-                if (entry != null && entry.equals(smallestDate)) {
-//
+                if (entry != null && entry.equals(smallestDate) && !damagedProducts.containsKey(entryInt)) {
                     sold[count] = Integer.parseInt(entryInt.toString());
-//                    expirationDates.remove(Integer.parseInt(entryInt.toString()));
+                    expirationDates.remove(Integer.parseInt(entryInt.toString()));
                     count++;
                     if (count == quantity) {
                         break;
