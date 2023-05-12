@@ -212,4 +212,5 @@ public void saveDetails(){
     public int getStoreIndexInShelf() {
         return numberOfMarketsInChain;
     }
+
 }

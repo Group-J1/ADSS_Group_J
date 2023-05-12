@@ -1,9 +1,6 @@
 package Stock.Presentation;
 
-import Stock.Business.Chain;
-import Stock.Business.Market;
-import Stock.Business.Product;
-import Stock.Business.ProductManager;
+import Stock.Business.*;
 import Stock.DataAccess.ProductDetailsDAO;
 
 import java.time.LocalDate;
@@ -61,6 +58,10 @@ public class StockMainUI {
             chain = new Chain(ProductDetailsDAO.getNumberOfMarketsInChain());
             market = new Market(ProductDetailsDAO.getNumOfShelves());
             numOfMarketToManagement = Integer.toString(ProductDetailsDAO.getManagedMarket());
+            ProductManager.setStore(market.getStore());
+            ProductManager.setStorage(market.getStorage());
+            MarketManager.setMarket(market);
+
         }
         else {
             running = true;
@@ -117,6 +118,7 @@ public class StockMainUI {
             ProductManager.getInstance();
             ProductManager.setStorage(market.getStorage());     // freshie change
             ProductManager.setStore(market.getStore());         // freshie change
+            MarketManager.setMarket(market);
             System.out.println("if you want to create the default market, write yes: ");
             String answer = input.nextLine();
             if (answer.equals("yes")) {
@@ -138,20 +140,16 @@ public class StockMainUI {
             String selection = input.nextLine();
             switch (selection) {
                 case "1":
-                     ProductManager.setStore(market.getStore());
-                     ProductManager.setStorage(market.getStorage());
                      productUi.startMenu(numOfMarketToManagement);
                     break;
 
                 case "2":
-                    ReportsUI reportsUi = new ReportsUI();
-                    reportsUi.startMenu(numOfMarketToManagement);
+                    reportsUI.startMenu(numOfMarketToManagement);
                     //reportsUi.startMenu(numOfMarketToManagement);
                     break;
 
                 case "3":
-                    MarketUI marketUI = new MarketUI();
-                    //marketUI.startMenu(numOfMarketToManagement);
+                    marketUI.startMenu(numOfMarketToManagement);
                     break;
 
                 case "4":

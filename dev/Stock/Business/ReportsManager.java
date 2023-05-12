@@ -4,13 +4,7 @@ import Stock.DataAccess.*;
 
 public class ReportsManager {
     private static final ProductDAO productDAO = ProductDAO.getInstance();
-    private static final ExpDateDAO expDateDAO = ExpDateDAO.getInstance();
-    private static final DamagedProductDAO damagedProductDAO = DamagedProductDAO.getInstance();
-    private static final ProductDetailsDAO productDetailsDAO = ProductDetailsDAO.getInstance();
     private static final CategoryDAO categoryDAO = CategoryDAO.getInstance();
-
-    private static Market market;
-
 
 
     private static ReportsManager instance = null;
@@ -24,9 +18,6 @@ public class ReportsManager {
             instance = new ReportsManager();
         }
         return instance;
-    }
-    public static void setMarket(Market market) {
-        ReportsManager.market = market;
     }
     public boolean createStockReport(){
         StockReport stockReport = new StockReport(productDAO.getAllProducts(),categoryDAO.getAllTheCategories());

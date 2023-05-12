@@ -208,7 +208,10 @@ public class Product {
     }
 
     public double getDiscount() {
-        return discount;
+        if(discount >= category.getDiscount()) {
+            return discount;
+        }
+        return category.getDiscount();              // not sure it's 2 am bro
     }
 
     public void setDiscount(double discount) {
