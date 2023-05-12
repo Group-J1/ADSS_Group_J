@@ -37,6 +37,12 @@ import java.text.SimpleDateFormat;
  * expirations, generate reports, and more.
  */
 public class StockMainUI {
+
+    private final MarketUI marketUI = new MarketUI();
+    private final ProductUI productUi = new ProductUI();
+    private final ReportsUI reportsUI = new ReportsUI();
+
+
     public void startMenu() {
         /**
          * Displays the initial menu for selecting the market to manage and entering the number of shelves.
@@ -86,8 +92,9 @@ public class StockMainUI {
                 running = false;
             }
         }
-//        market = chain.getMarketByIndex(Integer.parseInt(numOfMarketToManagement) - 1);
+        //market = chain.getMarketByIndex(Integer.parseInt(numOfMarketToManagement) - 1);
         market = new Market(Integer.parseInt(numOfShelves));
+
         ProductManager.getInstance();
         ProductManager.setStorage(market.getStorage());     // freshie change
         ProductManager.setStore(market.getStore());         // freshie change
@@ -111,7 +118,6 @@ public class StockMainUI {
             String selection = input.nextLine();
             switch (selection) {
                 case "1":
-                     ProductUI productUi = new ProductUI();
                      ProductManager.setStorage(market.getStorage());
                      ProductManager.setStorage(market.getStorage());
                      productUi.startMenu(numOfMarketToManagement);

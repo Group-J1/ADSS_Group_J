@@ -1,5 +1,6 @@
 package Stock.Business;
 
+import Stock.DataAccess.DamagedProductDAO;
 import Stock.DataAccess.ExpDateDAO;
 import Stock.DataAccess.ProductDAO;
 import Stock.DataAccess.ProductDetailsDAO;
@@ -9,6 +10,9 @@ import java.util.Date;
 public class ProductManager {
 
     private static final ProductDAO productDAO = ProductDAO.getInstance();
+    private static final ExpDateDAO expDateDAO = ExpDateDAO.getInstance();
+    private static final DamagedProductDAO damagedProductDAO = DamagedProductDAO.getInstance();
+
 
     private static ProductManager instance = null;
 
@@ -43,13 +47,8 @@ public class ProductManager {
          * @param expirationDate the expiration date of the new product.
          * @return true if the product was successfully added, false otherwise.
          */
-
         // New one
-        String[] subsubSplited = subSubCategoryStr.split(" ");
-
-        String name = subCategoryStr + " " + Double.toString(Double.parseDouble(subsubSplited[subsubSplited.length - 2])) + " " + subsubSplited[subsubSplited.length - 1];
-        String productCatalogNumber = UniqueStringGenerator.generateUniqueString(name);
-        if (ProductDAO.getProduct(productCatalogNumber) == null) {
+        if (getProductByCategories(subCategoryStr, subSubCategoryStr) == null) {
             // Old one
             //if (getProductByCategories(categoryStr, subCategoryStr, subSubCategoryStr) == null) {
             AProductCategory Ccategory = new AProductCategory(categoryStr);
@@ -63,7 +62,7 @@ public class ProductManager {
             Product product = new Product(Ccategory, CsubCategoryStr, CsubSubCategoryStr, storageLocation, storeLocation,
                     manufacturer, quantity, minQuantity, weight, expirationDate);
             // New one
-            ProductDAO.addNewProductToProducts(product);
+            productDAO.addNewProductToProducts(product);
 
             // Old one
             //stock.addNewProductToStock(product, minQuantity + 100, minQuantity + 30, minQuantity);
@@ -71,31 +70,53 @@ public class ProductManager {
             product.setStoreLocation(store.addProductToStore(product));
             product.setStorageLocation(storage.addProductToStorage(product));
             product.setCatalogNumber();
-            ProductDAO.writeProducts(); // Freshie check
+            productDAO.writeProducts(); // Freshie check
             ProductDetailsDAO.saveDetails(); // Freshie check
-            System.out.println(product.getName() + " : " + (ProductDetailsDAO.getProductIdNoUpdate() - quantity + 1) + "-" + ProductDetailsDAO.getProductIdNoUpdate());
+            System.out.println(product.getName() + " : " + (ProductDetailsDAO.getProductIdNoUpdate() - quantity + 1)
+                    + "-" + ProductDetailsDAO.getProductIdNoUpdate());
             return true;
         } else {
             return false;
         }
     }
-    public Product getProductByCategories(String category,String subCategory,String subSubCategory){
-        String[] subsubSplited = subSubCategory.split(" ");
 
-        String name = subCategory + " " + Double.toString(Double.parseDouble(subsubSplited[subsubSplited.length - 2])) + " " + subsubSplited[subsubSplited.length - 1];
+    // ------------ Helper function for Case 2 in Product UI ------------
+    public Product getProductByCategories(String subCategory,String subSubCategory){
+        String[] subsubSplited = subSubCategory.split(" ");
+        String name = subCategory + " " + Double.toString(Double.parseDouble(subsubSplited[subsubSplited.length - 2]))
+                + " " + subsubSplited[subsubSplited.length - 1];
         String productCatalogNumber = UniqueStringGenerator.generateUniqueString(name);
-        return ProductDAO.getProduct(productCatalogNumber);
+        return productDAO.getProduct(productCatalogNumber);
     }
 
+    // Case 2 at Product's menu
     public void addMoreItemsToProduct(Product product, Date expDate, int quantity){
         product.addMoreItemsToProduct(quantity,expDate);
-        ProductDAO.getInstance();
-        ProductDAO.writeProducts();
-        ExpDateDAO.getInstance();
-        ExpDateDAO.writeExpDates();
-
-
+        //productDAO.getInstance();
+        productDAO.writeProducts();
+        //ExpDateDAO.getInstance();
+        expDateDAO.writeExpDates();
     }
+
+
+    // ------------ Helper function for Case 3 in Product UI ------------
+    public Product getProductByUniqueCode(String productCatalogNumber) {
+        return productDAO.getProduct(productCatalogNumber);
+    }
+
+    // Case 3 at Product's menu
+    public void markAsDamaged(Product defectedProduct, int uniqueCode, String reason){
+        defectedProduct.markAsDamaged(uniqueCode, reason);
+        //productDAO.getInstance();
+        productDAO.writeProducts();
+        //ExpDateDAO.getInstance();
+        damagedProductDAO.writeDamagedProducts();
+    }
+
+
+
+
+
 
     public static void setStore(Store store) {          // freshie change
         ProductManager.store = store;

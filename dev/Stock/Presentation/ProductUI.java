@@ -13,7 +13,8 @@ public class ProductUI {
 
     private static final ProductService productService = ProductService.getInstance();
 
-    String categoryStr, subCategoryStr, subSubCategoryStr, manufacturer, quantity, minQuantity, weight;
+    String categoryStr, subCategoryStr, subSubCategoryStr, manufacturer, quantity, minQuantity, weight,
+            productCatalogNumber, uniqueCode, reason;
     Date expirationDate;
     Scanner input = new Scanner(System.in);
 
@@ -47,8 +48,7 @@ public class ProductUI {
                     break;
 
                 case "3":
-                    MarketUI marketUI = new MarketUI();
-                    //marketUI.startMenu();
+                    markAsDamagedCase3();
                     break;
 
                 case "4":
@@ -137,32 +137,30 @@ public class ProductUI {
     void addMoreItemsToProductCase2() {
         System.out.println("Whats is your product's category? ");
         categoryStr = input.nextLine();
-        if (!categoryStr.matches("[a-zA-Z' ]+")) {
+        if (!checkIfOnlyLetters(categoryStr)) {
             System.out.println("your product's category is not a valid string ");
             return;
         }
         System.out.println("Whats is your product's sub-category? ");
         subCategoryStr = input.nextLine();
-        if (!subCategoryStr.matches("[a-zA-Z0-9% ]+")) {
+        if (!checkSubCategory(subCategoryStr)) {
             System.out.println("your product's subCategory is not a valid string ");
             return;
         }
-
         System.out.println("What is your product's sub-sub-category? ");
         subSubCategoryStr = input.nextLine();
         if (!checkSubSubCategory(subSubCategoryStr)) {
             return;
         }
 //        product = market.getProductByCategories(categoryStr, subCategoryStr, subSubCategoryStr);
-        Product product = ProductManager.getInstance().getProductByCategories(categoryStr, subCategoryStr, subSubCategoryStr);
+        Product product = productService.getProductByCategories(subCategoryStr, subSubCategoryStr);
         if (product == null) {
-            System.out.println("Stock.Business.Product was not found.");
+            System.out.println("Product was not found ");
             return;
         }
-
         System.out.println("How many " + product.getSubCategoryName().getName() + " " + product.getSubSubCategory().getName() + " do you want to add? ");
         quantity = input.nextLine();
-        if (!(quantity.matches("[0-9]+") && Integer.parseInt(quantity) > 0)) {
+        if (!checkIfPositiveIntegerNumber(quantity)) {
             System.out.println("You have to add a positive number for quantity ");
             return;
         }
@@ -170,10 +168,45 @@ public class ProductUI {
         if (expirationDate == null) {
             return;
         }
-//        product.addMoreItemsToProduct(Integer.parseInt(quantity), expirationDate);
-        product.setCatalogNumber();
-        ProductManager.getInstance().addMoreItemsToProduct(product,expirationDate,Integer.parseInt(quantity));
-        System.out.println("Stock.Business.Product's quantity updated! ");
+        //product.addMoreItemsToProduct(Integer.parseInt(quantity), expirationDate);
+        // ---------- already exists in ProductManager ----------
+        //product.setCatalogNumber();
+        productService.addMoreItemsToProduct(product, expirationDate, Integer.parseInt(quantity));
+        //ProductManager.getInstance().addMoreItemsToProduct(product,expirationDate,Integer.parseInt(quantity));
+        System.out.println("Product's quantity updated! ");
+    }
+
+    void markAsDamagedCase3() {
+        System.out.println("What is the catalog number of the defected product? ");
+        productCatalogNumber = input.nextLine();
+        Product defectedProduct = productService.getProductByUniqueCode(productCatalogNumber);
+        //Product defected = market.getByProductID(productCatalogNumber);
+
+        // looks for product by ID if found return it else return null
+        if (defectedProduct == null) {
+            System.out.println("The product was not found!");
+            return;
+        }
+        System.out.println("What is the unique code (barcode) of the product? ");
+        uniqueCode = input.nextLine();
+        if (!checkIfPositiveIntegerNumber(uniqueCode)) {
+            System.out.println("You have to enter a positive number of barcode ");
+            return;
+        }
+        if (defectedProduct.getUniqueProduct(Integer.parseInt(uniqueCode))) {
+            System.out.println("What is the Problem with the product? ");
+            reason = input.nextLine();
+            if (!checkReason(reason)) {
+                System.out.println("The Problem with the product is not a valid string ");
+                return;
+            }
+            productService.markAsDamaged(defectedProduct, Integer.parseInt(uniqueCode), reason);
+            System.out.println("Product mark as Damaged! ");
+            //defectedProduct.markAsDamaged(Integer.parseInt(uniqueCode), reason);
+        }
+        else {
+            System.out.println("The unique code (barcode) is invalid!");
+        }
     }
 
 
@@ -222,6 +255,10 @@ public class ProductUI {
             return false;
         }
         return true;
+    }
+
+    Boolean checkReason(String reason) {
+        return reason.matches("[a-zA-Z0-9/ ]+");
     }
 
     Date dateInput() {
