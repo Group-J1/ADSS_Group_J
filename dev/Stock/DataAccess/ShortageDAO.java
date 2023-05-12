@@ -3,6 +3,7 @@ package Stock.DataAccess;
 import Resource.Connect;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -38,17 +39,36 @@ public class ShortageDAO {
         }
     }
 
-    public void writeShortages(){
-        try{
-            java.sql.Statement statement = connection.createStatement();
-            java.sql.ResultSet resultSet = statement.executeQuery("DELETE FROM Shortages");
-            for(String catalogNumber: shortageMap){
-                statement.executeQuery("DELETE FROM Shortages");
-                statement.executeUpdate("INSERT INTO Shortages (CatalogNumber) VALUES (" + "'"+catalogNumber+"'" + ")");
+    public void deleteFromShortages(String catalogNumber){
+        shortageMap.remove(catalogNumber);
+    }
+
+//    public void writeShortages(){
+//        try{
+//            java.sql.Statement statement = connection.createStatement();
+//            java.sql.ResultSet resultSet = statement.executeQuery("DELETE FROM Shortages");
+//            for(String catalogNumber: shortageMap){
+//                PreparedStatement stmt = connection.prepareStatement("INSERT INTO Shortages (CatalogNumber) VALUES (?)");
+//                stmt.setString(1, catalogNumber);
+//                stmt.executeUpdate();
+//            }
+//        }
+//        catch (SQLException e){
+//            System.out.println("theres a problem with the database");
+//        }
+//    }
+
+
+    public void writeShortages() {
+        try (PreparedStatement deleteStatement = connection.prepareStatement("DELETE FROM Shortages");
+             PreparedStatement insertStatement = connection.prepareStatement("INSERT INTO Shortages (CatalogNumber) VALUES (?)")) {
+            deleteStatement.executeUpdate();
+            for (String catalogNumber : shortageMap) {
+                insertStatement.setString(1, catalogNumber);
+                insertStatement.executeUpdate();
             }
-        }
-        catch (SQLException e){
-            System.out.println("theres a problem with the database");
+        } catch (SQLException e) {
+            System.out.println("There's a problem with the database");
         }
     }
 

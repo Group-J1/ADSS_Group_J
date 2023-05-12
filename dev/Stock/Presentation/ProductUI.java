@@ -2,6 +2,7 @@ package Stock.Presentation;
 import Stock.Business.Product;
 import Stock.Business.ProductManager;
 import Stock.Business.UniqueStringGenerator;
+import Stock.DataAccess.ProductDAO;
 import Stock.Service.ProductService;
 
 import java.text.SimpleDateFormat;
@@ -52,6 +53,7 @@ public class ProductUI {
                     break;
 
                 case "4":
+                    ProductDAO.getInstance().updateForNextDay();
                     //MarketUI marketUI = new MarketUI();
                     //marketUI.startMenu();
                     break;

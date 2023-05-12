@@ -359,4 +359,8 @@ public class Product {
     public void setDamagedProducts(HashMap<Integer, String> damagedProducts) {
         this.damagedProducts = damagedProducts;
     }
+
+    public boolean isShortage(){
+        return getStorageQuantity()+getStoreQuantity()<=damagedProducts.size();
+    }
 }

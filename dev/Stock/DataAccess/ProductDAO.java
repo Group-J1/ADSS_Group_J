@@ -7,11 +7,10 @@ import Stock.Service.ProductService;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ProductDAO {
+    private int dayDiff;
 
     private static ExpDateDAO expDateDAO = null;
     private static DamagedProductDAO damagedProductDAO = null;
@@ -24,6 +23,7 @@ public class ProductDAO {
     private static Connection connection;
 
     private ProductDAO(){
+        dayDiff = 0;
         productMap = new HashMap<>();
         connection = Connect.getConnection();
 
@@ -223,7 +223,27 @@ public class ProductDAO {
         }catch (SQLException e){
             System.out.println("theres a problem with the database");
         }
+    }
 
+    public void updateForNextDay(){
+        Date currentDay = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(currentDay);
+        calendar.add(Calendar.DAY_OF_YEAR, ++dayDiff); // Add day number from today
+        Date futureDay = calendar.getTime();
+        HashMap<String, ArrayList<Integer>> expProducts = expDateDAO.expirationForDate(futureDay);
+        for (String catalogNumber: expProducts.keySet()){
+            Product product = getProduct(catalogNumber);
+            for(Integer qr: expProducts.get(catalogNumber)){
+                product.markAsDamaged(qr,"Expired in " + futureDay.toString());
+            }
+            if(product.isShortage() && !ShortageDAO.getInstance().isInShortage(product.getCatalogNumber())){
+                ShortageDAO.getInstance().addToShortages(product.getCatalogNumber());
+            }
+
+        }
+        ProductDAO.getInstance().writeProducts();
+        ShortageDAO.getInstance().writeShortages();
 
     }
 }

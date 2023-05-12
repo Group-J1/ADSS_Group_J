@@ -1,15 +1,11 @@
 package Stock.DataAccess;
 
-import Stock.Business.Product;
 import Resource.Connect;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class ExpDateDAO {
     private static ExpDateDAO instance = null;
@@ -156,6 +152,47 @@ public class ExpDateDAO {
     public Boolean isQRfromCatalogNumber(String catalogNumber, int qr){
         lookForExpDate(qr);
         return Objects.equals(qrToCatalogNumber.get(qr), catalogNumber);
+    }
+
+    private void loadAllDataToCache(){
+        int barcode;
+        String catalogNumber;
+        Date expDate;
+
+        try{
+            java.sql.Statement statement = connection.createStatement();
+            java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM ExpDates");
+            while(resultSet.next()){
+                barcode = resultSet.getInt("QRCode");
+                catalogNumber = resultSet.getString("catalog_number");
+                expDate = resultSet.getDate("Date");
+                ExpDateMap.putIfAbsent(barcode,expDate);
+                qrToCatalogNumber.putIfAbsent(barcode,catalogNumber);
+
+            }
+
+        }catch (SQLException e){
+            System.out.println("there is problem with the data base");
+        }
+    }
+
+    public HashMap<String, ArrayList<Integer>> expirationForDate(Date futureDate){
+        loadAllDataToCache();
+        HashMap<String, ArrayList<Integer>> map = new HashMap<>();
+        for(Integer qr: ExpDateMap.keySet()){
+            if(futureDate.after(ExpDateMap.get(qr))) {
+                String catalogNumber = qrToCatalogNumber.get(qr);
+                if (map.containsKey(catalogNumber)) {
+                    map.get(catalogNumber).add(qr);
+                } else {
+                    map.put(catalogNumber, new ArrayList<>());
+                    map.get(catalogNumber).add(qr);
+                }
+                DamagedProductDAO.getInstance().writeDamagedProduct(qr, catalogNumber,"Expired in " + futureDate.toString());
+            }
+
+        }
+        return map;
     }
 
 
