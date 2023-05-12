@@ -71,6 +71,8 @@ public class Connect {
             stmt.executeUpdate("DELETE  FROM ProductID");
             stmt.executeUpdate("DELETE FROM Products");
             stmt.executeUpdate("DELETE  FROM ExpDates");
+            stmt.executeUpdate("DELETE  FROM Damaged");
+
 //            stmt.executeUpdate("CREATE TABLE ProductID ( ID INTEGER PRIMARY KEY, Value  INTEGER )");
 //            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "1" + "," + 0 + ")");
             stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "1" + "," + 0 + ")");

@@ -80,8 +80,9 @@ public class ProductDAO {
                     amount = words[words.length - 2];
                     aProductSubSubCategory = new AProductSubCategory(Double.parseDouble(amount), unit);
                     for(int i = 0 ; i < words.length -2; i ++){
-                        productKind.append(words[i]);
+                        productKind.append(words[i]).append(" ");
                     }
+                    productKind.deleteCharAt(productKind.length()-1);
                     aProductSubCategory = new AProductCategory(productKind.toString());
                 }
                 else {
