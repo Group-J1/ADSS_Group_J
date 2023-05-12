@@ -19,7 +19,7 @@ public class ProductDAO {
 
     private static ProductDAO instance = null;
 
-    private static Map<String, Product> productMap;
+    private static HashMap<String, Product> productMap;
     private static Connection connection;
 
     private ProductDAO(){
@@ -259,7 +259,7 @@ public class ProductDAO {
             System.out.println("there is problem with the data base");
         }
     }
-    public Map<String,Product> getAllProducts(){
+    public HashMap<String,Product> getAllProducts(){
         loadAllDataToCache();
         return productMap;
     }

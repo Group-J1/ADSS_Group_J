@@ -1,11 +1,16 @@
 package Stock.Business;
 
+import Stock.DataAccess.DamagedProductDAO;
+import Stock.DataAccess.ProductDAO;
+
 import java.util.*;
 
 public class DamagedReport extends Report {
 
     // < product name, <product id (barCode/ id), cause> >
     protected HashMap<String, Map<Integer, String>> products;
+    private DamagedProductDAO damagedProductDAO;
+    private ProductDAO productDAO;
 
     public DamagedReport(Stock stock) {
         /**
@@ -14,10 +19,16 @@ public class DamagedReport extends Report {
          * @return None
          * @throws None
          */
+        damagedProductDAO = DamagedProductDAO.getInstance();
+        productDAO = ProductDAO.getInstance();
         products = new HashMap<>();;
-        this.date = new Date();;
+        this.date = new Date();
         this.id = ++Report.reportsCounter;
-        addProductsToDamagedReport(stock);
+        HashMap<String,Product> allProducts = productDAO.getAllProducts();
+        for(Product product:allProducts.values()){
+            products.put(product.getName(),product.getDamagedProducts());
+        }
+//        addProductsToDamagedReport(stock);
     }
 
     public void addProductsToDamagedReport(Stock stock) {
@@ -39,6 +50,16 @@ public class DamagedReport extends Report {
             if(!newProduct.isEmpty()) {
                 products.put(product.getName(), newProduct);
             }
+        }
+    }
+
+    public void updateDamagedReportFromDataBase(){
+        products = new HashMap<>();;
+        this.date = new Date();
+        this.id = ++Report.reportsCounter;
+        HashMap<String,Product> allProducts = productDAO.getAllProducts();
+        for(Product product:allProducts.values()){
+            products.put(product.getName(),product.getDamagedProducts());
         }
     }
 
