@@ -15,18 +15,13 @@ public class ProductDetailsDAO {
     //  4           StoreLocation: ShelfNumber
     //  5           StoreLocation: IndexInShelf
 
-
-    private static ProductDetailsDAO instance = new ProductDetailsDAO();
+    private static ProductDetailsDAO instance = null;
     private static int curr;
     private static int storageShelfNumber;
     private static int storageIndexInShelf;
     private static int storeShelfNumber;
     private static int storeIndexInShelf;
     private static Connection connection;
-
-    public static ProductDetailsDAO getInstance() {
-        return instance;
-    }
 
     private ProductDetailsDAO(){
         connection = Connect.getConnection();
@@ -57,6 +52,13 @@ public class ProductDetailsDAO {
         }catch (SQLException e){
             System.out.println("there is a problem with the database");
         }
+    }
+
+    public static ProductDetailsDAO getInstance() {
+        if (instance == null) {
+            instance = new ProductDetailsDAO();
+        }
+        return instance;
     }
 
 //    public static void saveDetails(){
@@ -104,7 +106,7 @@ public class ProductDetailsDAO {
 //            System.out.println("there is a problem with the database");
 //        }
 //    }
-public static void saveDetails(){
+public void saveDetails(){
     try{
         java.sql.Statement statement = connection.createStatement();
 
@@ -124,7 +126,7 @@ public static void saveDetails(){
     }
 }
 
-    private static void updateOrInsertValue(java.sql.Statement statement, PreparedStatement insertStmt, PreparedStatement updateStmt, int id, int value) throws SQLException {
+    private void updateOrInsertValue(java.sql.Statement statement, PreparedStatement insertStmt, PreparedStatement updateStmt, int id, int value) throws SQLException {
         java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM ProductID WHERE ID = " + id);
         if(!resultSet.next()){
             insertStmt.setInt(1, id);
@@ -141,37 +143,35 @@ public static void saveDetails(){
 
     public static int getProductId() {
         return ++curr;
-
     }
     public static int getProductIdNoUpdate(){
         return curr;
     }
 
-    public static int getStorageShelfNumber() {
+    public int getStorageShelfNumber() {
         return storageShelfNumber;
     }
 
-    public static int getStorageIndexInShelf() {
+    public int getStorageIndexInShelf() {
         return storageIndexInShelf/2;           // always add 1 from store and one from storage
     }
-    public static void updateStorageIndexInShelf(){
+    public void updateStorageIndexInShelf(){
         storageIndexInShelf++;
     }
-    public static void resetIndexInShelf(){
+    public void resetIndexInShelf(){
         storageIndexInShelf = 0;
     }
-
-    public static int getStoreShelfNumber() {
+    public int getStoreShelfNumber() {
         return storeShelfNumber;
     }
-    public static void updateStoreShelfNumber(){
+    public void updateStoreShelfNumber(){
         storeShelfNumber++;
     }
-    public static void updateStorageShelfNumber(){
+    public void updateStorageShelfNumber(){
         storageShelfNumber++;
     }
 
-    public static int getStoreIndexInShelf() {
+    public int getStoreIndexInShelf() {
         return storeIndexInShelf;
     }
 }

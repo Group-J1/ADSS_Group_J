@@ -8,6 +8,8 @@ public class Store {
 //    private int currShelf;
     private int amountOfShelves;
 
+    private static final ProductDetailsDAO productDetailsDAO = ProductDetailsDAO.getInstance();
+
     public Store(int numberOfShelves) {
         /**
          * Constructs a new Stock.Business.Store object with the specified number of shelves.
@@ -27,8 +29,8 @@ public class Store {
     }
 
     public int getCurrShelf() {
-        ProductDetailsDAO.getInstance();
-        return ProductDetailsDAO.getStoreShelfNumber();
+        //ProductDetailsDAO.getInstance();
+        return productDetailsDAO.getStoreShelfNumber();
 //        return currShelf;
     }
 
@@ -46,10 +48,10 @@ public class Store {
          */
         Location loc = null;
         boolean running = true;
-        ProductDetailsDAO.getInstance();
+        //ProductDetailsDAO.getInstance();
         while (running) {
 
-            int currShelf = ProductDetailsDAO.getStoreShelfNumber();
+            int currShelf = productDetailsDAO.getStoreShelfNumber();
             if (currShelf == amountOfShelves - 1) {
                 running = false;
 
@@ -65,8 +67,8 @@ public class Store {
 
                     //reset indexInShelf
 
-                    ProductDetailsDAO.resetIndexInShelf();
-                    ProductDetailsDAO.updateStoreShelfNumber();
+                    productDetailsDAO.resetIndexInShelf();
+                    productDetailsDAO.updateStoreShelfNumber();
                 }
             }
 

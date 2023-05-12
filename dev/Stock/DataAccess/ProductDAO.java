@@ -2,6 +2,7 @@ package Stock.DataAccess;
 
 import Resource.Connect;
 import Stock.Business.*;
+import Stock.Service.ProductService;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,29 +12,42 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ProductDAO {
-    private static ProductDAO instance = new ProductDAO();
+
+    private static ExpDateDAO expDateDAO = null;
+    private static DamagedProductDAO damagedProductDAO = null;
+    private static ProductDetailsDAO productDetailsDAO = null;
+    private static CategoryDAO categoryDAO = null;
+
+    private static ProductDAO instance = null;
+
     private static Map<String, Product> productMap;
     private static Connection connection;
 
     private ProductDAO(){
         productMap = new HashMap<>();
         connection = Connect.getConnection();
+
+        expDateDAO = ExpDateDAO.getInstance();
+        damagedProductDAO = DamagedProductDAO.getInstance();
+        productDetailsDAO = ProductDetailsDAO.getInstance();
+        categoryDAO = CategoryDAO.getInstance();
     }
 
     public static ProductDAO getInstance() {
-        if(instance == null){
+        if (instance == null) {
             instance = new ProductDAO();
         }
         return instance;
     }
-    public static Product getProduct(String catalogNumber){
+
+    public Product getProduct(String catalogNumber){
         if(productMap.get(catalogNumber) == null){
             //read from the database
             lookForProduct(catalogNumber);
         }
         return productMap.get(catalogNumber);
     }
-    private static void lookForProduct(String catalogNumber){
+    private void lookForProduct(String catalogNumber){
         int qr,storageQuantity,storeQuantity,minimumQuantity;
         String catalogNum, manufacturer,category,DamagedReason,storeLocation,storageLocation ;
         // store/storage location are like this :    "1 2"
@@ -56,12 +70,12 @@ public class ProductDAO {
                 discount = resultSet.getDouble("ProductDiscount");
                 storeLocation = resultSet.getString("StoreLocation"); // the name of the storeLocation field
                 storageLocation = resultSet.getString("StorageLocation");// the name of the storageLocation field
-                ExpDateDAO expDateDAO = ExpDateDAO.getInstance();
-                HashMap<Integer,Date> exp = ExpDateDAO.readExpForCatalogNumber(catalogNumber);
-                CategoryDAO categoryDAO = CategoryDAO.getInstance();
-                AProductCategory productCategory = CategoryDAO.getCategory(category);
-                DamagedProductDAO damagedProductDAO = DamagedProductDAO.getInstance();
-                HashMap<Integer,String> damagedBarcodes = DamagedProductDAO.readDamagedForCatalogNumber(catalogNumber);
+                //ExpDateDAO expDateDAO = ExpDateDAO.getInstance();
+                HashMap<Integer,Date> exp = expDateDAO.readExpForCatalogNumber(catalogNumber);
+                //CategoryDAO categoryDAO = CategoryDAO.getInstance();
+                AProductCategory productCategory = categoryDAO.getCategory(category);
+                //DamagedProductDAO damagedProductDAO = DamagedProductDAO.getInstance();
+                HashMap<Integer,String> damagedBarcodes = damagedProductDAO.readDamagedForCatalogNumber(catalogNumber);
                 if(productCategory == null){
                     System.out.println("problem with the category");
                 }
@@ -109,7 +123,7 @@ public class ProductDAO {
         }
     }
 
-    public static void writeProducts(){
+    public void writeProducts(){
         for(Product product: productMap.values()){
             try{
                 java.sql.Statement statement = connection.createStatement();
@@ -161,31 +175,31 @@ public class ProductDAO {
             }catch (SQLException e){
                 System.out.println(e.getMessage());
             }
-            ExpDateDAO.getInstance();
-            DamagedProductDAO.getInstance();
-            ExpDateDAO.updateExpDate(product.getCatalogNumber(),product.getExpirationDates());
+            //expDateDAO.getInstance();
+            //DamagedProductDAO.getInstance();
+            expDateDAO.updateExpDate(product.getCatalogNumber(),product.getExpirationDates());
             for(Integer qr: product.getDamagedProducts().keySet()){
-                DamagedProductDAO.writeDamagedProduct(qr,product.getCatalogNumber(),product.getDamagedProducts().get(qr));
+                damagedProductDAO.writeDamagedProduct(qr,product.getCatalogNumber(),product.getDamagedProducts().get(qr));
             }
 
             // for thr checking:
-            DamagedProductDAO.writeDamagedProducts();
-            ExpDateDAO.writeExpDates();
+            damagedProductDAO.writeDamagedProducts();
+            expDateDAO.writeExpDates();
         }
     }
 
-    public static void addNewProductToProducts(Product product){
+    public void addNewProductToProducts(Product product){
         productMap.put(product.getCatalogNumber(),product);
-        DamagedProductDAO.getInstance();
-        ExpDateDAO.getInstance();
+        //DamagedProductDAO.getInstance();
+        //ExpDateDAO.getInstance();
         for(Integer qr: product.getDamagedProducts().keySet()){
-            DamagedProductDAO.writeDamagedProduct(qr,product.getCatalogNumber(),product.getDamagedProducts().get(qr));
+            damagedProductDAO.writeDamagedProduct(qr,product.getCatalogNumber(),product.getDamagedProducts().get(qr));
         }
         for(Integer qr: product.getExpirationDates().keySet()){
-            ExpDateDAO.writeExpDateForQR(qr,product.getCatalogNumber(),product.getExpirationDates().get(qr));
+            expDateDAO.writeExpDateForQR(qr,product.getCatalogNumber(),product.getExpirationDates().get(qr));
         }
-        ProductDetailsDAO.getInstance();
-        ProductDetailsDAO.saveDetails();
+        //ProductDetailsDAO.getInstance();
+        productDetailsDAO.saveDetails();
 
     }
 
@@ -194,13 +208,13 @@ public class ProductDAO {
         try{
             java.sql.Statement statement = connection.createStatement();
             java.sql.ResultSet resultSet = statement.executeQuery("DELETE  FROM Products WHERE catalog_number ==" + "'" + product.getCatalogNumber() + "'");
-            DamagedProductDAO.getInstance();
-            ExpDateDAO.getInstance();
+            //DamagedProductDAO.getInstance();
+            //ExpDateDAO.getInstance();
             for(Integer qr: product.getDamagedProducts().keySet()){
-                DamagedProductDAO.deleteExpDate(qr);
+                damagedProductDAO.deleteExpDate(qr);
             }
             for (Integer qr: product.getExpirationDates().keySet()){
-                ExpDateDAO.deleteExpDate(qr);
+                expDateDAO.deleteExpDate(qr);
             }
             java.sql.ResultSet resultSet1 = statement.executeQuery("SELECT * FROM Products WHERE Category ==" + "'" + product.getCategory() + "'");
             if(!resultSet1.next()){             // if no items in the category then delete the category

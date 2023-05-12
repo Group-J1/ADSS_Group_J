@@ -38,6 +38,9 @@ public class Product {
 
     private HashMap<Integer, String> damagedProducts;
 
+    private static final ExpDateDAO expDateDAO = ExpDateDAO.getInstance();
+
+
     public Product(AProductCategory category, AProductCategory subCategory, AProductSubCategory subSubCategory,
                    Location storageLocation, Location storeLocation, String manufacturer, int quantity,
                    int minimumQuantity, double weight, Date expiration) {
@@ -249,7 +252,7 @@ public class Product {
         for (int i = 0; i < quantity; i++) {
             this.expirationDates.put(ProductDetailsDAO.getProductId(), expiration);
         }
-        ExpDateDAO.updateExpDate(this.getCatalogNumber(),getExpirationDates());
+        expDateDAO.updateExpDate(this.getCatalogNumber(),getExpirationDates());
     }
 
     public int[] sellMultipleItemsFromProduct(int quantity) {

@@ -12,6 +12,8 @@ public class ProductManager {
     private static final ProductDAO productDAO = ProductDAO.getInstance();
     private static final ExpDateDAO expDateDAO = ExpDateDAO.getInstance();
     private static final DamagedProductDAO damagedProductDAO = DamagedProductDAO.getInstance();
+    private static final ProductDetailsDAO productDetailsDAO = ProductDetailsDAO.getInstance();
+
 
 
     private static ProductManager instance = null;
@@ -71,7 +73,7 @@ public class ProductManager {
             product.setStorageLocation(storage.addProductToStorage(product));
             product.setCatalogNumber();
             productDAO.writeProducts(); // Freshie check
-            ProductDetailsDAO.saveDetails(); // Freshie check
+            productDetailsDAO.saveDetails(); // Freshie check
             System.out.println(product.getName() + " : " + (ProductDetailsDAO.getProductIdNoUpdate() - quantity + 1)
                     + "-" + ProductDetailsDAO.getProductIdNoUpdate());
             return true;

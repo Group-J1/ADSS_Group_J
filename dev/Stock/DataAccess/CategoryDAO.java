@@ -12,7 +12,7 @@ import java.util.Locale;
 import java.util.Map;
 
 public class CategoryDAO {
-    private static CategoryDAO instance  = new CategoryDAO();
+    private static CategoryDAO instance  = null;
     private static Map<String, AProductCategory> CategoryMap;
     private static Connection connection;
 
@@ -22,19 +22,22 @@ public class CategoryDAO {
         connection = Connect.getConnection();
     }
 
-    public static CategoryDAO getInstance(){
+    public static CategoryDAO getInstance() {
+        if (instance == null) {
+            instance = new CategoryDAO();
+        }
         return instance;
     }
 
-    public static AProductCategory getCategory(String category){
+    public AProductCategory getCategory(String category){
         if(CategoryMap.get(category) == null){
             // look for item in the database
             lookForCategory(category);
         }
-        return  CategoryMap.get(category);
+        return CategoryMap.get(category);
     }
 
-    private static void lookForCategory(String categoryStr){
+    private void lookForCategory(String categoryStr){
         String category;
         double discount;
         try{
@@ -57,7 +60,7 @@ public class CategoryDAO {
         }
     }
 
-    public static void writeCategories(){
+    public void writeCategories(){
         for(AProductCategory category: CategoryMap.values()){
             String name;
             double discount;
@@ -79,15 +82,14 @@ public class CategoryDAO {
         }
     }
 
-    public static  void writeNewCategory(String categoryName, double discount){
+    public void writeNewCategory(String categoryName, double discount){
         AProductCategory category = new AProductCategory(categoryName);
         category.setDiscount(discount);
         CategoryMap.put(categoryName,category);
-
         // should be added to the db?
     }
 
-    public static void deleteCategory(String categoryName){
+    public void deleteCategory(String categoryName){
         CategoryMap.remove(categoryName);
         try{
             java.sql.Statement statement = connection.createStatement();

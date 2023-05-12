@@ -6,6 +6,7 @@ public class Storage {
     private Shelf[] shelves;
 //    private int currShelf;
     private int amountOfShelves;
+    private static final ProductDetailsDAO productDetailsDAO = ProductDetailsDAO.getInstance();
 
     public Storage(int numberOfShelves) {
         /**
@@ -26,8 +27,8 @@ public class Storage {
     }
 
     public int getCurrShelf() {
-        ProductDetailsDAO.getInstance();
-        return ProductDetailsDAO.getStorageShelfNumber();
+        //ProductDetailsDAO.getInstance();
+        return productDetailsDAO.getStorageShelfNumber();
     }
 
     public int getAmountOfShelves() {
@@ -44,10 +45,10 @@ public class Storage {
          */
         Location loc = null;
         boolean running = true;
-        ProductDetailsDAO.getInstance();
+        //ProductDetailsDAO.getInstance();
         while (running) {
 
-            int currShelf = ProductDetailsDAO.getStoreShelfNumber();
+            int currShelf = productDetailsDAO.getStoreShelfNumber();
             if (currShelf == amountOfShelves - 1) {
                 running = false;
 
@@ -63,8 +64,8 @@ public class Storage {
 
                     //reset indexInShelf
 
-                    ProductDetailsDAO.resetIndexInShelf();
-                    ProductDetailsDAO.updateStoreShelfNumber();
+                    productDetailsDAO.resetIndexInShelf();
+                    productDetailsDAO.updateStoreShelfNumber();
                 }
             }
         }

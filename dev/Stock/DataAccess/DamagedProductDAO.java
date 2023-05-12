@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DamagedProductDAO {
-    private static DamagedProductDAO instance = new DamagedProductDAO();
+    private static DamagedProductDAO instance = null;
     private static Map<Integer,String> damagedMap;
     private static  Map<Integer,String> qrToCatalogNumber;
     private static Map<String, HashMap<Integer,String>> catalogDamagedMap;
@@ -26,10 +26,13 @@ public class DamagedProductDAO {
     }
 
     public static DamagedProductDAO getInstance() {
+        if (instance == null) {
+            instance = new DamagedProductDAO();
+        }
         return instance;
     }
 
-    public static String getQrDamagedReason(int qr){
+    public String getQrDamagedReason(int qr){
         if(damagedMap.get(qr) == null){
             //read from database
             lookForDamagedProduct(qr);
@@ -37,7 +40,7 @@ public class DamagedProductDAO {
         return damagedMap.get(qr);
     }
 
-    private static void lookForDamagedProduct(int qr){
+    private void lookForDamagedProduct(int qr){
         int barcode;
         String catalogNumber, reason;
         try{
@@ -56,7 +59,7 @@ public class DamagedProductDAO {
         }
     }
 
-    public static HashMap<Integer,String> readDamagedForCatalogNumber(String catalogNumber){
+    public HashMap<Integer,String> readDamagedForCatalogNumber(String catalogNumber){
         if(catalogDamagedMap.get(catalogNumber) == null){
             //read from database
             getDamagedForCatalogNumber(catalogNumber);
@@ -64,7 +67,7 @@ public class DamagedProductDAO {
         return catalogDamagedMap.get(catalogNumber);
     }
 
-    private static void getDamagedForCatalogNumber(String catalogNumber){
+    private void getDamagedForCatalogNumber(String catalogNumber){
         int barcode;
         String reason;
         HashMap<Integer,String> catalogDamaged = new HashMap<>();
@@ -84,7 +87,7 @@ public class DamagedProductDAO {
             System.out.println("there is a problem eith the database");
         }
     }
-    public static void writeDamagedProducts(){
+    public void writeDamagedProducts(){
         for(Integer qr: damagedMap.keySet()){
             try{
                 java.sql.Statement statement = connection.createStatement();
@@ -117,17 +120,16 @@ public class DamagedProductDAO {
         }
     }
 
-    public static void writeDamagedProduct(int QR,String catalogNumber, String reason){
+    public void writeDamagedProduct(int QR,String catalogNumber, String reason){
         if(!damagedMap.containsKey(QR)){
             damagedMap.put(QR,reason);
             qrToCatalogNumber.put(QR,catalogNumber);
             // should be added to the database ?
-
         }
 //        else{System.out.println("this qr is already a damaged product");}
     }
 
-    public static void deleteExpDate(int qr){
+    public void deleteExpDate(int qr){
         damagedMap.remove(qr);
         catalogDamagedMap.get(qrToCatalogNumber.get(qr)).remove(qr);
         qrToCatalogNumber.remove(qr);

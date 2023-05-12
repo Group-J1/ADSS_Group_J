@@ -7,6 +7,9 @@ public class Shelf {
 //    private int counter;
     private int places;
 
+    private static final ProductDetailsDAO productDetailsDAO = ProductDetailsDAO.getInstance();
+
+
     public Shelf(int numberOfPlaces) {
         /**
          * Constructs a new Stock.Business.Shelf object with the specified number of places.
@@ -39,8 +42,8 @@ public class Shelf {
          */
         this.items[indexInShelfIndex] = newItem;
 //        counter++;
-        ProductDetailsDAO.getInstance();
-        ProductDetailsDAO.updateStorageIndexInShelf();
+        //ProductDetailsDAO.getInstance();
+        productDetailsDAO.updateStorageIndexInShelf();
     }
 
     public int nextFreeIndex(){
@@ -52,11 +55,11 @@ public class Shelf {
          *
          * @return the index of the next free place on the shelf, or -1 if the shelf is full
          */
-        ProductDetailsDAO.getInstance();
+        //ProductDetailsDAO.getInstance();
 
-        if(ProductDetailsDAO.getStorageIndexInShelf() < places)
-            return ProductDetailsDAO.getStorageIndexInShelf();
-        ProductDetailsDAO.resetIndexInShelf();
+        if(productDetailsDAO.getStorageIndexInShelf() < places)
+            return productDetailsDAO.getStorageIndexInShelf();
+        productDetailsDAO.resetIndexInShelf();
         return -1;    //if no space in the shelf.
     }
 }

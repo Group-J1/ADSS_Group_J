@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class ShortageDAO {
     private static Connection connection;
     private static ArrayList<String> shortageMap;
-    private static ShortageDAO instance = new ShortageDAO();
+    private static ShortageDAO instance = null;
 
     private ShortageDAO(){
         connection = Connect.getConnection();
@@ -18,10 +18,13 @@ public class ShortageDAO {
     }
 
     public static ShortageDAO getInstance() {
+        if (instance == null) {
+            instance = new ShortageDAO();
+        }
         return instance;
     }
 
-    private static void loadToShortageMap(){
+    private void loadToShortageMap(){
         try{
             java.sql.Statement statement = connection.createStatement();
             java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM Shortages ");
@@ -29,13 +32,13 @@ public class ShortageDAO {
                 String catalogNumber = resultSet.getString("CatalogNumber");
                 shortageMap.add(catalogNumber);
             }
-
-        }catch (SQLException e){
+        }
+        catch (SQLException e){
             System.out.println("theres a problem with the database");
         }
     }
 
-    public static void writeShortages(){
+    public void writeShortages(){
         try{
             java.sql.Statement statement = connection.createStatement();
             java.sql.ResultSet resultSet = statement.executeQuery("DELETE FROM Shortages");
@@ -43,23 +46,21 @@ public class ShortageDAO {
                 statement.executeQuery("DELETE FROM Shortages");
                 statement.executeUpdate("INSERT INTO Shortages (CatalogNumber) VALUES (" + "'"+catalogNumber+"'" + ")");
             }
-
-
         }
         catch (SQLException e){
             System.out.println("theres a problem with the database");
         }
     }
 
-    public static ArrayList<String> getShortageMap(){
+    public ArrayList<String> getShortageMap(){
         return shortageMap;
     }
 
-    public static void addToShortages(String catalogNumber){
+    public void addToShortages(String catalogNumber){
         shortageMap.add(catalogNumber);
     }
 
-    public static Boolean isInShortage(String catalogNumber){
+    public Boolean isInShortage(String catalogNumber){
         return shortageMap.contains(catalogNumber);
     }
 }

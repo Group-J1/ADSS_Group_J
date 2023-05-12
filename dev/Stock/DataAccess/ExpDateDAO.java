@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ExpDateDAO {
-    private static ExpDateDAO instance = new ExpDateDAO();
+    private static ExpDateDAO instance = null;
     private  static Map<Integer, Date> ExpDateMap;
     private static  Map<String, HashMap<Integer,Date>> catalogExpDate;
     private static  Map<Integer,String> qrToCatalogNumber;
@@ -25,10 +25,13 @@ public class ExpDateDAO {
     }
 
     public static ExpDateDAO getInstance() {
+        if (instance == null) {
+            instance = new ExpDateDAO();
+        }
         return instance;
     }
 
-    public static Date getQrExpDate(int qr){
+    public Date getQrExpDate(int qr){
 
         if (ExpDateMap.get(qr) == null) {
             // read from the db
@@ -37,7 +40,7 @@ public class ExpDateDAO {
         return ExpDateMap.get(qr);
     }
 
-    private static void lookForExpDate(int qr){
+    private void lookForExpDate(int qr){
         int barcode;
         String catalogNumber;
         Date expDate;
@@ -59,14 +62,14 @@ public class ExpDateDAO {
         }
     }
 
-    public static HashMap<Integer,Date> readExpForCatalogNumber(String catalogNumber){
+    public HashMap<Integer,Date> readExpForCatalogNumber(String catalogNumber){
         if(catalogExpDate.get(catalogNumber) == null){
             getExpForCatalogNumber(catalogNumber);
         }
         return catalogExpDate.get(catalogNumber);
     }
 
-    private static void getExpForCatalogNumber(String catalogNumber){
+    private void getExpForCatalogNumber(String catalogNumber){
         HashMap<Integer,Date> productExpDates = new HashMap<>();
         int barcode;
         Date expDate;
@@ -86,8 +89,6 @@ public class ExpDateDAO {
                 qrToCatalogNumber.putIfAbsent(barcode,catalogNumber);
             }
             catalogExpDate.put(catalogNumber,productExpDates);
-
-
         }
         catch (SQLException e){
             System.out.println("theres problem with the database");
@@ -96,7 +97,7 @@ public class ExpDateDAO {
     }
 
 
-    public static void writeExpDates(){
+    public void writeExpDates(){
         for(Integer qr: ExpDateMap.keySet()){
             try{
                 java.sql.Statement statement = connection.createStatement();
@@ -108,7 +109,6 @@ public class ExpDateDAO {
                     pstmt.setString(2, qrToCatalogNumber.get(qr));
                     pstmt.setDate(3, new java.sql.Date(ExpDateMap.get(qr).getTime()));
                     pstmt.executeUpdate();
-
                 }
                 else{
                     String updateExpDatesQuery = "UPDATE ExpDates SET Date = ?, catalog_number = ? WHERE QRCode = ?";
@@ -116,9 +116,7 @@ public class ExpDateDAO {
                     updateExpDatesStmt.setDate(1, new java.sql.Date(ExpDateMap.get(qr).getTime()));
                     updateExpDatesStmt.setString(2, qrToCatalogNumber.get(qr));
                     updateExpDatesStmt.setInt(3, qr);
-
                     updateExpDatesStmt.executeUpdate();
-
                 }
             }catch (SQLException e){
                 System.out.println(e.getMessage());
@@ -126,26 +124,24 @@ public class ExpDateDAO {
         }
     }
 
-    public static void writeExpDateForQR(int QR,String catalogNumber, Date date){
+    public void writeExpDateForQR(int QR,String catalogNumber, Date date){
         if(!ExpDateMap.containsKey(QR)){
             ExpDateMap.put(QR,date);
             qrToCatalogNumber.put(QR,catalogNumber);
             // should be added to the database ?
-
         }
        // else{System.out.println("the qr is not new");}
     }
-    public static void updateExpDate(String catalogNumber, HashMap<Integer,Date> updatedExpDates){
+    public void updateExpDate(String catalogNumber, HashMap<Integer,Date> updatedExpDates){
         for(Integer qr: updatedExpDates.keySet()){
             ExpDateMap.putIfAbsent(qr,updatedExpDates.get(qr));
             qrToCatalogNumber.putIfAbsent(qr,catalogNumber);
         }
     }
 
-    public static void deleteExpDate(int qr){
+    public void deleteExpDate(int qr){
         ExpDateMap.remove(qr);
         catalogExpDate.get(qrToCatalogNumber.get(qr)).remove(qr);
-
         qrToCatalogNumber.remove(qr);
         try{
             java.sql.Statement statement = connection.createStatement();
