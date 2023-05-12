@@ -43,6 +43,10 @@ public class ShortageDAO {
         shortageMap.remove(catalogNumber);
     }
 
+    public void resetShortages(){
+        shortageMap.clear();
+    }
+
 //    public void writeShortages(){
 //        try{
 //            java.sql.Statement statement = connection.createStatement();

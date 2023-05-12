@@ -1,15 +1,27 @@
 package Stock.Business;
 
+import Stock.DataAccess.ProductDAO;
+import Stock.DataAccess.ShortageDAO;
+
 import java.util.ArrayList;
 
 public class Shortages {
     private ArrayList<Product> missing;
+    private ShortageDAO shortageDAO;
+    private ProductDAO productDAO;
 
     public Shortages() {
         /**
          * Constructs a new Stock.Business.Shortages object.
          */
+
+        shortageDAO = ShortageDAO.getInstance();
+        productDAO = ProductDAO.getInstance();
         this.missing = new ArrayList<>();
+        for(String catalogNumber: shortageDAO.getShortageMap()){
+            Product product = productDAO.getProduct(catalogNumber);
+            missing.add(product);
+        }
     }
 
     public void addProductToShortages(Product product){
@@ -23,6 +35,15 @@ public class Shortages {
          */
         if(!missing.contains(product)){
             missing.add(product);
+            shortageDAO.addToShortages(product.getCatalogNumber());
+            shortageDAO.writeShortages();
+        }
+    }
+    public void removeFromShortages(Product product){
+        if(missing.contains(product)){
+            missing.remove(product);
+            shortageDAO.deleteFromShortages(product.getCatalogNumber());
+            shortageDAO.writeShortages();
         }
     }
 
@@ -52,7 +73,21 @@ public class Shortages {
                 newMissing.add(product);
             }
         }
+        shortageDAO.resetShortages();
+        for(Product product: missing){
+            shortageDAO.addToShortages(product.getCatalogNumber());
+        }
+        shortageDAO.writeShortages();
         this.missing = newMissing;
+
+    }
+
+    public void updateMissingFromDataBase(){            // will be used after ProductDAO::updateForNextDay
+        this.missing = new ArrayList<>();
+        for(String catalogNumber: shortageDAO.getShortageMap()){
+            Product product = productDAO.getProduct(catalogNumber);
+            missing.add(product);
+        }
     }
 
     public ArrayList<Product> getMissing() {

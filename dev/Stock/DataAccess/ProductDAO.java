@@ -246,4 +246,22 @@ public class ProductDAO {
         ShortageDAO.getInstance().writeShortages();
 
     }
+    private void loadAllDataToCache(){
+        String catalogNumber;
+        try{
+            java.sql.Statement statement = connection.createStatement();
+            java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM Products");
+            while(resultSet.next()){
+                catalogNumber = resultSet.getString("catalog_number");
+                getProduct(catalogNumber);
+            }
+        }catch (SQLException e){
+            System.out.println("there is problem with the data base");
+        }
+    }
+    public Map<String,Product> getAllProducts(){
+        loadAllDataToCache();
+        return productMap;
+    }
+
 }

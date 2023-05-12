@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -98,6 +99,29 @@ public class CategoryDAO {
         }catch (SQLException e){
             System.out.println("theres a problem with the database");
         }
+    }
+
+    private void loadAllDataToCache(){
+        String categoryStr;
+        try{
+            java.sql.Statement statement = connection.createStatement();
+            java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM ExpDates");
+            while(resultSet.next()){
+                categoryStr = resultSet.getString("Category");
+                getCategory(categoryStr);
+            }
+        }catch (SQLException e){
+            System.out.println("there is problem with the data base");
+        }
+    }
+
+    public ArrayList<String> getAllTheCategories(){
+        loadAllDataToCache();
+        return new ArrayList<>(CategoryMap.keySet());
+    }
+    public Map<String,AProductCategory> getCategoriesMap(){
+        loadAllDataToCache();
+        return CategoryMap;
     }
 
 
