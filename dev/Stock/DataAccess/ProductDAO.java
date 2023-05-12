@@ -94,6 +94,7 @@ public class ProductDAO {
                 storageLoc = new Location(Integer.parseInt(storageLocArr[0]),Integer.parseInt(storageLocArr[1]));
 
                 Product product = new Product(productCategory,aProductSubCategory,aProductSubSubCategory,storageLoc,storeLoc,manufacturer,storageQuantity+storeQuantity,minimumQuantity,weight,expDate);
+                product.setCatalogNumber();
                 product.setExpirationDates(exp);
                 product.setDamagedProducts(damagedBarcodes);
                 product.setDiscount(discount);
@@ -208,5 +209,7 @@ public class ProductDAO {
         }catch (SQLException e){
             System.out.println("theres a problem with the database");
         }
+
+
     }
 }

@@ -1,5 +1,6 @@
 package Stock.Business;
 
+import Stock.DataAccess.ExpDateDAO;
 import Stock.DataAccess.ProductDAO;
 import Stock.DataAccess.ProductDetailsDAO;
 
@@ -77,6 +78,23 @@ public class ProductManager {
         } else {
             return false;
         }
+    }
+    public Product getProductByCategories(String category,String subCategory,String subSubCategory){
+        String[] subsubSplited = subSubCategory.split(" ");
+
+        String name = subCategory + " " + Double.toString(Double.parseDouble(subsubSplited[subsubSplited.length - 2])) + " " + subsubSplited[subsubSplited.length - 1];
+        String productCatalogNumber = UniqueStringGenerator.generateUniqueString(name);
+        return ProductDAO.getProduct(productCatalogNumber);
+    }
+
+    public void addMoreItemsToProduct(Product product, Date expDate, int quantity){
+        product.addMoreItemsToProduct(quantity,expDate);
+        ProductDAO.getInstance();
+        ProductDAO.writeProducts();
+        ExpDateDAO.getInstance();
+        ExpDateDAO.writeExpDates();
+
+
     }
 
     public static void setStore(Store store) {          // freshie change

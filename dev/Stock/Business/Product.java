@@ -1,5 +1,6 @@
 package Stock.Business;
 
+import Stock.DataAccess.ExpDateDAO;
 import Stock.DataAccess.ProductDetailsDAO;
 
 import java.util.*;
@@ -248,6 +249,7 @@ public class Product {
         for (int i = 0; i < quantity; i++) {
             this.expirationDates.put(ProductDetailsDAO.getProductId(), expiration);
         }
+        ExpDateDAO.updateExpDate(this.getCatalogNumber(),getExpirationDates());
     }
 
     public int[] sellMultipleItemsFromProduct(int quantity) {
