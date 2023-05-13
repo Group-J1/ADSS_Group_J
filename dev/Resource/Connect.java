@@ -62,30 +62,46 @@ public class Connect {
 //        }
     public static void main(String[] args) {
         try {
+//            Connect.disconnect();
             Connection conn = getConnection();
             Statement stmt = conn.createStatement();
-//            String sql = "DROP TABLE IF EXISTS Products";
-//            stmt.executeUpdate(sql);
-//            String createProducts = "CREATE TABLE Products(catalog_number TEXT PRIMARY KEY,Manufacturer TEXT, StorageQuantity INTEGER, StoreQuantity INTEGER, MinimumQuantity INTEGER, ProductDiscount DOUBLE, Weight DOUBLE, Value DOUBLE, Category STRING, StorageLocation TEXT, StoreLocation TEXT)";
+            //            String createDamaged = "CREATE TABLE Damaged ( QRCode INTEGER PRIMARY KEY, catalog_number TEXT, reason TEXT)";
+            String createDamaged = "CREATE TABLE Damaged ( QRCode INTEGER PRIMARY KEY, catalog_number TEXT, reason TEXT)";
+            String createExpDate = "CREATE TABLE ExpDates (QRCode INTEGER PRIMARY KEY, catalog_number TEXT, Date DATE)";
+            String createCategory =  "CREATE TABLE Category (Category TEXT PRIMARY KEY, Discount DOUBLE )";
+//            String createProducts = "CREATE TABLE Products(QRCode INTEGER PRIMARY KEY, catalog_number TEXT,Manufacturer TEXT, StorageQuantity INTEGER, StoreQuantity INTEGER, MinimumQuantity INTEGER, ProductDiscount DOUBLE, Weight DOUBLE, Value DOUBLE, Category STRING)";
+            String createShortages = "CREATE TABLE Shortages(CatalogNumber TEXT PRIMARY KEY)";
+
+
+            // NEED TO CREATE DB TO THE STATIC INT, THE NAME IS: ProductID, the fields are ID, Value
+//
+//            stmt.executeUpdate(createDamaged);
+//            stmt.executeUpdate(createExpDate);
+//            stmt.executeUpdate(createCategory);
 //            stmt.executeUpdate(createProducts);
-            stmt.executeUpdate("DELETE  FROM ProductID");
-            stmt.executeUpdate("DELETE FROM Products");
-            stmt.executeUpdate("DELETE  FROM ExpDates");
-            stmt.executeUpdate("DELETE  FROM Damaged");
-            stmt.executeUpdate("DELETE FROM Shortages");
+//            stmt.executeUpdate(createShortages);
+//
+            String sql = "DROP TABLE IF EXISTS Products";
+            stmt.executeUpdate(sql);
+            String createProducts = "CREATE TABLE Products(catalog_number TEXT PRIMARY KEY,Manufacturer TEXT, StorageQuantity INTEGER, StoreQuantity INTEGER, MinimumQuantity INTEGER, ProductDiscount DOUBLE, Weight DOUBLE, Value DOUBLE, Category STRING, StorageLocation TEXT, StoreLocation TEXT)";
+            stmt.executeUpdate(createProducts);
+//            stmt.executeUpdate("DELETE  FROM ProductID");
+//            stmt.executeUpdate("PRAGMA quick_check;");
+//            stmt.executeUpdate("DELETE  FROM ExpDates");
+//            stmt.executeUpdate("DELETE  FROM Damaged");
+//            stmt.executeUpdate("DELETE FROM Shortages");
 
 //            stmt.executeUpdate("CREATE TABLE ProductID ( ID INTEGER PRIMARY KEY, Value  INTEGER )");
 //            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "1" + "," + 0 + ")");
-            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "1" + "," + 0 + ")");
-            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "2" + "," + 0 + ")");
-            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "3" + "," + 0 + ")");
-            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "4" + "," + 0 + ")");
-            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "5" + "," + 0 + ")");
-            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "6" + "," + 0 + ")");
-            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "7" + "," + 0 + ")");
-
-
-
+//            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "2" + "," + 0 + ")");
+//            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "3" + "," + 0 + ")");
+//            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "4" + "," + 0 + ")");
+//            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "5" + "," + 0 + ")");
+//            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "6" + "," + 0 + ")");
+//            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "7" + "," + 0 + ")");
+//
+//
+//
 //            stmt.executeUpdate("INSERT INTO Category (Category, Discount) VALUES (" + "'" + "Dairy" + "'" + "," + 0 + ")");
 //            stmt.executeUpdate("INSERT INTO Category (Category, Discount) VALUES (" + "'" + "Fruits" + "'" + "," + 0 + ")");
 //            stmt.executeUpdate("INSERT INTO Category (Category, Discount) VALUES (" + "'" + "Meat" + "'" + "," + 0 + ")");
@@ -93,7 +109,9 @@ public class Connect {
 
 //            stmt.executeUpdate("DELETE FROM Products WHERE catalog_number = null");
 
+            Connect.disconnect();
         } catch (SQLException e) {
+            Connect.disconnect();
             System.out.println(e.getMessage());
         }
 
@@ -114,5 +132,3 @@ public class Connect {
 //23
 //1
 //12
-
-
