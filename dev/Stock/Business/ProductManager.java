@@ -21,6 +21,8 @@ public class ProductManager {
     private static Store store;//= new Store(30); // Freshie check
     private static Storage storage;// = new Storage(30);// Freshie check
 
+    private static Shortages shortages;
+
     private ProductManager() {
         // private constructor
 
@@ -82,7 +84,7 @@ public class ProductManager {
         }
     }
 
-    // ------------ Helper function for Case 2 in Product UI ------------
+    // ------------ Helper function for Case 2.1 in Product UI ------------
     public Product getProductByCategories(String subCategory,String subSubCategory){
         String[] subsubSplited = subSubCategory.split(" ");
         String name = subCategory + " " + Double.toString(Double.parseDouble(subsubSplited[subsubSplited.length - 2]))
@@ -91,9 +93,25 @@ public class ProductManager {
         return productDAO.getProduct(productCatalogNumber);
     }
 
-    // Case 2 at Product's menu
+    // Case 2.1 at Product's menu
     public void addMoreItemsToProduct(Product product, Date expDate, int quantity){
         product.addMoreItemsToProduct(quantity,expDate);
+        //productDAO.getInstance();
+        productDAO.writeProducts();
+        //ExpDateDAO.getInstance();
+        expDateDAO.writeExpDates();
+        productDetailsDAO.saveDetails(); // Freshie check
+    }
+
+    // Case 2.2 at Product's menu
+    public void sellProductsByUniqueCode(Product soldProduct, int quantitySold){
+        int[] sold = soldProduct.sellMultipleItemsFromProduct(quantitySold);
+//        for (int i = 0; i < quantitySold; i++) {
+//            sales.addSale(product, sold[i]);
+//        }
+        if (soldProduct.getStoreQuantity() == 0) {
+            shortages.addProductToShortages(soldProduct);
+        }
         //productDAO.getInstance();
         productDAO.writeProducts();
         //ExpDateDAO.getInstance();
@@ -121,9 +139,29 @@ public class ProductManager {
         }
     }
 
+    // Case 4 at Product's menu
+    public void printProductInformation(int productInformationCase, Product product) {
+        /**
+         * Prints the specified information of the given product to the console.
+         * @param productInformationCase an integer indicating which piece of information to print:
+         *                               - 1 for the product catalog number
+         *                               - 2 for the product name
+         * @param product the product whose information to print
+         */
+        if (productInformationCase == 1) {
+            System.out.println(product.getCatalogNumber());
+        }
+        if (productInformationCase == 2) {
+            System.out.println(product.getName());
+        }
+    }
 
-
-
+    // ------------ Case 5 in Product UI ------------
+    public void setMinimumQuantity(Product product, int newMinQuantity) {
+        product.setMinimumQuantity(newMinQuantity);
+        System.out.println("The new minimum quantity of " + product.getName() + " is " + newMinQuantity);
+        productDAO.writeProducts();
+    }
 
 
     public static void setStore(Store store) {          // freshie change

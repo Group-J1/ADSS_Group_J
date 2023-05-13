@@ -29,14 +29,19 @@ public class ProductService {
                 minQuantity, weight, expirationDate);
     }
 
-    // ------------ Helper function for Case 2 in Product UI ------------
+    // ------------ Helper function for Case 2.1 in Product UI ------------
     public Product getProductByCategories(String subCategoryStr, String subSubCategoryStr) {
         return productManager.getProductByCategories(subCategoryStr, subSubCategoryStr);
     }
 
-    // ------------ Case 2 in Product UI ------------
+    // ------------ Case 2.1 in Product UI ------------
     public void addMoreItemsToProduct(Product product, Date expDate, int quantity) {
         productManager.addMoreItemsToProduct(product, expDate, quantity);
+    }
+
+    // ------------ Case 2.2 in Product UI ------------
+    public void sellProductsByUniqueCode(Product soldProduct, int quantitySold) {
+        productManager.sellProductsByUniqueCode(soldProduct, quantitySold);
     }
 
     // ------------ Helper function for Case 3 in Product UI ------------
@@ -47,6 +52,16 @@ public class ProductService {
     // ------------ Case 3 in Product UI ------------
     public void markAsDamaged(Product defectedProduct, int uniqueCode, String reason) {
         productManager.markAsDamaged(defectedProduct, uniqueCode, reason);
+    }
+
+    // ------------ Case 4 in Product UI ------------
+    public void printProductInformation(int productInformationCase, Product product) {
+        productManager.printProductInformation(productInformationCase, product);
+    }
+
+    // ------------ Case 5 in Product UI ------------
+    public void setMinimumQuantity(Product product, int newMinQuantity) {
+        productManager.setMinimumQuantity(product, newMinQuantity);
     }
 
 }

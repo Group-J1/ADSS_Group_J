@@ -61,7 +61,6 @@ public class StockMainUI {
             ProductManager.setStore(market.getStore());
             ProductManager.setStorage(market.getStorage());
             MarketManager.setMarket(market);
-
         }
         else {
             running = true;

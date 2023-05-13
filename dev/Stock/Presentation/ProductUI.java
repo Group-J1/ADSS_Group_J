@@ -15,8 +15,9 @@ public class ProductUI {
     private static final ProductService productService = ProductService.getInstance();
 
     String categoryStr, subCategoryStr, subSubCategoryStr, manufacturer, quantity, minQuantity, weight,
-            productCatalogNumber, uniqueCode, reason;
+            productCatalogNumber, uniqueCode, reason, quantityStr;
     Date expirationDate;
+    boolean flag;
     Scanner input = new Scanner(System.in);
 
     public void startMenu(String numOfMarketToManagement) {
@@ -25,7 +26,7 @@ public class ProductUI {
             System.out.println("-------- Welcome to the Product menu of market number " + Integer.parseInt(numOfMarketToManagement) + " --------");
             // case 1 at MainUI
             System.out.println("1) Add a new product ");
-            // case 2 at MainUI
+            // case 2 and Case 3 at MainUI
             System.out.println("2) Update quantity of existing product ");
             // case 5 at MainUI
             System.out.println("3) Inform on a defected/ expired product ");
@@ -45,7 +46,31 @@ public class ProductUI {
                     break;
 
                 case "2":
-                    addMoreItemsToProductCase2();
+                    flag = true;
+                    while (flag) {
+                        System.out.println("How do you want to change the quantity of existing product? ");
+                        System.out.println("1) Increase the quantity for single product (would be Supplier's function) ");
+                        System.out.println("2) Sell/remove from stock a single product ");
+                        System.out.println("3) return to menu.");
+                        char option = input.next().charAt(0);
+                        input.nextLine();
+                        switch (option) {
+                            case '1':
+                                addMoreItemsToProductCase2Point1();
+                                flag = false;
+                                break;
+                            case '2':
+                                sellMoreItemsFromProductCase2Point2();
+                                flag = false;
+                                break;
+                            case '3':
+                                flag = false;
+                                break;
+                            default:
+                                System.out.println("Wrong input");
+                                break;
+                        }
+                    }
                     break;
 
                 case "3":
@@ -53,12 +78,60 @@ public class ProductUI {
                     break;
 
                 case "4":
-                    //MarketUI marketUI = new MarketUI();
-                    //marketUI.startMenu();
+                    flag = true;
+                    char check;
+                    while (flag) {
+                        System.out.println("How do you want to receive the information about product? ");
+                        System.out.println("1) Information by product's categories.");
+                        System.out.println("2)  Information by product's catalog number.");
+                        System.out.println("3) return to menu.");
+                        check = input.next().charAt(0);
+                        input.nextLine();
+                        switch (check) {
+                            case '1':
+                                printProductInformationCase4Point1();
+                                flag = false;
+                                break;
+                            case '2':
+                                printProductInformationCase4Point2();
+                                flag = false;
+                                break;
+                            case 3:
+                                flag = false;
+                                break;
+                            default:
+                                System.out.println("Wrong input");
+                                break;
+                        }
+                    }
                     break;
+
                 case "5":
-                    //MarketUI marketUI = new MarketUI();
-                    //marketUI.startMenu();
+                    flag = true;
+                    while (flag) {
+                        System.out.println("which way you want to Update minimum amount? ");
+                        System.out.println("1) by product's categories.");
+                        System.out.println("2) by product's ID.");
+                        System.out.println("3) return to menu.");
+                        check = input.next().charAt(0);
+                        input.nextLine();
+                        switch (check) {
+                            case '1':
+                                setMinimumQuantityCase5Point1();
+                                flag = false;
+                                break;
+                            case '2':
+                                setMinimumQuantityCase5Point2();
+                                flag = false;
+                                break;
+                            case 3:
+                                flag = false;
+                                break;
+                            default:
+                                System.out.println("Wrong input");
+                                break;
+                        }
+                    }
                     break;
 
                 case "6":
@@ -133,8 +206,8 @@ public class ProductUI {
         }
     }
 
-    // Case 2 in product's menu
-    void addMoreItemsToProductCase2() {
+    // Case 2.1 in product's menu
+    void addMoreItemsToProductCase2Point1() {
         System.out.println("Whats is your product's category? ");
         categoryStr = input.nextLine();
         if (!checkIfOnlyLetters(categoryStr)) {
@@ -176,6 +249,38 @@ public class ProductUI {
         System.out.println("Product's quantity updated! ");
     }
 
+    // Case 2.2 in product's menu
+    void sellMoreItemsFromProductCase2Point2() {
+        System.out.println("What is the catalog number of the product you sell/remove? ");
+        String productCatalogNumber = input.nextLine();
+        Product soldProduct = productService.getProductByUniqueCode(productCatalogNumber);
+        //Product soldProduct = market.getByProductID(productID);
+
+        // looks for product if found return it else return null
+        if (soldProduct == null) {
+            System.out.println("The product was not found!");
+            return;
+        }
+        System.out.println("What is the  product  quantity you sell/remove? ");
+        quantity = input.nextLine();
+        if (!checkIfPositiveIntegerNumber(quantity) || Integer.parseInt(quantity) >= 31) {
+            System.out.println("The quantity value was invalid! you can by up to 30 products at once");
+            return;
+        }
+        // ----------- here -----------
+        productService.sellProductsByUniqueCode(soldProduct, Integer.parseInt(quantity));
+        //market.sellProductsByID(productID, Integer.parseInt(quantity));
+
+        // New
+        if(soldProduct.getStoreQuantity() + soldProduct.getStorageQuantity() < soldProduct.getMinimumQuantity()){
+            System.out.println("ALERT!!!!\nthe product: " + soldProduct.getName()+" is under the minimum quantity");
+        }
+        // Old
+//        if(sold.getStoreQuantity() + sold.getStorageQuantity() < market.stock.getBlackLine(sold)){
+//            System.out.println("ALERT!!!!\nthe product: " + sold.getName()+" is under the minimum quantity");
+//        }
+    }
+
     void markAsDamagedCase3() {
         System.out.println("What is the catalog number of the defected product? ");
         productCatalogNumber = input.nextLine();
@@ -209,6 +314,104 @@ public class ProductUI {
         }
     }
 
+
+    // Case 4.1 in product's menu
+    void printProductInformationCase4Point1() {
+        System.out.println("Whats is your product's category? ");
+        categoryStr = input.nextLine();
+        if (!checkIfOnlyLetters(categoryStr)) {
+            System.out.println("your product's category is not a valid string ");
+            return;
+        }
+        System.out.println("Whats is your product's sub-category? ");
+        subCategoryStr = input.nextLine();
+        if (!checkSubCategory(subCategoryStr)) {
+            System.out.println("your product's subCategory is not a valid string ");
+            return;
+        }
+        System.out.println("Whats is your product's sub-sub-category, in <double string> format? ");
+        subSubCategoryStr = input.nextLine();
+        if (!checkSubSubCategory(subSubCategoryStr)) {
+            return;
+        }
+        Product product = productService.getProductByCategories(subCategoryStr, subSubCategoryStr);
+        if (product == null) {
+            System.out.println("Product was not found ");
+            return;
+        }
+        productService.printProductInformation(1, product);
+        //market.printProductInformation(1, product);
+    }
+
+    // Case 4.2 in product's menu
+    void printProductInformationCase4Point2() {
+        System.out.println("What is the catalog number of the product? ");
+        productCatalogNumber = input.nextLine();
+        Product product = productService.getProductByUniqueCode(productCatalogNumber);
+        // looks for product by ID if found return it else return null
+        if (product == null) {
+            System.out.println("Product was not found ");
+            return;
+        }
+        productService.printProductInformation(2, product);
+        //market.printProductInformation(2, product);
+    }
+
+    // Case 5.1 in product's menu
+    void setMinimumQuantityCase5Point1() {
+        System.out.println("Whats is your product's category? ");
+        categoryStr = input.nextLine();
+        if (!checkIfOnlyLetters(categoryStr)) {
+            System.out.println("your product's category is not a valid string ");
+            return;
+        }
+        System.out.println("Whats is your product's sub-category? ");
+        subCategoryStr = input.nextLine();
+        if (!checkSubCategory(subCategoryStr)) {
+            System.out.println("your product's subCategory is not a valid string ");
+            return;
+        }
+        System.out.println("Whats is your product's sub-sub-category, in <double string> format? ");
+        subSubCategoryStr = input.nextLine();
+        if (!checkSubSubCategory(subSubCategoryStr)) {
+            return;
+        }
+        Product product = productService.getProductByCategories(subCategoryStr, subSubCategoryStr);
+        if (product == null) {
+            System.out.println("Product was not found ");
+            return;
+        }
+        System.out.println("What is the new minimum quantity? ");
+        quantityStr = input.nextLine();
+        if (!checkIfPositiveIntegerNumber(quantityStr)) {
+            System.out.println("You have to add a positive number to minimum quantity ");
+            return;
+        }
+        productService.setMinimumQuantity(product, Integer.parseInt(quantityStr));
+        //product.setMinimumQuantity(Integer.parseInt(quantityStr));
+        //System.out.println("The new minimum quantity of " + product.getName() + " is " + quantityStr);
+    }
+
+    // Case 5.2 in product's menu
+    void setMinimumQuantityCase5Point2() {
+        System.out.println("What is the catalog number of the product? ");
+        productCatalogNumber = input.nextLine();
+        Product product = productService.getProductByUniqueCode(productCatalogNumber);
+        // looks for product by ID if found return it else return null
+        if (product == null) {
+            System.out.println("Product was not found ");
+            return;
+        }
+        System.out.println("What is the new minimum quantity? ");
+        quantityStr = input.nextLine();
+        if (!checkIfPositiveIntegerNumber(quantityStr)) {
+            System.out.println("You have to add a positive number to minimum quantity ");
+            return;
+        }
+        productService.setMinimumQuantity(product, Integer.parseInt(quantityStr));
+        //product.setMinimumQuantity(Integer.parseInt(quantityStr));
+        //System.out.println("The new minimum quantity of " + product.getName() + " is " + quantityStr);
+    }
 
 
     Boolean checkIfPositiveIntegerNumber(String number) {
