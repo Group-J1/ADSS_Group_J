@@ -21,7 +21,6 @@ public class ProductService {
     }
 
     // other methods and variables of the class
-
     // ------------ Case 1 in Product UI ------------
     public boolean addNewProduct(String categoryStr, String subCategoryStr, String subSubCategoryStr, String manufacturer,
                                  int quantity, int minQuantity, double weight, Date expirationDate) {
