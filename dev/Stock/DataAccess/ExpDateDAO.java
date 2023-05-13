@@ -141,9 +141,9 @@ public class ExpDateDAO {
         catalogExpDate.get(qrToCatalogNumber.get(qr)).remove(qr);
         qrToCatalogNumber.remove(qr);
         try{
-            java.sql.Statement statement = connection.createStatement();
-            java.sql.ResultSet resultSet = statement.executeQuery("DELETE  FROM ExpDates WHERE QRCode ==" + Integer.toString(qr));
-
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM ExpDates WHERE QRCode = ?");
+            statement.setInt(1, qr);
+            statement.executeUpdate();
         }catch (SQLException e){
             System.out.println("theres a problem with the database");
         }

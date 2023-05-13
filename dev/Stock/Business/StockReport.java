@@ -31,7 +31,7 @@ public class StockReport extends Report{
             Map<String, Integer> newCategory = new HashMap<>();
             for (Product product : stock.values()) {
                 if (product.getCategory().getName().equals(category)) {
-                    newCategory.put(product.getName(), product.getStoreQuantity() + product.getStorageQuantity() - product.getDamagedProducts().size());
+                    newCategory.put(product.getName(), product.getStoreQuantity() + product.getStorageQuantity());
                 }
             }
             products.put(category, newCategory);

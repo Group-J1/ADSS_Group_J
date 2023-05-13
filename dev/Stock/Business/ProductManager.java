@@ -109,6 +109,10 @@ public class ProductManager {
 //        for (int i = 0; i < quantitySold; i++) {
 //            sales.addSale(product, sold[i]);
 //        }
+        for(Integer qr : sold){
+            expDateDAO.deleteExpDate(qr);
+//            soldProduct.getExpirationDates().remove(qr);
+        }
         if (soldProduct.getStoreQuantity() == 0) {
             shortages.addProductToShortages(soldProduct);
         }
@@ -129,10 +133,21 @@ public class ProductManager {
     public void markAsDamaged(Product defectedProduct, int uniqueCode, String reason){
         if (expDateDAO.isQRfromCatalogNumber(defectedProduct.getCatalogNumber(),uniqueCode)) {
             defectedProduct.markAsDamaged(uniqueCode, reason);
+            defectedProduct.getExpirationDates().remove(uniqueCode);
+            ExpDateDAO.getInstance().deleteExpDate(uniqueCode);
+            if(defectedProduct.getStorageQuantity() > 0){
+                defectedProduct.storageQuantityMinus1();
+            }
+            else{
+                if(defectedProduct.getStoreQuantity() > 0) {
+                    defectedProduct.storeQuantityMinus1();
+                }
+            }
             //productDAO.getInstance();
             productDAO.writeProducts();
             //ExpDateDAO.getInstance();
             damagedProductDAO.writeDamagedProducts();
+
         }
         else {
             System.out.println("the QR is does not belong to this Catalog Number! ");

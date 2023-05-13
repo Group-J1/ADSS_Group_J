@@ -363,4 +363,11 @@ public class Product {
     }
 
     public int getGreenLine(){return getMinimumQuantity() + 100;}
+
+    public void storeQuantityMinus1(){
+        storeQuantity--;
+    }
+    public void storageQuantityMinus1(){
+        storageQuantity--;
+    }
 }
