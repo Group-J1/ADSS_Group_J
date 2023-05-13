@@ -20,6 +20,10 @@ public class ReportsService {
         return reportsManager.createStockReport();
     }
 
+    public boolean createStockReportForCategory(String category){
+        return reportsManager.createStockReportForCategory(category);
+    }
+
     public boolean createOrderReport(){
         return reportsManager.createOrderReport();
     }

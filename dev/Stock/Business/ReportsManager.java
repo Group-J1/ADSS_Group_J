@@ -2,6 +2,8 @@ package Stock.Business;
 
 import Stock.DataAccess.*;
 
+import java.util.ArrayList;
+
 public class ReportsManager {
     private static final ProductDAO productDAO = ProductDAO.getInstance();
     private static final CategoryDAO categoryDAO = CategoryDAO.getInstance();
@@ -28,6 +30,20 @@ public class ReportsManager {
         }
         return true;
     }
+
+    public boolean createStockReportForCategory(String category){
+        ArrayList<String> singleCategory = new ArrayList<>();
+        singleCategory.add(category);
+        StockReport stockReport = new StockReport(productDAO.getAllProducts(),singleCategory);
+        try{System.out.println("-------- Stock Report --------");
+            System.out.println(stockReport);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+
 
     public boolean createOrderReport(){
         OrderReport orderReport = new OrderReport(productDAO.getAllProducts());

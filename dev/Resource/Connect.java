@@ -85,20 +85,20 @@ public class Connect {
             stmt.executeUpdate(sql);
             String createProducts = "CREATE TABLE Products(catalog_number TEXT PRIMARY KEY,Manufacturer TEXT, StorageQuantity INTEGER, StoreQuantity INTEGER, MinimumQuantity INTEGER, ProductDiscount DOUBLE, Weight DOUBLE, Value DOUBLE, Category STRING, StorageLocation TEXT, StoreLocation TEXT)";
             stmt.executeUpdate(createProducts);
-//            stmt.executeUpdate("DELETE  FROM ProductID");
-//            stmt.executeUpdate("PRAGMA quick_check;");
-//            stmt.executeUpdate("DELETE  FROM ExpDates");
-//            stmt.executeUpdate("DELETE  FROM Damaged");
-//            stmt.executeUpdate("DELETE FROM Shortages");
+            stmt.executeUpdate("DELETE  FROM ProductID");
+            stmt.executeUpdate("DELETE FROM Products");
+            stmt.executeUpdate("DELETE  FROM ExpDates");
+            stmt.executeUpdate("DELETE  FROM Damaged");
+            stmt.executeUpdate("DELETE FROM Shortages");
 
 //            stmt.executeUpdate("CREATE TABLE ProductID ( ID INTEGER PRIMARY KEY, Value  INTEGER )");
-//            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "1" + "," + 0 + ")");
-//            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "2" + "," + 0 + ")");
-//            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "3" + "," + 0 + ")");
-//            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "4" + "," + 0 + ")");
-//            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "5" + "," + 0 + ")");
-//            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "6" + "," + 0 + ")");
-//            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "7" + "," + 0 + ")");
+            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "1" + "," + 0 + ")");
+            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "2" + "," + 0 + ")");
+            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "3" + "," + 0 + ")");
+            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "4" + "," + 0 + ")");
+            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "5" + "," + 0 + ")");
+            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "6" + "," + 0 + ")");
+            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "7" + "," + 0 + ")");
 //
 //
 //

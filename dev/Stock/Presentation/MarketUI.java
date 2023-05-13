@@ -29,24 +29,18 @@ public class MarketUI {
                 case "1":
                     setDiscountByCategoriesCase1();
                     break;
-
                 case "2":
                     setDiscountByCatalogNumberCase2();
                     break;
-
                 case "3":
                     setDiscountForCategoryCase3();
                     break;
-
                 case "4":
                     addShelvesToMarketCase4();
                     break;
                 case "5":
                     running = false;
                     break;
-
-
-
                 default:
                     System.out.println("Wrong input");
                     break;
@@ -57,15 +51,11 @@ public class MarketUI {
     boolean checkIfPositiveDoubleNumber(String number) {
         try {
             double d = Double.parseDouble(number);
-            return d > 0.0;
+            return d >= 0.0;
         } catch (NumberFormatException e) {
             return false;
         }
     }
-
-//    Boolean checkIfPositiveDoubleNumber(String number) {
-//        return number.matches("[0-9]+") && Integer.parseInt(number) > 0;
-//    }
 
     Boolean checkIfOnlyLetters(String str) {
         return str.matches("[a-zA-Z' ]+");
@@ -140,6 +130,7 @@ public class MarketUI {
             return;
         }
         marketService.setDiscountForProduct(categoryStr,subCategoryStr,subSubCategoryStr,Double.parseDouble(discount));
+        System.out.println("Discount updated");
     }
 
     private void setDiscountByCatalogNumberCase2(){
@@ -153,6 +144,7 @@ public class MarketUI {
             return;
         }
         marketService.setDiscountForProduct(catalogNumber,Double.parseDouble(discount));
+        System.out.println("Discount updated");
     }
 
 
@@ -164,12 +156,17 @@ public class MarketUI {
             System.out.println("your product's category is not a valid string ");
             return;
         }
+        System.out.println("Whats is the discount? between 0 to 1 ");
         discount = input.nextLine();
         if (!checkIfPositiveDoubleNumber(discount)) {
             System.out.println("your discount is not a positive number ");
             return;
+        }if(0 > Double.parseDouble(discount) || Double.parseDouble(discount) > 1){
+            System.out.println("your discount is not between 0 to 1 ");
+            return;
         }
         marketService.setDiscountForCategory(categoryStr,Double.parseDouble(discount));
+        System.out.println("Discount updated");
     }
 
     private void addShelvesToMarketCase4(){

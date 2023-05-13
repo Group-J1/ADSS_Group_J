@@ -208,10 +208,7 @@ public class Product {
     }
 
     public double getDiscount() {
-        if(discount >= category.getDiscount()) {
             return discount;
-        }
-        return category.getDiscount();              // not sure it's 2 am bro
     }
 
     public void setDiscount(double discount) {
@@ -318,7 +315,6 @@ public class Product {
                 Date entry = expirationDates.get(entryInt);
                 if (entry != null && entry.equals(smallestDate) && !damagedProducts.containsKey(entryInt)) {
                     sold[count] = Integer.parseInt(entryInt.toString());
-                    expirationDates.remove(Integer.parseInt(entryInt.toString()));
                     count++;
                     if (count == quantity) {
                         break;

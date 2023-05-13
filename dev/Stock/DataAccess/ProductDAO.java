@@ -48,7 +48,7 @@ public class ProductDAO {
         return productMap.get(catalogNumber);
     }
     private void lookForProduct(String catalogNumber){
-        int qr,storageQuantity,storeQuantity,minimumQuantity;
+        int storageQuantity,storeQuantity,minimumQuantity;
         String catalogNum, manufacturer,category,DamagedReason,storeLocation,storageLocation ;
         // store/storage location are like this :    "1 2"
 

@@ -105,7 +105,7 @@ public class CategoryDAO {
         String categoryStr;
         try{
             java.sql.Statement statement = connection.createStatement();
-            java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM ExpDates");
+            java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM Category");
             while(resultSet.next()){
                 categoryStr = resultSet.getString("Category");
                 getCategory(categoryStr);
