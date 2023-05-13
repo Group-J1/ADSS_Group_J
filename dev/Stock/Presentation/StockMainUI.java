@@ -139,7 +139,7 @@ public class StockMainUI {
             String selection = input.nextLine();
             switch (selection) {
                 case "1":
-                     productUi.startMenu(numOfMarketToManagement);
+                    productUi.startMenu(numOfMarketToManagement);
                     break;
 
                 case "2":

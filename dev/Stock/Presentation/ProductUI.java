@@ -418,8 +418,13 @@ public class ProductUI {
         return number.matches("[0-9]+") && Integer.parseInt(number) > 0;
     }
 
-    Boolean checkIfPositiveDoubleNumber(String number) {
-        return number.matches("[0-9]+") && Integer.parseInt(number) > 0;
+    boolean checkIfPositiveDoubleNumber(String number) {
+        try {
+            double d = Double.parseDouble(number);
+            return d > 0.0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     Boolean checkIfOnlyLetters(String str) {
