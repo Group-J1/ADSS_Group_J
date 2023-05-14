@@ -67,13 +67,13 @@ public class ReportsManager {
         return true;
     }
 
-    public boolean createShortageReport(){
+    public Shortages createShortageReport(){
         Shortages shortages = new Shortages();
         try{System.out.println("-------- Shortage Report --------");
             System.out.println(shortages);
         } catch (Exception e) {
-            return false;
+            return null;
         }
-        return true;
+        return shortages;
     }
 }

@@ -1,6 +1,7 @@
 package Stock.Service;
 
 import Stock.Business.ReportsManager;
+import Stock.Business.Shortages;
 
 public class ReportsService {
     private final static ReportsManager reportsManager = ReportsManager.getInstance();
@@ -32,7 +33,7 @@ public class ReportsService {
         return reportsManager.createDamagedReport();
     }
 
-    public boolean createShortageReport(){
+    public Shortages createShortageReport(){
         return reportsManager.createShortageReport();
     }
 

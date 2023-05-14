@@ -2,6 +2,7 @@ package Stock.Presentation;
 
 import Stock.Business.*;
 import Stock.DataAccess.ProductDetailsDAO;
+import Stock.Service.ProductService;
 
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -39,6 +40,8 @@ public class StockMainUI {
     private final MarketUI marketUI = new MarketUI();
     private final ProductUI productUi = new ProductUI();
     private final ReportsUI reportsUI = new ReportsUI();
+    private static final ProductService productService = ProductService.getInstance();
+
 
 
     public void startMenu() {
@@ -49,20 +52,21 @@ public class StockMainUI {
         Chain chain;
         Market market;
         String numOfMarkets;
-        String numOfShelves ;
+        String numOfShelves;
         String numOfMarketToManagement;
         Scanner input = new Scanner(System.in);
         boolean running;
 
-        if(ProductDetailsDAO.getNumberOfMarketsInChain() != 0 && ProductDetailsDAO.getManagedMarket() != 0 && ProductDetailsDAO.getNumOfShelves() != 0){
+        if (ProductDetailsDAO.getNumberOfMarketsInChain() != 0 && ProductDetailsDAO.getManagedMarket() != 0 && ProductDetailsDAO.getNumOfShelves() != 0) {
             chain = new Chain(ProductDetailsDAO.getNumberOfMarketsInChain());
             market = new Market(ProductDetailsDAO.getNumOfShelves());
             numOfMarketToManagement = Integer.toString(ProductDetailsDAO.getManagedMarket());
             ProductManager.setStore(market.getStore());
             ProductManager.setStorage(market.getStorage());
+            ProductManager.setShortages(market.getShortages());
             MarketManager.setMarket(market);
-        }
-        else {
+            productService.sendToSupplierAllProductsQuantity();
+        } else {
             running = true;
             boolean validSubSubCategory;
             numOfMarkets = "0";
@@ -113,8 +117,8 @@ public class StockMainUI {
             ProductDetailsDAO.getInstance().saveDetails();
 
 
-
             ProductManager.getInstance();
+            ProductManager.setShortages(market.getShortages());
             ProductManager.setStorage(market.getStorage());     // freshie change
             ProductManager.setStore(market.getStore());         // freshie change
             MarketManager.setMarket(market);
@@ -122,7 +126,7 @@ public class StockMainUI {
             String answer = input.nextLine();
             if (answer.equals("yes")) {
                 System.out.println("The BarCodes are: \n");
-                defaultMarket(market);
+                //defaultMarket(market);
                 System.out.println("");
             }
         }
@@ -784,128 +788,128 @@ public class StockMainUI {
         Date dateToReturn = Date.from(date.atStartOfDay().atZone(java.time.ZoneId.systemDefault()).toInstant());
         return dateToReturn;
     }
-
-    public void defaultMarket(Market market) {
-        /**
-         * Adds several default products to the provided market object.
-         * The products include dairy, bakery, meat, fruits, vegetables, snacks, and beverages.
-         * Each product has a name, a brand, a weight or volume, a supplier, a price, a quantity, a discount, and an expiration date.
-         * @param market The market object to which the products will be added.
-         */
-        Date d1 = new Date(2024, Calendar.MAY, 23);
-        Date d2 = new Date(2023, Calendar.JUNE, 12);
-        Date d3 = new Date(2023, Calendar.JULY, 1);
-        Date d4 = new Date(2023, Calendar.AUGUST, 15);
-        Date d5 = new Date(2023, Calendar.SEPTEMBER, 2);
-        Date d6 = new Date(2023, Calendar.OCTOBER, 10);
-        Date d7 = new Date(2023, Calendar.NOVEMBER, 6);
-        Date d8 = new Date(2024, Calendar.JANUARY, 24);
-        Date d9 = new Date(2024, Calendar.FEBRUARY, 8);
-        Date d10 = new Date(2024, Calendar.MARCH, 15);
-        Date d11 = new Date(2024, Calendar.APRIL, 9);
-        Date d12 = new Date(2023, Calendar.OCTOBER, 6);
-        Date d13 = new Date(2023, Calendar.NOVEMBER, 24);
-        Date d14 = new Date(2023, Calendar.DECEMBER, 17);
-        Date d15 = new Date(2024, Calendar.JANUARY, 20);
-        Date d16 = new Date(2024, Calendar.FEBRUARY, 8);
-        Date d17 = new Date(2024, Calendar.MARCH, 8);
-        Date d18 = new Date(2024, Calendar.APRIL, 5);
-        Date d19 = new Date(2024, Calendar.MAY, 23);
-        Date d20 = new Date(2024, Calendar.JUNE, 12);
-        Date d21 = new Date(2024, Calendar.JULY, 16);
-        Date d22 = new Date(2024, Calendar.AUGUST, 3);
-        Date d23 = new Date(2024, Calendar.SEPTEMBER, 1);
-        Date d24 = new Date(2024, Calendar.OCTOBER, 1);
-        Date d25 = new Date(2024, Calendar.NOVEMBER, 7);
-        Date d26 = new Date(2024, Calendar.DECEMBER, 13);
-        Date d27 = new Date(2025, Calendar.JANUARY, 18);
-        Date d28 = new Date(2025, Calendar.FEBRUARY, 26);
-        Date d29 = new Date(2025, Calendar.MARCH, 13);
-        Date d30 = new Date(2025, Calendar.APRIL, 16);
-        Date d31 = new Date(2025, Calendar.MAY, 12);
-        Date d32 = new Date(2025, Calendar.JUNE, 14);
-        market.addNewProduct("Dairy", "Milk 3%", "1 l", "Dairy Co.", 100, 20, 1, d1);
-        market.addNewProduct("Bakery", "White bread", "500 g", "Bakery Co.", 40, 10, 0.5, d2);
-        market.addNewProduct("Dairy", "Milk 1%", "1.5 l", "Dairy Co.", 50, 10, 1.5, d1);
-        market.addNewProduct("Bakery", "Bagels", "100 g", "Bagel Co.", 40, 8, 0.1, d9);
-        market.addNewProduct("Meat", "Beef", "300 g", "Meat Co.", 20, 5, 0.3, d10);
-        market.addNewProduct("Fruits", "Bananas", "50 g", "Fruit Farms", 60, 12, 0.05, d11);
-        market.addNewProduct("Vegetables", "Carrots", "500 g", "Veggie Co.", 30, 6, 0.5, d12);
-        market.addNewProduct("Snacks", "Cookies", "250 g", "Cookie Co.", 80, 16, 0.25, d13);
-        market.addNewProduct("Beverages", "Soda", "2 l", "Soda Co.", 100, 20, 2, d14);
-        market.addNewProduct("Beverages", "Soda", "1 l", "Soda Co.", 100, 20, 1, d14);
-        market.addNewProduct("Dairy", "Yogurt", "200 g", "Yogurt Co.", 50, 10, 0.2, d15);
-        market.addNewProduct("Bakery", "Croissants", "150 g", "Croissant Co.", 40, 8, 0.15, d16);
-        market.addNewProduct("Meat", "Chicken", "400 g", "Poultry Co.", 20, 5, 0.4, d17);
-        market.addNewProduct("Bakery", "Baguette", "400 g", "Bakery Co.", 30, 6, 0.4, d18);
-        market.addNewProduct("Fruits", "Oranges", "1 kg", "Fruit Farms", 70, 14, 1, d19);
-        market.addNewProduct("Vegetables", "Tomatoes", "1 kg", "Veggie Co.", 40, 8, 1, d20);
-        market.addNewProduct("Dairy", "Cheese", "100 g", "Cheese Co.", 60, 12, 0.1, d21);
-        market.addNewProduct("Snacks", "Potato chips", "200 g", "Snack Co.", 100, 20, 0.2, d22);
-        market.addNewProduct("Beverages", "Milkshake", "500 ml", "Milkshake Co.", 50, 10, 0.5, d23);
-        market.addNewProduct("Beverages", "Juice", "1 l", "Juice Co.", 80, 16, 1, d24);
-        market.addNewProduct("Dairy", "Butter", "250 g", "Butter Co.", 40, 8, 0.25, d25);
-        market.addNewProduct("Bakery", "Croissants", "100 g", "Croissant Co.", 20, 5, 0.1, d26);
-        market.addNewProduct("Meat", "Pork", "500 g", "Meat Co.", 30, 6, 0.5, d27);
-        market.addNewProduct("Fruits", "Apples", "500 g", "Fruit Farms", 60, 12, 0.5, d28);
-        market.addNewProduct("Vegetables", "Onions", "500 g", "Veggie Co.", 20, 4, 0.5, d29);
-        market.addNewProduct("Snacks", "Nuts", "300 g", "Nuts Co.", 50, 10, 0.3, d30);
-        market.addNewProduct("Beverages", "Energy drink", "250 ml", "Energy Co.", 100, 20, 0.25, d31);
-        market.addNewProduct("Dairy", "Sour cream", "250 g", "Sour Cream Co.", 40, 8, 0.25, d32);
-        market.addNewProduct("Dairy", "Cheese", "250 g", "Dairy Co.", 60, 15, 0.25, d1);
-        market.addNewProduct("Bakery", "Multigrain bread", "1 kg", "Bakery Co.", 45, 10, 1, d2);
-        market.addNewProduct("Dairy", "Butter", "500 g", "Dairy Co.", 70, 14, 0.5, d3);
-        market.addNewProduct("Bakery", "Cinnamon rolls", "300 g", "Bakery Co.", 50, 12, 0.3, d4);
-        market.addNewProduct("Meat", "Pork chops", "400 g", "Meat Co.", 25, 5, 0.4, d5);
-        market.addNewProduct("Fruits", "Apples", "1 kg", "Fruit Farms", 80, 16, 1, d6);
-        market.addNewProduct("Vegetables", "Broccoli", "250 g", "Veggie Co.", 35, 7, 0.25, d7);
-        market.addNewProduct("Snacks", "Potato chips", "1 kg", "Snack Co.", 70, 14, 1, d8);
-        market.addNewProduct("Beverages", "Coffee", "1 kg", "Coffee Co.", 120, 24, 1, d10);
-        market.addNewProduct("Dairy", "Sour cream", "200 g", "Dairy Co.", 45, 9, 0.2, d11);
-        market.addNewProduct("Meat", "Lamb", "500 g", "Meat Co.", 30, 6, 0.5, d13);
-        market.addNewProduct("Fruits", "Oranges", "500 g", "Fruit Farms", 70, 14, 0.5, d14);
-        market.addNewProduct("Vegetables", "Cucumbers", "100 g", "Veggie Co.", 25, 5, 0.1, d15);
-        market.addNewProduct("Snacks", "Pretzels", "50 g", "Snack Co.", 50, 10, 0.5, d16);
-        market.addNewProduct("Beverages", "Juice", "2 l", "Juice Co.", 80, 16, 2, d17);
-        market.addNewProduct("Beverages", "Energy drink", "500 ml", "Energy Co.", 90, 18, 0.5, d18);
-        market.addNewProduct("Dairy", "Whipped cream", "200 g", "Dairy Co.", 50, 10, 0.2, d19);
-        market.addNewProduct("Bakery", "Croissants", "250 g", "Croissant Co.", 45, 9, 0.25, d20);
-        market.addNewProduct("Dairy", "Greek Yogurt", "500 g", "Yogurt Co.", 70, 14, 0.5, d3);
-        market.addNewProduct("Bakery", "Cinnamon Rolls", "200 g", "Croissant Co.", 45, 9, 0.2, d19);
-        market.addNewProduct("Fruits", "Strawberries", "250 g", "Fruit Farms", 80, 16, 0.25, d16);
-        market.addNewProduct("Vegetables", "Broccoli", "500 g", "Veggie Co.", 35, 7, 0.5, d10);
-        market.addNewProduct("Snacks", "Potato Chips", "100 g", "Snack Co.", 50, 10, 0.1, d27);
-        market.addNewProduct("Beverages", "Orange Juice", "1 l", "Juice Co.", 90, 18, 1, d12);
-        market.addNewProduct("Bakery", "Baguette", "500 g", "Bakery Co.", 30, 6, 0.5, d23);
-        market.addNewProduct("Dairy", "Butter", "100 g", "Dairy Co.", 60, 12, 0.1, d15);
-        market.addNewProduct("Meat", "Ground Beef", "1 kg", "Meat Co.", 60, 12, 1, d8);
-        market.addNewProduct("Fruits", "Pineapple", "500 g", "Fruit Farms", 40, 8, 0.5, d28);
-        market.addNewProduct("Vegetables", "Potatoes", "2 kg", "Veggie Co.", 20, 5, 2, d7);
-        market.addNewProduct("Snacks", "Trail Mix", "250 g", "Snack Co.", 55, 11, 0.25, d22);
-        market.addNewProduct("Beverages", "Apple Cider", "2 l", "Juice Co.", 100, 20, 2, d26);
-        market.addNewProduct("Dairy", "Cheese", "200 g", "Dairy Co.", 65, 13, 0.2, d18);
-        market.addNewProduct("Meat", "Lamb Chops", "400 g", "Poultry Co.", 35, 9, 0.4, d13);
-        market.addNewProduct("Fruits", "Watermelon", "1 kg", "Fruit Farms", 30, 6, 1, d31);
-        market.addNewProduct("Vegetables", "Lettuce", "200 g", "Veggie Co.", 25, 5, 0.2, d21);
-        market.addNewProduct("Snacks", "Pretzels", "250 g", "Snack Co.", 50, 10, 0.25, d24);
-        market.addNewProduct("Beverages", "Iced Tea", "1.5 l", "Soda Co.", 80, 16, 1.5, d17);
-        market.addNewProduct("Beverages", "Tea", "100 g", "Tea Co.", 30, 8, 0.1, d4);
-        market.addNewProduct("Dairy", "Cottage cheese", "500 g", "Dairy Co.", 50, 10, 0.5, d19);
-        market.addNewProduct("Fruits", "Pineapple", "1 kg", "Fruit Farms", 80, 16, 1, d13);
-        market.addNewProduct("Vegetables", "Potatoes", "1 kg", "Veggie Co.", 20, 4, 1, d17);
-        market.addNewProduct("Snacks", "Popcorn", "200 g", "Popcorn Co.", 60, 12, 0.2, d22);
-        market.addNewProduct("Beverages", "Coffee", "500 g", "Coffee Co.", 100, 20, 0.5, d29);
-        market.addNewProduct("Dairy", "Mozzarella", "250 g", "Cheese Co.", 70, 14, 0.25, d30);
-        market.addNewProduct("Bakery", "Brownies", "200 g", "Bakery Co.", 50, 10, 0.2, d31);
-        market.addNewProduct("Meat", "Salmon", "400 g", "Fish Co.", 80, 16, 0.4, d7);
-        market.addNewProduct("Fruits", "Grapes", "500 g", "Fruit Farms", 40, 8, 0.5, d1);
-        market.addNewProduct("Vegetables", "Lettuce", "500 g", "Veggie Co.", 30, 6, 0.5, d2);
-        market.addNewProduct("Snacks", "Crackers", "200 g", "Cracker Co.", 60, 12, 0.2, d3);
-        market.addNewProduct("Beverages", "Wine", "750 ml", "Wine Co.", 150, 30, 0.75, d4);
-        market.addNewProduct("Dairy", "Cream cheese", "200 g", "Dairy Co.", 40, 8, 0.2, d5);
-        market.addNewProduct("Meat", "Turkey", "500 g", "Poultry Co.", 30, 6, 0.5, d5);
-        market.addNewProduct("Fruits", "Mangoes", "1 kg", "Fruit Farms", 100, 20, 1, d4);
-        market.addNewProduct("Vegetables", "Cucumbers", "500 g", "Veggie Co.", 20, 4, 0.5, d22);
-        market.addNewProduct("Snacks", "Pretzel sticks", "200 g", "Pretzel Co.", 50, 10, 0.2, d7);
-    }
 }
+
+//    public void defaultMarket(Market market) {
+//        /**
+//         * Adds several default products to the provided market object.
+//         * The products include dairy, bakery, meat, fruits, vegetables, snacks, and beverages.
+//         * Each product has a name, a brand, a weight or volume, a supplier, a price, a quantity, a discount, and an expiration date.
+//         * @param market The market object to which the products will be added.
+//         */
+//        Date d1 = new Date(2024, Calendar.MAY, 23);
+//        Date d2 = new Date(2023, Calendar.JUNE, 12);
+//        Date d3 = new Date(2023, Calendar.JULY, 1);
+//        Date d4 = new Date(2023, Calendar.AUGUST, 15);
+//        Date d5 = new Date(2023, Calendar.SEPTEMBER, 2);
+//        Date d6 = new Date(2023, Calendar.OCTOBER, 10);
+//        Date d7 = new Date(2023, Calendar.NOVEMBER, 6);
+//        Date d8 = new Date(2024, Calendar.JANUARY, 24);
+//        Date d9 = new Date(2024, Calendar.FEBRUARY, 8);
+//        Date d10 = new Date(2024, Calendar.MARCH, 15);
+//        Date d11 = new Date(2024, Calendar.APRIL, 9);
+//        Date d12 = new Date(2023, Calendar.OCTOBER, 6);
+//        Date d13 = new Date(2023, Calendar.NOVEMBER, 24);
+//        Date d14 = new Date(2023, Calendar.DECEMBER, 17);
+//        Date d15 = new Date(2024, Calendar.JANUARY, 20);
+//        Date d16 = new Date(2024, Calendar.FEBRUARY, 8);
+//        Date d17 = new Date(2024, Calendar.MARCH, 8);
+//        Date d18 = new Date(2024, Calendar.APRIL, 5);
+//        Date d19 = new Date(2024, Calendar.MAY, 23);
+//        Date d20 = new Date(2024, Calendar.JUNE, 12);
+//        Date d21 = new Date(2024, Calendar.JULY, 16);
+//        Date d22 = new Date(2024, Calendar.AUGUST, 3);
+//        Date d23 = new Date(2024, Calendar.SEPTEMBER, 1);
+//        Date d24 = new Date(2024, Calendar.OCTOBER, 1);
+//        Date d25 = new Date(2024, Calendar.NOVEMBER, 7);
+//        Date d26 = new Date(2024, Calendar.DECEMBER, 13);
+//        Date d27 = new Date(2025, Calendar.JANUARY, 18);
+//        Date d28 = new Date(2025, Calendar.FEBRUARY, 26);
+//        Date d29 = new Date(2025, Calendar.MARCH, 13);
+//        Date d30 = new Date(2025, Calendar.APRIL, 16);
+//        Date d31 = new Date(2025, Calendar.MAY, 12);
+//        Date d32 = new Date(2025, Calendar.JUNE, 14);
+//        market.addNewProduct("Dairy", "Milk 3%", "1 l", "Dairy Co.", 100, 20, 1, d1);
+//        market.addNewProduct("Bakery", "White bread", "500 g", "Bakery Co.", 40, 10, 0.5, d2);
+//        market.addNewProduct("Dairy", "Milk 1%", "1.5 l", "Dairy Co.", 50, 10, 1.5, d1);
+//        market.addNewProduct("Bakery", "Bagels", "100 g", "Bagel Co.", 40, 8, 0.1, d9);
+//        market.addNewProduct("Meat", "Beef", "300 g", "Meat Co.", 20, 5, 0.3, d10);
+//        market.addNewProduct("Fruits", "Bananas", "50 g", "Fruit Farms", 60, 12, 0.05, d11);
+//        market.addNewProduct("Vegetables", "Carrots", "500 g", "Veggie Co.", 30, 6, 0.5, d12);
+//        market.addNewProduct("Snacks", "Cookies", "250 g", "Cookie Co.", 80, 16, 0.25, d13);
+//        market.addNewProduct("Beverages", "Soda", "2 l", "Soda Co.", 100, 20, 2, d14);
+//        market.addNewProduct("Beverages", "Soda", "1 l", "Soda Co.", 100, 20, 1, d14);
+//        market.addNewProduct("Dairy", "Yogurt", "200 g", "Yogurt Co.", 50, 10, 0.2, d15);
+//        market.addNewProduct("Bakery", "Croissants", "150 g", "Croissant Co.", 40, 8, 0.15, d16);
+//        market.addNewProduct("Meat", "Chicken", "400 g", "Poultry Co.", 20, 5, 0.4, d17);
+//        market.addNewProduct("Bakery", "Baguette", "400 g", "Bakery Co.", 30, 6, 0.4, d18);
+//        market.addNewProduct("Fruits", "Oranges", "1 kg", "Fruit Farms", 70, 14, 1, d19);
+//        market.addNewProduct("Vegetables", "Tomatoes", "1 kg", "Veggie Co.", 40, 8, 1, d20);
+//        market.addNewProduct("Dairy", "Cheese", "100 g", "Cheese Co.", 60, 12, 0.1, d21);
+//        market.addNewProduct("Snacks", "Potato chips", "200 g", "Snack Co.", 100, 20, 0.2, d22);
+//        market.addNewProduct("Beverages", "Milkshake", "500 ml", "Milkshake Co.", 50, 10, 0.5, d23);
+//        market.addNewProduct("Beverages", "Juice", "1 l", "Juice Co.", 80, 16, 1, d24);
+//        market.addNewProduct("Dairy", "Butter", "250 g", "Butter Co.", 40, 8, 0.25, d25);
+//        market.addNewProduct("Bakery", "Croissants", "100 g", "Croissant Co.", 20, 5, 0.1, d26);
+//        market.addNewProduct("Meat", "Pork", "500 g", "Meat Co.", 30, 6, 0.5, d27);
+//        market.addNewProduct("Fruits", "Apples", "500 g", "Fruit Farms", 60, 12, 0.5, d28);
+//        market.addNewProduct("Vegetables", "Onions", "500 g", "Veggie Co.", 20, 4, 0.5, d29);
+//        market.addNewProduct("Snacks", "Nuts", "300 g", "Nuts Co.", 50, 10, 0.3, d30);
+//        market.addNewProduct("Beverages", "Energy drink", "250 ml", "Energy Co.", 100, 20, 0.25, d31);
+//        market.addNewProduct("Dairy", "Sour cream", "250 g", "Sour Cream Co.", 40, 8, 0.25, d32);
+//        market.addNewProduct("Dairy", "Cheese", "250 g", "Dairy Co.", 60, 15, 0.25, d1);
+//        market.addNewProduct("Bakery", "Multigrain bread", "1 kg", "Bakery Co.", 45, 10, 1, d2);
+//        market.addNewProduct("Dairy", "Butter", "500 g", "Dairy Co.", 70, 14, 0.5, d3);
+//        market.addNewProduct("Bakery", "Cinnamon rolls", "300 g", "Bakery Co.", 50, 12, 0.3, d4);
+//        market.addNewProduct("Meat", "Pork chops", "400 g", "Meat Co.", 25, 5, 0.4, d5);
+//        market.addNewProduct("Fruits", "Apples", "1 kg", "Fruit Farms", 80, 16, 1, d6);
+//        market.addNewProduct("Vegetables", "Broccoli", "250 g", "Veggie Co.", 35, 7, 0.25, d7);
+//        market.addNewProduct("Snacks", "Potato chips", "1 kg", "Snack Co.", 70, 14, 1, d8);
+//        market.addNewProduct("Beverages", "Coffee", "1 kg", "Coffee Co.", 120, 24, 1, d10);
+//        market.addNewProduct("Dairy", "Sour cream", "200 g", "Dairy Co.", 45, 9, 0.2, d11);
+//        market.addNewProduct("Meat", "Lamb", "500 g", "Meat Co.", 30, 6, 0.5, d13);
+//        market.addNewProduct("Fruits", "Oranges", "500 g", "Fruit Farms", 70, 14, 0.5, d14);
+//        market.addNewProduct("Vegetables", "Cucumbers", "100 g", "Veggie Co.", 25, 5, 0.1, d15);
+//        market.addNewProduct("Snacks", "Pretzels", "50 g", "Snack Co.", 50, 10, 0.5, d16);
+//        market.addNewProduct("Beverages", "Juice", "2 l", "Juice Co.", 80, 16, 2, d17);
+//        market.addNewProduct("Beverages", "Energy drink", "500 ml", "Energy Co.", 90, 18, 0.5, d18);
+//        market.addNewProduct("Dairy", "Whipped cream", "200 g", "Dairy Co.", 50, 10, 0.2, d19);
+//        market.addNewProduct("Bakery", "Croissants", "250 g", "Croissant Co.", 45, 9, 0.25, d20);
+//        market.addNewProduct("Dairy", "Greek Yogurt", "500 g", "Yogurt Co.", 70, 14, 0.5, d3);
+//        market.addNewProduct("Bakery", "Cinnamon Rolls", "200 g", "Croissant Co.", 45, 9, 0.2, d19);
+//        market.addNewProduct("Fruits", "Strawberries", "250 g", "Fruit Farms", 80, 16, 0.25, d16);
+//        market.addNewProduct("Vegetables", "Broccoli", "500 g", "Veggie Co.", 35, 7, 0.5, d10);
+//        market.addNewProduct("Snacks", "Potato Chips", "100 g", "Snack Co.", 50, 10, 0.1, d27);
+//        market.addNewProduct("Beverages", "Orange Juice", "1 l", "Juice Co.", 90, 18, 1, d12);
+//        market.addNewProduct("Bakery", "Baguette", "500 g", "Bakery Co.", 30, 6, 0.5, d23);
+//        market.addNewProduct("Dairy", "Butter", "100 g", "Dairy Co.", 60, 12, 0.1, d15);
+//        market.addNewProduct("Meat", "Ground Beef", "1 kg", "Meat Co.", 60, 12, 1, d8);
+//        market.addNewProduct("Fruits", "Pineapple", "500 g", "Fruit Farms", 40, 8, 0.5, d28);
+//        market.addNewProduct("Vegetables", "Potatoes", "2 kg", "Veggie Co.", 20, 5, 2, d7);
+//        market.addNewProduct("Snacks", "Trail Mix", "250 g", "Snack Co.", 55, 11, 0.25, d22);
+//        market.addNewProduct("Beverages", "Apple Cider", "2 l", "Juice Co.", 100, 20, 2, d26);
+//        market.addNewProduct("Dairy", "Cheese", "200 g", "Dairy Co.", 65, 13, 0.2, d18);
+//        market.addNewProduct("Meat", "Lamb Chops", "400 g", "Poultry Co.", 35, 9, 0.4, d13);
+//        market.addNewProduct("Fruits", "Watermelon", "1 kg", "Fruit Farms", 30, 6, 1, d31);
+//        market.addNewProduct("Vegetables", "Lettuce", "200 g", "Veggie Co.", 25, 5, 0.2, d21);
+//        market.addNewProduct("Snacks", "Pretzels", "250 g", "Snack Co.", 50, 10, 0.25, d24);
+//        market.addNewProduct("Beverages", "Iced Tea", "1.5 l", "Soda Co.", 80, 16, 1.5, d17);
+//        market.addNewProduct("Beverages", "Tea", "100 g", "Tea Co.", 30, 8, 0.1, d4);
+//        market.addNewProduct("Dairy", "Cottage cheese", "500 g", "Dairy Co.", 50, 10, 0.5, d19);
+//        market.addNewProduct("Fruits", "Pineapple", "1 kg", "Fruit Farms", 80, 16, 1, d13);
+//        market.addNewProduct("Vegetables", "Potatoes", "1 kg", "Veggie Co.", 20, 4, 1, d17);
+//        market.addNewProduct("Snacks", "Popcorn", "200 g", "Popcorn Co.", 60, 12, 0.2, d22);
+//        market.addNewProduct("Beverages", "Coffee", "500 g", "Coffee Co.", 100, 20, 0.5, d29);
+//        market.addNewProduct("Dairy", "Mozzarella", "250 g", "Cheese Co.", 70, 14, 0.25, d30);
+//        market.addNewProduct("Bakery", "Brownies", "200 g", "Bakery Co.", 50, 10, 0.2, d31);
+//        market.addNewProduct("Meat", "Salmon", "400 g", "Fish Co.", 80, 16, 0.4, d7);
+//        market.addNewProduct("Fruits", "Grapes", "500 g", "Fruit Farms", 40, 8, 0.5, d1);
+//        market.addNewProduct("Vegetables", "Lettuce", "500 g", "Veggie Co.", 30, 6, 0.5, d2);
+//        market.addNewProduct("Snacks", "Crackers", "200 g", "Cracker Co.", 60, 12, 0.2, d3);
+//        market.addNewProduct("Beverages", "Wine", "750 ml", "Wine Co.", 150, 30, 0.75, d4);
+//        market.addNewProduct("Dairy", "Cream cheese", "200 g", "Dairy Co.", 40, 8, 0.2, d5);
+//        market.addNewProduct("Meat", "Turkey", "500 g", "Poultry Co.", 30, 6, 0.5, d5);
+//        market.addNewProduct("Fruits", "Mangoes", "1 kg", "Fruit Farms", 100, 20, 1, d4);
+//        market.addNewProduct("Vegetables", "Cucumbers", "500 g", "Veggie Co.", 20, 4, 0.5, d22);
+//        market.addNewProduct("Snacks", "Pretzel sticks", "200 g", "Pretzel Co.", 50, 10, 0.2, d7);
+//    }

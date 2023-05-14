@@ -1,26 +1,24 @@
 package Stock.Business;
 
-import Stock.DataAccess.DamagedProductDAO;
-import Stock.DataAccess.ExpDateDAO;
-import Stock.DataAccess.ProductDAO;
-import Stock.DataAccess.ProductDetailsDAO;
+import Stock.DataAccess.*;
 
 import java.util.Date;
+import java.util.HashMap;
 
 public class ProductManager {
 
     private static final ProductDAO productDAO = ProductDAO.getInstance();
     private static final ExpDateDAO expDateDAO = ExpDateDAO.getInstance();
+    private static final ShortageDAO shortageDAO = ShortageDAO.getInstance();
+
     private static final DamagedProductDAO damagedProductDAO = DamagedProductDAO.getInstance();
     private static final ProductDetailsDAO productDetailsDAO = ProductDetailsDAO.getInstance();
-
+    private static final CategoryDAO categoryDAO = CategoryDAO.getInstance();
 
 
     private static ProductManager instance = null;
-
     private static Store store;//= new Store(30); // Freshie check
     private static Storage storage;// = new Storage(30);// Freshie check
-
     private static Shortages shortages;
 
     private ProductManager() {
@@ -37,7 +35,7 @@ public class ProductManager {
     // other methods and variables of the class
 
     // Case 1 at Product's menu
-    public boolean addNewProduct(String categoryStr, String subCategoryStr, String subSubCategoryStr, String manufacturer,
+    public Product addNewProduct(String categoryStr, String subCategoryStr, String subSubCategoryStr, String manufacturer,
                                  int quantity, int minQuantity, double weight, Date expirationDate) {
         /**
          * Add a new product to the system.
@@ -56,6 +54,7 @@ public class ProductManager {
             // Old one
             //if (getProductByCategories(categoryStr, subCategoryStr, subSubCategoryStr) == null) {
             AProductCategory Ccategory = new AProductCategory(categoryStr);
+            categoryDAO.writeNewCategory(categoryStr, 0);
             AProductCategory CsubCategoryStr = new AProductCategory(subCategoryStr);
             String[] parts = subSubCategoryStr.split(" ");
             double number = Double.parseDouble(parts[0]);
@@ -78,9 +77,9 @@ public class ProductManager {
             productDetailsDAO.saveDetails(); // Freshie check
             System.out.println(product.getName() + " : " + (ProductDetailsDAO.getInstance().getProductIdNoUpdate() - quantity + 1)
                     + "-" + ProductDetailsDAO.getInstance().getProductIdNoUpdate());
-            return true;
+            return product;
         } else {
-            return false;
+            return null;
         }
     }
 
@@ -104,8 +103,9 @@ public class ProductManager {
     }
 
     // Case 2.2 at Product's menu
-    public void sellProductsByUniqueCode(Product soldProduct, int quantitySold){
+    public boolean sellProductsByUniqueCode(Product soldProduct, int quantitySold){
         int[] sold = soldProduct.sellMultipleItemsFromProduct(quantitySold);
+        boolean isProductOutOfStockNow = false;
 //        for (int i = 0; i < quantitySold; i++) {
 //            sales.addSale(product, sold[i]);
 //        }
@@ -115,12 +115,20 @@ public class ProductManager {
         }
         if (soldProduct.getStoreQuantity() == 0) {
             shortages.addProductToShortages(soldProduct);
+            shortageDAO.addToShortages(soldProduct.getCatalogNumber());
+            shortageDAO.writeShortages();
+            isProductOutOfStockNow = true;
         }
         //productDAO.getInstance();
         productDAO.writeProducts();
         //ExpDateDAO.getInstance();
         expDateDAO.writeExpDates();
+
         productDetailsDAO.saveDetails(); // Freshie check
+//        if (isProductOutOfStockNow) {
+//            functionToSupplierForNewShortage(shortages);
+//        }
+        return isProductOutOfStockNow;
     }
 
 
@@ -134,7 +142,7 @@ public class ProductManager {
         if (expDateDAO.isQRfromCatalogNumber(defectedProduct.getCatalogNumber(),uniqueCode)) {
             defectedProduct.markAsDamaged(uniqueCode, reason);
             defectedProduct.getExpirationDates().remove(uniqueCode);
-            ExpDateDAO.getInstance().deleteExpDate(uniqueCode);
+            expDateDAO.deleteExpDate(uniqueCode);
             if(defectedProduct.getStorageQuantity() > 0){
                 defectedProduct.storageQuantityMinus1();
             }
@@ -147,7 +155,6 @@ public class ProductManager {
             productDAO.writeProducts();
             //ExpDateDAO.getInstance();
             damagedProductDAO.writeDamagedProducts();
-
         }
         else {
             System.out.println("the QR is does not belong to this Catalog Number! ");
@@ -172,10 +179,11 @@ public class ProductManager {
     }
 
     // ------------ Case 5 in Product UI ------------
-    public void setMinimumQuantity(Product product, int newMinQuantity) {
+    public boolean setMinimumQuantity(Product product, int newMinQuantity) {
         product.setMinimumQuantity(newMinQuantity);
         System.out.println("The new minimum quantity of " + product.getName() + " is " + newMinQuantity);
         productDAO.writeProducts();
+        return true;
     }
 
 
@@ -185,5 +193,23 @@ public class ProductManager {
 
     public static void setStorage(Storage storage) {
         ProductManager.storage = storage;               // freshie change
+    }
+
+    public static void setShortages(Shortages shortages) {
+        ProductManager.shortages = shortages;               // freshie change
+        shortageDAO.writeShortages();
+    }
+
+    public HashMap<String,Integer> getAllProducts() {
+        HashMap<String, Integer> allProductsToSupplier = new HashMap<>();
+        HashMap<String, Product> allProductsFromDB = productDAO.getAllProducts();
+        if (allProductsFromDB.size() > 0) {
+            for (String catalogNumber : allProductsFromDB.keySet()) {
+                int minimumQuantity = allProductsFromDB.get(catalogNumber).getMinimumQuantity();
+                allProductsToSupplier.put(catalogNumber, minimumQuantity);
+            }
+            return allProductsToSupplier;
+        }
+        return null;
     }
 }

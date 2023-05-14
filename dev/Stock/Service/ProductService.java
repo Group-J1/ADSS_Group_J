@@ -2,12 +2,18 @@ package Stock.Service;
 
 import Stock.Business.Product;
 import Stock.Business.ProductManager;
+import Stock.Business.ReportsManager;
+import Stock.Business.Shortages;
+import Stock.DataAccess.ProductDetailsDAO;
 
 import java.util.Date;
+import java.util.HashMap;
 
 public class ProductService {
 
     private static final ProductManager productManager = ProductManager.getInstance();
+    //private static final ReportsManager reportsManager = ReportsManager.getInstance();
+
 
     private static ProductService instance = null;
     private ProductService() {
@@ -24,8 +30,14 @@ public class ProductService {
     // ------------ Case 1 in Product UI ------------
     public boolean addNewProduct(String categoryStr, String subCategoryStr, String subSubCategoryStr, String manufacturer,
                                  int quantity, int minQuantity, double weight, Date expirationDate) {
-        return productManager.addNewProduct(categoryStr, subCategoryStr, subSubCategoryStr, manufacturer, quantity,
-                minQuantity, weight, expirationDate);
+        Product newProductIfSuccessfullyAdded = productManager.addNewProduct(categoryStr, subCategoryStr, subSubCategoryStr,
+                manufacturer, quantity, minQuantity, weight, expirationDate);
+        if (newProductIfSuccessfullyAdded != null) {
+            HashMap<String, Integer> newProductToSupplier = new HashMap<>();
+            newProductToSupplier.put(newProductIfSuccessfullyAdded.getCatalogNumber(), minQuantity);
+            //functionToSupplierForNewProduct(newProductToSupplier);
+        }
+        return newProductIfSuccessfullyAdded != null;
     }
 
     // ------------ Helper function for Case 2.1 in Product UI ------------
@@ -40,7 +52,10 @@ public class ProductService {
 
     // ------------ Case 2.2 in Product UI ------------
     public void sellProductsByUniqueCode(Product soldProduct, int quantitySold) {
-        productManager.sellProductsByUniqueCode(soldProduct, quantitySold);
+        if (productManager.sellProductsByUniqueCode(soldProduct, quantitySold)) {
+            Shortages shortagesForSupplier = new Shortages();
+            //functionToSupplierForNewShortage(shortagesForSupplier.getMissing());
+        };
     }
 
     // ------------ Helper function for Case 3 in Product UI ------------
@@ -60,7 +75,18 @@ public class ProductService {
 
     // ------------ Case 5 in Product UI ------------
     public void setMinimumQuantity(Product product, int newMinQuantity) {
-        productManager.setMinimumQuantity(product, newMinQuantity);
+        if (productManager.setMinimumQuantity(product, newMinQuantity)) {
+            HashMap<String, Integer> newMinimumForProductToSupplier = new HashMap<>();
+            newMinimumForProductToSupplier.put(product.getCatalogNumber(), newMinQuantity);
+            //functionToSupplierForUpdateMinimumToProduct(newMinimumForProductToSupplier);
+        }
+    }
+
+    public void sendToSupplierAllProductsQuantity() {
+        HashMap<String, Integer> allProductsToSupplier = productManager.getAllProducts();
+        if (allProductsToSupplier != null) {
+            //functionToSupplierForInitializationAllProducts(allProductsToSupplier);
+        }
     }
 
 }

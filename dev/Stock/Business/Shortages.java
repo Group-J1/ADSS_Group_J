@@ -90,8 +90,12 @@ public class Shortages {
         }
     }
 
-    public ArrayList<Product> getMissing() {
-        return missing;
+    public ArrayList<String> getMissing() {
+        ArrayList<String> catalogNumberOfProductsInShortages = new ArrayList<>();
+        for(Product product: missing){
+            catalogNumberOfProductsInShortages.add(product.getCatalogNumber());
+        }
+        return catalogNumberOfProductsInShortages;
     }
 
     @Override

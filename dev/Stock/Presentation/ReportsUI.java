@@ -94,7 +94,7 @@ public class ReportsUI {
     }
 
     private void createShortageReportCase5(){
-        if (!reportsService.createShortageReport()) {
+        if (reportsService.createShortageReport() == null) {
             System.out.println("-------- Error in creation of shortage report --------");
         }
     }
