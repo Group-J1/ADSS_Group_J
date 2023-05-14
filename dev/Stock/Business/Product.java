@@ -1,6 +1,7 @@
 package Stock.Business;
 
 import Stock.DataAccess.ExpDateDAO;
+import Stock.DataAccess.ProductDAO;
 import Stock.DataAccess.ProductDetailsDAO;
 
 import java.util.*;
@@ -302,15 +303,18 @@ public class Product {
          * @param quantity the quantity of the product to sell
          * @return an array of integers representing the IDs of the sold products, or null if the requested quantity is not available in the store.
          */
-        if (expirationDates.size() - damagedProducts.size() < quantity) {
+        if (getStoreQuantity()+getStorageQuantity() < quantity) {
             return null;
         }
         List<Date> datesList = new ArrayList<>(expirationDates.values());
+        Set<Date> set = new HashSet<>(datesList);
+        datesList = new ArrayList<>(set);
         int[] sold = new int[quantity];
         Collections.sort(datesList);
         int count = 0;
-        for (int i = 0; i < quantity; i++) {
-            Date smallestDate = datesList.get(i);
+//        for (int i = 0; i < quantity; i++) {
+        for (Date smallestDate: datesList) {
+//            Date smallestDate = datesList.get(i);
             for (Integer entryInt : expirationDates.keySet()) {
                 Date entry = expirationDates.get(entryInt);
                 if (entry != null && entry.equals(smallestDate) && !damagedProducts.containsKey(entryInt)) {
@@ -325,6 +329,7 @@ public class Product {
                 break;
             }
         }
+
         storeQuantity -= quantity;
         if (storeQuantity + storageQuantity <= 30) {
             addToStore(storageQuantity);
@@ -335,6 +340,8 @@ public class Product {
         }
         for(int i = 0 ; i < quantity ; i++){
             expirationDates.remove(sold[i]);
+            ProductDAO.getInstance().getProduct(getCatalogNumber()).getExpirationDates().remove(sold[i]);
+            ProductDAO.getInstance().writeProducts();
         }
         return sold;
     }

@@ -130,15 +130,34 @@ public class ExpDateDAO {
        // else{System.out.println("the qr is not new");}
     }
     public void updateExpDate(String catalogNumber, HashMap<Integer,Date> updatedExpDates){
+
         for(Integer qr: updatedExpDates.keySet()){
             ExpDateMap.putIfAbsent(qr,updatedExpDates.get(qr));
             qrToCatalogNumber.putIfAbsent(qr,catalogNumber);
         }
     }
 
+
+    // func bfor sale
+       public void updateExpDateAfterSale(String catalogNumber, HashMap<Integer,Date> updatedExpDates){
+
+        try{
+            java.sql.Statement statement = connection.createStatement();
+            statement.executeUpdate("DELETE FROM ExpDates WHERE catalog_number = '" + catalogNumber + "'");
+
+        }catch (SQLException e){
+            System.out.println("there is problem with the data base");
+        }
+        for(Integer qr: updatedExpDates.keySet()){
+            writeExpDateForQR(qr,catalogNumber,updatedExpDates.get(qr));
+        }
+    }
+
     public void deleteExpDate(int qr){
         ExpDateMap.remove(qr);
-        catalogExpDate.get(qrToCatalogNumber.get(qr)).remove(qr);
+        if(catalogExpDate.containsKey(qrToCatalogNumber.get(qr))) {
+            catalogExpDate.get(qrToCatalogNumber.get(qr)).remove(qr);
+        }
         qrToCatalogNumber.remove(qr);
         try{
             PreparedStatement statement = connection.prepareStatement("DELETE FROM ExpDates WHERE QRCode = ?");
@@ -147,6 +166,7 @@ public class ExpDateDAO {
         }catch (SQLException e){
             System.out.println("theres a problem with the database");
         }
+        writeExpDates();
 
     }
     public Boolean isQRfromCatalogNumber(String catalogNumber, int qr){

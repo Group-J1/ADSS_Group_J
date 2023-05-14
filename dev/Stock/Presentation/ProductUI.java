@@ -272,7 +272,10 @@ public class ProductUI {
         //market.sellProductsByID(productID, Integer.parseInt(quantity));
 
         // New
-        if(soldProduct.getStoreQuantity() + soldProduct.getStorageQuantity() < soldProduct.getMinimumQuantity()){
+        if(soldProduct.getStoreQuantity() + soldProduct.getStorageQuantity() == 0){
+            System.out.println("ALERT!!!!\nthe product: " + soldProduct.getName()+" is in shortage");
+        }
+        else if(soldProduct.getStoreQuantity() + soldProduct.getStorageQuantity() < soldProduct.getMinimumQuantity()){
             System.out.println("ALERT!!!!\nthe product: " + soldProduct.getName()+" is under the minimum quantity");
         }
         // Old

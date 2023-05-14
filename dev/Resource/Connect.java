@@ -69,29 +69,31 @@ public class Connect {
             String createDamaged = "CREATE TABLE Damaged ( QRCode INTEGER PRIMARY KEY, catalog_number TEXT, reason TEXT)";
             String createExpDate = "CREATE TABLE ExpDates (QRCode INTEGER PRIMARY KEY, catalog_number TEXT, Date DATE)";
             String createCategory =  "CREATE TABLE Category (Category TEXT PRIMARY KEY, Discount DOUBLE )";
-//            String createProducts = "CREATE TABLE Products(QRCode INTEGER PRIMARY KEY, catalog_number TEXT,Manufacturer TEXT, StorageQuantity INTEGER, StoreQuantity INTEGER, MinimumQuantity INTEGER, ProductDiscount DOUBLE, Weight DOUBLE, Value DOUBLE, Category STRING)";
+            String createProducts = "CREATE TABLE Products(QRCode INTEGER PRIMARY KEY, catalog_number TEXT,Manufacturer TEXT, StorageQuantity INTEGER, StoreQuantity INTEGER, MinimumQuantity INTEGER, ProductDiscount DOUBLE, Weight DOUBLE, Value DOUBLE, Category STRING)";
             String createShortages = "CREATE TABLE Shortages(CatalogNumber TEXT PRIMARY KEY)";
 
 
             // NEED TO CREATE DB TO THE STATIC INT, THE NAME IS: ProductID, the fields are ID, Value
-//
+////
 //            stmt.executeUpdate(createDamaged);
 //            stmt.executeUpdate(createExpDate);
 //            stmt.executeUpdate(createCategory);
 //            stmt.executeUpdate(createProducts);
 //            stmt.executeUpdate(createShortages);
-//
+
             String sql = "DROP TABLE IF EXISTS Products";
             stmt.executeUpdate(sql);
-            String createProducts = "CREATE TABLE Products(catalog_number TEXT PRIMARY KEY,Manufacturer TEXT, StorageQuantity INTEGER, StoreQuantity INTEGER, MinimumQuantity INTEGER, ProductDiscount DOUBLE, Weight DOUBLE, Value DOUBLE, Category STRING, StorageLocation TEXT, StoreLocation TEXT)";
+            createProducts = "CREATE TABLE Products(catalog_number TEXT PRIMARY KEY,Manufacturer TEXT, StorageQuantity INTEGER, StoreQuantity INTEGER, MinimumQuantity INTEGER, ProductDiscount DOUBLE, Weight DOUBLE, Value DOUBLE, Category STRING, StorageLocation TEXT, StoreLocation TEXT)";
             stmt.executeUpdate(createProducts);
-            stmt.executeUpdate("DELETE  FROM ProductID");
-            stmt.executeUpdate("DELETE FROM Products");
-            stmt.executeUpdate("DELETE  FROM ExpDates");
-            stmt.executeUpdate("DELETE  FROM Damaged");
-            stmt.executeUpdate("DELETE FROM Shortages");
+//            stmt.executeUpdate("DELETE  FROM ProductID");
+//            stmt.executeUpdate("DELETE FROM Products");
+//            stmt.executeUpdate("DELETE  FROM ExpDates");
+//            stmt.executeUpdate("DELETE  FROM Damaged");
+//            stmt.executeUpdate("DELETE FROM Shortages");
+//
+//            stmt.executeUpdate("DELETE FROM Category");
 
-//            stmt.executeUpdate("CREATE TABLE ProductID ( ID INTEGER PRIMARY KEY, Value  INTEGER )");
+            stmt.executeUpdate("CREATE TABLE ProductID ( ID INTEGER PRIMARY KEY, Value  INTEGER )");
             stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "1" + "," + 0 + ")");
             stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "2" + "," + 0 + ")");
             stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "3" + "," + 0 + ")");
