@@ -7,6 +7,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.time.format.DateTimeFormatter;
+
+
 public class ProductManager {
 
     private static final ProductDAO productDAO = ProductDAO.getInstance();
@@ -211,6 +216,25 @@ public class ProductManager {
             return allProductsToSupplier;
         }
         return null;
+    }
+
+    // ------------ Add more items to product function for supplier usage ------------
+    public void addMoreItemsToProductsFromSupplier(HashMap<String, Integer> productsToAdd) {
+        LocalDate currentDate = LocalDate.now();
+        LocalDate twoWeeksLaterFromNow = currentDate.plus(2, ChronoUnit.WEEKS);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String twoWeeksLaterFromNowInString = twoWeeksLaterFromNow.format(formatter);
+        String[] parts = twoWeeksLaterFromNowInString.split("/");
+        int day = Integer.parseInt(parts[0]);
+        int month = Integer.parseInt(parts[1]);
+        int year = Integer.parseInt(parts[2]);
+        LocalDate date = LocalDate.of(year, month, day);
+        Date dateToAdd = Date.from(date.atStartOfDay().atZone(java.time.ZoneId.systemDefault()).toInstant());
+        for (String catalogNumber: productsToAdd.keySet()) {
+            Product currProduct = productDAO.getProduct(catalogNumber);
+            int quantityForCurrProduct = productsToAdd.get(catalogNumber);
+            addMoreItemsToProduct(currProduct, dateToAdd, quantityForCurrProduct);
+        }
     }
 
 

@@ -90,6 +90,12 @@ public class ProductService {
         }
     }
 
+    // ------------ Add more items to product function for supplier usage ------------
+    public void addMoreItemsToProductsFromSupplier(HashMap<String, Integer> productsToAdd) {
+        productManager.addMoreItemsToProductsFromSupplier(productsToAdd);
+    }
+
+
     public void updateForNextDay(int dayDiff){
         if (productManager.updateForNextDay(dayDiff)) {
             Shortages shortagesForSupplier = new Shortages();
