@@ -23,14 +23,14 @@ public class MarketService {
         marketManager.addShelves(extraShelves);
     }
 
-    public void setDiscountForProduct(String categoryStr, String subCategoryStr, String subSubCategoryStr, double discount){
-        marketManager.setDiscountForProduct(categoryStr,subCategoryStr,subSubCategoryStr,discount);
+    public boolean setDiscountForProduct(String categoryStr, String subCategoryStr, String subSubCategoryStr, double discount){
+        return marketManager.setDiscountForProduct(categoryStr,subCategoryStr,subSubCategoryStr,discount);
     }
-    public void setDiscountForProduct(String catalogNumber, double discount){
-        marketManager.setDiscountForProduct(catalogNumber,discount);
+    public boolean setDiscountForProduct(String catalogNumber, double discount){
+        return marketManager.setDiscountForProduct(catalogNumber,discount);
     }
-    public void setDiscountForCategory(String categoryStr, double discount){
-        marketManager.setDiscountForCategory(categoryStr,discount);
+    public boolean setDiscountForCategory(String categoryStr, double discount){
+        return marketManager.setDiscountForCategory(categoryStr,discount);
     }
 
 

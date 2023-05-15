@@ -2,7 +2,6 @@ package Stock.DataAccess;
 
 import Resource.Connect;
 import Stock.Business.*;
-import Stock.Service.ProductService;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -210,7 +209,7 @@ public class ProductDAO {
             //DamagedProductDAO.getInstance();
             //ExpDateDAO.getInstance();
             for(Integer qr: product.getDamagedProducts().keySet()){
-                damagedProductDAO.deleteExpDate(qr);
+                damagedProductDAO.deleteDamaged(qr);
             }
             for (Integer qr: product.getExpirationDates().keySet()){
                 expDateDAO.deleteExpDate(qr);
@@ -225,25 +224,37 @@ public class ProductDAO {
         }
     }
 
-    public void updateForNextDay(){
-        Date currentDay = new Date();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(currentDay);
-        calendar.add(Calendar.DAY_OF_YEAR, ++dayDiff); // Add day number from today
-        Date futureDay = calendar.getTime();
-        HashMap<String, ArrayList<Integer>> expProducts = expDateDAO.expirationForDate(futureDay);
-        for (String catalogNumber: expProducts.keySet()){
-            Product product = getProduct(catalogNumber);
-            for(Integer qr: expProducts.get(catalogNumber)){
-                product.markAsDamaged(qr,"Expired in " + futureDay.toString());
-            }
-            if(product.isShortage() && !ShortageDAO.getInstance().isInShortage(product.getCatalogNumber())){
-                ShortageDAO.getInstance().addToShortages(product.getCatalogNumber());
-            }
-
-        }
-        ProductDAO.getInstance().writeProducts();
-    }
+//    public void updateForNextDay(){
+//        Date currentDay = new Date();
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.setTime(currentDay);
+//        calendar.add(Calendar.DAY_OF_YEAR, ++dayDiff); // Add day number from today
+//        Date futureDay = calendar.getTime();
+//        HashMap<String, ArrayList<Integer>> expProducts = expDateDAO.expirationForDate(futureDay);
+//        for (String catalogNumber: expProducts.keySet()){
+//            Product product = getProduct(catalogNumber);
+//            for(Integer qr: expProducts.get(catalogNumber)){
+//                product.markAsDamaged(qr,"Expired in " + futureDay.toString());
+//                product.getExpirationDates().remove(qr);
+//                expDateDAO.deleteExpDate(qr);
+//                if(product.getStorageQuantity() > 0){
+//                    product.storageQuantityMinus1();
+//                }
+//                else{
+//                    if(product.getStoreQuantity() > 0) {
+//                        product.storeQuantityMinus1();
+//                    }
+//                }
+//            }
+//            if(product.isShortage() && !ShortageDAO.getInstance().isInShortage(product.getCatalogNumber())){
+//                ShortageDAO.getInstance().addToShortages(product.getCatalogNumber());
+//            }
+//
+//        }
+//        ProductDAO.getInstance().writeProducts();
+//        ShortageDAO.getInstance().writeShortages();
+//        DamagedProductDAO.getInstance().writeDamagedProducts();
+//    }
     private void loadAllDataToCache(){
         String catalogNumber;
         try{

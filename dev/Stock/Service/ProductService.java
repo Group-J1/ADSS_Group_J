@@ -6,6 +6,7 @@ import Stock.Business.ReportsManager;
 import Stock.Business.Shortages;
 import Stock.DataAccess.ProductDetailsDAO;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -86,6 +87,19 @@ public class ProductService {
         HashMap<String, Integer> allProductsToSupplier = productManager.getAllProducts();
         if (allProductsToSupplier != null) {
             //functionToSupplierForInitializationAllProducts(allProductsToSupplier);
+        }
+    }
+
+    public void updateForNextDay(int dayDiff){
+        if (productManager.updateForNextDay(dayDiff)) {
+            Shortages shortagesForSupplier = new Shortages();
+            ArrayList<String> productsCatalogNumber = new ArrayList<>();
+            // מערך של המספר הקטלוגי של המוצרים מתחת למינימום
+            // מפה של המוצרים עם החוסר והכמות של הקו הירוק
+            if (productManager.getAllProductsUnderMinimumQuantity() != null) {
+                productsCatalogNumber = productManager.getAllProductsUnderMinimumQuantity();
+            }
+            //functionToSupplierForNextDay(productsCatalogNumber, shortagesForSupplier.getMissing());
         }
     }
 

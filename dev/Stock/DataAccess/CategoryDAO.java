@@ -78,7 +78,7 @@ public class CategoryDAO {
 
                 }
                 else{
-                    statement.executeUpdate("UPDATE Category SET Discount ="  + discount+ " WHERE Category = "+ name);
+                    statement.executeUpdate("UPDATE Category SET Discount ="  + discount+ "WHERE Category ='" + name + "'");
                 }
             }
             catch (SQLException e) {

@@ -50,7 +50,7 @@ public class ReportsUI {
                     running = false;
                     break;
                 case "7":
-                    ProductDAO.getInstance().updateForNextDay();
+//                    ProductDAO.getInstance().updateForNextDay();
                     break;
 
 

@@ -2,6 +2,8 @@ package Stock.Business;
 
 import Stock.DataAccess.*;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -17,8 +19,8 @@ public class ProductManager {
 
 
     private static ProductManager instance = null;
-    private static Store store;//= new Store(30); // Freshie check
-    private static Storage storage;// = new Storage(30);// Freshie check
+    private static Store store;
+    private static Storage storage;
     private static Shortages shortages;
 
     private ProductManager() {
@@ -32,27 +34,24 @@ public class ProductManager {
         return instance;
     }
 
-    // other methods and variables of the class
 
     // Case 1 at Product's menu
+    /**
+     * Add a new product to the system.
+     * @param categoryStr the name of the product category.
+     * @param subCategoryStr the name of the product sub-category.
+     * @param subSubCategoryStr the name of the product sub-sub-category.
+     * @param manufacturer the name of the product manufacturer.
+     * @param quantity the quantity of the new product to add.
+     * @param minQuantity the minimum quantity of the new product to have in stock.
+     * @param weight the weight of the new product.
+     * @param expirationDate the expiration date of the new product.
+     * @return true if the product was successfully added, false otherwise.
+     */
     public Product addNewProduct(String categoryStr, String subCategoryStr, String subSubCategoryStr, String manufacturer,
                                  int quantity, int minQuantity, double weight, Date expirationDate) {
-        /**
-         * Add a new product to the system.
-         * @param categoryStr the name of the product category.
-         * @param subCategoryStr the name of the product sub-category.
-         * @param subSubCategoryStr the name of the product sub-sub-category.
-         * @param manufacturer the name of the product manufacturer.
-         * @param quantity the quantity of the new product to add.
-         * @param minQuantity the minimum quantity of the new product to have in stock.
-         * @param weight the weight of the new product.
-         * @param expirationDate the expiration date of the new product.
-         * @return true if the product was successfully added, false otherwise.
-         */
         // New one
         if (getProductByCategories(subCategoryStr, subSubCategoryStr) == null) {
-            // Old one
-            //if (getProductByCategories(categoryStr, subCategoryStr, subSubCategoryStr) == null) {
             AProductCategory Ccategory = new AProductCategory(categoryStr);
             categoryDAO.writeNewCategory(categoryStr, 0);
             AProductCategory CsubCategoryStr = new AProductCategory(subCategoryStr);
@@ -64,12 +63,7 @@ public class ProductManager {
             Location storeLocation = new Location(-1, -1);
             Product product = new Product(Ccategory, CsubCategoryStr, CsubSubCategoryStr, storageLocation, storeLocation,
                     manufacturer, quantity, minQuantity, weight, expirationDate);
-            // New one
             productDAO.addNewProductToProducts(product);
-
-            // Old one
-            //stock.addNewProductToStock(product, minQuantity + 100, minQuantity + 30, minQuantity);
-
             product.setStoreLocation(store.addProductToStore(product));
             product.setStorageLocation(storage.addProductToStorage(product));
             product.setCatalogNumber();
@@ -95,10 +89,12 @@ public class ProductManager {
     // Case 2.1 at Product's menu
     public void addMoreItemsToProduct(Product product, Date expDate, int quantity){
         product.addMoreItemsToProduct(quantity,expDate);
-        //productDAO.getInstance();
+        if (shortages.isMissing(product)) {
+            shortages.removeFromShortages(product);
+        }
         productDAO.writeProducts();
-        //ExpDateDAO.getInstance();
         expDateDAO.writeExpDates();
+        shortageDAO.writeShortages();
         productDetailsDAO.saveDetails(); // Freshie check
     }
 
@@ -106,28 +102,18 @@ public class ProductManager {
     public boolean sellProductsByUniqueCode(Product soldProduct, int quantitySold){
         int[] sold = soldProduct.sellMultipleItemsFromProduct(quantitySold);
         boolean isProductOutOfStockNow = false;
-//        for (int i = 0; i < quantitySold; i++) {
-//            sales.addSale(product, sold[i]);
-//        }
         for(Integer qr : sold){
             expDateDAO.deleteExpDate(qr);
-//            soldProduct.getExpirationDates().remove(qr);
         }
         if (soldProduct.getStoreQuantity() == 0) {
             shortages.addProductToShortages(soldProduct);
-            shortageDAO.addToShortages(soldProduct.getCatalogNumber());
-            shortageDAO.writeShortages();
+//            shortageDAO.addToShortages(soldProduct.getCatalogNumber());
+//            shortageDAO.writeShortages();
             isProductOutOfStockNow = true;
         }
-        //productDAO.getInstance();
         productDAO.writeProducts();
-        //ExpDateDAO.getInstance();
         expDateDAO.writeExpDates();
-
         productDetailsDAO.saveDetails(); // Freshie check
-//        if (isProductOutOfStockNow) {
-//            functionToSupplierForNewShortage(shortages);
-//        }
         return isProductOutOfStockNow;
     }
 
@@ -151,9 +137,7 @@ public class ProductManager {
                     defectedProduct.storeQuantityMinus1();
                 }
             }
-            //productDAO.getInstance();
             productDAO.writeProducts();
-            //ExpDateDAO.getInstance();
             damagedProductDAO.writeDamagedProducts();
         }
         else {
@@ -162,14 +146,14 @@ public class ProductManager {
     }
 
     // Case 4 at Product's menu
+    /**
+     * Prints the specified information of the given product to the console.
+     * @param productInformationCase an integer indicating which piece of information to print:
+     *                               - 1 for the product catalog number
+     *                               - 2 for the product name
+     * @param product the product whose information to print
+     */
     public void printProductInformation(int productInformationCase, Product product) {
-        /**
-         * Prints the specified information of the given product to the console.
-         * @param productInformationCase an integer indicating which piece of information to print:
-         *                               - 1 for the product catalog number
-         *                               - 2 for the product name
-         * @param product the product whose information to print
-         */
         if (productInformationCase == 1) {
             System.out.println(product.getCatalogNumber());
         }
@@ -187,16 +171,15 @@ public class ProductManager {
     }
 
 
-    public static void setStore(Store store) {          // freshie change
+    public static void setStore(Store store) {
         ProductManager.store = store;
     }
 
     public static void setStorage(Storage storage) {
-        ProductManager.storage = storage;               // freshie change
-    }
+        ProductManager.storage = storage; }
 
     public static void setShortages(Shortages shortages) {
-        ProductManager.shortages = shortages;               // freshie change
+        ProductManager.shortages = shortages;
         shortageDAO.writeShortages();
     }
 
@@ -212,4 +195,57 @@ public class ProductManager {
         }
         return null;
     }
+
+    public ArrayList<String> getAllProductsUnderMinimumQuantity() {
+        ArrayList<String> allProductsToSupplier = new ArrayList<>();
+        HashMap<String, Product> allProductsFromDB = productDAO.getAllProducts();
+        if (allProductsFromDB.size() > 0) {
+            for (String catalogNumber : allProductsFromDB.keySet()) {
+                int minimumQuantity = allProductsFromDB.get(catalogNumber).getMinimumQuantity();
+                Product currProduct = allProductsFromDB.get(catalogNumber);
+                if (currProduct.getStoreQuantity() + currProduct.getStorageQuantity()
+                        < minimumQuantity) {
+                    allProductsToSupplier.add(catalogNumber);
+                }
+            }
+            return allProductsToSupplier;
+        }
+        return null;
+    }
+
+
+    public boolean updateForNextDay(int dayDiff){
+        boolean thereIsProductOutOfStockNow = false;
+        Date currentDay = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(currentDay);
+        calendar.add(Calendar.DAY_OF_YEAR, dayDiff); // Add day number from today
+        Date futureDay = calendar.getTime();
+        HashMap<String, ArrayList<Integer>> expProducts = expDateDAO.expirationForDate(futureDay);
+        for (String catalogNumber: expProducts.keySet()){
+            Product product = productDAO.getProduct(catalogNumber);
+            for(Integer qr: expProducts.get(catalogNumber)){
+                markAsDamaged(product,qr,"Expired in " + futureDay.toString());
+                product.getExpirationDates().remove(qr);
+                expDateDAO.deleteExpDate(qr);
+                if(product.getStorageQuantity() > 0){
+                    product.storageQuantityMinus1();
+                }
+                else{
+                    if(product.getStoreQuantity() > 0) {
+                        product.storeQuantityMinus1();
+                    }
+                }
+            }
+            if(product.isShortage() && !shortageDAO.isInShortage(product.getCatalogNumber())){
+                shortageDAO.addToShortages(product.getCatalogNumber());
+                thereIsProductOutOfStockNow = true;
+            }
+        }
+        ProductDAO.getInstance().writeProducts();
+        ShortageDAO.getInstance().writeShortages();
+        DamagedProductDAO.getInstance().writeDamagedProducts();
+        return thereIsProductOutOfStockNow;
+    }
+
 }

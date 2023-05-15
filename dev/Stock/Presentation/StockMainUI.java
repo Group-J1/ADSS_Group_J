@@ -727,6 +727,10 @@ public class StockMainUI {
         return number.matches("[0-9]+") && Integer.parseInt(number) > 0;
     }
 
+    public void updateForNextDay(int dayDiff){
+        productService.updateForNextDay(dayDiff);
+    }
+
     Boolean checkSubSubCategory(String subSubCategoryStr) {
         /**
          * Checks if a given string matches the format of a sub-sub category.

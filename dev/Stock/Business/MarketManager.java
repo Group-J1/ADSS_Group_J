@@ -42,35 +42,44 @@ public class MarketManager {
 
     }
 
-    public void setDiscountForProduct(String categoryStr, String subCategoryStr, String subSubCategory, double discount){
+    public boolean setDiscountForProduct(String categoryStr, String subCategoryStr, String subSubCategory, double discount){
         Product product = getProductByCategories(subCategoryStr,subSubCategory);
         if(product != null) {
             product.setDiscount(discount);
             productDAO.writeProducts();
+            return true;
         }
         else {
-            System.out.println("Product Not Found");
+            return false;
         }
     }
 
-    public void setDiscountForProduct(String catalogNumber, double discount){
+    public boolean setDiscountForProduct(String catalogNumber, double discount){
         Product product = productDAO.getProduct(catalogNumber);
         if (product != null){
             product.setDiscount(discount);
             productDAO.writeProducts();
+            return true;
         }
         else{
-            System.out.println("Product Not Found");
+            return false;
         }
     }
 
-    public void setDiscountForCategory(String categoryStr, double discount){
+    /**
+     * Sets a discount to the products of the specified category.
+     * @param categoryStr the name of the category to set the discount for
+     * @param discount the discount percentage to apply to the products of the specified category
+     */
+    public boolean setDiscountForCategory(String categoryStr, double discount){
         AProductCategory category = categoryDAO.getCategory(categoryStr);
         if (category != null){
             category.setDiscount(discount);
             categoryDAO.writeCategories();
-        }else {
-            System.out.println("Category not found");
+            return true;
+        }
+        else {
+            return false;
         }
     }
 }

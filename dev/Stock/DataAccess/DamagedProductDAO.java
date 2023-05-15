@@ -94,23 +94,23 @@ public class DamagedProductDAO {
                     java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM Damaged WHERE QRCode ==" + qr);
                     if (!resultSet.next()) {
 //                    statement.executeUpdate("INSERT INTO Damaged (QRCode, catalog_number, Date) VALUES (" + qr  + ","+"'" + qrToCatalogNumber.get(qr) +"'"+","+"'" + damagedMap.get(qr) +"'" +")");
-                        PreparedStatement insertExpDates = connection.prepareStatement("INSERT INTO Damaged (QRCode, catalog_number, Reason) VALUES (?, ?, ?)");
-                        insertExpDates.setInt(1, qr);
-                        insertExpDates.setString(2, qrToCatalogNumber.get(qr));
-                        insertExpDates.setString(3, damagedMap.get(qr));
+                        PreparedStatement insertDamaged = connection.prepareStatement("INSERT INTO Damaged (QRCode, catalog_number, Reason) VALUES (?, ?, ?)");
+                        insertDamaged.setInt(1, qr);
+                        insertDamaged.setString(2, qrToCatalogNumber.get(qr));
+                        insertDamaged.setString(3, damagedMap.get(qr));
 
 
-                        insertExpDates.executeUpdate();
+                        insertDamaged.executeUpdate();
 
                     } else {
 //                    statement.executeUpdate("UPDATE ExpDates SET Date ="  + damagedMap.get(qr)+ " WHERE QRCode = "+ Integer.toString(qr));
 //                    statement.executeUpdate("UPDATE ExpDates SET catalog_number ="  + qrToCatalogNumber.get(qr)+ " WHERE QRCode = "+ Integer.toString(qr));
-                        PreparedStatement updateExpDates = connection.prepareStatement("UPDATE Damaged SET Reason = ?, catalog_number = ? WHERE QRCode = ?");
-                        updateExpDates.setString(1, damagedMap.get(qr));
-                        updateExpDates.setString(2, qrToCatalogNumber.get(qr));
-                        updateExpDates.setInt(3, qr);
+                        PreparedStatement updateDamaged = connection.prepareStatement("UPDATE Damaged SET Reason = ?, catalog_number = ? WHERE QRCode = ?");
+                        updateDamaged.setString(1, damagedMap.get(qr));
+                        updateDamaged.setString(2, qrToCatalogNumber.get(qr));
+                        updateDamaged.setInt(3, qr);
 
-                        updateExpDates.executeUpdate();
+                        updateDamaged.executeUpdate();
 
                     }
                 } catch (SQLException e) {
@@ -130,7 +130,7 @@ public class DamagedProductDAO {
 //        else{System.out.println("this qr is already a damaged product");}
     }
 
-    public void deleteExpDate(int qr){
+    public void deleteDamaged(int qr){
         damagedMap.remove(qr);
         catalogDamagedMap.get(qrToCatalogNumber.get(qr)).remove(qr);
         qrToCatalogNumber.remove(qr);

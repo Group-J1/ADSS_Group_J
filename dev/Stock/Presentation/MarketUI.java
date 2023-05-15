@@ -6,19 +6,17 @@ import Stock.Service.MarketService;
 import java.util.Scanner;
 
 public class MarketUI {
-    private static MarketService marketService = MarketService.getInstance();
+    private static final MarketService marketService = MarketService.getInstance();
 
     Scanner input = new Scanner(System.in);
-
-
 
     public void startMenu(String numOfMarketToManagement) {
         boolean running = true;
         while (running) {
             System.out.println("-------- Welcome to the Reports menu of market number " + Integer.parseInt(numOfMarketToManagement) + " --------");
-            System.out.println("1) Set discount for product by categories. ");
-            System.out.println("2) Set discount for product by Category Number. ");
-            System.out.println("3) Set discount for category. ");
+            System.out.println("1) Set discount for product by categories ");
+            System.out.println("2) Set discount for product by catalog number ");
+            System.out.println("3) Set discount for category ");
             System.out.println("4) Add shelves to the store and the storage. ");
             System.out.println("5) Go back to Stock menu ");
 
@@ -46,6 +44,96 @@ public class MarketUI {
                     break;
             }
         }
+    }
+
+    private void setDiscountByCategoriesCase1(){
+
+        String categoryStr,subCategoryStr,subSubCategoryStr,discount;
+
+        System.out.println("Whats is your product's category? ");
+        categoryStr = input.nextLine();
+        if (!checkIfOnlyLetters(categoryStr)) {
+            System.out.println("your product's category is not a valid string ");
+            return;
+        }
+        System.out.println("Whats is your product's sub-category? ");
+        subCategoryStr = input.nextLine();
+        if (!checkSubCategory(subCategoryStr)) {
+            System.out.println("your product's subCategory is not a valid string ");
+            return;
+        }
+        System.out.println("Whats is your product's sub-sub-category, in <double string> format? ");
+        subSubCategoryStr = input.nextLine();
+        if (!checkSubSubCategory(subSubCategoryStr)) {
+            return;
+        }
+        System.out.println("Whats is the product's discount? ");
+        discount = input.nextLine();
+        if (!checkIfPositiveDoubleNumber(discount)) {
+            System.out.println("your discount is not a positive number ");
+            return;
+        }
+        if (marketService.setDiscountForProduct(categoryStr,subCategoryStr,subSubCategoryStr,Double.parseDouble(discount))) {
+            System.out.println("Discount updated");
+        }
+        else {
+            System.out.println("Product Not Found");
+        }
+    }
+
+    private void setDiscountByCatalogNumberCase2(){
+        String catalogNumber,discount;
+        System.out.println("Whats is the catalog number? ");
+        catalogNumber = input.nextLine();
+        System.out.println("Whats is the product's discount? ");
+        discount = input.nextLine();
+        if (!checkIfPositiveDoubleNumber(discount)) {
+            System.out.println("your discount is not a positive number ");
+            return;
+        }
+        if (marketService.setDiscountForProduct(catalogNumber,Double.parseDouble(discount))) {
+            System.out.println("Discount updated");
+        }
+        else {
+            System.out.println("Product Not Found");
+        }
+    }
+
+
+    private void setDiscountForCategoryCase3(){
+        String categoryStr,discount;
+        System.out.println("Whats is the category? ");
+        categoryStr = input.nextLine();
+        if (!checkIfOnlyLetters(categoryStr)) {
+            System.out.println("your product's category is not a valid string ");
+            return;
+        }
+        System.out.println("Whats is the discount? between 0 to 1 ");
+        discount = input.nextLine();
+        if (!checkIfPositiveDoubleNumber(discount)) {
+            System.out.println("your discount is not a positive number ");
+            return;
+        }if(0 > Double.parseDouble(discount) || Double.parseDouble(discount) > 1){
+            System.out.println("your discount is not between 0 to 1 ");
+            return;
+        }
+        if (marketService.setDiscountForCategory(categoryStr,Double.parseDouble(discount))) {
+            System.out.println("Discount updated");
+        }
+        else {
+            System.out.println("Category not found");
+        }
+    }
+
+    private void addShelvesToMarketCase4(){
+        String extraShelves;
+        System.out.println("Whats is your product's minimum quantity? ");
+        extraShelves = input.nextLine();
+        if (!checkIfPositiveIntegerNumber(extraShelves)) {
+            System.out.println("your product's minimum quantity is not a positive number ");
+            return;
+        }
+        marketService.appendMarket(Integer.parseInt(extraShelves));
     }
 
     boolean checkIfPositiveDoubleNumber(String number) {
@@ -101,85 +189,5 @@ public class MarketUI {
     Boolean checkReason(String reason) {
         return reason.matches("[a-zA-Z0-9/ ]+");
     }
-
-    private void setDiscountByCategoriesCase1(){
-
-        String categoryStr,subCategoryStr,subSubCategoryStr,discount;
-
-        System.out.println("Whats is your product's category? ");
-        categoryStr = input.nextLine();
-        if (!checkIfOnlyLetters(categoryStr)) {
-            System.out.println("your product's category is not a valid string ");
-            return;
-        }
-        System.out.println("Whats is your product's sub-category? ");
-        subCategoryStr = input.nextLine();
-        if (!checkSubCategory(subCategoryStr)) {
-            System.out.println("your product's subCategory is not a valid string ");
-            return;
-        }
-        System.out.println("Whats is your product's sub-sub-category, in <double string> format? ");
-        subSubCategoryStr = input.nextLine();
-        if (!checkSubSubCategory(subSubCategoryStr)) {
-            return;
-        }
-        System.out.println("Whats is the product's discount? ");
-        discount = input.nextLine();
-        if (!checkIfPositiveDoubleNumber(discount)) {
-            System.out.println("your discount is not a positive number ");
-            return;
-        }
-        marketService.setDiscountForProduct(categoryStr,subCategoryStr,subSubCategoryStr,Double.parseDouble(discount));
-        System.out.println("Discount updated");
-    }
-
-    private void setDiscountByCatalogNumberCase2(){
-        String catalogNumber,discount;
-        System.out.println("Whats is the catalog number? ");
-        catalogNumber = input.nextLine();
-        System.out.println("Whats is the product's discount? ");
-        discount = input.nextLine();
-        if (!checkIfPositiveDoubleNumber(discount)) {
-            System.out.println("your discount is not a positive number ");
-            return;
-        }
-        marketService.setDiscountForProduct(catalogNumber,Double.parseDouble(discount));
-        System.out.println("Discount updated");
-    }
-
-
-    private void setDiscountForCategoryCase3(){
-        String categoryStr,discount;
-        System.out.println("Whats is the category? ");
-        categoryStr = input.nextLine();
-        if (!checkIfOnlyLetters(categoryStr)) {
-            System.out.println("your product's category is not a valid string ");
-            return;
-        }
-        System.out.println("Whats is the discount? between 0 to 1 ");
-        discount = input.nextLine();
-        if (!checkIfPositiveDoubleNumber(discount)) {
-            System.out.println("your discount is not a positive number ");
-            return;
-        }if(0 > Double.parseDouble(discount) || Double.parseDouble(discount) > 1){
-            System.out.println("your discount is not between 0 to 1 ");
-            return;
-        }
-        marketService.setDiscountForCategory(categoryStr,Double.parseDouble(discount));
-        System.out.println("Discount updated");
-    }
-
-    private void addShelvesToMarketCase4(){
-        String extraShelves;
-        System.out.println("Whats is your product's minimum quantity? ");
-        extraShelves = input.nextLine();
-        if (!checkIfPositiveIntegerNumber(extraShelves)) {
-            System.out.println("your product's minimum quantity is not a positive number ");
-            return;
-        }
-        marketService.appendMarket(Integer.parseInt(extraShelves));
-
-    }
-
 
 }

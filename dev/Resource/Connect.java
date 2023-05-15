@@ -81,19 +81,19 @@ public class Connect {
 //            stmt.executeUpdate(createProducts);
 //            stmt.executeUpdate(createShortages);
 
-            String sql = "DROP TABLE IF EXISTS Products";
-            stmt.executeUpdate(sql);
-            createProducts = "CREATE TABLE Products(catalog_number TEXT PRIMARY KEY,Manufacturer TEXT, StorageQuantity INTEGER, StoreQuantity INTEGER, MinimumQuantity INTEGER, ProductDiscount DOUBLE, Weight DOUBLE, Value DOUBLE, Category STRING, StorageLocation TEXT, StoreLocation TEXT)";
-            stmt.executeUpdate(createProducts);
-//            stmt.executeUpdate("DELETE  FROM ProductID");
-//            stmt.executeUpdate("DELETE FROM Products");
-//            stmt.executeUpdate("DELETE  FROM ExpDates");
-//            stmt.executeUpdate("DELETE  FROM Damaged");
-//            stmt.executeUpdate("DELETE FROM Shortages");
-//
-//            stmt.executeUpdate("DELETE FROM Category");
+//            String sql = "DROP TABLE IF EXISTS Products";
+//            stmt.executeUpdate(sql);
+//            createProducts = "CREATE TABLE Products(catalog_number TEXT PRIMARY KEY,Manufacturer TEXT, StorageQuantity INTEGER, StoreQuantity INTEGER, MinimumQuantity INTEGER, ProductDiscount DOUBLE, Weight DOUBLE, Value DOUBLE, Category STRING, StorageLocation TEXT, StoreLocation TEXT)";
+//            stmt.executeUpdate(createProducts);
+            stmt.executeUpdate("DELETE  FROM ProductID");
+            stmt.executeUpdate("DELETE FROM Products");
+            stmt.executeUpdate("DELETE  FROM ExpDates");
+            stmt.executeUpdate("DELETE  FROM Damaged");
+            stmt.executeUpdate("DELETE FROM Shortages");
 
-            stmt.executeUpdate("CREATE TABLE ProductID ( ID INTEGER PRIMARY KEY, Value  INTEGER )");
+            stmt.executeUpdate("DELETE FROM Category");
+
+//            stmt.executeUpdate("CREATE TABLE ProductID ( ID INTEGER PRIMARY KEY, Value  INTEGER )");
             stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "1" + "," + 0 + ")");
             stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "2" + "," + 0 + ")");
             stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "3" + "," + 0 + ")");
