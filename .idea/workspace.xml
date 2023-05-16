@@ -2,79 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12e6723f-0bef-4e36-9a29-bb4ad2721fe9" name="Changes" comment="jarFile added in release">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/ChainTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/LocationTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/MarketManagerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/ProductTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/ShortagesTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/StorageTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/StoreTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/SuplyStockTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/SupplyTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/resource/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/resource/MarketDB.db" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/Instructions.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/test/ADSS_Group_J/ChainTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/test/ADSS_Group_J/LocationTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/test/ADSS_Group_J/MarketManagerTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/test/ADSS_Group_J/ProductTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/test/ADSS_Group_J/ShortagesTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/test/ADSS_Group_J/StorageTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/test/ADSS_Group_J/StoreTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/test/ADSS_Group_J/SuplyStockTests.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/test/ADSS_Group_J/SupplyTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/release/adss2023_v02.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/adss2023_v01_jar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/adss_v0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/sqlite_jdbc_3_41_2_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqlDataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ADSS_Group_J.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ADSS_Group_J.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ADSS_Group_JTest.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/LoginMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/dev/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Resource/Connect.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DBConnect/Connect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Resource/MarketDB.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Resource/SuperLee.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/resource/SuperLee.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/DamagedReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/DamagedReport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/Market.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/Market.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/MarketManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/MarketManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/OrderReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/OrderReport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/ProductManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/ProductManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/Shortages.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/Shortages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/Storage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/Store.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/Store.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/DataAccess/CategoryDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/DataAccess/CategoryDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/DataAccess/DamagedProductDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/DataAccess/DamagedProductDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/DataAccess/ExpDateDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/DataAccess/ExpDateDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/DataAccess/ProductDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/DataAccess/ProductDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/DataAccess/ProductDetailsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/DataAccess/ProductDetailsDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/DataAccess/ShortageDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/DataAccess/ShortageDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/Presentation/ProductUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Presentation/ProductUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/Presentation/ReportsUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Presentation/ReportsUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/Presentation/StockMainUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Presentation/StockMainUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/Service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Managers/Order_Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Managers/Order_Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Managers/SupplyManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Managers/SupplyManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/DAO/ContactMemberDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/DAO/ContactMemberDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/DAO/DBTables.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/DAO/DBTables.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/DAO/ItemOrderDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/DAO/ItemOrderDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/DAO/OrderDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/DAO/OrderDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/DAO/SupplierProductDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/DAO/SupplierProductDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Presentation/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Presentation/Data.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Presentation/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Presentation/UI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/ID.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ID.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/confi.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/release/adss2023_v01.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Instructions.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/docs/instructions.pdf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,11 +33,12 @@
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/Users/yuval/IdeaProjects/ADSS_Group_J"
+    "last_opened_file_path": "/Users/yuval/IdeaProjects/ADSS_Group_J/docs"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/docs" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -149,6 +78,13 @@
       <option name="presentableId" value="Default" />
       <updated>1684260672275</updated>
     </task>
+    <task id="LOCAL‎00001" summary="jarFile added in release">
+      <created>1684262804555</created>
+      <option name="number" value="LOCAL‎00001" />
+      <option name="presentableId" value="LOCAL‎00001" />
+      <updated>1684262804555</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
