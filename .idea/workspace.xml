@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12e6723f-0bef-4e36-9a29-bb4ad2721fe9" name="Changes" comment="jarFile added in release">
-      <change beforePath="$PROJECT_DIR$/docs/Instructions.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/docs/instructions.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +84,13 @@
       <option name="presentableId" value="LOCAL‎00001" />
       <updated>1684262804555</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL‎00002" summary="jarFile added in release">
+      <created>1684263150306</created>
+      <option name="number" value="LOCAL‎00002" />
+      <option name="presentableId" value="LOCAL‎00002" />
+      <updated>1684263150306</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
