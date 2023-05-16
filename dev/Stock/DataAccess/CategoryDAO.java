@@ -1,7 +1,7 @@
 package Stock.DataAccess;
 
 import Stock.Business.AProductCategory;
-import Resource.Connect;
+import DBConnect.Connect;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 public class CategoryDAO {
@@ -43,7 +42,6 @@ public class CategoryDAO {
         double discount;
         try{
             java.sql.Statement statement = connection.createStatement();
-//            java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM Category WHERE Category ==" + categoryStr);
             String sql = "SELECT * FROM Category WHERE Category = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, categoryStr);
@@ -57,7 +55,7 @@ public class CategoryDAO {
                 CategoryMap.put(category,found);
             }
         } catch (SQLException e) {
-            System.out.println("there was a problem with the database");
+            System.out.println(e.getMessage());
         }
     }
 
@@ -69,9 +67,9 @@ public class CategoryDAO {
                 java.sql.Statement statement = connection.createStatement();
                 name = category.getName();
                 discount = category.getDiscount();
-                ResultSet resultSet = statement.executeQuery("SELECT * FROM Category WHERE Category ='" + name + "'");
+                java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM Category WHERE Category ='" + name + "'");
                 if(!resultSet.next()){
-                    PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Category (Category, Discount) VALUES (?, ?)");
+                    java.sql.PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Category (Category, Discount) VALUES (?, ?)");
                     preparedStatement.setString(1, name);
                     preparedStatement.setDouble(2, discount);
                     preparedStatement.executeUpdate();
@@ -92,7 +90,6 @@ public class CategoryDAO {
         category.setDiscount(discount);
         CategoryMap.putIfAbsent(categoryName,category);
         writeCategories();
-        // should be added to the db?
     }
 
     public void deleteCategory(String categoryName){
@@ -102,7 +99,7 @@ public class CategoryDAO {
             statement.executeQuery("DELETE  FROM Category WHERE Catrgory ==" + categoryName);
 
         }catch (SQLException e){
-            System.out.println("theres a problem with the database");
+            System.out.println(e.getMessage());
         }
     }
 
@@ -110,13 +107,13 @@ public class CategoryDAO {
         String categoryStr;
         try{
             java.sql.Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM Category");
+            java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM Category");
             while(resultSet.next()){
                 categoryStr = resultSet.getString("Category");
                 getCategory(categoryStr);
             }
         }catch (SQLException e){
-            System.out.println("there is problem with the data base");
+            System.out.println(e.getMessage());
         }
     }
 

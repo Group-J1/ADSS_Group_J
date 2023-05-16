@@ -26,10 +26,9 @@ public class ProductService {
         return instance;
     }
 
-    // other methods and variables of the class
     // ------------ Case 1 in Product UI ------------
     public boolean addNewProduct(String categoryStr, String subCategoryStr, String subSubCategoryStr, String manufacturer,
-                                 int quantity, int minQuantity, double weight, Date expirationDate) {
+                                 int quantity, int minQuantity, double weight, Date expirationDate,LocalDate localDate) {
         Product newProductIfSuccessfullyAdded = productManager.addNewProduct(categoryStr, subCategoryStr, subSubCategoryStr,
                 manufacturer, quantity, minQuantity, weight, expirationDate);
         if (newProductIfSuccessfullyAdded != null) {
@@ -37,6 +36,7 @@ public class ProductService {
             newProductToSupplier.put(newProductIfSuccessfullyAdded.getCatalogNumber(), minQuantity);
             //functionToSupplierForNewProduct(newProductToSupplier);
         }
+        SupplierService.getSupplierService().updatePeriodOrders(ProductService.getInstance().sendToSupplierAllProductsQuantity(),localDate);
         return newProductIfSuccessfullyAdded != null;
     }
 
@@ -48,14 +48,16 @@ public class ProductService {
     // ------------ Case 2.1 in Product UI ------------
     public void addMoreItemsToProduct(Product product, Date expDate, int quantity) {
         productManager.addMoreItemsToProduct(product, expDate, quantity);
+
     }
 
     // ------------ Case 2.2 in Product UI ------------
-    public void sellProductsByUniqueCode(Product soldProduct, int quantitySold) {
+    public void sellProductsByUniqueCode(Product soldProduct, int quantitySold, LocalDate localDate) {
         if (productManager.sellProductsByUniqueCode(soldProduct, quantitySold)) {
             Shortages shortagesForSupplier = new Shortages();
-            //functionToSupplierForNewShortage(shortagesForSupplier.getMissing());
-        };
+
+            SupplierService.getSupplierService().lackReport(shortagesForSupplier.getMissing(),localDate);
+                        };
     }
 
     // ------------ Helper function for Case 3 in Product UI ------------
@@ -75,11 +77,12 @@ public class ProductService {
     }
 
     // ------------ Case 5 in Product UI ------------
-    public void setMinimumQuantity(Product product, int newMinQuantity) {
+    public void setMinimumQuantity(Product product, int newMinQuantity,LocalDate localDate) {
         if (productManager.setMinimumQuantity(product, newMinQuantity)) {
             HashMap<String, Integer> newMinimumForProductToSupplier = new HashMap<>();
             newMinimumForProductToSupplier.put(product.getCatalogNumber(), newMinQuantity);
-            //functionToSupplierForUpdateMinimumToProduct(newMinimumForProductToSupplier);
+            SupplierService.getSupplierService().updatePeriodOrders(ProductService.getInstance().sendToSupplierAllProductsQuantity(),localDate);
+
         }
     }
 
@@ -104,17 +107,14 @@ public class ProductService {
 
 
     public void updateForNextDay(LocalDate date){
-//        LocalDate date = LocalDate.now().plusDays(dayDiff);
         //TODO alot of time
         if (productManager.updateForNextDay(date.plusDays(2))) {
             Shortages shortagesForSupplier = new Shortages();
             if (shortagesForSupplier.getMissing().size() > 0) {
-                SupplierService.getSupplierService().lackReport(shortagesForSupplier.getMissing(), date.minusDays(1));
+                SupplierService.getSupplierService().lackReport(shortagesForSupplier.getMissing(), date);
             }
         }
         ArrayList<String> productsCatalogNumber = new ArrayList<>(),nameList = new ArrayList<>();
-        // מערך של המספר הקטלוגי של המוצרים מתחת למינימום
-        // מפה של המוצרים עם החוסר והכמות של הקו הירוק
         if (productManager.getAllProductsUnderMinimumQuantity() != null) {
             productsCatalogNumber = productManager.getAllProductsUnderMinimumQuantity();
             for(String cataltogNumber: productsCatalogNumber){
@@ -122,7 +122,6 @@ public class ProductService {
             }
         }
         SupplierService.getSupplierService().ConfirmPeriodOrders(nameList,date);
-            //functionToSupplierForNextDay(productsCatalogNumber, shortagesForSupplier.getMissing());
 
     }
 

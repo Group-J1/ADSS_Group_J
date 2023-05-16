@@ -1,6 +1,6 @@
 package Stock.DataAccess;
 
-import Resource.Connect;
+import DBConnect.Connect;
 import Stock.Business.*;
 
 import java.sql.Connection;
@@ -222,7 +222,7 @@ public class ProductDAO {
             }
 
         }catch (SQLException e){
-            System.out.println("theres a problem with the database");
+            System.out.println(e.getMessage());
         }
     }
 
@@ -267,7 +267,7 @@ public class ProductDAO {
                 getProduct(catalogNumber);
             }
         }catch (SQLException e){
-            System.out.println("there is problem with the data base");
+            System.out.println(e.getMessage());
         }
     }
     public HashMap<String,Product> getAllProducts(){

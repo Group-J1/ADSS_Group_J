@@ -94,7 +94,7 @@ public class Shortages {
     public HashMap<String, Integer> getMissing() {
         HashMap<String, Integer> productsInShortages = new HashMap<>();
         for(Product product: missing){
-            productsInShortages.put(UniqueStringGenerator.convertBackToString(product.getCatalogNumber()), product.getMinimumQuantity() + 100);
+            productsInShortages.put(UniqueStringGenerator.convertBackToString(product.getCatalogNumber()), product.getMinimumQuantity() + 20);
         }
         return productsInShortages;
     }

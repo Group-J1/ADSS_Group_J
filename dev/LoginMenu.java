@@ -35,7 +35,7 @@ public class LoginMenu {
     }
 
     public void begin(){
-//        SupplierService.getSupplierService().updatePeriodOrders(ProductService.getInstance().sendToSupplierAllProductsQuantity(),localDate);
+        SupplierService.getSupplierService().updatePeriodOrders(ProductService.getInstance().sendToSupplierAllProductsQuantity(),localDate);
         int choice1 = 0;
         while (choice1!=4) {
             System.out.println("Choose which option you want to enter");
@@ -51,7 +51,7 @@ public class LoginMenu {
                 }
 
                 case 2:{
-                    stockMainUi.startMenu();
+                    stockMainUi.startMenu(localDate);
                     break;
                 }
                 case 3:{

@@ -5,8 +5,10 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 
 public class DBTables {
-    private static final String DB_URL = "jdbc:sqlite:dev/Resource/SuperLee.db";
-        public final static String SUPPLIERS = "SUPPLIERS";
+    private static final String DB_URL = "jdbc:sqlite::resource:SuperLee.db";
+//    private static final String DB_URL = "jdbc:sqlite::resource:SuperLee";  // change for jar
+
+    public final static String SUPPLIERS = "SUPPLIERS";
         public final static String ITEM_ORDERS = "ITEM_ORDERS";
         public final static String CONTACTS = "CONTACTS";
         public final static String ORDERS = "ORDERS";

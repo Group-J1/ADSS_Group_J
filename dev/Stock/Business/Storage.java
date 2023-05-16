@@ -15,10 +15,9 @@ public class Storage {
          * @param numberOfShelves the number of shelves to create in the Stock.Business.Storage object
          */
         this.shelves = new Shelf[numberOfShelves];
-//        currShelf = 0;
         amountOfShelves = numberOfShelves;
         for(int i =0; i< numberOfShelves; i++){
-            shelves[i] = new Shelf(30);    // DRAMATIC CHANGE !!! CHANGING FOR TEST SHOULD BE 30 -> test passed
+            shelves[i] = new Shelf(30);
         }
     }
 
@@ -27,7 +26,6 @@ public class Storage {
     }
 
     public int getCurrShelf() {
-        //ProductDetailsDAO.getInstance();
         return productDetailsDAO.getStorageShelfNumber();
     }
 
@@ -35,7 +33,6 @@ public class Storage {
         return amountOfShelves;
     }
 
-    // Add new product from UI menu
     public Location addProductToStorage(Product product){
         /**
          * Adds a given Stock.Business.Product object to the first available location in the Stock.Business.Storage object.
@@ -68,25 +65,7 @@ public class Storage {
                 }
             }
         }
-//            int currShelf = ProductDetailsDAO.getStorageShelfNumber();
-//            int indexInShelf = shelves[currShelf].nextFreeIndex();
-//            if (indexInShelf != -1) {
-//                loc = new Location(currShelf,indexInShelf);
-//                product.setStorageLocation(loc);
-//                shelves[currShelf].addItemToShelf(product,indexInShelf);
-//                running = false;
-//            }
-//            else if (currShelf == amountOfShelves - 1) {
-//                running = false;
-//
-//            }
-//            else if (currShelf < amountOfShelves - 1){
-////                currShelf++;
-//                ProductDetailsDAO.resetIndexInShelf();
-//
-//                ProductDetailsDAO.updateStorageShelfNumber();
-//            }
-//        }
+
 
         return loc;
     }

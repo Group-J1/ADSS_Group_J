@@ -4,6 +4,7 @@ import Stock.Business.ProductManager;
 import Stock.Business.UniqueStringGenerator;
 import Stock.DataAccess.ProductDAO;
 import Stock.Service.ProductService;
+import Supplier_Module.Service.SupplierService;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -20,21 +21,16 @@ public class ProductUI {
     boolean flag;
     Scanner input = new Scanner(System.in);
 
-    public void startMenu(String numOfMarketToManagement) {
+    public void startMenu(String numOfMarketToManagement, LocalDate localDate) {
+
         boolean running = true;
         while (running) {
             System.out.println("-------- Welcome to the Product menu of market number " + Integer.parseInt(numOfMarketToManagement) + " --------");
-            // case 1 at MainUI
             System.out.println("1) Add a new product ");
-            // case 2 and Case 3 at MainUI
             System.out.println("2) Update quantity of existing product ");
-            // case 5 at MainUI
             System.out.println("3) Inform on a defected/ expired product ");
-            // case 7 at MainUI
             System.out.println("4) Get information on selected product ");
-            // case 10 at MainUI
             System.out.println("5) Change min quantity to product ");
-            // Exit from product's menu to stock's menu
             System.out.println("6) Go back to Stock menu ");
 
             System.out.println("Select the number you would like to access ");
@@ -42,7 +38,7 @@ public class ProductUI {
             String selection = input.nextLine();
             switch (selection) {
                 case "1":
-                    addNewProductCase1();
+                    addNewProductCase1(localDate);
                     break;
 
                 case "2":
@@ -60,7 +56,7 @@ public class ProductUI {
                                 flag = false;
                                 break;
                             case '2':
-                                sellMoreItemsFromProductCase2Point2();
+                                sellMoreItemsFromProductCase2Point2(localDate);
                                 flag = false;
                                 break;
                             case '3':
@@ -117,11 +113,11 @@ public class ProductUI {
                         input.nextLine();
                         switch (check) {
                             case '1':
-                                setMinimumQuantityCase5Point1();
+                                setMinimumQuantityCase5Point1(localDate);
                                 flag = false;
                                 break;
                             case '2':
-                                setMinimumQuantityCase5Point2();
+                                setMinimumQuantityCase5Point2(localDate);
                                 flag = false;
                                 break;
                             case 3:
@@ -146,7 +142,7 @@ public class ProductUI {
     }
 
     // Case 1 in product's menu
-    void addNewProductCase1() {
+    void addNewProductCase1(LocalDate localDate) {
         System.out.println("Whats is your product's category? ");
         categoryStr = input.nextLine();
         if (!checkIfOnlyLetters(categoryStr)) {
@@ -198,10 +194,11 @@ public class ProductUI {
             return;
         }
         if (!productService.addNewProduct(categoryStr, subCategoryStr, subSubCategoryStr, manufacturer,
-                Integer.parseInt(quantity), Integer.parseInt(minQuantity), Double.parseDouble(weight), expirationDate)) {
+                Integer.parseInt(quantity), Integer.parseInt(minQuantity), Double.parseDouble(weight), expirationDate,localDate)) {
             System.out.println("The product already exist in stock! ");
         }
         else {
+            SupplierService.getSupplierService().updatePeriodOrders(ProductService.getInstance().sendToSupplierAllProductsQuantity(),localDate);
             System.out.println("Product added! ");
         }
     }
@@ -225,7 +222,6 @@ public class ProductUI {
         if (!checkSubSubCategory(subSubCategoryStr)) {
             return;
         }
-//        product = market.getProductByCategories(categoryStr, subCategoryStr, subSubCategoryStr);
         Product product = productService.getProductByCategories(subCategoryStr, subSubCategoryStr);
         if (product == null) {
             System.out.println("Product was not found ");
@@ -241,16 +237,14 @@ public class ProductUI {
         if (expirationDate == null) {
             return;
         }
-        //product.addMoreItemsToProduct(Integer.parseInt(quantity), expirationDate);
         // ---------- already exists in ProductManager ----------
-        //product.setCatalogNumber();
-        productService.addMoreItemsToProduct(product, expirationDate, Integer.parseInt(quantity));
+        productService.addMoreItemsToProduct(product, expirationDate, Integer.parseInt(quantity) );
         //ProductManager.getInstance().addMoreItemsToProduct(product,expirationDate,Integer.parseInt(quantity));
         System.out.println("Product's quantity updated! ");
     }
 
     // Case 2.2 in product's menu
-    void sellMoreItemsFromProductCase2Point2() {
+    void sellMoreItemsFromProductCase2Point2(LocalDate localDate) {
         System.out.println("What is the catalog number of the product you sell/remove? ");
         String productCatalogNumber = input.nextLine();
         Product soldProduct = productService.getProductByUniqueCode(productCatalogNumber);
@@ -268,7 +262,7 @@ public class ProductUI {
             return;
         }
         // ----------- here -----------
-        productService.sellProductsByUniqueCode(soldProduct, Integer.parseInt(quantity));
+        productService.sellProductsByUniqueCode(soldProduct, Integer.parseInt(quantity),localDate);
         //market.sellProductsByID(productID, Integer.parseInt(quantity));
 
         // New
@@ -278,10 +272,6 @@ public class ProductUI {
         else if(soldProduct.getStoreQuantity() + soldProduct.getStorageQuantity() < soldProduct.getMinimumQuantity()){
             System.out.println("ALERT!!!!\nthe product: " + soldProduct.getName()+" is under the minimum quantity");
         }
-        // Old
-//        if(sold.getStoreQuantity() + sold.getStorageQuantity() < market.stock.getBlackLine(sold)){
-//            System.out.println("ALERT!!!!\nthe product: " + sold.getName()+" is under the minimum quantity");
-//        }
     }
 
     void markAsDamagedCase3() {
@@ -357,11 +347,10 @@ public class ProductUI {
             return;
         }
         productService.printProductInformation(2, product);
-        //market.printProductInformation(2, product);
     }
 
     // Case 5.1 in product's menu
-    void setMinimumQuantityCase5Point1() {
+    void setMinimumQuantityCase5Point1(LocalDate localDate) {
         System.out.println("Whats is your product's category? ");
         categoryStr = input.nextLine();
         if (!checkIfOnlyLetters(categoryStr)) {
@@ -390,13 +379,13 @@ public class ProductUI {
             System.out.println("You have to add a positive number to minimum quantity ");
             return;
         }
-        productService.setMinimumQuantity(product, Integer.parseInt(quantityStr));
+        productService.setMinimumQuantity(product, Integer.parseInt(quantityStr),localDate);
         //product.setMinimumQuantity(Integer.parseInt(quantityStr));
         //System.out.println("The new minimum quantity of " + product.getName() + " is " + quantityStr);
     }
 
     // Case 5.2 in product's menu
-    void setMinimumQuantityCase5Point2() {
+    void setMinimumQuantityCase5Point2(LocalDate localDate) {
         System.out.println("What is the catalog number of the product? ");
         productCatalogNumber = input.nextLine();
         Product product = productService.getProductByUniqueCode(productCatalogNumber);
@@ -411,9 +400,7 @@ public class ProductUI {
             System.out.println("You have to add a positive number to minimum quantity ");
             return;
         }
-        productService.setMinimumQuantity(product, Integer.parseInt(quantityStr));
-        //product.setMinimumQuantity(Integer.parseInt(quantityStr));
-        //System.out.println("The new minimum quantity of " + product.getName() + " is " + quantityStr);
+        productService.setMinimumQuantity(product, Integer.parseInt(quantityStr),localDate);
     }
 
 

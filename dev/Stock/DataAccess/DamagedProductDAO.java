@@ -1,6 +1,6 @@
 package Stock.DataAccess;
 
-import Resource.Connect;
+import DBConnect.Connect;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -52,7 +52,7 @@ public class DamagedProductDAO {
             }
 
         }catch (SQLException e){
-            System.out.println("there is a problem with the database");
+            System.out.println(e.getMessage());
         }
     }
 
@@ -81,7 +81,7 @@ public class DamagedProductDAO {
             catalogDamagedMap.put(catalogNumber,catalogDamaged);
         }catch (SQLException e)
         {
-            System.out.println("there is a problem eith the database");
+            System.out.println(e.getMessage());
         }
     }
     public void writeDamagedProducts(){
@@ -112,7 +112,7 @@ public class DamagedProductDAO {
 
                     }
                 } catch (SQLException e) {
-                    System.out.println("there is a problem with the database");
+                    System.out.println(e.getMessage());
                 }
 
             }
@@ -137,7 +137,7 @@ public class DamagedProductDAO {
             java.sql.ResultSet resultSet = statement.executeQuery("DELETE  FROM Damaged WHERE QRCode ==" + Integer.toString(qr));
 
         }catch (SQLException e){
-            System.out.println("theres a problem with the database");
+            System.out.println(e.getMessage());
         }
 
     }

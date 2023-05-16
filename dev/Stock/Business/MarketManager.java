@@ -33,7 +33,7 @@ public class MarketManager {
         ProductDetailsDAO.setNumOfShelves(ProductDetailsDAO.getNumOfShelves() + extraShelves);
         productDetailsDAO.saveDetails();
     }
-    private Product getProductByCategories(String subCategory,String subSubCategory){
+    public Product getProductByCategories(String subCategory,String subSubCategory){
         String[] subsubSplited = subSubCategory.split(" ");
         String name = subCategory + " " + Double.toString(Double.parseDouble(subsubSplited[subsubSplited.length - 2]))
                 + " " + subsubSplited[subsubSplited.length - 1];

@@ -21,7 +21,6 @@ public class ReportsUI {
             System.out.println("4) Create damaged products report. ");
             System.out.println("5) Create shortages report. ");
             System.out.println("6) Go back to Stock menu ");
-            System.out.println("7) next day ");
 
             System.out.println("Select the number you would like to access ");
             System.out.println("-----------------------");
@@ -49,9 +48,7 @@ public class ReportsUI {
                 case "6":
                     running = false;
                     break;
-                case "7":
-//                    ProductDAO.getInstance().updateForNextDay();
-                    break;
+
 
 
                 default:

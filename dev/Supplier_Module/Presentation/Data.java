@@ -544,7 +544,7 @@ public class  Data {
         p6_1_discounts.add(discount6_1_2);
         p6_1_discounts.add(discount6_1_3);
 
-        SupplierProduct p6_1=new SupplierProduct("Beef 500 gr",6000,0.5,31,1500,p6_1_discounts,15);
+        SupplierProduct p6_1=new SupplierProduct("Beef 500.0 gr",6000,0.5,31,1500,p6_1_discounts,15);
 
         //p4_2
 

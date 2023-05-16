@@ -1,6 +1,6 @@
 package Stock.DataAccess;
 
-import Resource.Connect;
+import DBConnect.Connect;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -62,7 +62,7 @@ public class ProductDetailsDAO {
             }
 
         }catch (SQLException e){
-            System.out.println("there is a problem with the database");
+            System.out.println(e.getMessage());
         }
     }
 
@@ -160,7 +160,7 @@ public void saveDetails(){
         updateOrInsertValue(statement, insertStmt, updateStmt, 7, numOfShelves);
 
     }catch (SQLException e){
-        System.out.println("there is a problem with the database");
+        System.out.println(e.getMessage());
     }
 }
 

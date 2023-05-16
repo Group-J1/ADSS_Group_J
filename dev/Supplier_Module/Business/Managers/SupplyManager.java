@@ -345,6 +345,7 @@ public class SupplyManager {
     }
 //check if there is a key in the hash map for this product name
     public boolean isThisProductAlreadyInSystem(String productName) {
+        supplierDAO.SelectAllSuppliers();
         if (supplierDAO.getSupplierByProductMap().containsKey(productName))
             return true;
         else

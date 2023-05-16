@@ -94,8 +94,8 @@ public class ProductManager {
     // Case 2.1 at Product's menu
     public void addMoreItemsToProduct(Product product, Date expDate, int quantity){
         product.addMoreItemsToProduct(quantity,expDate);
-        if (shortages.isMissing(product)) {
-            shortages.removeFromShortages(product);
+        if (shortageDAO.isInShortage(product.getCatalogNumber())) {
+            shortageDAO.deleteFromShortages(product.getCatalogNumber());
         }
         productDAO.writeProducts();
         expDateDAO.writeExpDates();
@@ -106,14 +106,15 @@ public class ProductManager {
     // Case 2.2 at Product's menu
     public boolean sellProductsByUniqueCode(Product soldProduct, int quantitySold){
         int[] sold = soldProduct.sellMultipleItemsFromProduct(quantitySold);
+        if(sold == null){
+            return false;
+        }
         boolean isProductOutOfStockNow = false;
         for(Integer qr : sold){
             expDateDAO.deleteExpDate(qr);
         }
         if (soldProduct.getStoreQuantity() == 0) {
             shortages.addProductToShortages(soldProduct);
-//            shortageDAO.addToShortages(soldProduct.getCatalogNumber());
-//            shortageDAO.writeShortages();
             isProductOutOfStockNow = true;
         }
         productDAO.writeProducts();
@@ -134,7 +135,6 @@ public class ProductManager {
             defectedProduct.markAsDamaged(uniqueCode, reason);
             damagedProductDAO.writeDamagedProduct(uniqueCode,defectedProduct.getCatalogNumber(),reason);
             defectedProduct.getExpirationDates().remove(uniqueCode);
-//            expDateDAO.deleteExpDate(uniqueCode);
             if(defectedProduct.getStorageQuantity() > 0){
                 defectedProduct.storageQuantityMinus1();
             }
@@ -143,7 +143,6 @@ public class ProductManager {
                     defectedProduct.storeQuantityMinus1();
                 }
             }
-//            productDAO.writeProducts();
             damagedProductDAO.writeDamagedProducts();
 
         }
@@ -235,8 +234,8 @@ public class ProductManager {
         for (String productName: productsToAdd.keySet()) {
             String catalogNumber = UniqueStringGenerator.generateUniqueString(productName);
             Product currProduct = productDAO.getProduct(catalogNumber);
-            if(productsToAdd.get(catalogNumber)!= null){
-                int quantityForCurrProduct = productsToAdd.get(catalogNumber);
+            if(productsToAdd.get(productName)!= null){
+                int quantityForCurrProduct = productsToAdd.get(productName);
                 addMoreItemsToProduct(currProduct, dateToAdd, quantityForCurrProduct);
             }
         }
@@ -246,11 +245,6 @@ public class ProductManager {
     public boolean updateForNextDay(LocalDate futureDay){
         boolean thereIsProductOutOfStockNow = false;
         boolean written = false;
-//        Date currentDay = new Date();
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.setTime(currentDay);
-//        calendar.add(Calendar.DAY_OF_YEAR, dayDiff); // Add day number from today
-//        Date futureDay = calendar.getTime();
         HashMap<String, ArrayList<Integer>> expProducts = expDateDAO.expirationForDate(futureDay);
         for (String catalogNumber: expProducts.keySet()){
             Product product = productDAO.getProduct(catalogNumber);
@@ -259,14 +253,6 @@ public class ProductManager {
                 product.getExpirationDates().remove(qr);
                 expDateDAO.deleteExpDate(qr);
                 damagedProductDAO.writeDamagedProducts();
-//                if(product.getStorageQuantity() > 0){
-//                    product.storageQuantityMinus1();
-//                }
-//                else{
-////                    if(product.getStoreQuantity() > 0) {
-////                        product.storeQuantityMinus1();
-////                    }
-//                }
             }
             if(product.isShortage()){
                 shortageDAO.addToShortages(product.getCatalogNumber());

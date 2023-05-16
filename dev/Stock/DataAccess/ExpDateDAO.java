@@ -1,6 +1,6 @@
 package Stock.DataAccess;
 
-import Resource.Connect;
+import DBConnect.Connect;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -56,7 +56,7 @@ public class ExpDateDAO {
             }
 
         }catch (SQLException e){
-            System.out.println("there is problem with the data base");
+            System.out.println(e.getMessage());
         }
     }
 
@@ -89,7 +89,7 @@ public class ExpDateDAO {
             catalogExpDate.put(catalogNumber,productExpDates);
         }
         catch (SQLException e){
-            System.out.println("theres problem with the database");
+            System.out.println(e.getMessage());
         }
 
     }
@@ -136,6 +136,7 @@ public class ExpDateDAO {
             ExpDateMap.putIfAbsent(qr,updatedExpDates.get(qr));
             qrToCatalogNumber.putIfAbsent(qr,catalogNumber);
         }
+        writeExpDates();
     }
 
 
@@ -147,7 +148,7 @@ public class ExpDateDAO {
             statement.executeUpdate("DELETE FROM ExpDates WHERE catalog_number = '" + catalogNumber + "'");
 
         }catch (SQLException e){
-            System.out.println("there is problem with the data base");
+            System.out.println(e.getMessage());
         }
         for(Integer qr: updatedExpDates.keySet()){
             writeExpDateForQR(qr,catalogNumber,updatedExpDates.get(qr));
@@ -165,7 +166,7 @@ public class ExpDateDAO {
             statement.setInt(1, qr);
             statement.executeUpdate();
         }catch (SQLException e){
-            System.out.println("theres a problem with the database");
+            System.out.println(e.getMessage());
         }
         writeExpDates();
 
@@ -193,7 +194,7 @@ public class ExpDateDAO {
             }
 
         }catch (SQLException e){
-            System.out.println("there is problem with the data base");
+            System.out.println(e.getMessage());
         }
     }
 

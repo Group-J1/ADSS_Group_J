@@ -134,7 +134,7 @@ public class Order_Manager {
             }
         }
         Map<Supplier,Map<SupplierProduct,Integer>> waiting = waitingOrderByRequest(to_order, date);
-        LinkedList<Order> lackOrders = lackProducts(waiting);
+        LinkedList<Order> lackOrders = lackProducts(waiting, date);
         for(Order order : lackOrders ){
             order.setKind(1);
             orderDAO.Insert(order);
@@ -144,13 +144,12 @@ public class Order_Manager {
     /**
      //create the waiting orders for the lack report
      */
-    public LinkedList<Order> lackProducts( Map<Supplier,Map<SupplierProduct,Integer>> ToOrder){
+    public LinkedList<Order> lackProducts( Map<Supplier,Map<SupplierProduct,Integer>> ToOrder, LocalDate localDate){
         LinkedList<Order> lack = new LinkedList<>();
         for (Map.Entry<Supplier, Map<SupplierProduct,Integer>> iter : ToOrder.entrySet()) {
-            LocalDate now = LocalDate.now();
             counter++;
             int or_id = counter;
-            Order or1 = new Order(iter.getKey(),iter.getValue(),now, or_id);
+            Order or1 = new Order(iter.getKey(),iter.getValue(),localDate, or_id);
             lack.add(or1);
         }
         return lack;
@@ -183,7 +182,7 @@ public class Order_Manager {
                 //find the current best supplier that can provide fastest of the product
                 Supplier sup = bestTimeSupplier(name,amount,date);
                 for(SupplierProduct p : sup.getAgreement().getProductList()){
-                    if(p.getProduct_name().compareTo(name)>0){
+                    if(p.getProduct_name().equals(name)){
                         curr_amount = p.getAmount_available();
                         break;
                     }
@@ -373,6 +372,9 @@ public class Order_Manager {
         {
             OrderDAO.getInstance().Delete(order);
         }
+        ItemOrderDAO.getInstance().deleteAll();
+
+
 
     }
 

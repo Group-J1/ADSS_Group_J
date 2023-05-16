@@ -41,23 +41,23 @@ public class UI {
 
     public void beginSupplierMenu(LocalDate localDate){
         int choice1 = 0;
-        while (choice1!=3) {
-            System.out.println("Welcome to Suppliers system! \nDo you want to upload existing data, edit current data,create new data or start over? \n1.Load data \n2.Edit existing data  \n3.Return to the login menu");
+        while (choice1!=2) {
+            System.out.println("Welcome to Suppliers system! \nDo you want to edit current data,create new data or start over? \n1.Edit existing data  \n2.Return to the login menu");
             choice1 = input.nextInt();
             switch (choice1) {
-                case 1: {
-                    user.Data.loadData();
-                    System.out.println("Data load successfully!");
-                    break;
-                }
+//                case 1: {
+//                    user.Data.loadData();
+//                    System.out.println("Data load successfully!");
+//                    break;
+//                }
 
-                case 2:{
+                case 1:{
                     System.out.println("Please select one of the following options:");
                     mainMenu(localDate);
                     break;
 
             }
-                case 3:{
+                case 2:{
                     break;
                 }
                 default:
@@ -76,9 +76,6 @@ public class UI {
             System.out.println("3. Delete an existing supplier.");
             System.out.println("4. View order history of supplier");
             System.out.println("5. View Supplier details");
-//            System.out.println("6 delete all sup");
-//            System.out.println("7 delete all orders");
-//            System.out.println("8 period orders");
             System.out.println("0. Back");
             choice = input.nextInt();
 
@@ -121,45 +118,7 @@ public class UI {
                     this.sup_manager.PrintSupplierDetailes(id);
                     break;
                 }
-//                case 6:
-//                {
-//                    sup_manager.deleteAllData();
-//                    break;
-//                }
-//                case 7:
-//                {
-//                    order_manager.deleteAllData();
-//                    break;
-//                }
-//
-//                case 8: // not good, check why
-//                {
-//                    Map<String,Integer> ans = new HashMap<>();
-//                    ans.put("Dog Food", 200);
-//                    ans.put("Chicken", 400);
-//                    ans.put("Captain-Crunch", 400);
-//                    ans.put("Lays-chips", 400);
-//                    ans.put("Cini-Minis", 400);
-//                    ans.put("Coca cola", 400);
-//                    ans.put("Soup", 400);
-//                    ans.put("Wipes", 400);
-//                    ans.put("Banana", 400);
-//                    order_manager.updatePeriodOrders(ans,localDate);
-//                    break;
-//                }
-//                case 9: { // work but check again with another product, לבדוק מה קורה שיש רשימה עם כמה מוצרים וחלקם בדרך
-//                    Map<String,Integer> ans = new HashMap<>();
-//                    ans.put("Captain-Crunch", 1000);
-//                    order_manager.lackReport(ans,localDate);
-//                    break;
-//                }
-//                case 10:{// period order
-//                    LinkedList<String> under_minimum = new LinkedList<>();
-//                    under_minimum.add("Chicken");
-//                    under_minimum.add("Banana");
-//                    order_manager.ConfirmPeriodOrders(under_minimum,localDate);
-//                    break;
-//                }
+
 
                 default:
                 {

@@ -283,6 +283,7 @@ public class Product {
             this.expirationDates.put(ProductDetailsDAO.getInstance().getProductId(), expiration);
         }
         expDateDAO.updateExpDate(this.getCatalogNumber(),getExpirationDates());
+
     }
 
     /**
@@ -333,7 +334,6 @@ public class Product {
         for(int i = 0 ; i < quantity ; i++){
             expirationDates.remove(sold[i]);
             ProductDAO.getInstance().getProduct(getCatalogNumber()).getExpirationDates().remove(sold[i]);
-            ProductDAO.getInstance().writeProducts();
         }
         return sold;
     }

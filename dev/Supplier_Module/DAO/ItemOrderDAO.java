@@ -155,4 +155,15 @@ public class ItemOrderDAO extends DAO{
         }
         return amount;
     }
+
+    public void deleteAll(){
+        try {
+            Connection conn = DBTables.getInstance().open();
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("DELETE  FROM " + DBTables.ITEM_ORDERS);
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+    }
 }

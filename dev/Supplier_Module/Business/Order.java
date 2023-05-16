@@ -170,7 +170,7 @@ public class Order {
             sum += (discount*u_price*amount);
 
         }
-        return sum*this.totalDiscountBytotalAmount();
+        return sum*(100-this.totalDiscountBytotalAmount())*0.01;
     }
 
 

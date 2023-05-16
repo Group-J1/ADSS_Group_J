@@ -1,11 +1,13 @@
 package Stock.DataAccess;
 
-import Resource.Connect;
+import DBConnect.Connect;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ShortageDAO {
     private static Connection connection;
@@ -35,12 +37,14 @@ public class ShortageDAO {
             }
         }
         catch (SQLException e){
-            System.out.println("theres a problem with the database");
+            System.out.println(e.getMessage());
         }
     }
 
     public void deleteFromShortages(String catalogNumber){
-        shortageMap.remove(catalogNumber);
+        while(shortageMap.contains(catalogNumber)) {
+            shortageMap.remove(catalogNumber);
+        }
     }
 
     public void resetShortages(){
@@ -67,12 +71,13 @@ public class ShortageDAO {
         try (PreparedStatement deleteStatement = connection.prepareStatement("DELETE FROM Shortages");
              PreparedStatement insertStatement = connection.prepareStatement("INSERT INTO Shortages (CatalogNumber) VALUES (?)")) {
             deleteStatement.executeUpdate();
-            for (String catalogNumber : shortageMap) {
+            Set<String> uniqe = new HashSet<>(shortageMap);
+            for (String catalogNumber : uniqe) {
                 insertStatement.setString(1, catalogNumber);
                 insertStatement.executeUpdate();
             }
         } catch (SQLException e) {
-            System.out.println("There's a problem with the database");
+            System.out.println(e.getMessage());
         }
     }
 

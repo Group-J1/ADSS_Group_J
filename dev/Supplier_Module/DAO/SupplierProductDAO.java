@@ -240,4 +240,23 @@ public class SupplierProductDAO extends DAO {
         return prod;
     }
 
+    public List<SupplierProduct> getProductsMapper() {
+        List<SupplierProduct> prod = new LinkedList<>();
+        try {
+            Connection c = DBTables.getInstance().open();
+            Statement stmt;
+            stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM " + DBTables.SUPPLIER_PRODUCT +";");
+            while (rs.next()) {
+                SupplierProduct supplierProduct = convertReaderToObject(rs);
+                prod.add(supplierProduct);
+            }
+            rs.close();
+            stmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return prod;
+    }
+
 }

@@ -179,8 +179,8 @@ public class ContactMemberDAO extends DAO{
             pstmt.setInt(2, supplierID);
             pstmt.setString(3, phone);
             pstmt.executeUpdate();
-            Pair<Integer,String> temp = new Pair(supplierID,phone);
-            contactsHashMap.get(temp).setEmail(email);
+//            Pair<Integer,String> temp = new Pair(supplierID,phone);
+//            contactsHashMap.get(temp).setEmail(email);
 
         } catch (SQLException e) {
             System.out.println("Got Exception:");
