@@ -25,7 +25,7 @@ public class ShortageDAO {
         return instance;
     }
 
-    private void loadToShortageMap(){
+    public void loadToShortageMap(){
         try{
             java.sql.Statement statement = connection.createStatement();
             java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM Shortages ");
@@ -87,6 +87,8 @@ public class ShortageDAO {
     public Boolean isInShortage(String catalogNumber){
         return shortageMap.contains(catalogNumber);
     }
+
+
 }
 
 

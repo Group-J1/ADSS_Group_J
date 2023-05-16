@@ -727,8 +727,8 @@ public class StockMainUI {
         return number.matches("[0-9]+") && Integer.parseInt(number) > 0;
     }
 
-    public void updateForNextDay(int dayDiff){
-        productService.updateForNextDay(dayDiff);
+    public void updateForNextDay(LocalDate day){
+        productService.updateForNextDay(day);
     }
 
     Boolean checkSubSubCategory(String subSubCategoryStr) {

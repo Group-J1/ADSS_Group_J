@@ -5,6 +5,7 @@ import Resource.Connect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.*;
 import java.util.*;
 
 public class ExpDateDAO {
@@ -196,11 +197,13 @@ public class ExpDateDAO {
         }
     }
 
-    public HashMap<String, ArrayList<Integer>> expirationForDate(Date futureDate){
+    public HashMap<String, ArrayList<Integer>> expirationForDate(LocalDate futureDate){
         loadAllDataToCache();
         HashMap<String, ArrayList<Integer>> map = new HashMap<>();
         for(Integer qr: ExpDateMap.keySet()){
-            if(futureDate.after(ExpDateMap.get(qr))) {
+            Date date = Date.from(futureDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+//            int compareator = ExpDateMap.get(qr).compareTo(date);
+            if(ExpDateMap.get(qr).compareTo(date) <= 0) {
                 String catalogNumber = qrToCatalogNumber.get(qr);
                 if (map.containsKey(catalogNumber)) {
                     map.get(catalogNumber).add(qr);

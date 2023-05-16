@@ -132,8 +132,9 @@ public class ProductManager {
     public void markAsDamaged(Product defectedProduct, int uniqueCode, String reason){
         if (expDateDAO.isQRfromCatalogNumber(defectedProduct.getCatalogNumber(),uniqueCode)) {
             defectedProduct.markAsDamaged(uniqueCode, reason);
+            damagedProductDAO.writeDamagedProduct(uniqueCode,defectedProduct.getCatalogNumber(),reason);
             defectedProduct.getExpirationDates().remove(uniqueCode);
-            expDateDAO.deleteExpDate(uniqueCode);
+//            expDateDAO.deleteExpDate(uniqueCode);
             if(defectedProduct.getStorageQuantity() > 0){
                 defectedProduct.storageQuantityMinus1();
             }
@@ -142,8 +143,9 @@ public class ProductManager {
                     defectedProduct.storeQuantityMinus1();
                 }
             }
-            productDAO.writeProducts();
+//            productDAO.writeProducts();
             damagedProductDAO.writeDamagedProducts();
+
         }
         else {
             System.out.println("the QR is does not belong to this Catalog Number! ");
@@ -208,8 +210,7 @@ public class ProductManager {
             for (String catalogNumber : allProductsFromDB.keySet()) {
                 int minimumQuantity = allProductsFromDB.get(catalogNumber).getMinimumQuantity();
                 Product currProduct = allProductsFromDB.get(catalogNumber);
-                if (currProduct.getStoreQuantity() + currProduct.getStorageQuantity()
-                        < minimumQuantity) {
+                if (currProduct.getStoreQuantity() + currProduct.getStorageQuantity()>0 && currProduct.getStoreQuantity() + currProduct.getStorageQuantity() < minimumQuantity) {
                     allProductsToSupplier.add(catalogNumber);
                 }
             }
@@ -220,6 +221,7 @@ public class ProductManager {
 
     // ------------ Add more items to product function for supplier usage ------------
     public void addMoreItemsToProductsFromSupplier(HashMap<String, Integer> productsToAdd) {
+
         LocalDate currentDate = LocalDate.now();
         LocalDate twoWeeksLaterFromNow = currentDate.plus(2, ChronoUnit.WEEKS);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -230,38 +232,43 @@ public class ProductManager {
         int year = Integer.parseInt(parts[2]);
         LocalDate date = LocalDate.of(year, month, day);
         Date dateToAdd = Date.from(date.atStartOfDay().atZone(java.time.ZoneId.systemDefault()).toInstant());
-        for (String catalogNumber: productsToAdd.keySet()) {
+        for (String productName: productsToAdd.keySet()) {
+            String catalogNumber = UniqueStringGenerator.generateUniqueString(productName);
             Product currProduct = productDAO.getProduct(catalogNumber);
-            int quantityForCurrProduct = productsToAdd.get(catalogNumber);
-            addMoreItemsToProduct(currProduct, dateToAdd, quantityForCurrProduct);
+            if(productsToAdd.get(catalogNumber)!= null){
+                int quantityForCurrProduct = productsToAdd.get(catalogNumber);
+                addMoreItemsToProduct(currProduct, dateToAdd, quantityForCurrProduct);
+            }
         }
     }
 
 
-    public boolean updateForNextDay(int dayDiff){
+    public boolean updateForNextDay(LocalDate futureDay){
         boolean thereIsProductOutOfStockNow = false;
-        Date currentDay = new Date();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(currentDay);
-        calendar.add(Calendar.DAY_OF_YEAR, dayDiff); // Add day number from today
-        Date futureDay = calendar.getTime();
+        boolean written = false;
+//        Date currentDay = new Date();
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.setTime(currentDay);
+//        calendar.add(Calendar.DAY_OF_YEAR, dayDiff); // Add day number from today
+//        Date futureDay = calendar.getTime();
         HashMap<String, ArrayList<Integer>> expProducts = expDateDAO.expirationForDate(futureDay);
         for (String catalogNumber: expProducts.keySet()){
             Product product = productDAO.getProduct(catalogNumber);
             for(Integer qr: expProducts.get(catalogNumber)){
-                markAsDamaged(product,qr,"Expired in " + futureDay.toString());
+                markAsDamaged(product,qr,"Expired in " + futureDay.minusDays(1).toString());
                 product.getExpirationDates().remove(qr);
                 expDateDAO.deleteExpDate(qr);
-                if(product.getStorageQuantity() > 0){
-                    product.storageQuantityMinus1();
-                }
-                else{
-                    if(product.getStoreQuantity() > 0) {
-                        product.storeQuantityMinus1();
-                    }
-                }
+                damagedProductDAO.writeDamagedProducts();
+//                if(product.getStorageQuantity() > 0){
+//                    product.storageQuantityMinus1();
+//                }
+//                else{
+////                    if(product.getStoreQuantity() > 0) {
+////                        product.storeQuantityMinus1();
+////                    }
+//                }
             }
-            if(product.isShortage() && !shortageDAO.isInShortage(product.getCatalogNumber())){
+            if(product.isShortage()){
                 shortageDAO.addToShortages(product.getCatalogNumber());
                 thereIsProductOutOfStockNow = true;
             }

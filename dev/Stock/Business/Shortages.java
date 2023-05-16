@@ -5,9 +5,11 @@ import Stock.DataAccess.ShortageDAO;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Shortages {
-    private ArrayList<Product> missing;
+    private Set<Product> missing;
     private ShortageDAO shortageDAO;
     private ProductDAO productDAO;
 
@@ -17,7 +19,8 @@ public class Shortages {
     public Shortages() {
         shortageDAO = ShortageDAO.getInstance();
         productDAO = ProductDAO.getInstance();
-        this.missing = new ArrayList<>();
+        shortageDAO.loadToShortageMap();
+        this.missing = new HashSet<>();
         for(String catalogNumber: shortageDAO.getShortageMap()){
             Product product = productDAO.getProduct(catalogNumber);
             missing.add(product);
@@ -65,7 +68,7 @@ public class Shortages {
          *
          * @param products the list of Stock.Business.Product objects to check for missing items
          */
-        ArrayList<Product> newMissing = new ArrayList<>();
+        Set<Product> newMissing = new HashSet<>();
         for(Product product: products){
             if(product.getStoreQuantity() == 0 && product.getStorageQuantity() == 0){
                 newMissing.add(product);
@@ -81,7 +84,7 @@ public class Shortages {
     }
 
     public void updateMissingFromDataBase(){            // will be used after ProductDAO::updateForNextDay
-        this.missing = new ArrayList<>();
+        this.missing = new HashSet<>();
         for(String catalogNumber: shortageDAO.getShortageMap()){
             Product product = productDAO.getProduct(catalogNumber);
             missing.add(product);
@@ -91,7 +94,7 @@ public class Shortages {
     public HashMap<String, Integer> getMissing() {
         HashMap<String, Integer> productsInShortages = new HashMap<>();
         for(Product product: missing){
-            productsInShortages.put(product.getCatalogNumber(), product.getMinimumQuantity() + 100);
+            productsInShortages.put(UniqueStringGenerator.convertBackToString(product.getCatalogNumber()), product.getMinimumQuantity() + 100);
         }
         return productsInShortages;
     }

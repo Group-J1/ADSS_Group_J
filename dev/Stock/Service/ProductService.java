@@ -1,11 +1,10 @@
 package Stock.Service;
 
-import Stock.Business.Product;
-import Stock.Business.ProductManager;
-import Stock.Business.ReportsManager;
-import Stock.Business.Shortages;
+import Stock.Business.*;
 import Stock.DataAccess.ProductDetailsDAO;
+import Supplier_Module.Service.SupplierService;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -67,6 +66,7 @@ public class ProductService {
     // ------------ Case 3 in Product UI ------------
     public void markAsDamaged(Product defectedProduct, int uniqueCode, String reason) {
         productManager.markAsDamaged(defectedProduct, uniqueCode, reason);
+
     }
 
     // ------------ Case 4 in Product UI ------------
@@ -83,11 +83,18 @@ public class ProductService {
         }
     }
 
-    public void sendToSupplierAllProductsQuantity() {
-        HashMap<String, Integer> allProductsToSupplier = productManager.getAllProducts();
-        if (allProductsToSupplier != null) {
-            //functionToSupplierForInitializationAllProducts(allProductsToSupplier);
+    public HashMap<String, Integer> sendToSupplierAllProductsQuantity() {
+        HashMap<String, Integer> allProductsToSupplier = productManager.getAllProducts(),nameHash = new HashMap<>();
+        if (allProductsToSupplier == null) {
+            return null;
         }
+
+        for(String catalogNumber: allProductsToSupplier.keySet()){
+            String name = UniqueStringGenerator.convertBackToString(catalogNumber);
+            int amount = allProductsToSupplier.get(catalogNumber);
+            nameHash.put(name,amount);
+        }
+        return nameHash;
     }
 
     // ------------ Add more items to product function for supplier usage ------------
@@ -96,17 +103,27 @@ public class ProductService {
     }
 
 
-    public void updateForNextDay(int dayDiff){
-        if (productManager.updateForNextDay(dayDiff)) {
+    public void updateForNextDay(LocalDate date){
+//        LocalDate date = LocalDate.now().plusDays(dayDiff);
+        //TODO alot of time
+        if (productManager.updateForNextDay(date.plusDays(2))) {
             Shortages shortagesForSupplier = new Shortages();
-            ArrayList<String> productsCatalogNumber = new ArrayList<>();
-            // מערך של המספר הקטלוגי של המוצרים מתחת למינימום
-            // מפה של המוצרים עם החוסר והכמות של הקו הירוק
-            if (productManager.getAllProductsUnderMinimumQuantity() != null) {
-                productsCatalogNumber = productManager.getAllProductsUnderMinimumQuantity();
+            if (shortagesForSupplier.getMissing().size() > 0) {
+                SupplierService.getSupplierService().lackReport(shortagesForSupplier.getMissing(), date.minusDays(1));
             }
-            //functionToSupplierForNextDay(productsCatalogNumber, shortagesForSupplier.getMissing());
         }
+        ArrayList<String> productsCatalogNumber = new ArrayList<>(),nameList = new ArrayList<>();
+        // מערך של המספר הקטלוגי של המוצרים מתחת למינימום
+        // מפה של המוצרים עם החוסר והכמות של הקו הירוק
+        if (productManager.getAllProductsUnderMinimumQuantity() != null) {
+            productsCatalogNumber = productManager.getAllProductsUnderMinimumQuantity();
+            for(String cataltogNumber: productsCatalogNumber){
+                nameList.add(UniqueStringGenerator.convertBackToString(cataltogNumber));
+            }
+        }
+        SupplierService.getSupplierService().ConfirmPeriodOrders(nameList,date);
+            //functionToSupplierForNextDay(productsCatalogNumber, shortagesForSupplier.getMissing());
+
     }
 
 }

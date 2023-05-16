@@ -69,16 +69,16 @@ public class CategoryDAO {
                 java.sql.Statement statement = connection.createStatement();
                 name = category.getName();
                 discount = category.getDiscount();
-                java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM Category WHERE Category ='" + name + "'");
+                ResultSet resultSet = statement.executeQuery("SELECT * FROM Category WHERE Category ='" + name + "'");
                 if(!resultSet.next()){
-                    java.sql.PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Category (Category, Discount) VALUES (?, ?)");
+                    PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Category (Category, Discount) VALUES (?, ?)");
                     preparedStatement.setString(1, name);
                     preparedStatement.setDouble(2, discount);
                     preparedStatement.executeUpdate();
 
                 }
                 else{
-                    statement.executeUpdate("UPDATE Category SET Discount ="  + discount+ "WHERE Category ='" + name + "'");
+                    statement.executeUpdate("UPDATE Category SET Discount ="  + discount+ " WHERE Category ='" + name + "'");
                 }
             }
             catch (SQLException e) {
@@ -90,7 +90,7 @@ public class CategoryDAO {
     public void writeNewCategory(String categoryName, double discount){
         AProductCategory category = new AProductCategory(categoryName);
         category.setDiscount(discount);
-        CategoryMap.put(categoryName,category);
+        CategoryMap.putIfAbsent(categoryName,category);
         writeCategories();
         // should be added to the db?
     }
@@ -110,7 +110,7 @@ public class CategoryDAO {
         String categoryStr;
         try{
             java.sql.Statement statement = connection.createStatement();
-            java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM Category");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM Category");
             while(resultSet.next()){
                 categoryStr = resultSet.getString("Category");
                 getCategory(categoryStr);

@@ -30,6 +30,7 @@ public class ProductDAO {
         damagedProductDAO = DamagedProductDAO.getInstance();
         productDetailsDAO = ProductDetailsDAO.getInstance();
         categoryDAO = CategoryDAO.getInstance();
+        loadAllDataToCache();
     }
 
     public static ProductDAO getInstance() {
@@ -187,6 +188,7 @@ public class ProductDAO {
     }
 
     public void addNewProductToProducts(Product product){
+//        CategoryDAO.getInstance().writeNewCategory(product.getCategory().getName(),0);
         productMap.put(product.getCatalogNumber(),product);
         //DamagedProductDAO.getInstance();
         //ExpDateDAO.getInstance();

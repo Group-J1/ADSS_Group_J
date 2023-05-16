@@ -87,9 +87,7 @@ public class DamagedProductDAO {
     public void writeDamagedProducts(){
         for(Integer qr: damagedMap.keySet()) {
             String[] words = damagedMap.get(qr).split(" ");
-            if (!Objects.equals(words[0], "Expired")) {
-
-                try {
+            try {
                     java.sql.Statement statement = connection.createStatement();
                     java.sql.ResultSet resultSet = statement.executeQuery("SELECT * FROM Damaged WHERE QRCode ==" + qr);
                     if (!resultSet.next()) {
@@ -119,7 +117,7 @@ public class DamagedProductDAO {
 
             }
         }
-    }
+
 
     public void writeDamagedProduct(int QR,String catalogNumber, String reason){
         if(!damagedMap.containsKey(QR)){
