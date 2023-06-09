@@ -155,6 +155,26 @@ public class ItemOrderDAO extends DAO{
         }
         return amount;
     }
+    ///////////////////////////////
+    public boolean changeAmountOfProduct(String p_name, int order_id, int amount){
+        boolean res = true;
+        String sql = MessageFormat.format("UPDATE {0} SET {1} = ? WHERE {2} = ? and {3} = ? "
+                , _tableName, AMOUNT, PRODUCT_NAME, ORDER_ID);
+        try (
+                PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, amount);
+            pstmt.setString(2, p_name);
+            pstmt.setInt(3, order_id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Got Exception:");
+            System.out.println(e.getMessage());
+            System.out.println(sql);
+            res = false;
+        }
+        return res;
+    }
+    ///////////////////////////////////////////
 
     public void deleteAll(){
         try {

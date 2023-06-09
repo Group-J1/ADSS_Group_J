@@ -1,8 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="12e6723f-0bef-4e36-9a29-bb4ad2721fe9" name="Changes" comment="jarFile added in release">
+    <list default="true" id="0c8d2ceb-bd65-48e0-97bd-8e5d843af20f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ADSS_Group_J.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ADSS_Group_J.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/DBConnect/Connect.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DBConnect/Connect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/LoginMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/DamagedReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/DamagedReport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/Market.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/Market.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/OrderReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/OrderReport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/ProductManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/ProductManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/Stock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/Storage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/Store.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/Store.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/DataAccess/CategoryDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/DataAccess/CategoryDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Presentation/ProductUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Presentation/ProductUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Presentation/ReportsUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Presentation/ReportsUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Presentation/StockMainUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Presentation/StockMainUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/MethodSupply/ByFixedDays.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/MethodSupply/ByFixedDays.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/MethodSupply/BySuperLee.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/MethodSupply/BySuperLee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/MethodSupply/BySupplyDays.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/MethodSupply/BySupplyDays.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/MethodSupply/MethodSupply.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/MethodSupply/MethodSupply.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Managers/Order_Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Managers/Order_Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Managers/SupplyManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Managers/SupplyManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/DAO/ContactMemberDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/DAO/ContactMemberDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/DAO/DAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/DAO/DAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/DAO/DBTables.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/DAO/DBTables.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/DAO/ItemOrderDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/DAO/ItemOrderDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/DAO/OrderDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/DAO/OrderDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/DAO/Pair.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/DAO/Pair.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/DAO/SupplierDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/DAO/SupplierDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/DAO/SupplierProductDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/DAO/SupplierProductDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Presentation/AgreementMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Presentation/AgreementMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Presentation/CardMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Presentation/CardMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Presentation/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Presentation/Data.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Presentation/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Presentation/UI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Service/SupplierService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Service/SupplierService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/resource/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Resource/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/resource/MarketDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Resource/MarketDB.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/resource/SuperLee.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Resource/SuperLee.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,77 +59,50 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2PszeMe4Yv4pQxuNvR9FTYOrutK" />
+  <component name="ProjectId" id="2Qxtg5OCxjv1jF8oldiC0SbEiuy" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/Users/yuval/IdeaProjects/ADSS_Group_J/docs"
+    "last_opened_file_path": "/Users/yuval/IdeaProjects/ADSS_Group_J/dev/Supplier_Module/Presentation"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/docs" />
-      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/dev/Supplier_Module/Presentation" />
+      <recent name="$PROJECT_DIR$/dev/Supplier_Module/DAO" />
+      <recent name="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/MethodSupply" />
+      <recent name="$PROJECT_DIR$/dev/Stock/Service" />
+      <recent name="$PROJECT_DIR$/dev/Stock/Presentation" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.SuplyStockTests.checkUpdatePeriodNumOfOrders">
-    <configuration name="ChainTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="ADSS_Group_J" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="ChainTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SuplyStockTests.checkUpdatePeriodNumOfOrders" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ADSS_Group_J" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="SuplyStockTests" />
-      <option name="METHOD_NAME" value="checkUpdatePeriodNumOfOrders" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.SuplyStockTests.checkUpdatePeriodNumOfOrders" />
-        <item itemvalue="JUnit.ChainTest" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="12e6723f-0bef-4e36-9a29-bb4ad2721fe9" name="Changes" comment="" />
-      <created>1684260672275</created>
+      <changelist id="0c8d2ceb-bd65-48e0-97bd-8e5d843af20f" name="Changes" comment="" />
+      <created>1686307167801</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1684260672275</updated>
+      <updated>1686307167801</updated>
     </task>
-    <task id="LOCAL‎00001" summary="jarFile added in release">
-      <created>1684262804555</created>
-      <option name="number" value="LOCAL‎00001" />
-      <option name="presentableId" value="LOCAL‎00001" />
-      <updated>1684262804555</updated>
-    </task>
-    <task id="LOCAL‎00002" summary="jarFile added in release">
-      <created>1684263150306</created>
-      <option name="number" value="LOCAL‎00002" />
-      <option name="presentableId" value="LOCAL‎00002" />
-      <updated>1684263150306</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -103,9 +115,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="jarFile added in release" />
-    <option name="LAST_COMMIT_MESSAGE" value="jarFile added in release" />
   </component>
 </project>

@@ -29,9 +29,9 @@ public class Connect {
     }
     public static void connect(){
         try {
-            String url = "jdbc:sqlite::resource:MarketDB.db";  // change for jar
+            String url = "jdbc:sqlite:dev/Resource/MarketDB.db";  // change for jar
 
-//            String url = "jdbc:sqlite::resource:MarketDB";  // change for jar
+//            String url = "jdbc:sqlite::Resource:MarketDB.db";  // change for jar
             connection = DriverManager.getConnection(url);
         }
         catch (SQLException e){
@@ -137,7 +137,7 @@ public class Connect {
 
 
             Calendar calendar = Calendar.getInstance();
-            calendar.set(2023, Calendar.MAY, 30);
+            calendar.set(2023, Calendar.MAY, 23);
             Date expDate1 =  calendar.getTime();
 
             calendar.set(2023, Calendar.JULY,10);
@@ -177,7 +177,7 @@ public class Connect {
             Product product8 = new Product(vegetables,Tomatos,ssc_1kg,new Location(0,7),new Location(0,7), "Sade",11,10,1.0,expDate8);
             Product product9 = new Product(Meat,Steaks,ssc_2kg,new Location(0,8),new Location(0,8), "BBB",17,4,2.0,expDate9);
 
-                        // curr product 406
+            // curr product 406
             Product[] p = {product1,product2,product3,product4,product5,product6,product7,product8,product9};
             for(Product product: p){
                 product.setCatalogNumber();

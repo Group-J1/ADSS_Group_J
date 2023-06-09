@@ -159,7 +159,7 @@ public class Order_Manager {
 
 
     /**
-    //create the best time order for every product
+     //create the best time order for every product
      */
     public Map<Supplier,Map<SupplierProduct,Integer>> waitingOrderByRequest(Map<String,Integer> request, LocalDate date){
         Map<Supplier,Map<SupplierProduct,Integer>> waitingOrder = new HashMap<>();
@@ -351,6 +351,14 @@ public class Order_Manager {
         LinkedList<Order> ans = order_manager.OrdersByRequest(report,localDate);
     }
 
+//    public void editPeriodicOrder(LocalDate localDate, Order order1){
+//        System.out.println("This is the order you want to edit");
+//        order1.PrintOrder();
+//        System.out.println("Please select action:");
+
+
+//    }
+
     public void deleteAllData()
     {
         Map<Integer,Order> allorders_0= OrderDAO.getInstance().getAllOrdersByKind(0);
@@ -376,6 +384,28 @@ public class Order_Manager {
 
 
 
+    }
+    public boolean deleteProductFromOrder(Order order, SupplierProduct sp){
+        order.deleteProductFromOrder(sp);//delete product from map
+        Pair<String,Integer> pair = new Pair<>(sp.getProduct_name(),order.getOrder_id());
+        ItemOrderDAO.getInstance().Delete(pair);//delete the product from table
+        this.orderDAO.updateAndGetOrderTotalPriceById(order.getOrder_id());//update the new price in the table
+        System.out.println("Product "+ sp.getProduct_name() + " delete successfully!");
+
+        if(order.getProducts_list_order().isEmpty())
+        {
+            OrderDAO.getInstance().Delete(order);
+            System.out.println("There is no products in this order anymore");
+            System.out.println("The order deleted!");
+            return false;
+        }
+        return true;
+    }
+    public void editProductAmount(Order order, SupplierProduct sp, int amount){
+        order.editProductInOrder(sp,amount);
+        ItemOrderDAO.getInstance().changeAmountOfProduct(sp.getProduct_name(),order.getOrder_id(), amount);
+        this.orderDAO.updateAndGetOrderTotalPriceById(order.getOrder_id());//update the new price in the table
+        System.out.println("Product "+ sp.getProduct_name() + " amount updated successfully!");
     }
 
 }

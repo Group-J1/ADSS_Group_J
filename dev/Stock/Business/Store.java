@@ -16,6 +16,7 @@ public class Store {
          * @param numberOfShelves the number of shelves to create in the Stock.Business.Store object
          */
         this.shelves = new Shelf[numberOfShelves];
+//        currShelf = 0;
         amountOfShelves = numberOfShelves;
         for(int i =0; i< numberOfShelves; i++){
             shelves[i] = new Shelf(30);    // DRAMATIC CHANGE !!! CHANGING FOR TEST SHOULD BE 30 -> test passed
@@ -34,6 +35,7 @@ public class Store {
         return amountOfShelves;
     }
 
+    // Add new product from UI menu
     public Location addProductToStore(Product product){
         /**
          * Adds the specified product to the Stock.Business.Store object by placing it on the next available shelf.
@@ -66,13 +68,12 @@ public class Store {
                     productDetailsDAO.updateStoreShelfNumber();
                 }
             }
-
         }
 
         return loc;
     }
-    
-    
+
+
     public void updateStoreShelvesNumber(int NumberOfShelvesToAdd){
         /**
          * Updates the number of shelves in the store by adding the specified number of shelves.

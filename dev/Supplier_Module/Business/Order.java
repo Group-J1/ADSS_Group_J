@@ -2,7 +2,9 @@ package Supplier_Module.Business;
 
 import Supplier_Module.Business.Agreement.SupplierProduct;
 import Supplier_Module.Business.Discount.PrecentageDiscount;
+import Supplier_Module.DAO.ItemOrderDAO;
 import Supplier_Module.DAO.OrderDAO;
+import Supplier_Module.DAO.Pair;
 
 import java.time.LocalDate;
 import java.util.Map;
@@ -172,7 +174,23 @@ public class Order {
         }
         return sum*(100-this.totalDiscountBytotalAmount())*0.01;
     }
+    public SupplierProduct isProductInOrder(String name){
+        for(SupplierProduct sp : this.getProducts_list_order().keySet()){
+            if(sp.getProduct_name().equals(name)){
+                return sp;
+            }
+        }
+        return null;
 
+    }
+    public void deleteProductFromOrder(SupplierProduct sp){
+        this.getProducts_list_order().remove(sp);
+    }
+
+    public void editProductInOrder(SupplierProduct sp, int amount){
+        this.getProducts_list_order().remove(sp);
+        this.products_list_order.put(sp,amount);
+    }
 
 }
 

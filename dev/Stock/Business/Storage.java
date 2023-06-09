@@ -4,7 +4,6 @@ import Stock.DataAccess.ProductDetailsDAO;
 
 public class Storage {
     private Shelf[] shelves;
-//    private int currShelf;
     private int amountOfShelves;
     private static final ProductDetailsDAO productDetailsDAO = ProductDetailsDAO.getInstance();
 
@@ -15,9 +14,10 @@ public class Storage {
          * @param numberOfShelves the number of shelves to create in the Stock.Business.Storage object
          */
         this.shelves = new Shelf[numberOfShelves];
+//        currShelf = 0;
         amountOfShelves = numberOfShelves;
         for(int i =0; i< numberOfShelves; i++){
-            shelves[i] = new Shelf(30);
+            shelves[i] = new Shelf(30);    // DRAMATIC CHANGE !!! CHANGING FOR TEST SHOULD BE 30 -> test passed
         }
     }
 
@@ -33,6 +33,7 @@ public class Storage {
         return amountOfShelves;
     }
 
+    // Add new product from UI menu
     public Location addProductToStorage(Product product){
         /**
          * Adds a given Stock.Business.Product object to the first available location in the Stock.Business.Storage object.
@@ -42,7 +43,6 @@ public class Storage {
          */
         Location loc = null;
         boolean running = true;
-        //ProductDetailsDAO.getInstance();
         while (running) {
 
             int currShelf = productDetailsDAO.getStorageShelfNumber();
@@ -65,8 +65,6 @@ public class Storage {
                 }
             }
         }
-
-
         return loc;
     }
 

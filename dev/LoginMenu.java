@@ -35,14 +35,15 @@ public class LoginMenu {
     }
 
     public void begin(){
-        SupplierService.getSupplierService().updatePeriodOrders(ProductService.getInstance().sendToSupplierAllProductsQuantity(),localDate);
+        //SupplierService.getSupplierService().updatePeriodOrders(ProductService.getInstance().sendToSupplierAllProductsQuantity(),localDate);
         int choice1 = 0;
-        while (choice1!=4) {
+        while (choice1!=5) {
             System.out.println("Choose which option you want to enter");
             System.out.println("1. Suppliers");
             System.out.println("2. Stock");
-            System.out.println("3. Promote day");
-            System.out.println("4. Exit");
+            System.out.println("3. Manage orders");
+            System.out.println("4. Promote day");
+            System.out.println("5. Exit");
             choice1 = input.nextInt();
             switch (choice1) {
                 case 1: {
@@ -55,13 +56,18 @@ public class LoginMenu {
                     break;
                 }
                 case 3:{
-                    //todo: put here the premote day functions of the 2 modules
-                    stockMainUi.updateForNextDay(localDate);
-                    executeNextDay();
+                    //orders menu
+                    ui.beginOrderMenu(localDate);
                     break;
                 }
 
                 case 4:
+                {
+                    stockMainUi.updateForNextDay(localDate);
+                    executeNextDay();
+                    break;
+                }
+                case 5:
                 {
                     System.out.println("Thanks for using our system! Bye Bye");
                     System.exit(0);

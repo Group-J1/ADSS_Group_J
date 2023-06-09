@@ -3,7 +3,6 @@ package Stock.Business;
 import java.util.*;
 
 public class OrderReport extends Report {
-    // <product name (subCategory) and size (subSubCategory), quantity>
     protected HashMap<String, Integer> products;
 
     /**

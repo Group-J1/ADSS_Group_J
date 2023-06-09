@@ -391,6 +391,7 @@ public class OrderDAO extends DAO {
         return false;
     }
 
+
     public int getMaxID() {
         int MaxId = 0;
         try {

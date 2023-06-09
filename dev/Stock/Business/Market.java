@@ -25,9 +25,6 @@ public class Market {
         //stock = new Stock();
         allReports = new ArrayList<>();
     }
-
-
-
     /**
      * Increase the number of shelves in the storage area by the given amount.
      * @param addedShelves the number of shelves to be added to the storage area.
@@ -47,9 +44,6 @@ public class Market {
         store.updateStoreShelvesNumber(addedShelves);
         return true;
     }
-
-
-
     /**
      * Prints the list of products that are currently in shortage to the console.
      */
