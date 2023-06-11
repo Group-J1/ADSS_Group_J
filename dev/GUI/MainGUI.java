@@ -13,7 +13,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class MainGUI extends JFrame{
-    //////////////////////////////////////////////
     private JLayeredPane layeredPane;
     private JPanel mainPanel;
     private SupplierGUI supplierGUI;
