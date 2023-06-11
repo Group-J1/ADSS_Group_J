@@ -18,7 +18,7 @@ public class SupplierGUI extends JPanel {
     private EditSupplierPanel editSupplierPanel;
     private DeleteSupplierPanel deleteSupplierPanel;
 
-    public SupplierGUI(MainGUI mainGUI) {
+    public SupplierGUI(MainGUI mainGUI)throws IOException  {
         this.mainGUI = mainGUI;
         setLayout(new BorderLayout());
 
@@ -42,73 +42,41 @@ public class SupplierGUI extends JPanel {
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
         mainPanel.add(titleLabel, BorderLayout.NORTH);
+        mainPanel.setLayout(new FlowLayout());
 
         // Create button panel
+        JButton backButton = new JButton("Back");
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
         buttonPanel.setOpaque(false);
 
         // Create buttons
-        JButton addSupplierButton = new JButton("Add Supplier");
-        JButton editSupplierButton = new JButton("Edit Supplier");
-        JButton deleteSupplierButton = new JButton("Delete Supplier");
-        JButton backButton = new JButton("Back");
+        JButton addSupplierButton = createButton("Add Supplier","/GUI/pictures/new-supplier.jpg");
+        JButton editSupplierButton = createButton("Edit Supplier","/GUI/pictures/update.jpg");
+        JButton deleteSupplierButton = createButton("Delete Supplier","/GUI/pictures/delete-supplier.jpg");
 
-        // Customize button appearance
-        Font buttonFont = new Font("Comic Sans MS", Font.BOLD, 16);
-        Color buttonBackground = new Color(80, 100, 120);
-        Color buttonForeground = Color.BLACK;
-        Dimension buttonSize = new Dimension(300, 40);
-        Border buttonBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
-
-        addSupplierButton.setFont(buttonFont);
-        addSupplierButton.setBackground(buttonBackground);
-        addSupplierButton.setForeground(buttonForeground);
-        addSupplierButton.setPreferredSize(buttonSize);
-        addSupplierButton.setBorder(buttonBorder);
-
-        editSupplierButton.setFont(buttonFont);
-        editSupplierButton.setBackground(buttonBackground);
-        editSupplierButton.setForeground(buttonForeground);
-        editSupplierButton.setPreferredSize(buttonSize);
-        editSupplierButton.setBorder(buttonBorder);
-
-        deleteSupplierButton.setFont(buttonFont);
-        deleteSupplierButton.setBackground(buttonBackground);
-        deleteSupplierButton.setForeground(buttonForeground);
-        deleteSupplierButton.setPreferredSize(buttonSize);
-        deleteSupplierButton.setBorder(buttonBorder);
-
-        backButton.setFont(buttonFont);
-        backButton.setBackground(buttonBackground);
-        backButton.setForeground(buttonForeground);
-        backButton.setPreferredSize(buttonSize);
-        backButton.setBorder(buttonBorder);
-
-
-        // Add buttons to the button panel
-        buttonPanel.add(Box.createVerticalGlue());
-
-        buttonPanel.add(Box.createVerticalStrut(100));
+        buttonPanel.add(Box.createHorizontalGlue());
         buttonPanel.add(addSupplierButton);
-        buttonPanel.add(Box.createVerticalStrut(20));
+        buttonPanel.add(Box.createHorizontalStrut(20));
         buttonPanel.add(editSupplierButton);
-        buttonPanel.add(Box.createVerticalStrut(20));
+        buttonPanel.add(Box.createHorizontalStrut(20));
         buttonPanel.add(deleteSupplierButton);
-        buttonPanel.add(Box.createVerticalStrut(20));
-        buttonPanel.add(backButton);
-        buttonPanel.add(Box.createVerticalGlue());
+        buttonPanel.add(Box.createHorizontalGlue());
 
-        buttonPanel.add(Box.createVerticalGlue());
-        JPanel horizontalPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        horizontalPanel.setOpaque(false);
-        horizontalPanel.add(buttonPanel);
-        // Add the buttons panel to the center of the main panel
-        mainPanel.add(horizontalPanel, BorderLayout.CENTER);
-        // Add button panel to the center of the main panel
-//        mainPanel.add(buttonPanel, BorderLayout.CENTER);
 
-        // Add main panel to the SupplierGUI panel
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        bottomPanel.add(backButton);
+
+        // Add button panel to the main panel
+        mainPanel.add(Box.createVerticalStrut(120)); // Adjust the spacing as needed
+        mainPanel.add(buttonPanel,BorderLayout.CENTER);
+
+
+        mainPanel.add(Box.createVerticalStrut(200));
+        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+
+
         add(mainPanel, BorderLayout.CENTER);
 
         // Add action listeners for the buttons
@@ -135,6 +103,43 @@ public class SupplierGUI extends JPanel {
                     mainGUI.showMainPanel();
                 }
         });
+    }
+    private JButton createButton(String text, String imagePath) throws IOException {
+        // Create button panel
+        int width = 150;
+        int height = 150;
+        JPanel buttonPanel = new JPanel(null);
+        buttonPanel.setLayout(new BorderLayout());
+//        buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0)); // Remove label margin
+
+        // Create image label
+        JLabel imageLabel = new JLabel();
+        Image image = ImageIO.read(getClass().getResource(imagePath));
+        Image small_image = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        ImageIcon imageIcon = new ImageIcon(small_image);
+        imageLabel.setIcon(imageIcon);
+        imageLabel.setBounds(0,0,width,height);
+        imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        buttonPanel.add(imageLabel, BorderLayout.CENTER);
+
+        // Create text label
+        Font buttonFont = new Font("Tahoma", Font.BOLD, 16);
+        JLabel textLabel = new JLabel(text);
+        textLabel.setFont(buttonFont);
+        textLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        buttonPanel.add(textLabel, BorderLayout.SOUTH);
+
+        // Create button
+        JButton button = new JButton();
+        button.setLayout(new BorderLayout());
+        button.add(buttonPanel, BorderLayout.CENTER);
+        button.setFocusPainted(false);
+        button.setVerticalAlignment(SwingConstants.TOP); // Adjust vertical alignment
+        button.setVerticalTextPosition(SwingConstants.BOTTOM); // Adjust vertical text position
+        button.setHorizontalTextPosition(SwingConstants.CENTER); // Adjust horizontal text position
+        button.setMargin(new Insets(0, 0, 0, 0)); // Set the margin to zer
+
+        return button;
     }
 
     private void openAddSupplierPanel() {

@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+
 public class StockManagerGUI extends JPanel {
     private MainGUI mainGUI;
     private JPanel mainPanel;
@@ -17,7 +18,7 @@ public class StockManagerGUI extends JPanel {
     private EditOrderPanel editOrderPanel;
     private DeleteOrderPanel deleteOrderPanel;
 
-    public StockManagerGUI(MainGUI mainGUI) {
+    public StockManagerGUI(MainGUI mainGUI) throws IOException {
         this.mainGUI = mainGUI;
         setLayout(new BorderLayout());
 
@@ -41,91 +42,61 @@ public class StockManagerGUI extends JPanel {
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
         mainPanel.add(titleLabel, BorderLayout.NORTH);
+        mainPanel.setLayout(new FlowLayout());
+
 
         // Create button panel
+        JButton backButton = new JButton("Back");
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
         buttonPanel.setOpaque(false);
 
         // Create buttons
-        JButton addOrderButton = new JButton("Add Period Order");
-        JButton editOrderButton = new JButton("Edit Period Order");
-        JButton deleteOrderButton = new JButton("Delete Period Order");
-        JButton backButton = new JButton("Back");
-
-        // Customize button appearance
-        Font buttonFont = new Font("Comic Sans MS", Font.BOLD, 16);
-        Color buttonBackground = new Color(80, 100, 120);
-        Color buttonForeground = Color.BLACK;
-        Dimension buttonSize = new Dimension(300, 40);
-        Border buttonBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
-
-        addOrderButton.setFont(buttonFont);
-        addOrderButton.setBackground(buttonBackground);
-        addOrderButton.setForeground(buttonForeground);
-        addOrderButton.setPreferredSize(buttonSize);
-        addOrderButton.setBorder(buttonBorder);
-
-        editOrderButton.setFont(buttonFont);
-        editOrderButton.setBackground(buttonBackground);
-        editOrderButton.setForeground(buttonForeground);
-        editOrderButton.setPreferredSize(buttonSize);
-        editOrderButton.setBorder(buttonBorder);
-
-        deleteOrderButton.setFont(buttonFont);
-        deleteOrderButton.setBackground(buttonBackground);
-        deleteOrderButton.setForeground(buttonForeground);
-        deleteOrderButton.setPreferredSize(buttonSize);
-        deleteOrderButton.setBorder(buttonBorder);
-
-        backButton.setFont(buttonFont);
-        backButton.setBackground(buttonBackground);
-        backButton.setForeground(buttonForeground);
-        backButton.setPreferredSize(buttonSize);
-        backButton.setBorder(buttonBorder);
+        JButton addOrderButton = createButton("Add Period Order", "/GUI/pictures/add-order.jpg");
+        JButton editOrderButton = createButton("Edit Period Order", "/GUI/pictures/update.jpg");
+        JButton deleteOrderButton = createButton("Delete Period Order", "/GUI/pictures/delete.jpg");
 
 
-        // Add buttons to the button panel
-        buttonPanel.add(Box.createVerticalGlue());
-
-        buttonPanel.add(Box.createVerticalStrut(100));
+        buttonPanel.add(Box.createHorizontalGlue());
         buttonPanel.add(addOrderButton);
-        buttonPanel.add(Box.createVerticalStrut(20));
+        buttonPanel.add(Box.createHorizontalStrut(20));
         buttonPanel.add(editOrderButton);
-        buttonPanel.add(Box.createVerticalStrut(20));
+        buttonPanel.add(Box.createHorizontalStrut(20));
         buttonPanel.add(deleteOrderButton);
-        buttonPanel.add(Box.createVerticalStrut(20));
-        buttonPanel.add(backButton);
-        buttonPanel.add(Box.createVerticalGlue());
+        buttonPanel.add(Box.createHorizontalGlue());
 
-        buttonPanel.add(Box.createVerticalGlue());
-        JPanel horizontalPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        horizontalPanel.setOpaque(false);
-        horizontalPanel.add(buttonPanel);
-        // Add the buttons panel to the center of the main panel
-        mainPanel.add(horizontalPanel, BorderLayout.CENTER);
-        // Add button panel to the center of the main panel
-//        mainPanel.add(buttonPanel, BorderLayout.CENTER);
 
-        // Add main panel to the SupplierGUI panel
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        bottomPanel.add(backButton);
+
+        // Add button panel to the main panel
+        mainPanel.add(Box.createVerticalStrut(120)); // Adjust the spacing as needed
+        mainPanel.add(buttonPanel,BorderLayout.CENTER);
+
+
+        mainPanel.add(Box.createVerticalStrut(200));
+        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+
+
         add(mainPanel, BorderLayout.CENTER);
 
         // Add action listeners for the buttons
         addOrderButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                openAddSupplierPanel();
+                openAddOrderPanel();
             }
         });
 
         editOrderButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                openEditSupplierPanel();
+                openEditOrderPanel();
             }
         });
 
         deleteOrderButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                openDeleteSupplierPanel();
+                openDeleteOrderPanel();
             }
         });
 
@@ -135,8 +106,47 @@ public class StockManagerGUI extends JPanel {
             }
         });
     }
+    private JButton createButton(String text, String imagePath) throws IOException {
+        // Create button panel
+        int width = 150;
+        int height = 150;
+        JPanel buttonPanel = new JPanel(null);
+        buttonPanel.setLayout(new BorderLayout());
+//        buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0)); // Remove label margin
 
-    private void openAddSupplierPanel() {
+        // Create image label
+        JLabel imageLabel = new JLabel();
+        Image image = ImageIO.read(getClass().getResource(imagePath));
+        Image small_image = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        ImageIcon imageIcon = new ImageIcon(small_image);
+        imageLabel.setIcon(imageIcon);
+        imageLabel.setBounds(0,0,width,height);
+        imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        buttonPanel.add(imageLabel, BorderLayout.CENTER);
+
+        // Create text label
+        Font buttonFont = new Font("Tahoma", Font.BOLD, 16);
+        JLabel textLabel = new JLabel(text);
+        textLabel.setFont(buttonFont);
+        textLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        buttonPanel.add(textLabel, BorderLayout.SOUTH);
+
+        // Create button
+        JButton button = new JButton();
+        button.setLayout(new BorderLayout());
+        button.add(buttonPanel, BorderLayout.CENTER);
+        button.setFocusPainted(false);
+        button.setVerticalAlignment(SwingConstants.TOP); // Adjust vertical alignment
+        button.setVerticalTextPosition(SwingConstants.BOTTOM); // Adjust vertical text position
+        button.setHorizontalTextPosition(SwingConstants.CENTER); // Adjust horizontal text position
+        button.setMargin(new Insets(0, 0, 0, 0)); // Set the margin to zer
+
+
+        return button;
+
+    }
+
+    private void openAddOrderPanel() {
         mainPanel.setVisible(false);
 
         if (addOrderPanel == null) {
@@ -152,7 +162,7 @@ public class StockManagerGUI extends JPanel {
         repaint();
     }
 
-    private void openEditSupplierPanel() {
+    private void openEditOrderPanel() {
         mainPanel.setVisible(false);
 
         if (editOrderPanel == null) {
@@ -168,7 +178,7 @@ public class StockManagerGUI extends JPanel {
         repaint();
     }
 
-    private void openDeleteSupplierPanel() {
+    private void openDeleteOrderPanel() {
         mainPanel.setVisible(false);
 
         if (deleteOrderPanel == null) {

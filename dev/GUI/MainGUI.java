@@ -13,7 +13,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class MainGUI extends JFrame{
-    //////////////////////////////////////////////
+
     private JLayeredPane layeredPane;
     private JPanel mainPanel;
     private SupplierGUI supplierGUI;
@@ -28,7 +28,7 @@ public class MainGUI extends JFrame{
         layeredPane = new JLayeredPane();
         layeredPane.setLayout(new BorderLayout());
         getContentPane().add(layeredPane);
-        Image background = ImageIO.read(getClass().getResource("/GUI/pictures/market.jpg"));
+        Image background = ImageIO.read(getClass().getResource("/GUI/pictures/background.jpg"));
         // Create main panel
         mainPanel = new JPanel(){
             protected void paintComponent(Graphics g) {
@@ -42,9 +42,10 @@ public class MainGUI extends JFrame{
 
         JLabel label1 = new JLabel("<html>Welcome to Super Lee store! <br>What is your role?</html>");
         label1.setHorizontalAlignment(SwingConstants.CENTER);
-//        label1.setVerticalAlignment(SwingConstants.NORTH);
+//        label1.setForeground(Color.WHITE);
         Font font = new Font("Comic Sans MS", Font.BOLD, 24);
         label1.setFont(font);
+
         mainPanel.add(label1, BorderLayout.NORTH);
         mainPanel.setLayout(new FlowLayout());
 
@@ -86,18 +87,30 @@ public class MainGUI extends JFrame{
         // Add action listeners
         supplierManagerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                openSupplierManager();
+                try {
+                    openSupplierManager();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
         storeManagerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                openStoreManager();
+                try {
+                    openStoreManager();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 
         stockManagerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                openStockManager();
+                try {
+                    openStockManager();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
     }
@@ -105,9 +118,9 @@ public class MainGUI extends JFrame{
         // Create button panel
         int width = 150;
         int height = 150;
-        JPanel buttonPanel = new JPanel(null);
+        JPanel buttonPanel = new JPanel(new FlowLayout());
         buttonPanel.setLayout(new BorderLayout());
-//        buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0)); // Remove label margin
+
 
         // Create image label
         JLabel imageLabel = new JLabel();
@@ -120,7 +133,7 @@ public class MainGUI extends JFrame{
         buttonPanel.add(imageLabel, BorderLayout.CENTER);
 
         // Create text label
-        Font buttonFont = new Font("Comic Sans MS", Font.BOLD, 16);
+        Font buttonFont = new Font("Tahoma", Font.BOLD, 16);
         JLabel textLabel = new JLabel(text);
         textLabel.setFont(buttonFont);
         textLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -134,11 +147,12 @@ public class MainGUI extends JFrame{
         button.setVerticalAlignment(SwingConstants.TOP); // Adjust vertical alignment
         button.setVerticalTextPosition(SwingConstants.BOTTOM); // Adjust vertical text position
         button.setHorizontalTextPosition(SwingConstants.CENTER); // Adjust horizontal text position
+        button.setMargin(new Insets(0, 0, 0, 0)); // Set the margin to zer
 
         return button;
     }
 
-    private void openSupplierManager() {
+    private void openSupplierManager() throws IOException {
         if (supplierGUI == null) {
             supplierGUI = new SupplierGUI(this);
             layeredPane.add(supplierGUI, 1);
@@ -147,7 +161,7 @@ public class MainGUI extends JFrame{
         supplierGUI.setVisible(true);
         mainPanel.setVisible(false);
     }
-    private void openStoreManager() {
+    private void openStoreManager() throws IOException {
         if (storeManagerGUI == null) {
             storeManagerGUI = new StoreManagerGUI(this);
             layeredPane.add(storeManagerGUI, 1);
@@ -157,7 +171,7 @@ public class MainGUI extends JFrame{
         mainPanel.setVisible(false);
     }
 
-    private void openStockManager() {
+    private void openStockManager() throws IOException {
         if (stockManagerGUI == null) {
             stockManagerGUI = new StockManagerGUI(this);
             layeredPane.add(stockManagerGUI, 1);

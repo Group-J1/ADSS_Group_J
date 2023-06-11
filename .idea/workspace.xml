@@ -1,5 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a2680182-f1a1-4c54-acd1-98aa3ea3b45e" name="Changes" comment="heck">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/MainGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/MainGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/orderGui/StockManagerGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/orderGui/StockManagerGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/pictures/background.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/pictures/market.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/pictures/stock-manager.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/pictures/store-manager.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/pictures/store-manager.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/pictures/supply.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/storeGui/StoreManagerGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/storeGui/StoreManagerGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/supplyGui/SupplierGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/supplyGui/SupplierGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/ADSS_Group_J/ChainTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/ADSS_Group_J/LocationTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/ADSS_Group_J/MarketManagerTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/ADSS_Group_J/ProductTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/ADSS_Group_J/ShortagesTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/ADSS_Group_J/StorageTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/ADSS_Group_J/StoreTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/ADSS_Group_J/SuplyStockTests.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/ADSS_Group_J/SupplyTest.class" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2R3Mi4Sq2Plqq1pnCdThbckpOgm" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\reuta\Desktop\לימודים\שנה ג\סמסטר ב\ניתוח ותיכון\ספקים מלאי\רבעיות בגיט\ADSS_Group_J\dev\GUI\pictures" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="MainGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="GUI.MainGUI" />
@@ -19,5 +89,32 @@
         <item itemvalue="Application.MainGUI" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a2680182-f1a1-4c54-acd1-98aa3ea3b45e" name="Changes" comment="" />
+      <created>1686474434773</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1686474434773</updated>
+      <workItem from="1686474436291" duration="24415000" />
+    </task>
+    <task id="LOCAL‎-00001" summary="heck">
+      <created>1686474662535</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL‎-00001" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1686474662536</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="heck" />
+    <option name="LAST_COMMIT_MESSAGE" value="heck" />
   </component>
 </project>
