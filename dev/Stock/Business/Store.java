@@ -5,6 +5,7 @@ import Stock.DataAccess.ProductDetailsDAO;
 public class Store {
 
     private Shelf[] shelves;
+//    private int currShelf;
     private int amountOfShelves;
 
     private static final ProductDetailsDAO productDetailsDAO = ProductDetailsDAO.getInstance();
@@ -28,7 +29,9 @@ public class Store {
     }
 
     public int getCurrShelf() {
+        //ProductDetailsDAO.getInstance();
         return productDetailsDAO.getStoreShelfNumber();
+//        return currShelf;
     }
 
     public int getAmountOfShelves() {
@@ -68,12 +71,18 @@ public class Store {
                     productDetailsDAO.updateStoreShelfNumber();
                 }
             }
+
+//            else if (currShelf < amountOfShelves - 1){
+////                currShelf++;
+//                ProductDetailsDAO.updateStoreShelfNumber();
+//
+//            }
         }
 
         return loc;
     }
-
-
+    
+    
     public void updateStoreShelvesNumber(int NumberOfShelvesToAdd){
         /**
          * Updates the number of shelves in the store by adding the specified number of shelves.

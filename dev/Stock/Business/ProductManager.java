@@ -115,6 +115,8 @@ public class ProductManager {
         }
         if (soldProduct.getStoreQuantity() == 0) {
             shortages.addProductToShortages(soldProduct);
+//            shortageDAO.addToShortages(soldProduct.getCatalogNumber());
+//            shortageDAO.writeShortages();
             isProductOutOfStockNow = true;
         }
         productDAO.writeProducts();
@@ -135,6 +137,7 @@ public class ProductManager {
             defectedProduct.markAsDamaged(uniqueCode, reason);
             damagedProductDAO.writeDamagedProduct(uniqueCode,defectedProduct.getCatalogNumber(),reason);
             defectedProduct.getExpirationDates().remove(uniqueCode);
+//            expDateDAO.deleteExpDate(uniqueCode);
             if(defectedProduct.getStorageQuantity() > 0){
                 defectedProduct.storageQuantityMinus1();
             }
@@ -143,6 +146,7 @@ public class ProductManager {
                     defectedProduct.storeQuantityMinus1();
                 }
             }
+//            productDAO.writeProducts();
             damagedProductDAO.writeDamagedProducts();
 
         }
@@ -245,6 +249,11 @@ public class ProductManager {
     public boolean updateForNextDay(LocalDate futureDay){
         boolean thereIsProductOutOfStockNow = false;
         boolean written = false;
+//        Date currentDay = new Date();
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.setTime(currentDay);
+//        calendar.add(Calendar.DAY_OF_YEAR, dayDiff); // Add day number from today
+//        Date futureDay = calendar.getTime();
         HashMap<String, ArrayList<Integer>> expProducts = expDateDAO.expirationForDate(futureDay);
         for (String catalogNumber: expProducts.keySet()){
             Product product = productDAO.getProduct(catalogNumber);
@@ -253,6 +262,14 @@ public class ProductManager {
                 product.getExpirationDates().remove(qr);
                 expDateDAO.deleteExpDate(qr);
                 damagedProductDAO.writeDamagedProducts();
+//                if(product.getStorageQuantity() > 0){
+//                    product.storageQuantityMinus1();
+//                }
+//                else{
+////                    if(product.getStoreQuantity() > 0) {
+////                        product.storeQuantityMinus1();
+////                    }
+//                }
             }
             if(product.isShortage()){
                 shortageDAO.addToShortages(product.getCatalogNumber());
@@ -264,4 +281,5 @@ public class ProductManager {
         DamagedProductDAO.getInstance().writeDamagedProducts();
         return thereIsProductOutOfStockNow;
     }
+
 }

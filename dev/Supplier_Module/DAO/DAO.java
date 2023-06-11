@@ -1,6 +1,8 @@
 package Supplier_Module.DAO;
 
 
+import DBConnect.Connect;
+
 import java.sql.*;
 import java.text.MessageFormat;
 import java.text.ParseException;
@@ -13,7 +15,8 @@ public abstract class DAO {
     protected Connection connection;
     {
         try {
-            connection = DBTables.getInstance().open();
+            //connection = DBTables.getInstance().open(); // TODO
+            connection = Connect.getConnection();
         } catch (Exception e) {
             e.printStackTrace();
         }

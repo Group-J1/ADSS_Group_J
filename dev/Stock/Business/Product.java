@@ -92,7 +92,7 @@ public class Product {
      * @param minimumQuantity  the minimum quantity required to keep in stock
      * @param weight           the weight of the product
      */
-    public Product(AProductCategory category, AProductCategory subCategory, AProductSubCategory subSubCategory,
+        public Product(AProductCategory category, AProductCategory subCategory, AProductSubCategory subSubCategory,
                    Location storageLocation, Location storeLocation, String manufacturer, int quantity,
                    int minimumQuantity, double weight) {
         this.name = subCategory.getName() + " " + subSubCategory.getName();
@@ -202,7 +202,7 @@ public class Product {
     }
 
     public double getDiscount() {
-        return discount;
+            return discount;
     }
 
     public void setDiscount(double discount) {

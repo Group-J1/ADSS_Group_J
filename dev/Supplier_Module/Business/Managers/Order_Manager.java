@@ -159,7 +159,7 @@ public class Order_Manager {
 
 
     /**
-     //create the best time order for every product
+    //create the best time order for every product
      */
     public Map<Supplier,Map<SupplierProduct,Integer>> waitingOrderByRequest(Map<String,Integer> request, LocalDate date){
         Map<Supplier,Map<SupplierProduct,Integer>> waitingOrder = new HashMap<>();

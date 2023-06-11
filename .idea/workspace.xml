@@ -1,7 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cbe26415-1eee-4379-83ae-0b6b96f4e62e" name="Changes" comment="nothing changed" />
+    <list default="true" id="7d12459e-0aca-45d8-931d-7166b7b33ff0" name="Changes" comment="nothing changed">
+      <change afterPath="$PROJECT_DIR$/release/adss2023_v01.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/ChainTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/ChainTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/LocationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/LocationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/MarketManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/MarketManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/ProductTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/ProductTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/ShortagesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/ShortagesTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/StorageTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/StorageTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/StoreTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/StoreTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/SuplyStockTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/SuplyStockTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/SupplyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/SupplyTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/DBConnect/Connect.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DBConnect/Connect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/dev/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Resource/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Resource/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Resource/MarketDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Resource/MarketDB.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Resource/SuperLee.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Resource/SuperLee.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/DamagedReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/DamagedReport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/Market.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/Market.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/OrderReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/OrderReport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/ProductManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/ProductManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/Stock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/Storage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/Store.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/Store.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/Agreement.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/Agreement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/MethodSupply/ByFixedDays.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/MethodSupply/ByFixedDays.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/MethodSupply/BySuperLee.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/MethodSupply/BySuperLee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/MethodSupply/BySupplyDays.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/MethodSupply/BySupplyDays.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/MethodSupply/MethodSupply.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/MethodSupply/MethodSupply.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/SupplierProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/SupplierProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Card/ContactMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Card/ContactMember.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Card/SupplierCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Card/SupplierCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Defs/EOM.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Defs/EOM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Defs/Payment_method.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Defs/Payment_method.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Discount/PrecentageDiscount.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Discount/PrecentageDiscount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Discount/Range.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Discount/Range.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Managers/Order_Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Managers/Order_Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Managers/SupplyManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Managers/SupplyManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Supplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Supplier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/DAO/ContactMemberDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/DAO/ContactMemberDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/DAO/DAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/DAO/DAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/DAO/DBTables.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/DAO/DBTables.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/DAO/ItemOrderDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/DAO/ItemOrderDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/DAO/OrderDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/DAO/OrderDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/DAO/Pair.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/DAO/Pair.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/DAO/SupplierDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/DAO/SupplierDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/DAO/SupplierProductDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/DAO/SupplierProductDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Presentation/AgreementMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Presentation/AgreementMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Presentation/CardMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Presentation/CardMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Presentation/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Presentation/Data.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Presentation/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Presentation/UI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Service/SupplierService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Service/SupplierService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/ADSS_Group_J/ChainTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/ADSS_Group_J/ChainTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/ADSS_Group_J/LocationTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/ADSS_Group_J/LocationTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/ADSS_Group_J/MarketManagerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/ADSS_Group_J/MarketManagerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/ADSS_Group_J/ProductTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/ADSS_Group_J/ProductTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/ADSS_Group_J/ShortagesTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/ADSS_Group_J/ShortagesTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/ADSS_Group_J/StorageTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/ADSS_Group_J/StorageTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/ADSS_Group_J/StoreTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/ADSS_Group_J/StoreTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/ADSS_Group_J/SuplyStockTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/ADSS_Group_J/SuplyStockTests.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/ADSS_Group_J/SupplyTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/ADSS_Group_J/SupplyTest.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,7 +73,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="318643228_318661808_209384783_313558967" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -23,20 +86,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/yuval/IdeaProjects/ADSS_Group_J/dev/Supplier_Module/Presentation&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/Users/yuval/IdeaProjects/ADSS_Group_J"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/dev" />
       <recent name="$PROJECT_DIR$/dev/Supplier_Module/Presentation" />
       <recent name="$PROJECT_DIR$/dev/Supplier_Module/DAO" />
       <recent name="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/MethodSupply" />
-      <recent name="$PROJECT_DIR$/dev/Stock/Service" />
-      <recent name="$PROJECT_DIR$/dev/Stock/Presentation" />
     </key>
   </component>
   <component name="RunManager">
@@ -49,6 +112,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>

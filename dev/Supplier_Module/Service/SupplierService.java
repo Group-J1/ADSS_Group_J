@@ -51,8 +51,13 @@ public class SupplierService {
     }
 
 
-    //
-    public void ConfirmPeriodOrders(List<String> underminimum, LocalDate localDate) {
+//
+public void ConfirmPeriodOrders(List<String> underminimum, LocalDate localDate) {
         order_manager.ConfirmPeriodOrders(underminimum,localDate);
-    }
+}
+
+
+
+
+
 }

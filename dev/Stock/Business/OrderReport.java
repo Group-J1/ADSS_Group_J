@@ -3,6 +3,7 @@ package Stock.Business;
 import java.util.*;
 
 public class OrderReport extends Report {
+    // <product name (subCategory) and size (subSubCategory), quantity>
     protected HashMap<String, Integer> products;
 
     /**
@@ -17,6 +18,8 @@ public class OrderReport extends Report {
     }
 
     public void addProductsToOrderReport(HashMap<String,Product> stock) {
+//        Map<Product, Integer []> itemsInStock = stock.getItemsInStock();
+//        Set<Product> allProducts = itemsInStock.keySet();
         int howMuchToOrder;
         for (Product product : stock.values()) {
             int quantity = product.getStorageQuantity()+product.getStoreQuantity();

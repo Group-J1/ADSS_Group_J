@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 
 public class DBTables {
-    private static final String DB_URL = "jdbc:sqlite:dev/Resource/SuperLee.db";
+    private static final String DB_URL = "jdbc:sqlite:dev/Resource/MarketDB.db";
   //  private static final String DB_URL = "jdbc:sqlite::Resource:SuperLee.db";  // change for jar
 
     public final static String SUPPLIERS = "SUPPLIERS";

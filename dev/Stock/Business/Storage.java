@@ -4,6 +4,7 @@ import Stock.DataAccess.ProductDetailsDAO;
 
 public class Storage {
     private Shelf[] shelves;
+//    private int currShelf;
     private int amountOfShelves;
     private static final ProductDetailsDAO productDetailsDAO = ProductDetailsDAO.getInstance();
 
@@ -26,6 +27,7 @@ public class Storage {
     }
 
     public int getCurrShelf() {
+        //ProductDetailsDAO.getInstance();
         return productDetailsDAO.getStorageShelfNumber();
     }
 
@@ -43,6 +45,7 @@ public class Storage {
          */
         Location loc = null;
         boolean running = true;
+        //ProductDetailsDAO.getInstance();
         while (running) {
 
             int currShelf = productDetailsDAO.getStorageShelfNumber();
@@ -65,6 +68,26 @@ public class Storage {
                 }
             }
         }
+//            int currShelf = ProductDetailsDAO.getStorageShelfNumber();
+//            int indexInShelf = shelves[currShelf].nextFreeIndex();
+//            if (indexInShelf != -1) {
+//                loc = new Location(currShelf,indexInShelf);
+//                product.setStorageLocation(loc);
+//                shelves[currShelf].addItemToShelf(product,indexInShelf);
+//                running = false;
+//            }
+//            else if (currShelf == amountOfShelves - 1) {
+//                running = false;
+//
+//            }
+//            else if (currShelf < amountOfShelves - 1){
+////                currShelf++;
+//                ProductDetailsDAO.resetIndexInShelf();
+//
+//                ProductDetailsDAO.updateStorageShelfNumber();
+//            }
+//        }
+
         return loc;
     }
 

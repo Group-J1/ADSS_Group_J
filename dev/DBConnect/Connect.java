@@ -177,7 +177,7 @@ public class Connect {
             Product product8 = new Product(vegetables,Tomatos,ssc_1kg,new Location(0,7),new Location(0,7), "Sade",11,10,1.0,expDate8);
             Product product9 = new Product(Meat,Steaks,ssc_2kg,new Location(0,8),new Location(0,8), "BBB",17,4,2.0,expDate9);
 
-            // curr product 406
+                        // curr product 406
             Product[] p = {product1,product2,product3,product4,product5,product6,product7,product8,product9};
             for(Product product: p){
                 product.setCatalogNumber();

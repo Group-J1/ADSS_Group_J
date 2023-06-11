@@ -160,7 +160,7 @@ public class SupplyManager {
     }
 
     public void setPayment_method(SupplierCard x, int y) {
-        String str = "";
+                String str = "";
         if(y ==1)
         {
             str="cash";
@@ -343,7 +343,7 @@ public class SupplyManager {
             supplierDAO.getSupplier(id).PrintSupplierDetailes();
         }
     }
-    //check if there is a key in the hash map for this product name
+//check if there is a key in the hash map for this product name
     public boolean isThisProductAlreadyInSystem(String productName) {
         supplierDAO.SelectAllSuppliers();
         if (supplierDAO.getSupplierByProductMap().containsKey(productName))
@@ -400,10 +400,10 @@ public class SupplyManager {
         if(orders == null){
             return false;
         }
-        for (Order order : orders.values()) {
-            if(order.getSupplier().getCard().getSupplier_number()==supId)
-                return true;
-        }
+            for (Order order : orders.values()) {
+                if(order.getSupplier().getCard().getSupplier_number()==supId)
+                    return true;
+            }
         return false;
     }
 

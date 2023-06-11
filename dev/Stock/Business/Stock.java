@@ -137,7 +137,7 @@ public class Stock {
         if(val[1] < quantity){
             status = 3;
         }
-        return status;
+            return status;
     }
 
     public Product findProductByCatalogNumber(String catalogNumber) {
