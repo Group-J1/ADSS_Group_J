@@ -1,8 +1,7 @@
-//import Business.Managers.Order_Manager;
+package LoginRegister.Presentation;//import Business.Managers.Order_Manager;
 //import Business.Managers.SupplyManager;
 //import DataAccessLayer.DAO.DBTables;
 
-import Stock.DataAccess.ProductDAO;
 import Stock.Presentation.StockMainUI;
 import Stock.Service.ProductService;
 import Supplier_Module.Presentation.UI;
@@ -12,8 +11,8 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class LoginMenu {
-    private static LoginMenu loginMenu = null;
+public class StoreManagerMenu {
+    private static StoreManagerMenu storeManagerMenu = null;
     static LocalDate localDate;
 
     static int dayDiff = 0;
@@ -22,16 +21,16 @@ public class LoginMenu {
     Scanner input = new Scanner(System.in);
 
 
-    private LoginMenu() {
+    private StoreManagerMenu() {
         localDate = LocalDate.now();
         ui= UI.getUser();
     }
 
-    public static LoginMenu getLoginMenu() {
-        if (loginMenu == null) {
-            loginMenu = new LoginMenu();
+    public static StoreManagerMenu getLoginMenu() {
+        if (storeManagerMenu == null) {
+            storeManagerMenu = new StoreManagerMenu();
         }
-        return loginMenu;
+        return storeManagerMenu;
     }
 
     public void begin(){

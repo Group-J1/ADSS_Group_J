@@ -22,7 +22,7 @@ public class MainGUI extends JFrame{
     public MainGUI() throws IOException {
         setTitle("SUPER LEE");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(700, 500);
+        setSize(800, 650);
 
         // Create layered pane
         layeredPane = new JLayeredPane();
@@ -69,7 +69,7 @@ public class MainGUI extends JFrame{
         buttonPanel.add(Box.createHorizontalGlue());
 
         // Add button panel to the main panel
-        mainPanel.add(Box.createVerticalStrut(150)); // Adjust the spacing as needed
+        mainPanel.add(Box.createVerticalStrut(210)); // Adjust the spacing as needed
 
         mainPanel.add(buttonPanel,BorderLayout.CENTER);
 
@@ -174,7 +174,7 @@ public class MainGUI extends JFrame{
     private void openStockManager() throws IOException {
         if (stockManagerGUI == null) {
             stockManagerGUI = new StockManagerGUI(this);
-            layeredPane.add(stockManagerGUI, 1);
+            layeredPane.add(stockManagerGUI, JLayeredPane.POPUP_LAYER);
         }
 
         stockManagerGUI.setVisible(true);
