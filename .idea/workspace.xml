@@ -4,27 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a2680182-f1a1-4c54-acd1-98aa3ea3b45e" name="Changes" comment="heck">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/MainGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/MainGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/orderGui/StockManagerGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/orderGui/StockManagerGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/pictures/background.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/pictures/market.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/pictures/stock-manager.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/pictures/store-manager.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/pictures/store-manager.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/pictures/supply.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/storeGui/StoreManagerGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/storeGui/StoreManagerGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/supplyGui/SupplierGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/supplyGui/SupplierGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/ADSS_Group_J/ChainTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/ADSS_Group_J/LocationTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/ADSS_Group_J/MarketManagerTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/ADSS_Group_J/ProductTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/ADSS_Group_J/ShortagesTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/ADSS_Group_J/StorageTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/ADSS_Group_J/StoreTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/ADSS_Group_J/SuplyStockTests.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/ADSS_Group_J/SupplyTest.class" beforeDir="false" />
-    </list>
+    <list default="true" id="a2680182-f1a1-4c54-acd1-98aa3ea3b45e" name="Changes" comment="pictures for bottons" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,10 +20,23 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="318643228_318661808" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="00de3c8d-21bc-48f8-b2d7-73bc193fd032" />
+        <option name="url" value="https://github.com/Group-J1/ADSS_Group_J.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -53,18 +46,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\reuta\Desktop\לימודים\שנה ג\סמסטר ב\ניתוח ותיכון\ספקים מלאי\רבעיות בגיט\ADSS_Group_J\dev\GUI\pictures" />
@@ -107,7 +100,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1686474662536</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL‎-00002" summary="pictures for bottons">
+      <created>1686557753727</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL‎-00002" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1686557753727</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -115,6 +115,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="heck" />
-    <option name="LAST_COMMIT_MESSAGE" value="heck" />
+    <MESSAGE value="pictures for bottons" />
+    <option name="LAST_COMMIT_MESSAGE" value="pictures for bottons" />
   </component>
 </project>
