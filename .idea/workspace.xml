@@ -4,16 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3667c3f5-8697-4f62-91f2-822fbcd2d9e0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/dev/LoginRegister/Business/LoginManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/LoginRegister/Business/RegisterManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/LoginRegister/Presentation/LoginMenuNew.java" afterDir="false" />
+    <list default="true" id="3667c3f5-8697-4f62-91f2-822fbcd2d9e0" name="Changes" comment="merged yo yours branch">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/LoginRegister/Presentation/StoreManagerMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/LoginRegister/DataAccess/StockManagerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/LoginRegister/DataAccess/StockManagerDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/LoginRegister/DataAccess/SupplierManagerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/LoginRegister/DataAccess/SupplierManagerDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Resource/MarketDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Resource/MarketDB.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +42,7 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.loginRegisterGUI">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Connect" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DBConnect.Connect" />
       <module name="ADSS_Group_J" />
@@ -99,9 +91,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.loginRegisterGUI" />
         <item itemvalue="Application.MainGUI" />
-        <item itemvalue="Application.Main" />
         <item itemvalue="Application.Connect" />
       </list>
     </recent_temporary>
@@ -115,6 +107,13 @@
       <option name="presentableId" value="Default" />
       <updated>1686567990962</updated>
     </task>
+    <task id="LOCAL‎00001" summary="merged yo yours branch">
+      <created>1686583052592</created>
+      <option name="number" value="LOCAL‎00001" />
+      <option name="presentableId" value="LOCAL‎00001" />
+      <updated>1686583052593</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -127,5 +126,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="merged yo yours branch" />
+    <option name="LAST_COMMIT_MESSAGE" value="merged yo yours branch" />
   </component>
 </project>
