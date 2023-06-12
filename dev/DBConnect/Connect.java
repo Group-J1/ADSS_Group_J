@@ -195,6 +195,12 @@ public class Connect {
 //            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "3" + "," + 0 + ")");
             stmt.executeUpdate("UPDATE ProductID SET VALUE = 18 WHERE ID = 3");
 
+            String createTableQuery = "CREATE TABLE SupplierManagerUsers ("
+                    + "username VARCHAR(255) PRIMARY KEY NOT NULL,"
+                    + "password VARCHAR(255) NOT NULL)";
+
+            stmt.executeUpdate(createTableQuery);
+
 
 
 
