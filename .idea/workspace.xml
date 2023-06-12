@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3667c3f5-8697-4f62-91f2-822fbcd2d9e0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/dev/LoginRegister/Business/LoginManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/LoginRegister/Business/RegisterManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/LoginRegister/Presentation/LoginMenuNew.java" afterDir="false" />
+    <list default="true" id="3667c3f5-8697-4f62-91f2-822fbcd2d9e0" name="Changes" comment="added loginRegisterGUI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/LoginRegister/Presentation/StoreManagerMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/LoginRegister/DataAccess/StockManagerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/LoginRegister/DataAccess/StockManagerDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/DBConnect/Connect.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DBConnect/Connect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/MainGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/MainGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/loginRegisterGui/loginRegisterGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/loginRegisterGui/loginRegisterGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/LoginRegister/DataAccess/SupplierManagerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/LoginRegister/DataAccess/SupplierManagerDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Resource/MarketDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Resource/MarketDB.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -101,8 +98,8 @@
       <list>
         <item itemvalue="Application.loginRegisterGUI" />
         <item itemvalue="Application.MainGUI" />
-        <item itemvalue="Application.Main" />
         <item itemvalue="Application.Connect" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -115,6 +112,14 @@
       <option name="presentableId" value="Default" />
       <updated>1686567990962</updated>
     </task>
+    <task id="LOCAL-00001" summary="added loginRegisterGUI">
+      <created>1686582373687</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1686582373687</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -127,5 +132,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added loginRegisterGUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="added loginRegisterGUI" />
   </component>
 </project>

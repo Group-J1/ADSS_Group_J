@@ -68,7 +68,7 @@ public class SupplierManagerDAO {
                 java.sql.Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery("SELECT * FROM SupplierManagerUsers WHERE username ='" + user + "'");
                 if (!resultSet.next()) {
-                    PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO StockManagerUsers (username, password) VALUES (?, ?)");
+                    PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO SupplierManagerUsers (username, password) VALUES (?, ?)");
                     preparedStatement.setString(1, user);
                     preparedStatement.setString(2, userToPassword.get(user));
                     preparedStatement.executeUpdate();

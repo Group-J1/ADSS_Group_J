@@ -99,6 +99,11 @@ public class Connect {
             stmt.executeUpdate("DELETE  FROM Damaged");
             stmt.executeUpdate("DELETE FROM Shortages");
             stmt.executeUpdate("DELETE FROM Category");
+
+            stmt.executeUpdate("DELETE FROM SupplierManagerUsers");
+            stmt.executeUpdate("DELETE FROM StockManagerUsers");
+
+
             stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "1" + "," + 0 + ")");
             stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "2" + "," + 0 + ")");
             stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "3" + "," + 0 + ")");
@@ -194,12 +199,12 @@ public class Connect {
             ProductDAO.getInstance().writeProducts();
 //            stmt.executeUpdate("INSERT INTO ProductID (ID, VALUE ) VALUES (" + "3" + "," + 0 + ")");
             stmt.executeUpdate("UPDATE ProductID SET VALUE = 18 WHERE ID = 3");
-
-            String createTableQuery = "CREATE TABLE SupplierManagerUsers ("
-                    + "username VARCHAR(255) PRIMARY KEY NOT NULL,"
-                    + "password VARCHAR(255) NOT NULL)";
-
-            stmt.executeUpdate(createTableQuery);
+//
+//            String createTableQuery = "CREATE TABLE SupplierManagerUsers ("
+//                    + "username VARCHAR(255) PRIMARY KEY NOT NULL,"
+//                    + "password VARCHAR(255) NOT NULL)";
+//
+//            stmt.executeUpdate(createTableQuery);
 
 
 
