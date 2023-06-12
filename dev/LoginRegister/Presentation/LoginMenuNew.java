@@ -30,6 +30,8 @@ public class LoginMenuNew {
 
     private LoginMenuNew(){
         //private constructor
+        localDate = LocalDate.now();
+        ui= UI.getUser();
     }
 
     public static LoginMenuNew getInstance() {
@@ -108,11 +110,11 @@ public class LoginMenuNew {
             password = input.nextLine();
             System.out.println("Please enter your role: ");
             role = input.nextLine();
+            role = role.toLowerCase();
             if (!checkIfRoleValid(role)) {
                 System.out.println("This role does not exist! ");
                 continue;
             }
-            role = role.toLowerCase();
             running = false;
         }
 
@@ -124,8 +126,8 @@ public class LoginMenuNew {
 
     private Boolean checkIfRoleValid(String role) {
 
-        return role.toLowerCase().equals("stock manager") || role.toLowerCase().equals("supplier manager")
-                || role.toLowerCase().equals("store manager");
+        return role.equals("stock manager") || role.equals("supplier manager")
+                || role.equals("store manager");
     }
 
 }

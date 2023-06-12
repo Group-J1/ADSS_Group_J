@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3667c3f5-8697-4f62-91f2-822fbcd2d9e0" name="Changes" comment="added loginRegisterGUI">
+    <list default="true" id="3667c3f5-8697-4f62-91f2-822fbcd2d9e0" name="Changes" comment="there is database again">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/DBConnect/Connect.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DBConnect/Connect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/loginRegisterGui/loginRegisterGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/loginRegisterGui/loginRegisterGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/LoginRegister/Business/LoginManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/LoginRegister/Business/LoginManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/LoginRegister/Business/RegisterManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/LoginRegister/Business/RegisterManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/LoginRegister/DataAccess/StockManagerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/LoginRegister/DataAccess/StockManagerDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/LoginRegister/DataAccess/SupplierManagerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/LoginRegister/DataAccess/SupplierManagerDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/LoginRegister/Presentation/LoginMenuNew.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/LoginRegister/Presentation/LoginMenuNew.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Resource/MarketDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Resource/MarketDB.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -59,7 +62,7 @@
       <recent name="$PROJECT_DIR$/dev/Resource" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Connect">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Connect" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DBConnect.Connect" />
       <module name="ADSS_Group_J" />
@@ -108,9 +111,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Connect" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.loginRegisterGUI" />
+        <item itemvalue="Application.Connect" />
         <item itemvalue="Application.MainGUI" />
       </list>
     </recent_temporary>
@@ -131,7 +134,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686582373687</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="there is database again">
+      <created>1686590253616</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1686590253616</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -147,15 +157,26 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added loginRegisterGUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="added loginRegisterGUI" />
+    <MESSAGE value="there is database again" />
+    <option name="LAST_COMMIT_MESSAGE" value="there is database again" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/dev/DBConnect/Connect.java</url>
-          <line>93</line>
+          <line>101</line>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/dev/LoginRegister/DataAccess/SupplierManagerDAO.java</url>
+          <line>39</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/dev/LoginRegister/DataAccess/StockManagerDAO.java</url>
+          <line>65</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

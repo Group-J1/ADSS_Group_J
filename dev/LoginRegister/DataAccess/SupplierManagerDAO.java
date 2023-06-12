@@ -53,7 +53,7 @@ public class SupplierManagerDAO {
     }
 
     public boolean register(String userName, String password) {
-        if (userToPassword.get(userName) != null) {
+        if (getUserPassword(userName) != null) {
             return false;
         }
         userToPassword.put(userName, password);

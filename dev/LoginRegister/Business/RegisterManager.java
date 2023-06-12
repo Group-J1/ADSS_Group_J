@@ -24,7 +24,7 @@ public class RegisterManager {
     }
 
     public boolean register(String username, String password, String role) {
-        if (role.toLowerCase().equals("store manager")) {
+        if (role.equals("store manager")) {
             if (stockManagerDAO.getUserPassword(username) != null ||
                     supplierManagerDAO.getUserPassword(username) != null) {
                 return false;
@@ -33,7 +33,7 @@ public class RegisterManager {
             supplierManagerDAO.register(username, password);
             return true;
         }
-        else if (role.toLowerCase().equals("stock manager")) {
+        else if (role.equals("stock manager")) {
             // Check if this username is not known as supplier manager
             if (supplierManagerDAO.getUserPassword(username) == null) {
                 return stockManagerDAO.register(username, password);
