@@ -1,16 +1,11 @@
-import Stock.Presentation.StockMainUI;
-
-//public class Main {
-//    public static void main(String[] args) {
-//        StockMainUI stockMainUi = new StockMainUI();
-//        stockMainUi.startMenu();
-//    }
-//
-//}
+import LoginRegister.Presentation.LoginMenuNew;
+import LoginRegister.Presentation.StoreManagerMenu;
 
 public class Main {
     public static void main(String[] args) {
-        LoginMenu loginMenu= LoginMenu.getLoginMenu();
-        loginMenu.begin();
+        //StoreManagerMenu storeManagerMenu = StoreManagerMenu.getLoginMenu();
+        //storeManagerMenu.begin();
+        LoginMenuNew loginMenuNew = LoginMenuNew.getInstance();
+        loginMenuNew.begin();
     }
 }

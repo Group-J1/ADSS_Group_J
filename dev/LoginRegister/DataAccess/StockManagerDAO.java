@@ -76,7 +76,7 @@ public class StockManagerDAO {
         for(String user: userToPassword.keySet()){
             try{
                 java.sql.Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery("SELECT * FROM StockManagerUsers WHERE Category ='" + user + "'");
+                ResultSet resultSet = statement.executeQuery("SELECT * FROM StockManagerUsers WHERE username ='" + user + "'");
                 if(!resultSet.next()){
                     PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO StockManagerUsers (username, password) VALUES (?, ?)");
                     preparedStatement.setString(1, user);

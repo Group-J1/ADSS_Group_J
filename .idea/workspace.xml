@@ -5,11 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3667c3f5-8697-4f62-91f2-822fbcd2d9e0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/dev/LoginRegister/Business/LoginManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dev/LoginRegister/Business/RegisterManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dev/LoginRegister/Presentation/LoginMenuNew.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ADSS_Group_J.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ADSS_Group_J.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/DBConnect/Connect.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DBConnect/Connect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/LoginRegister/Presentation/StoreManagerMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/LoginRegister/DataAccess/StockManagerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/LoginRegister/DataAccess/StockManagerDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/LoginRegister/DataAccess/SupplierManagerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/LoginRegister/DataAccess/SupplierManagerDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Resource/MarketDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Resource/MarketDB.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -40,14 +43,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "node.js.selected.package.tslint": "(autodetect)"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="Application.Connect">
+}</component>
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Connect" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DBConnect.Connect" />
       <module name="ADSS_Group_J" />
@@ -83,9 +86,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.Connect" />
         <item itemvalue="Application.MainGUI" />
-        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
