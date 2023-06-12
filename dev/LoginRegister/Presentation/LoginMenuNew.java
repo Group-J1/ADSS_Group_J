@@ -62,11 +62,11 @@ public class LoginMenuNew {
                     receiveInput();
                     String errorMessage = loginManager.login(username,password,role);
                     if (errorMessage.equals("")) {
-                        if (role.toLowerCase().equals("stock manager")) {
+                        if (role.equals("stock manager")) {
                             StockMainUI stockMainUi = new StockMainUI();
                             stockMainUi.startMenu(localDate);
                         }
-                        else if (role.toLowerCase().equals("supplier manager")) {
+                        else if (role.equals("supplier manager")) {
                             ui.beginSupplierMenu(localDate.plusDays(0));
                         }
                         // store manager
@@ -95,7 +95,7 @@ public class LoginMenuNew {
     }
 
     private void receiveInput() {
-        username = input.nextLine();
+        //username = input.nextLine();
         boolean running = true;
         while (running) {
             System.out.println("Please enter your username: ");
@@ -112,8 +112,10 @@ public class LoginMenuNew {
                 System.out.println("This role does not exist! ");
                 continue;
             }
+            role = role.toLowerCase();
             running = false;
         }
+
     }
 
     private Boolean checkIfUsernameValid(String username) {
