@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="3667c3f5-8697-4f62-91f2-822fbcd2d9e0" name="Changes" comment="added loginRegisterGUI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/LoginRegister/Presentation/LoginMenuNew.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/LoginRegister/Presentation/LoginMenuNew.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/DBConnect/Connect.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DBConnect/Connect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/loginRegisterGui/loginRegisterGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/loginRegisterGui/loginRegisterGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Resource/MarketDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Resource/MarketDB.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -37,14 +38,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/Users/raananpevzner/IdeaProjects/ADSS_Group_J/dev/Resource",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlite"
+    ]
   }
-}</component>
-  <component name="RunManager" selected="Application.loginRegisterGUI">
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/dev/Resource" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Connect">
     <configuration name="Connect" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DBConnect.Connect" />
       <module name="ADSS_Group_J" />
@@ -93,10 +108,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.loginRegisterGUI" />
-        <item itemvalue="Application.MainGUI" />
         <item itemvalue="Application.Connect" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.loginRegisterGUI" />
+        <item itemvalue="Application.MainGUI" />
       </list>
     </recent_temporary>
   </component>
@@ -133,5 +148,16 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added loginRegisterGUI" />
     <option name="LAST_COMMIT_MESSAGE" value="added loginRegisterGUI" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/dev/DBConnect/Connect.java</url>
+          <line>93</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -150,6 +150,7 @@ public class loginRegisterGUI extends JFrame {
                         if (role.toLowerCase().equals("stock manager")) {
                             // show StockManagerGUI
                             try {
+                                mainGUI.setVisible(true);
                                 mainGUI.openStockManager();
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
@@ -159,6 +160,7 @@ public class loginRegisterGUI extends JFrame {
                         else if (role.toLowerCase().equals("supplier manager")) {
                             // show SupplierManagerGUI
                             try {
+                                mainGUI.setVisible(true);
                                 mainGUI.openSupplierManager();
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
@@ -167,6 +169,7 @@ public class loginRegisterGUI extends JFrame {
                         else {
 //                          // show storeManagerGUI
                             try {
+                                mainGUI.setVisible(true);
                                 mainGUI.openStoreManager();
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
