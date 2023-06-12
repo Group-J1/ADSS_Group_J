@@ -1,9 +1,7 @@
-package GUI.storeGui;
+package GUI.storeGui.OrderReport;
 
-import GUI.MainGUI;
-import GUI.storeGui.OrderReport.MainOrderReport;
-import GUI.storeGui.stockReport.MainStockReport;
-import GUI.storeGui.supplyReport.MainSupplyReport;
+import GUI.storeGui.StoreManagerGUI;
+
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -12,15 +10,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class StoreManagerGUI extends JPanel {
-    private MainGUI mainGUI;
+public class MainOrderReport extends JPanel {
+    private StoreManagerGUI mainGUI;
     private JPanel mainPanel;
-    private MainOrderReport mainOrderReport;
-    private MainStockReport mainStockReport;
-    private MainSupplyReport mainSupplyReport;
+    private SpecificOrder specificOrder;
 
-    public StoreManagerGUI(MainGUI mainGUI) throws IOException {
-        this.mainGUI = mainGUI;
+    public MainOrderReport(StoreManagerGUI storeManagerGUI) throws IOException {
+        this.mainGUI = storeManagerGUI;
         setLayout(new BorderLayout());
 
         Image background = null;
@@ -38,33 +34,28 @@ public class StoreManagerGUI extends JPanel {
             }
         };
         mainPanel.setLayout(new BorderLayout());
-        JLabel titleLabel = new JLabel("<html>Welcome Store Manager <br> Please select report type :</html>");
+        JLabel titleLabel = new JLabel("<html>Welcome To Order Report <br> Please select required report  :</html>");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
         mainPanel.add(titleLabel, BorderLayout.NORTH);
         mainPanel.setLayout(new FlowLayout());
 
-
         JButton backButton = new JButton("Back");
-        JPanel buttonPanel = new JPanel();
-//        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel buttonPanel = new JPanel(new GridLayout(2,2,25,25));
 
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
         buttonPanel.setOpaque(false);
 
         // Create buttons
-        JButton supplierReportButton = createButton("supply Reports", "/GUI/pictures/supply.JPG");
-        JButton OrderReportButton = createButton("Order Reports", "/GUI/pictures/order-report.jpg");
-        JButton stockReportButton = createButton("Stock Reports", "/GUI/pictures/stock-manager.jpg");
+        JButton periodic_order = createButton(" Period Orders", "/GUI/pictures/supply.JPG");
+        JButton on_the_way_orders = createButton("On The Way Orders", "/GUI/pictures/stock-manager.jpg");
+        JButton historic_orders = createButton("Historic Orders", "/GUI/pictures/stock-manager.jpg");
+        JButton specific_order = createButton("Specific Order", "/GUI/pictures/supply.JPG");
 
         // Add buttons to the button panel
-        buttonPanel.add(Box.createHorizontalGlue());
-        buttonPanel.add(supplierReportButton);
-        buttonPanel.add(Box.createHorizontalStrut(20));
-        buttonPanel.add(OrderReportButton);
-        buttonPanel.add(Box.createHorizontalStrut(20));
-        buttonPanel.add(stockReportButton);
-        buttonPanel.add(Box.createHorizontalGlue());
+        buttonPanel.add(periodic_order);
+        buttonPanel.add(on_the_way_orders);
+        buttonPanel.add(historic_orders);
+        buttonPanel.add(specific_order);
 
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -78,49 +69,47 @@ public class StoreManagerGUI extends JPanel {
         mainPanel.add(Box.createVerticalStrut(200));
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 
-
-        add(mainPanel, BorderLayout.CENTER);
-
+        add(mainPanel);
 
         // Add action listeners
-        supplierReportButton.addActionListener(new ActionListener() {
+        periodic_order.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                openSupplyReports();
+                openPeriodic_order();
             }
         });
-        stockReportButton.addActionListener(new ActionListener() {
+        on_the_way_orders.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    openstockReports();
+                    openOn_the_way_orders();
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
             }
         });
 
-        OrderReportButton.addActionListener(new ActionListener() {
+        historic_orders.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                try {
-                    openOrderReports();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
+                openHistoric_orders();
+            }
+        });
+        specific_order.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                openSpecific_order();
             }
         });
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mainGUI.showMainPanel();
+                mainGUI.showDefaultPanelFromChild();
             }
         });
 
     }
     private JButton createButton(String text, String imagePath) throws IOException {
         // Create button panel
-        int width = 150;
-        int height = 150;
+        int width = 120;
+        int height = 120;
         JPanel buttonPanel = new JPanel(null);
         buttonPanel.setLayout(new BorderLayout());
-//        buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0)); // Remove label margin
 
         // Create image label
         JLabel imageLabel = new JLabel();
@@ -133,7 +122,7 @@ public class StoreManagerGUI extends JPanel {
         buttonPanel.add(imageLabel, BorderLayout.CENTER);
 
         // Create text label
-        Font buttonFont = new Font("Tahoma", Font.BOLD, 16);
+        Font buttonFont = new Font("Tahoma", Font.BOLD, 12);
         JLabel textLabel = new JLabel(text);
         textLabel.setFont(buttonFont);
         textLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -152,53 +141,32 @@ public class StoreManagerGUI extends JPanel {
         return button;
     }
 
-    private void openSupplyReports() {
-        mainPanel.setVisible(false);
-        if (mainSupplyReport == null) {
-            mainSupplyReport = new MainSupplyReport(this);
-            mainSupplyReport.setPreferredSize(mainPanel.getSize());
-            mainSupplyReport.setMaximumSize(mainPanel.getMaximumSize());
-            mainSupplyReport.setMinimumSize(mainPanel.getMinimumSize());
-            mainSupplyReport.setSize(mainPanel.getSize());
-        }
-
-        add(mainSupplyReport, BorderLayout.CENTER);
-        revalidate();
-        repaint();
-
+    private void openPeriodic_order() {
+        //open new frame of this report
     }
-    private void openstockReports() throws IOException {
+    private void openOn_the_way_orders() throws IOException {
+        //open new frame if this report
+    }
+    private void openHistoric_orders()  {
+        //open new frame if this report
+    }
+    private void openSpecific_order()  {
+        //new frame of categry name
         mainPanel.setVisible(false);
-        if (mainStockReport == null) {
-            mainStockReport = new MainStockReport(this);
-            mainStockReport.setPreferredSize(mainPanel.getSize());
-            mainStockReport.setMaximumSize(mainPanel.getMaximumSize());
-            mainStockReport.setMinimumSize(mainPanel.getMinimumSize());
-            mainStockReport.setSize(mainPanel.getSize());
+
+        if (specificOrder == null) {
+            specificOrder = new SpecificOrder(this);
+            specificOrder.setPreferredSize(mainPanel.getSize());
+            specificOrder.setMaximumSize(mainPanel.getMaximumSize());
+            specificOrder.setMinimumSize(mainPanel.getMinimumSize());
+            specificOrder.setSize(mainPanel.getSize());
         }
 
-        add(mainStockReport, BorderLayout.CENTER);
+        add(specificOrder, BorderLayout.CENTER);
         revalidate();
         repaint();
     }
-
-    private void openOrderReports() throws IOException {
-        mainPanel.setVisible(false);
-        if (mainOrderReport == null) {
-            mainOrderReport = new MainOrderReport(this);
-            mainOrderReport.setPreferredSize(mainPanel.getSize());
-            mainOrderReport.setMaximumSize(mainPanel.getMaximumSize());
-            mainOrderReport.setMinimumSize(mainPanel.getMinimumSize());
-            mainOrderReport.setSize(mainPanel.getSize());
-        }
-
-        add(mainOrderReport, BorderLayout.CENTER);
-        revalidate();
-        repaint();
-    }
-
     // Add methods to open other screens and handle back button
-
     public void showDefaultPanelFromChild() {
         mainPanel.setVisible(true);
         removeCurrentChildPanel();
@@ -207,12 +175,10 @@ public class StoreManagerGUI extends JPanel {
     }
 
     private void removeCurrentChildPanel() {
-        if (mainSupplyReport != null && mainSupplyReport.isShowing()) {
-            remove(mainSupplyReport);
-        } else if (mainOrderReport != null && mainOrderReport.isShowing()) {
-            remove(mainOrderReport);
-        } else if (mainStockReport != null && mainStockReport.isShowing()) {
-            remove(mainStockReport);
+        if (specificOrder != null && specificOrder.isShowing()) {
+            remove(specificOrder);
         }
     }
+
 }
+
