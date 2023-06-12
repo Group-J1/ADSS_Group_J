@@ -50,7 +50,7 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.loginRegisterGUI">
     <configuration name="Connect" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DBConnect.Connect" />
       <module name="ADSS_Group_J" />
@@ -84,11 +84,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="loginRegisterGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GUI.loginRegisterGui.loginRegisterGUI" />
+      <module name="ADSS_Group_J" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="GUI.loginRegisterGui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.loginRegisterGUI" />
+        <item itemvalue="Application.MainGUI" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Connect" />
-        <item itemvalue="Application.MainGUI" />
       </list>
     </recent_temporary>
   </component>
