@@ -37,13 +37,43 @@ public class StockManagement extends JPanel {
         mainPanel.add(titleLabel, BorderLayout.NORTH);
         mainPanel.setLayout(new FlowLayout());
 
+
+        // Create button panel
         JButton backButton = new JButton("Back");
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+        buttonPanel.setOpaque(false);
+
+        // Create buttons
+        JButton productMenu = createButton("Product Menu", "/GUI/pictures/stock-manager.jpg");
+        JButton reportsMenu = createButton("Reports Menu", "/GUI/pictures/order_manager.jpg");
+        JButton marketMenu = createButton("Market Menu", "/GUI/pictures/order_manager.jpg");
+
+
+
+        buttonPanel.add(Box.createHorizontalGlue());
+        buttonPanel.add(productMenu);
+        buttonPanel.add(Box.createHorizontalStrut(60));
+        buttonPanel.add(reportsMenu);
+        buttonPanel.add(Box.createHorizontalStrut(60));
+        buttonPanel.add(marketMenu);
+        buttonPanel.add(Box.createHorizontalGlue());
 
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         bottomPanel.add(backButton);
+
+        // Add button panel to the main panel
+        mainPanel.add(Box.createVerticalStrut(120)); // Adjust the spacing as needed
+        mainPanel.add(buttonPanel,BorderLayout.CENTER);
+
+
+        mainPanel.add(Box.createVerticalStrut(200));
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+
+
         add(mainPanel, BorderLayout.CENTER);
+
 
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -100,5 +130,5 @@ public class StockManagement extends JPanel {
 
     private void removeCurrentChildPanel() {
 
-        }
+    }
 }
