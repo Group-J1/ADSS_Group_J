@@ -1,10 +1,7 @@
 package GUI.loginRegisterGui;
 
 import GUI.MainGUI;
-import GUI.orderGui.AddOrderPanel;
-import GUI.orderGui.DeleteOrderPanel;
-import GUI.orderGui.EditOrderPanel;
-import GUI.orderGui.StockManagerGUI;
+import GUI.stockmanagerGui.StockManagerGUI;
 import GUI.storeGui.StoreManagerGUI;
 import GUI.supplyGui.SupplierGUI;
 import LoginRegister.Business.LoginManager;

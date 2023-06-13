@@ -1,6 +1,7 @@
 package GUI;
 
-import GUI.orderGui.StockManagerGUI;
+import GUI.stockmanagerGui.OrderManagementGui;
+import GUI.stockmanagerGui.StockManagerGUI;
 import GUI.storeGui.StoreManagerGUI;
 import GUI.supplyGui.SupplierGUI;
 
@@ -9,7 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class MainGUI extends JFrame{
@@ -22,7 +22,7 @@ public class MainGUI extends JFrame{
     public MainGUI() throws IOException {
         setTitle("SUPER LEE");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 650);
+        setSize(700, 500);
 
         // Create layered pane
         layeredPane = new JLayeredPane();
@@ -69,7 +69,7 @@ public class MainGUI extends JFrame{
         buttonPanel.add(Box.createHorizontalGlue());
 
         // Add button panel to the main panel
-        mainPanel.add(Box.createVerticalStrut(210)); // Adjust the spacing as needed
+        mainPanel.add(Box.createVerticalStrut(150)); // Adjust the spacing as needed
 
         mainPanel.add(buttonPanel,BorderLayout.CENTER);
 
@@ -152,7 +152,7 @@ public class MainGUI extends JFrame{
         return button;
     }
 
-    private void openSupplierManager() throws IOException {          // used to be private
+    private void openSupplierManager() throws IOException {
         if (supplierGUI == null) {
             supplierGUI = new SupplierGUI(this);
             layeredPane.add(supplierGUI, 1);
@@ -161,7 +161,7 @@ public class MainGUI extends JFrame{
         supplierGUI.setVisible(true);
         mainPanel.setVisible(false);
     }
-    private void openStoreManager() throws IOException {             // used to be private
+    private void openStoreManager() throws IOException {
         if (storeManagerGUI == null) {
             storeManagerGUI = new StoreManagerGUI(this);
             layeredPane.add(storeManagerGUI, 1);
@@ -171,10 +171,10 @@ public class MainGUI extends JFrame{
         mainPanel.setVisible(false);
     }
 
-    private void openStockManager() throws IOException {            // used to be private
+    private void openStockManager() throws IOException {
         if (stockManagerGUI == null) {
             stockManagerGUI = new StockManagerGUI(this);
-            layeredPane.add(stockManagerGUI, JLayeredPane.POPUP_LAYER);
+            layeredPane.add(stockManagerGUI, 1);
         }
 
         stockManagerGUI.setVisible(true);
