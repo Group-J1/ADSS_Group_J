@@ -1,15 +1,33 @@
 package GUI.supplyGui;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class DeleteSupplierPanel extends JPanel {
     private SupplierGUI parent;
+    private JPanel mainPanel;
     public DeleteSupplierPanel(SupplierGUI supplierGUI) {
         this.parent = supplierGUI;
         setLayout(new BorderLayout());
+
+        Image background = null;
+        try {
+            background = ImageIO.read(getClass().getResource("/GUI/pictures/background.jpg"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        Image finalBackground = background;
+        mainPanel = new JPanel(){
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(finalBackground, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
 
         JLabel titleLabel = new JLabel("Delete Supplier");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);

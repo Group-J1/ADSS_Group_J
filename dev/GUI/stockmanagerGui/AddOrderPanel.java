@@ -1,13 +1,11 @@
-package GUI.orderGui;
-import GUI.orderGui.StockManagerGUI;
+package GUI.stockmanagerGui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 public class AddOrderPanel extends JPanel {
-    private StockManagerGUI stockManagerGUI;
-    public AddOrderPanel(StockManagerGUI stockManagerGUI1) {
+    private OrderManagementGui stockManagerGUI;
+    public AddOrderPanel(OrderManagementGui stockManagerGUI1) {
 
         this.stockManagerGUI = stockManagerGUI1;
         setLayout(new BorderLayout());

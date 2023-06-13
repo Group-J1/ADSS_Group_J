@@ -30,6 +30,8 @@ public class LoginMenuNew {
 
     private LoginMenuNew(){
         //private constructor
+        localDate = LocalDate.now();
+        ui= UI.getUser();
     }
 
     public static LoginMenuNew getInstance() {
@@ -62,11 +64,11 @@ public class LoginMenuNew {
                     receiveInput();
                     String errorMessage = loginManager.login(username,password,role);
                     if (errorMessage.equals("")) {
-                        if (role.toLowerCase().equals("stock manager")) {
+                        if (role.equals("stock manager")) {
                             StockMainUI stockMainUi = new StockMainUI();
                             stockMainUi.startMenu(localDate);
                         }
-                        else if (role.toLowerCase().equals("supplier manager")) {
+                        else if (role.equals("supplier manager")) {
                             ui.beginSupplierMenu(localDate.plusDays(0));
                         }
                         // store manager
@@ -95,7 +97,7 @@ public class LoginMenuNew {
     }
 
     private void receiveInput() {
-        username = input.nextLine();
+        //username = input.nextLine();
         boolean running = true;
         while (running) {
             System.out.println("Please enter your username: ");
@@ -108,12 +110,14 @@ public class LoginMenuNew {
             password = input.nextLine();
             System.out.println("Please enter your role: ");
             role = input.nextLine();
+            role = role.toLowerCase();
             if (!checkIfRoleValid(role)) {
                 System.out.println("This role does not exist! ");
                 continue;
             }
             running = false;
         }
+
     }
 
     private Boolean checkIfUsernameValid(String username) {
@@ -122,8 +126,8 @@ public class LoginMenuNew {
 
     private Boolean checkIfRoleValid(String role) {
 
-        return role.toLowerCase().equals("stock manager") || role.toLowerCase().equals("supplier manager")
-                || role.toLowerCase().equals("store manager");
+        return role.equals("stock manager") || role.equals("supplier manager")
+                || role.equals("store manager");
     }
 
 }

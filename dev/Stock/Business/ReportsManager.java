@@ -31,6 +31,12 @@ public class ReportsManager {
         return true;
     }
 
+    public String getStockReport(){
+        StockReport stockReport = new StockReport(productDAO.getAllProducts(),categoryDAO.getAllTheCategories());
+        return "-------- Stock Report --------\n"+ stockReport.toString();
+
+    }
+
     public boolean createStockReportForCategory(String category){
         ArrayList<String> singleCategory = new ArrayList<>();
         singleCategory.add(category);

@@ -1,27 +1,49 @@
 package GUI.loginRegisterGui;
 
 import GUI.MainGUI;
-import GUI.orderGui.AddOrderPanel;
-import GUI.orderGui.DeleteOrderPanel;
-import GUI.orderGui.EditOrderPanel;
+import GUI.stockmanagerGui.StockManagerGUI;
+import GUI.storeGui.StoreManagerGUI;
+import GUI.supplyGui.SupplierGUI;
+import LoginRegister.Business.LoginManager;
+import LoginRegister.Business.RegisterManager;
+import LoginRegister.Presentation.StoreManagerMenu;
+import Stock.Presentation.StockMainUI;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.Console;
 import java.io.IOException;
 
-public class loginRegisterGUI extends JPanel {
+public class loginRegisterGUI extends JFrame {
 
+    private JLayeredPane layeredPane;
     private MainGUI mainGUI;
     private JPanel mainPanel;
-    private AddOrderPanel addOrderPanel;
-    private EditOrderPanel editOrderPanel;
-    private DeleteOrderPanel deleteOrderPanel;
 
-    public loginRegisterGUI(MainGUI mainGUI) throws IOException {
-        this.mainGUI = mainGUI;
+    private SupplierGUI supplierGUI;
+    private StoreManagerGUI storeManagerGUI;
+    private StockManagerGUI stockManagerGUI;
+
+
+    //    public loginRegisterGUI(MainGUI mainGUI) throws IOException {
+    public loginRegisterGUI() throws IOException {
+
+        mainGUI = new MainGUI();
+        setTitle("SUPER LEE");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(800, 650);
+
+        // Create layered pane
+        layeredPane = new JLayeredPane();
+        layeredPane.setLayout(new BorderLayout());
+        getContentPane().add(layeredPane);
+
+
 
         setLayout(new BorderLayout());
 
@@ -67,17 +89,20 @@ public class loginRegisterGUI extends JPanel {
 
 
         JTextField usernameField = new JTextField(15);
-        JTextField passwordField = new JTextField(15);
+        JPasswordField passwordField = new JPasswordField(15);
+//        JTextField passwordField = new JTextField(15);
         JPanel textFieldPanel = new JPanel();
         textFieldPanel.setLayout(new FlowLayout());
         textFieldPanel.setOpaque(false);
         textFieldPanel.add(new JLabel("Username: "));
         textFieldPanel.add(usernameField);
-        textFieldPanel.add(new JLabel("Password: "));
+//        textFieldPanel.add(new JLabel("Password: "));
+//        textFieldPanel.add(passwordField);
+
         textFieldPanel.add(passwordField);
 
         //////////////
-        String[] options = {"Supplier Manager", "Stock Manager", "Market Manager"};
+        String[] options = {"Supplier Manager", "Stock Manager", "Store manager"};
         JComboBox<String> comboBox = new JComboBox<>(options);
 
         // Create panel for combo box
@@ -110,28 +135,98 @@ public class loginRegisterGUI extends JPanel {
         // Add action listeners for the buttons
         Login.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //openAddOrderPanel();
+                // login function
+                String userName, password, role;
+                userName = usernameField.getText();
+                char[] pass = passwordField.getPassword();
+                password = new String(pass);
+                //password = passwordField.getText();
+                role = (String)comboBox.getSelectedItem();
+                if (!checkIfUsernameValid(userName)) {
+                    // raise box of invalid username
+                    JOptionPane.showMessageDialog(null, "The username must contains only letters and numbers! ");
+                }
+                else{
+                    LoginManager loginManager = LoginManager.getInstance();
+                    String errorMessage = loginManager.login(userName,password,role);
+                    if (errorMessage.equals("")) {
+//                        System.out.println("Connected");
+                        mainPanel.setVisible(false);
+                        if (role.toLowerCase().equals("stock manager")) {
+                            // show StockManagerGUI
+//                            try {
+//                                mainGUI.setVisible(true);
+////                                openStockManager();
+//                            }
+//                            catch (IOException ex) {
+//                                throw new RuntimeException(ex);
+//                            }
+
+                        }
+                        else if (role.toLowerCase().equals("supplier manager")) {
+                            // show SupplierManagerGUI
+                            try {
+                                mainGUI.setVisible(true);
+                                openSupplierManager();
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }
+                        else {
+//                          // show storeManagerGUI
+                            try {
+                                mainGUI.setVisible(true);
+//                                mainGUI.openStoreManager();
+                                openStoreManager();
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }
+
+                    }
+                    else {
+//                        System.out.println(errorMessage);
+                        // raise box with error message
+                        JOptionPane.showMessageDialog(null, errorMessage);
+
+                    }
+
+                }
+
             }
         });
 
         register.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //openEditOrderPanel();
+                String userName, password, role;
+                userName = usernameField.getText();
+                char[] pass = passwordField.getPassword();
+                password = new String(pass);
+                //password = passwordField.getText();
+                role = (String)comboBox.getSelectedItem();
+                if (!checkIfUsernameValid(userName)) {
+                    // raise box of invalid username
+                    JOptionPane.showMessageDialog(null, "The username must contains only letters and numbers! ");
+                }
+                else{
+                    RegisterManager registerManager = RegisterManager.getInstance();
+                    if (!registerManager.register(userName, password, role)) {
+                        JOptionPane.showMessageDialog(null,"This username already exist! " );
+
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(null,"Your registration was successful, You can login now! " );
+
+                    }
+                }
 
             }
         });
 
-//        deleteOrderButton.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {
-//                openDeleteOrderPanel();
-//            }
-//        });
-//
-//        backButton.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {
-//                mainGUI.showMainPanel();
-//            }
-//        });
+    }
+    private Boolean checkIfUsernameValid(String username) {
+        return username.matches("[a-zA-Z0-9]+");
     }
     private JButton createButton(String text, String imagePath) throws IOException {
         // Create button panel
@@ -176,18 +271,46 @@ public class loginRegisterGUI extends JPanel {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                JFrame mainGUI = null;
+                loginRegisterGUI login;
                 try {
-                    mainGUI = new JFrame();
-                    mainGUI.setSize(800, 650);
-                    mainGUI.add(new loginRegisterGUI(new MainGUI()));
+
+                    login = new loginRegisterGUI();
+
 
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                mainGUI.setVisible(true);
+                login.setVisible(true);
             }
         });
+    }
+    private void openSupplierManager() throws IOException {          // used to be private
+        if (supplierGUI == null) {
+//            supplierGUI = new SupplierGUI(this);
+//            layeredPane.add(supplierGUI, 1);
+        }
+
+        supplierGUI.setVisible(true);
+        mainPanel.setVisible(false);
+    }
+    private void openStoreManager() throws IOException {             // used to be private
+        if (storeManagerGUI == null) {
+//            storeManagerGUI = new StoreManagerGUI(this);
+//            layeredPane.add(storeManagerGUI, 1);
+        }
+
+        storeManagerGUI.setVisible(true);
+        mainPanel.setVisible(false);
+    }
+
+    private void openStockManager() throws IOException {            // used to be private
+        if (stockManagerGUI == null) {
+//            stockManagerGUI = new StockManagerGUI(this);
+//            layeredPane.add(stockManagerGUI, JLayeredPane.POPUP_LAYER);
+        }
+
+        stockManagerGUI.setVisible(true);
+        mainPanel.setVisible(false);
     }
 }
 

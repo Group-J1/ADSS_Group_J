@@ -1,5 +1,9 @@
 package GUI.storeGui.stockReport;
 import GUI.storeGui.StoreManagerGUI;
+import Stock.Business.StockReport;
+import Stock.DataAccess.CategoryDAO;
+import Stock.DataAccess.ProductDAO;
+import Stock.Service.ReportsService;
 
 
 import javax.imageio.ImageIO;
@@ -172,6 +176,34 @@ public class MainStockReport extends JPanel {
     }
     private void openStockReport()  {
         //open new frame if this report
+
+        String stock = ReportsService.getInstance().getStockReport();
+        stockReportsPanel stockPanel = new stockReportsPanel(this,stock);
+
+        mainPanel.setVisible(false);
+        stockPanel.setVisible(true);
+//        add(stockPanel);
+        revalidate();
+        repaint();
+
+//        JPanel stockRep = new JPanel();
+//        JTextArea textArea = new JTextArea(stock.toString());
+//        stockRep.add(textArea);
+//        JButton back = new JButton("Back");
+//
+//        stockRep.add(back);
+//
+//        mainGUI.add(stockRep);
+//        mainPanel.setVisible(false);
+//        stockRep.setVisible(true);
+//        back.setVisible(true);
+//        back.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {
+//                stockRep.setVisible(false);
+//                mainPanel.setVisible(true);
+//            }
+//        });
+//
     }
     private void openCategoryReport()  {
         //new frame of categry name

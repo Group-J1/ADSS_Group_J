@@ -13,7 +13,7 @@ public class MarketUI {
     public void startMenu(String numOfMarketToManagement) {
         boolean running = true;
         while (running) {
-            System.out.println("-------- Welcome to the Reports menu of market number " + Integer.parseInt(numOfMarketToManagement) + " --------");
+            System.out.println("-------- Welcome to the Market menu of market number " + Integer.parseInt(numOfMarketToManagement) + " --------");
             System.out.println("1) Set discount for product by categories ");
             System.out.println("2) Set discount for product by catalog number ");
             System.out.println("3) Set discount for category ");

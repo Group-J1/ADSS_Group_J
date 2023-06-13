@@ -1,6 +1,4 @@
-package GUI.orderGui;
-
-import GUI.supplyGui.SupplierGUI;
+package GUI.stockmanagerGui;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,8 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class DeleteOrderPanel extends JPanel {
-    private StockManagerGUI parent;
-    public DeleteOrderPanel(StockManagerGUI stockManagerGUI) {
+    private OrderManagementGui parent;
+    public DeleteOrderPanel(OrderManagementGui stockManagerGUI) {
         this.parent = stockManagerGUI;
         setLayout(new BorderLayout());
 

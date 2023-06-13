@@ -24,8 +24,9 @@ public class LoginManager {
     }
 
     public String login(String username, String password, String role) {
+        role = role.toLowerCase();
         // return an empty string if the login is successful or an error message if not
-        if (role.toLowerCase().equals("store manager")) {
+        if (role.equals("store manager")) {
             // Check if store manager is not existing in one relation at least (stock manager and supplier manager)
             if (stockManagerDAO.getUserPassword(username) == null ||
                     supplierManagerDAO.getUserPassword(username) == null) {
@@ -34,15 +35,16 @@ public class LoginManager {
             else {
                 // Check if the username matching to the password
                 if (stockManagerDAO.getUserPassword(username).equals(password) &&
-                        supplierManagerDAO.getUserPassword(password).equals(password)) {
+                        supplierManagerDAO.getUserPassword(username).equals(password)) {
                     return "";
                 }
                 return "Incorrect password";
             }
         }
-        else if (role.toLowerCase().equals("stock manager")) {
+        else if (role.equals("stock manager")) {
             // Check if the username is not known as stock manager
-            if (stockManagerDAO.getUserPassword(username) == null) {
+            if (stockManagerDAO.getUserPassword(username) == null ||
+                    supplierManagerDAO.getUserPassword(username) != null) {
                 return "This username is not known as stock manager";
             }
             else {
@@ -55,7 +57,8 @@ public class LoginManager {
         }
         else {
             // Check if the username is not known as supplier manager
-            if (supplierManagerDAO.getUserPassword(username) == null) {
+            if (supplierManagerDAO.getUserPassword(username) == null ||
+                    stockManagerDAO.getUserPassword(username) != null) {
                 return "This username is not known as supplier manager";
             } else {
                 // Check if the username matching to the password

@@ -1,24 +1,23 @@
-package GUI.orderGui;
+package GUI.stockmanagerGui;
 
 import GUI.MainGUI;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
 
-public class StockManagerGUI extends JPanel {
-    private MainGUI mainGUI;
+public class OrderManagementGui extends JPanel {
+    private StockManagerGUI mainGUI;
     private JPanel mainPanel;
     private AddOrderPanel addOrderPanel;
     private EditOrderPanel editOrderPanel;
     private DeleteOrderPanel deleteOrderPanel;
 
-    public StockManagerGUI(MainGUI mainGUI) throws IOException {
+    public OrderManagementGui(StockManagerGUI mainGUI) throws IOException {
         this.mainGUI = mainGUI;
         setLayout(new BorderLayout());
 
@@ -38,7 +37,7 @@ public class StockManagerGUI extends JPanel {
             }
         };
         mainPanel.setLayout(new BorderLayout());
-        JLabel titleLabel = new JLabel("<html>Welcome storekeeper <br> Please select option :</html>");
+        JLabel titleLabel = new JLabel("<html>Welcome to Order Management <br> Please select option :</html>");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
         mainPanel.add(titleLabel, BorderLayout.NORTH);
@@ -47,23 +46,20 @@ public class StockManagerGUI extends JPanel {
 
         // Create button panel
         JButton backButton = new JButton("Back");
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+        JPanel buttonPanel = new JPanel(new GridLayout(2,2,25,25));
+
         buttonPanel.setOpaque(false);
 
         // Create buttons
         JButton addOrderButton = createButton("Add Period Order", "/GUI/pictures/add-order.jpg");
         JButton editOrderButton = createButton("Edit Period Order", "/GUI/pictures/update.jpg");
         JButton deleteOrderButton = createButton("Delete Period Order", "/GUI/pictures/delete.jpg");
+        JButton defaultOrderButton = createButton("Order Each Product", "/GUI/pictures/order-report.jpg");
 
-
-        buttonPanel.add(Box.createHorizontalGlue());
         buttonPanel.add(addOrderButton);
-        buttonPanel.add(Box.createHorizontalStrut(20));
         buttonPanel.add(editOrderButton);
-        buttonPanel.add(Box.createHorizontalStrut(20));
         buttonPanel.add(deleteOrderButton);
-        buttonPanel.add(Box.createHorizontalGlue());
+        buttonPanel.add(defaultOrderButton);
 
 
         JPanel bottomPanel = new JPanel();
@@ -99,17 +95,23 @@ public class StockManagerGUI extends JPanel {
                 openDeleteOrderPanel();
             }
         });
+        defaultOrderButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "There is periodic order for each product!");
+            }
+        });
+
 
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mainGUI.showMainPanel();
+                mainGUI.showDefaultPanelFromChild();
             }
         });
     }
     private JButton createButton(String text, String imagePath) throws IOException {
         // Create button panel
-        int width = 150;
-        int height = 150;
+        int width = 100;
+        int height = 100;
         JPanel buttonPanel = new JPanel(null);
         buttonPanel.setLayout(new BorderLayout());
 //        buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0)); // Remove label margin
@@ -125,7 +127,7 @@ public class StockManagerGUI extends JPanel {
         buttonPanel.add(imageLabel, BorderLayout.CENTER);
 
         // Create text label
-        Font buttonFont = new Font("Tahoma", Font.BOLD, 16);
+        Font buttonFont = new Font("Tahoma", Font.BOLD, 12);
         JLabel textLabel = new JLabel(text);
         textLabel.setFont(buttonFont);
         textLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -177,7 +179,6 @@ public class StockManagerGUI extends JPanel {
         revalidate();
         repaint();
     }
-
     private void openDeleteOrderPanel() {
         mainPanel.setVisible(false);
 
@@ -193,6 +194,8 @@ public class StockManagerGUI extends JPanel {
         revalidate();
         repaint();
     }
+
+
     public void showDefaultPanelFromChild() {
         mainPanel.setVisible(true);
         removeCurrentChildPanel();
