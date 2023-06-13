@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class MainGUI extends JPanel{
+public class MainGUI extends JFrame{
 
     private JLayeredPane layeredPane;
     private JPanel mainPanel;
@@ -20,14 +20,14 @@ public class MainGUI extends JPanel{
     private StoreManagerGUI storeManagerGUI;
     private StockManagerGUI stockManagerGUI;
     public MainGUI() throws IOException {
-//        setTitle("SUPER LEE");
-//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("SUPER LEE");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 650);
 
         // Create layered pane
         layeredPane = new JLayeredPane();
         layeredPane.setLayout(new BorderLayout());
-//        getContentPane().add(layeredPane);
+        getContentPane().add(layeredPane);
         Image background = ImageIO.read(getClass().getResource("/GUI/pictures/background.jpg"));
         // Create main panel
         mainPanel = new JPanel(){
@@ -152,7 +152,7 @@ public class MainGUI extends JPanel{
         return button;
     }
 
-    public void openSupplierManager() throws IOException {          // used to be private
+    private void openSupplierManager() throws IOException {          // used to be private
         if (supplierGUI == null) {
             supplierGUI = new SupplierGUI(this);
             layeredPane.add(supplierGUI, 1);
@@ -161,7 +161,7 @@ public class MainGUI extends JPanel{
         supplierGUI.setVisible(true);
         mainPanel.setVisible(false);
     }
-    public void openStoreManager() throws IOException {             // used to be private
+    private void openStoreManager() throws IOException {             // used to be private
         if (storeManagerGUI == null) {
             storeManagerGUI = new StoreManagerGUI(this);
             layeredPane.add(storeManagerGUI, 1);
@@ -171,7 +171,7 @@ public class MainGUI extends JPanel{
         mainPanel.setVisible(false);
     }
 
-    public void openStockManager() throws IOException {            // used to be private
+    private void openStockManager() throws IOException {            // used to be private
         if (stockManagerGUI == null) {
             stockManagerGUI = new StockManagerGUI(this);
             layeredPane.add(stockManagerGUI, JLayeredPane.POPUP_LAYER);

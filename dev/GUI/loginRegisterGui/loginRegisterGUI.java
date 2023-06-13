@@ -4,6 +4,9 @@ import GUI.MainGUI;
 import GUI.orderGui.AddOrderPanel;
 import GUI.orderGui.DeleteOrderPanel;
 import GUI.orderGui.EditOrderPanel;
+import GUI.orderGui.StockManagerGUI;
+import GUI.storeGui.StoreManagerGUI;
+import GUI.supplyGui.SupplierGUI;
 import LoginRegister.Business.LoginManager;
 import LoginRegister.Business.RegisterManager;
 import LoginRegister.Presentation.StoreManagerMenu;
@@ -25,7 +28,12 @@ public class loginRegisterGUI extends JFrame {
     private MainGUI mainGUI;
     private JPanel mainPanel;
 
-//    public loginRegisterGUI(MainGUI mainGUI) throws IOException {
+    private SupplierGUI supplierGUI;
+    private StoreManagerGUI storeManagerGUI;
+    private StockManagerGUI stockManagerGUI;
+
+
+    //    public loginRegisterGUI(MainGUI mainGUI) throws IOException {
     public loginRegisterGUI() throws IOException {
 
         mainGUI = new MainGUI();
@@ -149,19 +157,20 @@ public class loginRegisterGUI extends JFrame {
                         mainPanel.setVisible(false);
                         if (role.toLowerCase().equals("stock manager")) {
                             // show StockManagerGUI
-                            try {
-                                mainGUI.setVisible(true);
-                                mainGUI.openStockManager();
-                            } catch (IOException ex) {
-                                throw new RuntimeException(ex);
-                            }
+//                            try {
+//                                mainGUI.setVisible(true);
+////                                openStockManager();
+//                            }
+//                            catch (IOException ex) {
+//                                throw new RuntimeException(ex);
+//                            }
 
                         }
                         else if (role.toLowerCase().equals("supplier manager")) {
                             // show SupplierManagerGUI
                             try {
                                 mainGUI.setVisible(true);
-                                mainGUI.openSupplierManager();
+                                openSupplierManager();
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
                             }
@@ -170,7 +179,8 @@ public class loginRegisterGUI extends JFrame {
 //                          // show storeManagerGUI
                             try {
                                 mainGUI.setVisible(true);
-                                mainGUI.openStoreManager();
+//                                mainGUI.openStoreManager();
+                                openStoreManager();
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
                             }
@@ -276,6 +286,34 @@ public class loginRegisterGUI extends JFrame {
                 login.setVisible(true);
             }
         });
+    }
+    private void openSupplierManager() throws IOException {          // used to be private
+        if (supplierGUI == null) {
+//            supplierGUI = new SupplierGUI(this);
+//            layeredPane.add(supplierGUI, 1);
+        }
+
+        supplierGUI.setVisible(true);
+        mainPanel.setVisible(false);
+    }
+    private void openStoreManager() throws IOException {             // used to be private
+        if (storeManagerGUI == null) {
+//            storeManagerGUI = new StoreManagerGUI(this);
+//            layeredPane.add(storeManagerGUI, 1);
+        }
+
+        storeManagerGUI.setVisible(true);
+        mainPanel.setVisible(false);
+    }
+
+    private void openStockManager() throws IOException {            // used to be private
+        if (stockManagerGUI == null) {
+//            stockManagerGUI = new StockManagerGUI(this);
+//            layeredPane.add(stockManagerGUI, JLayeredPane.POPUP_LAYER);
+        }
+
+        stockManagerGUI.setVisible(true);
+        mainPanel.setVisible(false);
     }
 }
 
