@@ -29,6 +29,7 @@ public class stockReportsPanel extends JPanel {
             }
         }
         textArea.setPreferredSize(new Dimension(longestLineWidth, textArea.getPreferredSize().height));
+        textArea.setEditable(false);
 
 //        textArea.setLineWrap(true);
 //        textArea.setWrapStyleWord(true);

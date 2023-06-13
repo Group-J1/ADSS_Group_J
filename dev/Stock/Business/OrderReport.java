@@ -40,7 +40,7 @@ public class OrderReport extends Report {
         String productInString = "";
         for (String productName : products.keySet()) {
             Integer dataQuantity = products.get(productName);
-            productInString = "- " + productName + ": " + dataQuantity;
+            productInString = "          - " + productName + ": " + dataQuantity;
             stringBuilderStockReport.append(productInString).append(System.lineSeparator());
         }
         return stringBuilderStockReport.toString();

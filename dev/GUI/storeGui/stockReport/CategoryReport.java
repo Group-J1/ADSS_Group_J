@@ -1,4 +1,6 @@
 package GUI.storeGui.stockReport;
+import Stock.Service.ReportsService;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -6,6 +8,7 @@ import java.awt.event.ActionListener;
 
 public class CategoryReport extends JPanel {
     private MainStockReport parent;
+    private JTextArea textArea;
 
     public CategoryReport(MainStockReport mainStockReport){
         this.parent = mainStockReport;
@@ -31,9 +34,24 @@ public class CategoryReport extends JPanel {
         submitButton.addActionListener(e -> {
             String category_name = nameField.getText();
             // Perform
-            // Refresh the panel to show the confirmation panel
-            revalidate();
-            repaint();
+
+            String report = ReportsService.getInstance().getStockReportForCategory(category_name);
+            if (report.equals("")) {
+                JOptionPane.showMessageDialog(null, "Product was not found!");
+            } else {
+                if (textArea != null) {
+                    category_report_.remove(textArea);
+                }
+                textArea = new JTextArea(report);
+                textArea.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
+                // ... (set other properties)
+
+                category_report_.add(textArea);
+
+                // Refresh the panel to show the new textArea
+                revalidate();
+                repaint();
+            }
         });
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JButton backButton = new JButton("Back");
@@ -43,6 +61,7 @@ public class CategoryReport extends JPanel {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 parent.showDefaultPanelFromChild();
+                category_report_.remove(textArea);
             }
         });
 

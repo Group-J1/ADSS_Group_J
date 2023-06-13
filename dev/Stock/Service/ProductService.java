@@ -130,4 +130,8 @@ public class ProductService {
 
     }
 
+    public String productReport(String catalogNumber){
+        return productManager.productReport(catalogNumber);
+    }
+
 }

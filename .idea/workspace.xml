@@ -1,39 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="39b3b9d5-b3c5-4b52-89ae-d50d3cf4bb7e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/dev/GUI/pictures/category-report.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/GUI/pictures/damage-report.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/GUI/pictures/historic-orders.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/GUI/pictures/missing-report.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/GUI/pictures/new-product.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/GUI/pictures/on-the-way-report.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/GUI/pictures/period-report.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/GUI/pictures/product-report.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/GUI/pictures/specific-order.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/GUI/pictures/stock-report.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/StockManagement.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/StockManagerGUI.java" afterDir="false" />
+    <list default="true" id="791a9454-e111-4b33-95de-17326b14e958" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ADSS_Group_J.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ADSS_Group_J.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/MainGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/MainGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/loginRegisterGui/loginRegisterGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/loginRegisterGui/loginRegisterGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/orderGui/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/orderGui/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/orderGui/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/orderGui/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/orderGui/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/orderGui/AddOrderPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/AddOrderPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/orderGui/DeleteOrderPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/DeleteOrderPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/orderGui/EditOrderPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/EditOrderPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/orderGui/StockManagerGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/OrderManagementGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/pictures/market.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/storeGui/StoreManagerGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/storeGui/StoreManagerGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/storeGui/stockReport/CategoryReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/storeGui/stockReport/CategoryReport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/storeGui/stockReport/MainStockReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/storeGui/stockReport/MainStockReport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/storeGui/stockReport/SpecificProductReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/storeGui/stockReport/SpecificProductReport.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/GUI/storeGui/stockReport/stockReportsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/storeGui/stockReport/stockReportsPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/supplyGui/AddSupplierPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/supplyGui/AddSupplierPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/supplyGui/DeleteSupplierPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/supplyGui/DeleteSupplierPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/supplyGui/EditSupplierPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/supplyGui/EditSupplierPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/supplyGui/SupplierGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/supplyGui/SupplierGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/DamagedReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/DamagedReport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/OrderReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/OrderReport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/ProductManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/ProductManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/ReportsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/ReportsManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/Shortages.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/Shortages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/StockReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/StockReport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Service/ReportsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Service/ReportsService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +36,7 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2R9hDImv2aBezwRnul2XtY9nqBz" />
+  <component name="ProjectId" id="2R9mzHZoHOp8om2vepy0UtMH5Gn" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -60,23 +45,14 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/Users/yuval/IdeaProjects/ADSS_Group_J/dev/GUI"
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/dev/GUI" />
-      <recent name="$PROJECT_DIR$/dev/GUI/pictures" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Application.MainGUI">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="ADSS_Group_J" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager">
     <configuration name="MainGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="GUI.MainGUI" />
       <module name="ADSS_Group_J" />
@@ -93,20 +69,23 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainGUI" />
-        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="39b3b9d5-b3c5-4b52-89ae-d50d3cf4bb7e" name="Changes" comment="" />
-      <created>1686668082790</created>
+      <changelist id="791a9454-e111-4b33-95de-17326b14e958" name="Changes" comment="" />
+      <created>1686670931739</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1686668082790</updated>
+      <updated>1686670931739</updated>
+      <workItem from="1686670932833" duration="5106000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -118,5 +97,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/dev/Stock/Business/ReportsManager.java</url>
+          <line>89</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

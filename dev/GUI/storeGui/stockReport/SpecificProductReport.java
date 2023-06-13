@@ -1,5 +1,9 @@
 package GUI.storeGui.stockReport;
 
+import Stock.DataAccess.ProductDAO;
+import Stock.Service.ProductService;
+import Stock.Service.ReportsService;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,6 +11,7 @@ import java.awt.event.ActionListener;
 
 public class SpecificProductReport extends JPanel {
     private MainStockReport parent;
+    private JTextArea textArea;
 
     public SpecificProductReport(MainStockReport mainStockReport) {
         this.parent = mainStockReport;
@@ -30,11 +35,25 @@ public class SpecificProductReport extends JPanel {
 
         // Add action listener for the submit button
         submitButton.addActionListener(e -> {
-            String category_name = nameField.getText();
+            String product = nameField.getText();
             // Perform
-            // Refresh the panel to show the confirmation panel
-            revalidate();
-            repaint();
+            String report = ProductService.getInstance().productReport(product);
+            if (report.equals("")) {
+                JOptionPane.showMessageDialog(null, "Category was not found!");
+            } else {
+                if (textArea != null) {
+                    product_report_.remove(textArea);
+                }
+                textArea = new JTextArea(report);
+                textArea.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
+                // ... (set other properties)
+
+                product_report_.add(textArea);
+
+                // Refresh the panel to show the confirmation panel
+                revalidate();
+                repaint();
+            }
         });
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JButton backButton = new JButton("Back");
@@ -44,6 +63,7 @@ public class SpecificProductReport extends JPanel {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 parent.showDefaultPanelFromChild();
+                product_report_.remove(textArea);
             }
         });
 

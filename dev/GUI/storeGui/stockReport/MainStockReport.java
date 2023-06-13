@@ -167,12 +167,37 @@ public class MainStockReport extends JPanel {
 
     private void openDamageReport() {
         //open new frame of this report
+        String damaged = ReportsService.getInstance().getDamagedReport();
+        stockReportsPanel stockPanel = new stockReportsPanel(this,damaged);
+
+        mainPanel.setVisible(false);
+        stockPanel.setVisible(true);
+//        add(stockPanel);
+        revalidate();
+        repaint();
+
     }
     private void openShortagesReports() throws IOException {
         //open new frame if this report
+        String shortages = ReportsService.getInstance().getShortagesReport();
+        stockReportsPanel stockPanel = new stockReportsPanel(this,shortages);
+
+        mainPanel.setVisible(false);
+        stockPanel.setVisible(true);
+//        add(stockPanel);
+        revalidate();
+        repaint();
     }
     private void openOrderReport()  {
         //open new frame if this report
+        String orderReport = ReportsService.getInstance().getOrderReport();
+        stockReportsPanel stockPanel = new stockReportsPanel(this,orderReport);
+
+        mainPanel.setVisible(false);
+        stockPanel.setVisible(true);
+//        add(stockPanel);
+        revalidate();
+        repaint();
     }
     private void openStockReport()  {
         //open new frame if this report

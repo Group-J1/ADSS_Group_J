@@ -368,4 +368,9 @@ public class Product {
     public void storageQuantityMinus1(){
         storageQuantity--;
     }
+
+    public String productInformation(){
+        String formattedString = String.format("Catalog Number: %s \nProduct Name: %s \nCategory: %s \nStore Location: %s \nStorage Location: %s \nManufacturer: %s \nStore Quantity :%d \nStorage Quantity :%d \nMinimum Quantity :%d  \nWeight :%.2f  \nDiscount :%.2f",catalogNumber, name, category.getName(), storageLocation,storageLocation,manufacturer,storeQuantity,storeQuantity,minimumQuantity,weight,discount);
+        return formattedString.toString();
+    }
 }

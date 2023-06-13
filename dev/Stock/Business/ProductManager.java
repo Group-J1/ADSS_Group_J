@@ -282,4 +282,12 @@ public class ProductManager {
         return thereIsProductOutOfStockNow;
     }
 
+    public String productReport(String catalogNumber){
+        Product product = productDAO.getProduct(catalogNumber);
+        if(product == null){
+            return "";
+        }
+        return product.productInformation();
+    }
+
 }

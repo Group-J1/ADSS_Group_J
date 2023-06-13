@@ -33,7 +33,14 @@ public class ReportsManager {
 
     public String getStockReport(){
         StockReport stockReport = new StockReport(productDAO.getAllProducts(),categoryDAO.getAllTheCategories());
-        return "-------- Stock Report --------\n"+ stockReport.toString();
+        return "-------- Stock Report --------\n"+ stockReport;
+
+    }
+
+    public  String getDamagedReport(){
+        ProductDAO productDAO = ProductDAO.getInstance();
+        DamagedReport damagedReport = new DamagedReport(productDAO.getAllProducts());
+        return "-------- Damaged Report --------\n"+ damagedReport;
 
     }
 
@@ -61,6 +68,12 @@ public class ReportsManager {
         return true;
     }
 
+    public String getOrderReport(){
+        OrderReport orderReport = new OrderReport(productDAO.getAllProducts());
+
+        return "-------- Order Report --------\n" + orderReport;
+    }
+
 
 
     public boolean createDamagedReport(){
@@ -81,5 +94,20 @@ public class ReportsManager {
             return null;
         }
         return shortages;
+    }
+
+    public String getShortagesReport(){
+        Shortages shortages = new Shortages();
+        return "-------- Shortage Report --------\n" + shortages;
+    }
+
+    public String getStockReportForCategory(String category){
+        ArrayList<String> arr = new ArrayList<>();
+        if(CategoryDAO.getInstance().getCategory(category) == null){
+            return "";
+        }
+        arr.add(category);
+        StockReport stockReport = new StockReport(productDAO.getAllProducts(),arr);
+        return "-------- Stock Report --------\n"+stockReport;
     }
 }

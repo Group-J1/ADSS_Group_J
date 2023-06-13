@@ -28,16 +28,26 @@ public class ReportsService {
         return reportsManager.createStockReportForCategory(category);
     }
 
+    public String getStockReportForCategory(String Category){
+        return reportsManager.getStockReportForCategory(Category);
+    }
+
     public boolean createOrderReport(){
         return reportsManager.createOrderReport();
     }
 
+    public String getOrderReport(){
+        return reportsManager.getOrderReport();
+    }
     public boolean createDamagedReport(){
         return reportsManager.createDamagedReport();
     }
 
+    public String getDamagedReport(){return reportsManager.getDamagedReport();}
     public Shortages createShortageReport(){
         return reportsManager.createShortageReport();
     }
+
+    public String getShortagesReport(){ return reportsManager.getShortagesReport(); }
 
 }

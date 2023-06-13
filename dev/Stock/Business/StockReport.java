@@ -54,7 +54,7 @@ public class StockReport extends Report{
             Map<String, Integer> categoryData = products.get(category);
             for (String dataName : categoryData.keySet()) {
                 Integer dataQuantity = categoryData.get(dataName);
-                productInString = "\t- " + dataName + ": " + dataQuantity;
+                productInString = "           - " + dataName + ": " + dataQuantity;
                 stringBuilderStockReport.append(productInString).append(System.lineSeparator());
             }
         }

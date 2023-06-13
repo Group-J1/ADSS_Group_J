@@ -168,7 +168,7 @@ public class DamagedReport extends Report {
             Map<Integer, String> productNameData = products.get(productName);
             for (Integer dataBarCode : productNameData.keySet()) {
                 String dataCause = productNameData.get(dataBarCode);
-                productDetails = "- " + dataBarCode + " : " + dataCause;
+                productDetails = "           - " + dataBarCode + " : " + dataCause;
                 stringBuilderStockReport.append(productDetails).append(System.lineSeparator());
 //                System.out.println("here");
             }

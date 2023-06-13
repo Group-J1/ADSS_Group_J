@@ -110,7 +110,7 @@ public class Shortages {
     public String toString(){
         StringBuilder report = new StringBuilder();
         for(Product product: missing){
-            report.append(product.getName()).append('\n');
+            report.append("          " +product.getName()).append('\n');
         }
         if(report.toString().isEmpty()){
             report.append("No shortages");
