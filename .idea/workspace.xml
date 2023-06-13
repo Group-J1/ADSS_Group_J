@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3667c3f5-8697-4f62-91f2-822fbcd2d9e0" name="Changes" comment="Finished login register options in cli">
+    <list default="true" id="3667c3f5-8697-4f62-91f2-822fbcd2d9e0" name="Changes" comment="creating the reports">
+      <change afterPath="$PROJECT_DIR$/dev/GUI/storeGui/stockReport/stockReportsPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/MainGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/MainGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/loginRegisterGui/loginRegisterGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/loginRegisterGui/loginRegisterGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/GUI/storeGui/stockReport/MainStockReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/storeGui/stockReport/MainStockReport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/ReportsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/ReportsManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/StockReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/StockReport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Service/ReportsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Service/ReportsService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,7 +147,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686593001214</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="creating the reports">
+      <created>1686662611092</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1686662611092</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -163,7 +172,8 @@
     <MESSAGE value="added loginRegisterGUI" />
     <MESSAGE value="there is database again" />
     <MESSAGE value="Finished login register options in cli" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished login register options in cli" />
+    <MESSAGE value="creating the reports" />
+    <option name="LAST_COMMIT_MESSAGE" value="creating the reports" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -185,13 +195,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/dev/GUI/storeGui/stockReport/MainStockReport.java</url>
-          <line>176</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dev/GUI/storeGui/stockReport/MainStockReport.java</url>
           <line>177</line>
-          <option name="timeStamp" value="7" />
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
