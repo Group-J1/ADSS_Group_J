@@ -130,62 +130,26 @@ public class AddNewProductGUI extends JPanel{
 
                     ArrayList<Boolean> inputChecks = new ArrayList<>();
                     String categoryStr = category.getText();
-//                    if (!checkIfOnlyLetters(categoryStr)) {
-//                        System.out.println("your product's category is not a valid string ");
-//                        return;
-//                    }
                     inputChecks.add(checkIfOnlyLetters(categoryStr));
-//                    System.out.println("Whats is your product's sub-category? ");
                     String subCategoryStr = subCategory.getText();
-//                    if (!checkSubCategory(subCategoryStr)) {
-//                        System.out.println("your product's subCategory is not a valid string ");
-//                        return;
-//                    }
                     inputChecks.add(checkSubCategory(subCategoryStr));
-//                    System.out.println("Whats is your product's sub-sub-category, in <double string> format? ");
                     String subSubCategoryStr = subsubCategory.getText();
-//                    if (!checkSubSubCategory(subSubCategoryStr)) {
-//                        return;
-//                    }
                     inputChecks.add(checkSubSubCategory(subSubCategoryStr));
-//                    System.out.println("Whats is your product's manufacturer? ");
                     String manufacturerStr =  manufacturer.getText();
-//                    if (!checkIfOnlyLetters(manufacturerStr)) {
-//                        System.out.println("your product's manufacturer is not a valid string ");
-//                        return;
-//                    }
                     inputChecks.add(checkIfOnlyLetters(manufacturerStr));
 
-//                    System.out.println("Whats is your product's quantity? ");
                     String quantityStr = quantity.getText();
-//                    if (!checkIfPositiveIntegerNumber(quantityStr)) {
-//                        System.out.println("your product's quantity is not a positive number ");
-//                        return;
-//                    }
+
                     inputChecks.add(!quantityStr.equals("") && checkIfPositiveIntegerNumber(quantityStr));
 
-//                    System.out.println("Whats is your product's weight? ");
                     String weightStr = weight.getText();
-//                    if (!checkIfPositiveDoubleNumber(weightStr)) {
-//                        System.out.println("your product's weight is not a positive number ");
-//                        return;
-//                    }
                     inputChecks.add(checkIfPositiveDoubleNumber(weightStr));
 
-
-//                    System.out.println("Whats is your product's minimum quantity? ");
                     String minQuantityStr = minimumQuantity.getText();
-//                    if (!checkIfPositiveIntegerNumber(minQuantityStr)) {
-//                        System.out.println("your product's minimum quantity is not a positive number ");
-//                        return;
-//                    }
                     inputChecks.add(checkIfPositiveIntegerNumber(minQuantityStr));
 
                     String dateStr = date.getText();
                     Date expirationDate = dateInput(dateStr);
-//                    if (expirationDate == null) {
-//                        return;
-//                    }
                     inputChecks.add(expirationDate != null);
                     ProductService productService = ProductService.getInstance();
                     LocalDate localDate = LocalDate.now();
@@ -198,16 +162,11 @@ public class AddNewProductGUI extends JPanel{
                     }
                     if (!productService.addNewProduct(categoryStr, subCategoryStr, subSubCategoryStr, manufacturerStr,
                             Integer.parseInt(quantityStr), Integer.parseInt(minQuantityStr), Double.parseDouble(weightStr), expirationDate,localDate)) {
-//                        System.out.println("The product already exist in stock! ");
-                        //TODO: product already exist
                         JOptionPane.showMessageDialog(null,"The product already exist");
 
 
                     }
                     else {
-//                        SupplierService.getSupplierService().updatePeriodOrders(ProductService.getInstance().sendToSupplierAllProductsQuantity(),localDate);
-//                        System.out.println("Product added! ");
-                        //TODO: product added
                         JOptionPane.showMessageDialog(null,"The new product added");
 
 
@@ -225,9 +184,6 @@ public class AddNewProductGUI extends JPanel{
         }catch (IOException e) {
             System.out.println(e.getMessage());
         }
-
-
-
     }
     private JButton createButton(String text, String imagePath) throws IOException {
         // Create button panel

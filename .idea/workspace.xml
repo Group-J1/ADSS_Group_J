@@ -6,11 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="791a9454-e111-4b33-95de-17326b14e958" name="Changes" comment="finished the ProductMenuGui.java now there is graphic">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/MainGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/MainGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/AddNewProductGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/AddNewProductGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/DiscountByCategoryGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/DiscountByCategoryGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Resource/MarketDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Resource/MarketDB.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/Presentation/ProductUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Presentation/ProductUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/Service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Service/ProductService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,16 +153,6 @@
           <url>file://$PROJECT_DIR$/dev/Stock/Business/ReportsManager.java</url>
           <line>89</line>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dev/GUI/stockmanagerGui/AddNewProductGUI.java</url>
-          <line>190</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/dev/GUI/stockmanagerGui/AddNewProductGUI.java</url>
-          <line>198</line>
-          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
