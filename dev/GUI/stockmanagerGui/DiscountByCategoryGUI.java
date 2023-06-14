@@ -1,7 +1,6 @@
 package GUI.stockmanagerGui;
 
 import Stock.Service.MarketService;
-import Stock.Service.ProductService;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -9,10 +8,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 
 public class DiscountByCategoryGUI extends JPanel {
 
@@ -218,50 +215,15 @@ public class DiscountByCategoryGUI extends JPanel {
                 invalidSubCategoryLabel.setVisible(false);
                 invalidSubSubCategoryLabel.setVisible(false);
                 invalidDiscountLabel.setVisible(false);
+
+                categoryTextField.setText("");
+                subCategoryTextField.setText("");
+                subSubCategoryTextField.setText("");
+                discountTextField.setText("");
+
                 parent.showDefaultPanelFromChild();
             }
         });
-
-    }
-
-
-    private JButton createButton(String text, String imagePath) throws IOException {
-        // Create button panel
-        int width = 100;
-        int height = 100;
-        JPanel buttonPanel = new JPanel(null);
-        buttonPanel.setLayout(new BorderLayout());
-//        buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0)); // Remove label margin
-
-        // Create image label
-        JLabel imageLabel = new JLabel();
-        Image image = ImageIO.read(getClass().getResource(imagePath));
-        Image small_image = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        ImageIcon imageIcon = new ImageIcon(small_image);
-        imageLabel.setIcon(imageIcon);
-        imageLabel.setBounds(0, 0, width, height);
-        imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        buttonPanel.add(imageLabel, BorderLayout.CENTER);
-
-        // Create text label
-        Font buttonFont = new Font("Tahoma", Font.BOLD, 12);
-        JLabel textLabel = new JLabel(text);
-        textLabel.setFont(buttonFont);
-        textLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        buttonPanel.add(textLabel, BorderLayout.SOUTH);
-
-        // Create button
-        JButton button = new JButton();
-        button.setLayout(new BorderLayout());
-        button.add(buttonPanel, BorderLayout.CENTER);
-        button.setFocusPainted(false);
-        button.setVerticalAlignment(SwingConstants.TOP); // Adjust vertical alignment
-        button.setVerticalTextPosition(SwingConstants.BOTTOM); // Adjust vertical text position
-        button.setHorizontalTextPosition(SwingConstants.CENTER); // Adjust horizontal text position
-        button.setMargin(new Insets(0, 0, 0, 0)); // Set the margin to zer
-
-
-        return button;
 
     }
 

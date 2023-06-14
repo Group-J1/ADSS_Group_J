@@ -1,7 +1,7 @@
 package GUI.stockmanagerGui;
 
+import Stock.Service.MarketService;
 import Stock.Service.ProductService;
-import Supplier_Module.Service.SupplierService;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -9,18 +9,17 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
-import java.util.Scanner;
 
 public class AddNewProductGUI extends JPanel{
 
     private JPanel mainPanel;
     private ProductMenuGui parent;
 
-    public AddNewProductGUI(ProductMenuGui parent){
+    public AddNewProductGUI(ProductMenuGui parent) {
         this.parent = parent;
         setLayout(new BorderLayout());
 
@@ -33,158 +32,475 @@ public class AddNewProductGUI extends JPanel{
         }
 
         Image finalBackground = background;
-        mainPanel = new JPanel(){
+        mainPanel = new JPanel() {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 g.drawImage(finalBackground, 0, 0, getWidth(), getHeight(), this);
             }
         };
         mainPanel.setLayout(new BorderLayout());
-        JLabel titleLabel = new JLabel("<html>Welcome to Order Management <br> Please select option :</html>");
+        JLabel titleLabel = new JLabel("<html>Add New Product <br> </html>");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
         mainPanel.add(titleLabel, BorderLayout.NORTH);
-        mainPanel.setLayout(new FlowLayout());
 
+
+        // Create text fields
+        JLabel categoryLabel = new JLabel("Category");
+        Font categoryLabelFont = categoryLabel.getFont();
+        Font categoryLabelNewFont = categoryLabelFont.deriveFont(Font.PLAIN, 18);
+        categoryLabel.setFont(categoryLabelNewFont);
+
+        JTextField categoryTextField = new JTextField();
+        Font categoryTextFieldFont = categoryTextField.getFont();
+        Font categoryTextFieldNewFont = categoryTextFieldFont.deriveFont(Font.PLAIN, 18);
+        categoryTextField.setFont(categoryTextFieldNewFont);
+
+        JLabel invalidCategoryLabel = new JLabel("Invalid Category");
+        Font invalidCategoryLabelFont = invalidCategoryLabel.getFont();
+        Font invalidCategoryLabelNewFont = invalidCategoryLabelFont.deriveFont(Font.PLAIN, 18);
+        invalidCategoryLabel.setFont(invalidCategoryLabelNewFont);
+        invalidCategoryLabel.setForeground(Color.RED);
+
+
+        JLabel subCategoryLabel = new JLabel("Sub Category");
+        Font subCategoryLabelFont = subCategoryLabel.getFont();
+        Font subCategoryLabelNewFont = subCategoryLabelFont.deriveFont(Font.PLAIN, 18);
+        subCategoryLabel.setFont(subCategoryLabelNewFont);
+
+        JTextField subCategoryTextField = new JTextField();
+        Font subCategoryTextFieldFont = subCategoryTextField.getFont();
+        Font subCategoryTextFieldNewFont = subCategoryTextFieldFont.deriveFont(Font.PLAIN, 18);
+        subCategoryTextField.setFont(subCategoryTextFieldNewFont);
+
+        JLabel invalidSubCategoryLabel = new JLabel("Invalid Sub Category");
+        Font invalidSubCategoryLabelFont = invalidSubCategoryLabel.getFont();
+        Font invalidSubCategoryLabelNewFont = invalidSubCategoryLabelFont.deriveFont(Font.PLAIN, 18);
+        invalidSubCategoryLabel.setFont(invalidSubCategoryLabelNewFont);
+        invalidSubCategoryLabel.setForeground(Color.RED);
+
+
+        JLabel subSubCategoryLabel = new JLabel("Sub Sub Category");
+        Font subSubCategoryLabelFont = subSubCategoryLabel.getFont();
+        Font subSubCategoryLabelNewFont = subSubCategoryLabelFont.deriveFont(Font.PLAIN, 18);
+        subSubCategoryLabel.setFont(subSubCategoryLabelNewFont);
+
+        JTextField subSubCategoryTextField = new JTextField();
+        Font subSubCategoryTextFieldFont = subSubCategoryTextField.getFont();
+        Font subSubCategoryTextFieldNewFont = subSubCategoryTextFieldFont.deriveFont(Font.PLAIN, 18);
+        subSubCategoryTextField.setFont(subSubCategoryTextFieldNewFont);
+
+        JLabel invalidSubSubCategoryLabel = new JLabel("Invalid Sub Sub Category");
+        Font invalidSubSubCategoryLabelFont = invalidSubSubCategoryLabel.getFont();
+        Font invalidSubSubCategoryLabelNewFont = invalidSubSubCategoryLabelFont.deriveFont(Font.PLAIN, 18);
+        invalidSubSubCategoryLabel.setFont(invalidSubSubCategoryLabelNewFont);
+        invalidSubSubCategoryLabel.setForeground(Color.RED);
+
+
+        JLabel manufacturerLabel = new JLabel("Manufacturer");
+        Font manufacturerLabelFont = manufacturerLabel.getFont();
+        Font manufacturerLabelNewFont = manufacturerLabelFont.deriveFont(Font.PLAIN, 18);
+        manufacturerLabel.setFont(manufacturerLabelNewFont);
+
+        JTextField manufacturerTextField = new JTextField();
+        Font manufacturerTextFieldFont = manufacturerTextField.getFont();
+        Font manufacturerTextFieldNewFont = manufacturerTextFieldFont.deriveFont(Font.PLAIN, 18);
+        manufacturerTextField.setFont(manufacturerTextFieldNewFont);
+
+        JLabel invalidManufacturerLabel = new JLabel("Invalid Manufacturer");
+        Font invalidManufacturerLabelFont = invalidManufacturerLabel.getFont();
+        Font invalidManufacturerLabelNewFont = invalidManufacturerLabelFont.deriveFont(Font.PLAIN, 18);
+        invalidManufacturerLabel.setFont(invalidManufacturerLabelNewFont);
+        invalidManufacturerLabel.setForeground(Color.RED);
+
+
+        JLabel quantityLabel = new JLabel("Quantity");
+        Font quantityLabelFont = quantityLabel.getFont();
+        Font quantityLabelNewFont = quantityLabelFont.deriveFont(Font.PLAIN, 18);
+        quantityLabel.setFont(quantityLabelNewFont);
+
+        JTextField quantityTextField = new JTextField();
+        Font quantityTextFieldFont = quantityTextField.getFont();
+        Font quantityTextFieldNewFont = quantityTextFieldFont.deriveFont(Font.PLAIN, 18);
+        quantityTextField.setFont(quantityTextFieldNewFont);
+
+        JLabel invalidQuantityLabel = new JLabel("Invalid Quantity");
+        Font invalidQuantityLabelFont = invalidQuantityLabel.getFont();
+        Font invalidQuantityLabelNewFont = invalidQuantityLabelFont.deriveFont(Font.PLAIN, 18);
+        invalidQuantityLabel.setFont(invalidQuantityLabelNewFont);
+        invalidQuantityLabel.setForeground(Color.RED);
+
+
+        JLabel minQuantityLabel = new JLabel("Minimum Quantity");
+        Font minQuantityLabelFont = minQuantityLabel.getFont();
+        Font minQuantityLabelNewFont = minQuantityLabelFont.deriveFont(Font.PLAIN, 18);
+        minQuantityLabel.setFont(minQuantityLabelNewFont);
+
+        JTextField minQuantityTextField = new JTextField();
+        Font minQuantityTextFieldFont = minQuantityTextField.getFont();
+        Font minQuantityTextFieldNewFont = minQuantityTextFieldFont.deriveFont(Font.PLAIN, 18);
+        minQuantityTextField.setFont(minQuantityTextFieldNewFont);
+
+        JLabel invalidMinQuantityLabel = new JLabel("Invalid Minimum Quantity");
+        Font invalidMinQuantityLabelFont = invalidMinQuantityLabel.getFont();
+        Font invalidMinQuantityLabelNewFont = invalidMinQuantityLabelFont.deriveFont(Font.PLAIN, 18);
+        invalidMinQuantityLabel.setFont(invalidMinQuantityLabelNewFont);
+        invalidMinQuantityLabel.setForeground(Color.RED);
+
+        JLabel weightLabel = new JLabel("Weight");
+        Font weightLabelFont = weightLabel.getFont();
+        Font weightLabelNewFont = weightLabelFont.deriveFont(Font.PLAIN, 18);
+        weightLabel.setFont(weightLabelNewFont);
+
+        JTextField weightTextField = new JTextField();
+        Font weightTextFieldFont = weightTextField.getFont();
+        Font weightTextFieldNewFont = weightTextFieldFont.deriveFont(Font.PLAIN, 18);
+        weightTextField.setFont(weightTextFieldNewFont);
+
+        JLabel invalidWeightLabel = new JLabel("Invalid Weight");
+        Font invalidWeightLabelFont = invalidWeightLabel.getFont();
+        Font invalidWeightLabelNewFont = invalidWeightLabelFont.deriveFont(Font.PLAIN, 18);
+        invalidWeightLabel.setFont(invalidWeightLabelNewFont);
+        invalidWeightLabel.setForeground(Color.RED);
+
+
+        JLabel dateLabel = new JLabel("Date (DD/MM/YYYY)");
+        Font dateLabelFont = dateLabel.getFont();
+        Font dateLabelNewFont = dateLabelFont.deriveFont(Font.PLAIN, 18);
+        dateLabel.setFont(dateLabelNewFont);
+
+        JTextField dateTextField = new JTextField();
+        Font dateTextFieldFont = dateTextField.getFont();
+        Font dateTextFieldNewFont = dateTextFieldFont.deriveFont(Font.PLAIN, 18);
+        dateTextField.setFont(dateTextFieldNewFont);
+
+        JLabel invalidDateLabel = new JLabel("Invalid Date");
+        Font invalidDateLabelFont = invalidDateLabel.getFont();
+        Font invalidDateLabelNewFont = invalidDateLabelFont.deriveFont(Font.PLAIN, 18);
+        invalidDateLabel.setFont(invalidDateLabelNewFont);
+        invalidDateLabel.setForeground(Color.RED);
+
+
+        JPanel inputPanel = new JPanel();
+        int verticalGap = 15; // Set the desired vertical gap between rows
+        int horizontalGap = 15;
+        inputPanel.setLayout(new GridLayout(8, 3, horizontalGap, verticalGap));
+        inputPanel.add(categoryLabel);
+        inputPanel.add(categoryTextField);
+        inputPanel.add(invalidCategoryLabel);
+        invalidCategoryLabel.setVisible(false);
+        inputPanel.add(subCategoryLabel);
+        inputPanel.add(subCategoryTextField);
+        inputPanel.add(invalidSubCategoryLabel);
+        invalidSubCategoryLabel.setVisible(false);
+        inputPanel.add(subSubCategoryLabel);
+        inputPanel.add(subSubCategoryTextField);
+        inputPanel.add(invalidSubSubCategoryLabel);
+        invalidSubSubCategoryLabel.setVisible(false);
+        inputPanel.add(manufacturerLabel);
+        inputPanel.add(manufacturerTextField);
+        inputPanel.add(invalidManufacturerLabel);
+        invalidManufacturerLabel.setVisible(false);
+        inputPanel.add(quantityLabel);
+        inputPanel.add(quantityTextField);
+        inputPanel.add(invalidQuantityLabel);
+        invalidQuantityLabel.setVisible(false);
+        inputPanel.add(minQuantityLabel);
+        inputPanel.add(minQuantityTextField);
+        inputPanel.add(invalidMinQuantityLabel);
+        invalidMinQuantityLabel.setVisible(false);
+        inputPanel.add(weightLabel);
+        inputPanel.add(weightTextField);
+        inputPanel.add(invalidWeightLabel);
+        invalidWeightLabel.setVisible(false);
+        inputPanel.add(dateLabel);
+        inputPanel.add(dateTextField);
+        inputPanel.add(invalidDateLabel);
+        invalidDateLabel.setVisible(false);
+
+        inputPanel.setOpaque(false);
+
+        JPanel inputWrapperPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        inputWrapperPanel.add(inputPanel);
+        mainPanel.add(inputWrapperPanel, BorderLayout.WEST);
+
+        inputWrapperPanel.setOpaque(false);
 
         // Create button panel
+        JButton submitButton = new JButton("Submit");
         JButton backButton = new JButton("Back");
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-        buttonPanel.setOpaque(false);
 
-        // Create buttons
-        try {
+        JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        buttonsPanel.add(submitButton);
+        buttonsPanel.add(backButton);
 
-            JPanel texts = new JPanel();
-            texts.setLayout(new BoxLayout(texts, BoxLayout.Y_AXIS));
+        buttonsPanel.setOpaque(false);
 
-            JLabel catLabel = new JLabel("Category");
-            JLabel subCatLabel = new JLabel("Sub Category");
-            JLabel subSubCatLabel = new JLabel("Sub Sub Category");
-            JLabel manuLabel = new JLabel("Manufacturer");
-            JLabel quanLabel = new JLabel("Quantity");
-            JLabel minQuanLabel = new JLabel("Minimum Quantity");
-            JLabel weightLabel = new JLabel("Weight");
-            JLabel dateLabel = new JLabel("Date  (DD/MM/YYYY)");
+        mainPanel.add(buttonsPanel, BorderLayout.SOUTH);
 
-            JTextField category = new JTextField();
-            category.setColumns(15);
-            JTextField subCategory = new JTextField();
-            subCategory.setColumns(15);
-            JTextField subsubCategory = new JTextField();
-            subsubCategory.setColumns(15);
-            JTextField manufacturer = new JTextField();
-            manufacturer.setColumns(15);
-            JTextField quantity = new JTextField();
-            quantity.setColumns(15);
-            JTextField minimumQuantity = new JTextField();
-            minimumQuantity.setColumns(15);
-            JTextField weight = new JTextField();
-            weight.setColumns(15);
-            JTextField date = new JTextField();
-            date.setColumns(15);
-            texts.add(createTextFieldPanel(catLabel, category));
-            texts.add(createTextFieldPanel(subCatLabel, subCategory));
-            texts.add(createTextFieldPanel(subSubCatLabel, subsubCategory));
-            texts.add(createTextFieldPanel(manuLabel, manufacturer));
-            texts.add(createTextFieldPanel(quanLabel, quantity));
-            texts.add(createTextFieldPanel(minQuanLabel, minimumQuantity));
-            texts.add(createTextFieldPanel(weightLabel, weight));
-            texts.add(createTextFieldPanel(dateLabel, date));
-            texts.setVisible(true);
-            mainPanel.add(texts);
+        add(mainPanel, BorderLayout.CENTER);
 
 
+        submitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Handle submit button action
+                ProductService productService = ProductService.getInstance();
+                LocalDate localDate = LocalDate.now();
+                ArrayList<JLabel> inputsArrayList = new ArrayList<>(Arrays.asList(
+                        invalidCategoryLabel, invalidSubCategoryLabel, invalidSubSubCategoryLabel, invalidManufacturerLabel,
+                        invalidQuantityLabel, invalidMinQuantityLabel, invalidWeightLabel, invalidDateLabel));
+                ArrayList<Boolean> inputChecks = new ArrayList<>();
 
+                String categoryStr = categoryTextField.getText();
+                inputChecks.add(checkIfOnlyLetters(categoryStr));
+                String subCategoryStr = subCategoryTextField.getText();
+                inputChecks.add(checkSubCategory(subCategoryStr));
+                String subSubCategoryStr = subSubCategoryTextField.getText();
+                inputChecks.add(checkSubSubCategory(subSubCategoryStr));
+                String manufacturerStr = manufacturerTextField.getText();
+                inputChecks.add(checkIfOnlyLetters(manufacturerStr));
+                String quantityStr = quantityTextField.getText();
+                inputChecks.add(!quantityStr.equals("") && checkIfPositiveIntegerNumber(quantityStr));
+                String weightStr = weightTextField.getText();
+                inputChecks.add(checkIfPositiveDoubleNumber(weightStr));
+                String minQuantityStr = minQuantityTextField.getText();
+                inputChecks.add(checkIfPositiveIntegerNumber(minQuantityStr));
+                String dateStr = dateTextField.getText();
+                Date expirationDate = dateInput(dateStr);
+                inputChecks.add(expirationDate != null);
 
+                boolean allTrue = !inputChecks.contains(Boolean.FALSE);
 
-            JButton submit = createButton("Submit", "/GUI/pictures/stock-manager.jpg");
-
-
-
-
-            buttonPanel.add(Box.createHorizontalGlue());
-            buttonPanel.add(submit);
-            buttonPanel.add(Box.createHorizontalGlue());
-
-            JPanel bottomPanel = new JPanel();
-            bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-            bottomPanel.add(backButton);
-
-            // Add button panel to the main panel
-            mainPanel.add(Box.createVerticalStrut(120)); // Adjust the spacing as needed
-            mainPanel.add(buttonPanel,BorderLayout.CENTER);
-
-
-            mainPanel.add(Box.createVerticalStrut(200));
-            mainPanel.add(bottomPanel, BorderLayout.SOUTH);
-
-
-            add(mainPanel, BorderLayout.CENTER);
-            mainPanel.setVisible(true);
-
-
-            submit.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-
-                    ArrayList<Boolean> inputChecks = new ArrayList<>();
-                    String categoryStr = category.getText();
-                    inputChecks.add(checkIfOnlyLetters(categoryStr));
-                    String subCategoryStr = subCategory.getText();
-                    inputChecks.add(checkSubCategory(subCategoryStr));
-                    String subSubCategoryStr = subsubCategory.getText();
-                    inputChecks.add(checkSubSubCategory(subSubCategoryStr));
-                    String manufacturerStr =  manufacturer.getText();
-                    inputChecks.add(checkIfOnlyLetters(manufacturerStr));
-
-                    String quantityStr = quantity.getText();
-
-                    inputChecks.add(!quantityStr.equals("") && checkIfPositiveIntegerNumber(quantityStr));
-
-                    String weightStr = weight.getText();
-                    inputChecks.add(checkIfPositiveDoubleNumber(weightStr));
-
-                    String minQuantityStr = minimumQuantity.getText();
-                    inputChecks.add(checkIfPositiveIntegerNumber(minQuantityStr));
-
-                    String dateStr = date.getText();
-                    Date expirationDate = dateInput(dateStr);
-                    inputChecks.add(expirationDate != null);
-                    ProductService productService = ProductService.getInstance();
-                    LocalDate localDate = LocalDate.now();
-                    for(int i = 0 ; i < 8;i++){
-                        if(!inputChecks.get(i)) {
-                            JOptionPane.showMessageDialog(null, "there was a problem with the " + i + " input");
-                            return;
+                if (allTrue) {
+                    for (JLabel currentInput : inputsArrayList) {
+                        currentInput.setVisible(false);
+                    }
+                    if (productService.addNewProduct(categoryStr, subCategoryStr, subSubCategoryStr, manufacturerStr,
+                            Integer.parseInt(quantityStr), Integer.parseInt(minQuantityStr), Double.parseDouble(weightStr),
+                            expirationDate, localDate)) {
+                        categoryTextField.setText("");
+                        subCategoryTextField.setText("");
+                        subSubCategoryTextField.setText("");
+                        manufacturerTextField.setText("");
+                        quantityTextField.setText("");
+                        minQuantityTextField.setText("");
+                        weightTextField.setText("");
+                        dateTextField.setText("");
+                        JOptionPane.showMessageDialog(null, "The new product added");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "The product already exist");
+                    }
+                } else {
+                    int index = 0;
+                    for (boolean currentInputValid : inputChecks) {
+                        // Perform operations on the 'element' using the index 'index'
+                        if (!currentInputValid) {
+                            inputsArrayList.get(index).setVisible(true);
+                        } else {
+                            inputsArrayList.get(index).setVisible(false);
                         }
-
-                    }
-                    if (!productService.addNewProduct(categoryStr, subCategoryStr, subSubCategoryStr, manufacturerStr,
-                            Integer.parseInt(quantityStr), Integer.parseInt(minQuantityStr), Double.parseDouble(weightStr), expirationDate,localDate)) {
-                        JOptionPane.showMessageDialog(null,"The product already exist");
-
-
-                    }
-                    else {
-                        JOptionPane.showMessageDialog(null,"The new product added");
-
-
+                        index++;
                     }
                 }
-            });
+            }
+        });
 
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                invalidCategoryLabel.setVisible(false);
+                invalidSubCategoryLabel.setVisible(false);
+                invalidSubSubCategoryLabel.setVisible(false);
+                invalidManufacturerLabel.setVisible(false);
+                invalidQuantityLabel.setVisible(false);
+                invalidMinQuantityLabel.setVisible(false);
+                invalidWeightLabel.setVisible(false);
+                invalidDateLabel.setVisible(false);
 
+                categoryTextField.setText("");
+                subCategoryTextField.setText("");
+                subSubCategoryTextField.setText("");
+                manufacturerTextField.setText("");
+                quantityTextField.setText("");
+                minQuantityTextField.setText("");
+                weightTextField.setText("");
+                dateTextField.setText("");
 
-            backButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    parent.showDefaultPanelFromChild();
-                }
-            });
-        }catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+                parent.showDefaultPanelFromChild();
+            }
+        });
     }
+
+
+
+
+
+
+//
+//
+//
+//
+//        this.parent = parent;
+//        setLayout(new BorderLayout());
+//
+//        // Create main panel
+//        Image background = null;
+//        try {
+//            background = ImageIO.read(getClass().getResource("/GUI/pictures/background.jpg"));
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        Image finalBackground = background;
+//        mainPanel = new JPanel(){
+//            protected void paintComponent(Graphics g) {
+//                super.paintComponent(g);
+//                g.drawImage(finalBackground, 0, 0, getWidth(), getHeight(), this);
+//            }
+//        };
+//        mainPanel.setLayout(new BorderLayout());
+//        JLabel titleLabel = new JLabel("<html>Welcome to Order Management <br> Please select option :</html>");
+//        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+//        titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
+//        mainPanel.add(titleLabel, BorderLayout.NORTH);
+//        mainPanel.setLayout(new FlowLayout());
+//
+//
+//        // Create button panel
+//        JButton backButton = new JButton("Back");
+//        JPanel buttonPanel = new JPanel();
+//        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+//        buttonPanel.setOpaque(false);
+//
+//        // Create buttons
+//        try {
+//
+//            JPanel texts = new JPanel();
+//            texts.setLayout(new BoxLayout(texts, BoxLayout.Y_AXIS));
+//
+//            JLabel catLabel = new JLabel("Category");
+//            JLabel subCatLabel = new JLabel("Sub Category");
+//            JLabel subSubCatLabel = new JLabel("Sub Sub Category");
+//            JLabel manuLabel = new JLabel("Manufacturer");
+//            JLabel quanLabel = new JLabel("Quantity");
+//            JLabel minQuanLabel = new JLabel("Minimum Quantity");
+//            JLabel weightLabel = new JLabel("Weight");
+//            JLabel dateLabel = new JLabel("Date  (DD/MM/YYYY)");
+//
+//            JTextField category = new JTextField();
+//            category.setColumns(15);
+//            JTextField subCategory = new JTextField();
+//            subCategory.setColumns(15);
+//            JTextField subsubCategory = new JTextField();
+//            subsubCategory.setColumns(15);
+//            JTextField manufacturer = new JTextField();
+//            manufacturer.setColumns(15);
+//            JTextField quantity = new JTextField();
+//            quantity.setColumns(15);
+//            JTextField minimumQuantity = new JTextField();
+//            minimumQuantity.setColumns(15);
+//            JTextField weight = new JTextField();
+//            weight.setColumns(15);
+//            JTextField date = new JTextField();
+//            date.setColumns(15);
+//            texts.add(createTextFieldPanel(catLabel, category));
+//            texts.add(createTextFieldPanel(subCatLabel, subCategory));
+//            texts.add(createTextFieldPanel(subSubCatLabel, subsubCategory));
+//            texts.add(createTextFieldPanel(manuLabel, manufacturer));
+//            texts.add(createTextFieldPanel(quanLabel, quantity));
+//            texts.add(createTextFieldPanel(minQuanLabel, minimumQuantity));
+//            texts.add(createTextFieldPanel(weightLabel, weight));
+//            texts.add(createTextFieldPanel(dateLabel, date));
+//            texts.setVisible(true);
+//            mainPanel.add(texts);
+//
+//
+//
+//
+//
+//            JButton submit = createButton("Submit", "/GUI/pictures/stock-manager.jpg");
+//
+//
+//
+//
+//            buttonPanel.add(Box.createHorizontalGlue());
+//            buttonPanel.add(submit);
+//            buttonPanel.add(Box.createHorizontalGlue());
+//
+//            JPanel bottomPanel = new JPanel();
+//            bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+//            bottomPanel.add(backButton);
+//
+//            // Add button panel to the main panel
+//            mainPanel.add(Box.createVerticalStrut(120)); // Adjust the spacing as needed
+//            mainPanel.add(buttonPanel,BorderLayout.CENTER);
+//
+//
+//            mainPanel.add(Box.createVerticalStrut(200));
+//            mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+//
+//
+//            add(mainPanel, BorderLayout.CENTER);
+//            mainPanel.setVisible(true);
+//
+//
+//            submit.addActionListener(new ActionListener() {
+//                public void actionPerformed(ActionEvent e) {
+//
+//                    ArrayList<Boolean> inputChecks = new ArrayList<>();
+//                    String categoryStr = category.getText();
+//                    inputChecks.add(checkIfOnlyLetters(categoryStr));
+//                    String subCategoryStr = subCategory.getText();
+//                    inputChecks.add(checkSubCategory(subCategoryStr));
+//                    String subSubCategoryStr = subsubCategory.getText();
+//                    inputChecks.add(checkSubSubCategory(subSubCategoryStr));
+//                    String manufacturerStr =  manufacturer.getText();
+//                    inputChecks.add(checkIfOnlyLetters(manufacturerStr));
+//
+//                    String quantityStr = quantity.getText();
+//
+//                    inputChecks.add(!quantityStr.equals("") && checkIfPositiveIntegerNumber(quantityStr));
+//
+//                    String weightStr = weight.getText();
+//                    inputChecks.add(checkIfPositiveDoubleNumber(weightStr));
+//
+//                    String minQuantityStr = minimumQuantity.getText();
+//                    inputChecks.add(checkIfPositiveIntegerNumber(minQuantityStr));
+//
+//                    String dateStr = date.getText();
+//                    Date expirationDate = dateInput(dateStr);
+//                    inputChecks.add(expirationDate != null);
+//                    ProductService productService = ProductService.getInstance();
+//                    LocalDate localDate = LocalDate.now();
+//                    for(int i = 0 ; i < 8;i++){
+//                        if(!inputChecks.get(i)) {
+//                            JOptionPane.showMessageDialog(null, "there was a problem with the " + i + " input");
+//                            return;
+//                        }
+//
+//                    }
+//                    if (!productService.addNewProduct(categoryStr, subCategoryStr, subSubCategoryStr, manufacturerStr,
+//                            Integer.parseInt(quantityStr), Integer.parseInt(minQuantityStr), Double.parseDouble(weightStr), expirationDate,localDate)) {
+//                        JOptionPane.showMessageDialog(null,"The product already exist");
+//
+//
+//                    }
+//                    else {
+//                        JOptionPane.showMessageDialog(null,"The new product added");
+//
+//
+//                    }
+//                }
+//            });
+
+//
+//            backButton.addActionListener(new ActionListener() {
+//                public void actionPerformed(ActionEvent e) {
+//                    parent.showDefaultPanelFromChild();
+//                }
+//            });
+//        }catch (IOException e) {
+//            System.out.println(e.getMessage());
+//        }
     private JButton createButton(String text, String imagePath) throws IOException {
         // Create button panel
         int width = 100;
@@ -309,11 +625,6 @@ public class AddNewProductGUI extends JPanel{
          *
          * @return the date entered by the user as a Date object, or null if it is invalid or in the past.
          */
-//        Scanner input = new Scanner(System.in);
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-//
-//        System.out.println("Enter a expiration date in dd/MM/yyyy format:");
-//        String dateStr = input.nextLine();
         if(dateStr.equals("")){
             return null;
         }
@@ -337,6 +648,5 @@ public class AddNewProductGUI extends JPanel{
         Date dateToReturn = Date.from(date.atStartOfDay().atZone(java.time.ZoneId.systemDefault()).toInstant());
         return dateToReturn;
     }
-
 
 }

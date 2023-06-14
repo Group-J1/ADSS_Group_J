@@ -72,10 +72,8 @@ public class ProductManager {
             product.setStoreLocation(store.addProductToStore(product));
             product.setStorageLocation(storage.addProductToStorage(product));
             product.setCatalogNumber();
-            productDAO.writeProducts(); // Freshie check
-            productDetailsDAO.saveDetails(); // Freshie check
-            System.out.println(product.getName() + " : " + (ProductDetailsDAO.getInstance().getProductIdNoUpdate() - quantity + 1)
-                    + "-" + ProductDetailsDAO.getInstance().getProductIdNoUpdate());
+            productDAO.writeProducts();
+            productDetailsDAO.saveDetails();
             return product;
         } else {
             return null;
