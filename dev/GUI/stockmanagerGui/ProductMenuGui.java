@@ -10,6 +10,7 @@ import java.io.IOException;
 public class ProductMenuGui extends JPanel{
     private StockManagement parent;
     private AddNewProductGUI addNewProductGUI;
+    private UpdateQuantityGUI updateQuantityGUI;
     private JPanel mainPanel;
 
     public ProductMenuGui(StockManagement parent){
@@ -95,7 +96,9 @@ public class ProductMenuGui extends JPanel{
         updateQuantity.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 //                parent.showDefaultPanelFromChild();
+                openUpdateQuantity();
             }
+
         });
 
         informDefected.addActionListener(new ActionListener() {
@@ -181,9 +184,10 @@ public class ProductMenuGui extends JPanel{
         if (addNewProductGUI != null && addNewProductGUI.isShowing()) {
             remove(addNewProductGUI);
         }
-//         else if (editSupplierPanel != null && editSupplierPanel.isShowing()) {
-//            remove(editSupplierPanel);
-//        } else if (deleteSupplierPanel != null && deleteSupplierPanel.isShowing()) {
+        if (updateQuantityGUI != null && updateQuantityGUI.isShowing()) {
+            remove(updateQuantityGUI);
+        }
+//        else if (deleteSupplierPanel != null && deleteSupplierPanel.isShowing()) {
 //            remove(deleteSupplierPanel);
 //        }
 
@@ -204,6 +208,23 @@ public class ProductMenuGui extends JPanel{
         revalidate();
         repaint();
     }
+
+    public void openUpdateQuantity(){
+        mainPanel.setVisible(false);
+
+        if (updateQuantityGUI == null) {
+            updateQuantityGUI = new UpdateQuantityGUI(this);
+            updateQuantityGUI.setPreferredSize(mainPanel.getSize());
+            updateQuantityGUI.setMaximumSize(mainPanel.getMaximumSize());
+            updateQuantityGUI.setMinimumSize(mainPanel.getMinimumSize());
+            updateQuantityGUI.setSize(mainPanel.getSize());
+        }
+        updateQuantityGUI.setVisible(true);
+        add(updateQuantityGUI, BorderLayout.CENTER);
+        revalidate();
+        repaint();
+    }
+
 
 }
 
