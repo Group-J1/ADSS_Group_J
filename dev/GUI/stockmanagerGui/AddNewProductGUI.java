@@ -48,31 +48,44 @@ public class AddNewProductGUI extends JPanel{
         // Create buttons
         try {
 
-            JLabel catLabel = new JLabel("category");
-            JLabel subCatLabel = new JLabel("category");
-            JLabel subSubCatLabel = new JLabel("category");
-            JLabel manuLabel = new JLabel("category");
-            JLabel quanLabel = new JLabel("category");
-            JLabel minQuanLabel = new JLabel("category");
-            JLabel weightLabel = new JLabel("category");
+            JPanel texts = new JPanel();
+            texts.setLayout(new BoxLayout(texts, BoxLayout.Y_AXIS));
+
+            JLabel catLabel = new JLabel("Category");
+            JLabel subCatLabel = new JLabel("Sub Category");
+            JLabel subSubCatLabel = new JLabel("Sub Sub Category");
+            JLabel manuLabel = new JLabel("Manufacturer");
+            JLabel quanLabel = new JLabel("Quantity");
+            JLabel minQuanLabel = new JLabel("Minimum Quantity");
+            JLabel weightLabel = new JLabel("Weight");
             JLabel dateLabel = new JLabel("Date  (DD/MM/YYYY)");
 
             JTextField category = new JTextField();
+            category.setColumns(15);
             JTextField subCategory = new JTextField();
+            subCategory.setColumns(15);
             JTextField subsubCategory = new JTextField();
+            subsubCategory.setColumns(15);
             JTextField manufacturer = new JTextField();
+            manufacturer.setColumns(15);
             JTextField quantity = new JTextField();
-            JTextField weight = new JTextField();
+            quantity.setColumns(15);
             JTextField minimumQuantity = new JTextField();
+            minimumQuantity.setColumns(15);
+            JTextField weight = new JTextField();
+            weight.setColumns(15);
             JTextField date = new JTextField();
-            mainPanel.add(createTextFieldPanel(catLabel, category));
-            mainPanel.add(createTextFieldPanel(subCatLabel, subCategory));
-            mainPanel.add(createTextFieldPanel(subSubCatLabel, subsubCategory));
-            mainPanel.add(createTextFieldPanel(manuLabel, manufacturer));
-            mainPanel.add(createTextFieldPanel(quanLabel, quantity));
-            mainPanel.add(createTextFieldPanel(minQuanLabel, minimumQuantity));
-            mainPanel.add(createTextFieldPanel(weightLabel, weight));
-            mainPanel.add(createTextFieldPanel(dateLabel, date));
+            date.setColumns(15);
+            texts.add(createTextFieldPanel(catLabel, category));
+            texts.add(createTextFieldPanel(subCatLabel, subCategory));
+            texts.add(createTextFieldPanel(subSubCatLabel, subsubCategory));
+            texts.add(createTextFieldPanel(manuLabel, manufacturer));
+            texts.add(createTextFieldPanel(quanLabel, quantity));
+            texts.add(createTextFieldPanel(minQuanLabel, minimumQuantity));
+            texts.add(createTextFieldPanel(weightLabel, weight));
+            texts.add(createTextFieldPanel(dateLabel, date));
+            texts.setVisible(true);
+            mainPanel.add(texts);
 
 
 
