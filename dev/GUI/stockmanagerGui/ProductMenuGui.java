@@ -1,5 +1,7 @@
 package GUI.stockmanagerGui;
 
+import GUI.storeGui.stockReport.SpecificProductReport;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +13,10 @@ public class ProductMenuGui extends JPanel{
     private StockManagement parent;
     private AddNewProductGUI addNewProductGUI;
     private UpdateQuantityGUI updateQuantityGUI;
+    private InformDefectedGUI informDefectedGUI;
+    private ChangeMinQuantityGUI changeMinQuantityGUI;
+
+    private ProductInformation productInformation;
     private JPanel mainPanel;
 
     public ProductMenuGui(StockManagement parent){
@@ -104,18 +110,21 @@ public class ProductMenuGui extends JPanel{
         informDefected.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 //                parent.showDefaultPanelFromChild();
+                openInformDefectedProduct();
             }
         });
 
         productInformation.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 //                parent.showDefaultPanelFromChild();
+                openProductInformation();
             }
         });
 
         changeMin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 //                parent.showDefaultPanelFromChild();
+                openChangeMinQuantity();
 
             }
         });
@@ -187,9 +196,15 @@ public class ProductMenuGui extends JPanel{
         if (updateQuantityGUI != null && updateQuantityGUI.isShowing()) {
             remove(updateQuantityGUI);
         }
-//        else if (deleteSupplierPanel != null && deleteSupplierPanel.isShowing()) {
-//            remove(deleteSupplierPanel);
-//        }
+        if (informDefectedGUI != null && informDefectedGUI.isShowing()) {
+            remove(informDefectedGUI);
+        }
+        if(productInformation != null && productInformation.isShowing()){
+          remove(productInformation);
+        }
+        if(changeMinQuantityGUI != null && changeMinQuantityGUI.isShowing()){
+          remove(changeMinQuantityGUI);
+        }
 
     }
 
@@ -224,6 +239,54 @@ public class ProductMenuGui extends JPanel{
         revalidate();
         repaint();
     }
+    public void openInformDefectedProduct(){
+        mainPanel.setVisible(false);
+
+        if (informDefectedGUI == null) {
+            informDefectedGUI = new InformDefectedGUI(this);
+            informDefectedGUI.setPreferredSize(mainPanel.getSize());
+            informDefectedGUI.setMaximumSize(mainPanel.getMaximumSize());
+            informDefectedGUI.setMinimumSize(mainPanel.getMinimumSize());
+            informDefectedGUI.setSize(mainPanel.getSize());
+        }
+        informDefectedGUI.setVisible(true);
+        add(informDefectedGUI, BorderLayout.CENTER);
+        revalidate();
+        repaint();
+    }
+
+    public void openProductInformation(){
+        mainPanel.setVisible(false);
+
+        if (productInformation == null) {
+            productInformation = new ProductInformation(this);
+            productInformation.setPreferredSize(mainPanel.getSize());
+            productInformation.setMaximumSize(mainPanel.getMaximumSize());
+            productInformation.setMinimumSize(mainPanel.getMinimumSize());
+            productInformation.setSize(mainPanel.getSize());
+        }
+        productInformation.setVisible(true);
+        add(productInformation, BorderLayout.CENTER);
+        revalidate();
+        repaint();
+    }
+
+    public void openChangeMinQuantity(){
+        mainPanel.setVisible(false);
+
+        if (changeMinQuantityGUI == null) {
+            changeMinQuantityGUI = new ChangeMinQuantityGUI(this);
+            changeMinQuantityGUI.setPreferredSize(mainPanel.getSize());
+            changeMinQuantityGUI.setMaximumSize(mainPanel.getMaximumSize());
+            changeMinQuantityGUI.setMinimumSize(mainPanel.getMinimumSize());
+            changeMinQuantityGUI.setSize(mainPanel.getSize());
+        }
+        changeMinQuantityGUI.setVisible(true);
+        add(changeMinQuantityGUI, BorderLayout.CENTER);
+        revalidate();
+        repaint();
+    }
+
 
 
 }

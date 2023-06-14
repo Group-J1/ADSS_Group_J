@@ -11,7 +11,6 @@ public class MarketMenuGui extends JPanel{
     private StockManagement parent;
 
     private DiscountByCategoryGUI discountByCategoryGUI;
-
     private JPanel mainPanel;
 
     public MarketMenuGui(StockManagement parent){
