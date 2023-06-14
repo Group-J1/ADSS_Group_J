@@ -14,6 +14,7 @@ public class StockManagement extends JPanel {
     private StockManagerGUI mainGUI;
     private JPanel mainPanel;
     private  ProductMenuGui productMenu;
+    private MarketMenuGui marketMenu;
 
     public StockManagement(StockManagerGUI mainGUI) throws IOException {
         this.mainGUI = mainGUI;
@@ -85,6 +86,13 @@ public class StockManagement extends JPanel {
             }
         });
 
+        marketMenu.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+//                parent.showDefaultPanelFromChild();]
+                openMarketMenu();
+            }
+        });
+
 
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -140,12 +148,20 @@ public class StockManagement extends JPanel {
     }
 
     private void removeCurrentChildPanel() {
-
+        if (productMenu != null && productMenu.isShowing()) {
+            remove(productMenu);
+        }
+        if (marketMenu != null && marketMenu.isShowing()) {
+            remove(marketMenu);
+        }
     }
     public void showMainPanel() {
         mainPanel.setVisible(true);
         if (productMenu != null) {
             productMenu.setVisible(false);
+        }
+        if (marketMenu != null) {
+            marketMenu.setVisible(false);
         }
     }
 
@@ -165,9 +181,23 @@ public class StockManagement extends JPanel {
         revalidate();
         repaint();
     }
-//        mainPanel.setVisible(false);
-//        stockPanel.setVisible(true);
-////        add(stockPanel);
+
+    private void openMarketMenu(){
+
+        mainPanel.setVisible(false);
+
+        if (marketMenu == null) {
+            marketMenu = new MarketMenuGui(this);
+            marketMenu.setPreferredSize(mainPanel.getSize());
+            marketMenu.setMaximumSize(mainPanel.getMaximumSize());
+            marketMenu.setMinimumSize(mainPanel.getMinimumSize());
+            marketMenu.setSize(mainPanel.getSize());
+        }
+        marketMenu.setVisible(true);
+        add(marketMenu, BorderLayout.CENTER);
+        revalidate();
+        repaint();
+    }
 
 
 }

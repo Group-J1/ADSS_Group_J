@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="791a9454-e111-4b33-95de-17326b14e958" name="Changes" comment="added the class of ProductMenuGui.java">
-      <change afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/AddNewProductGUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/MarketMenuGui.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/ProductMenuGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/ProductMenuGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/StockManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/StockManagement.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
