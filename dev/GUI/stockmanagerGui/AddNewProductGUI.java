@@ -331,176 +331,6 @@ public class AddNewProductGUI extends JPanel{
     }
 
 
-
-
-
-
-//
-//
-//
-//
-//        this.parent = parent;
-//        setLayout(new BorderLayout());
-//
-//        // Create main panel
-//        Image background = null;
-//        try {
-//            background = ImageIO.read(getClass().getResource("/GUI/pictures/background.jpg"));
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        Image finalBackground = background;
-//        mainPanel = new JPanel(){
-//            protected void paintComponent(Graphics g) {
-//                super.paintComponent(g);
-//                g.drawImage(finalBackground, 0, 0, getWidth(), getHeight(), this);
-//            }
-//        };
-//        mainPanel.setLayout(new BorderLayout());
-//        JLabel titleLabel = new JLabel("<html>Welcome to Order Management <br> Please select option :</html>");
-//        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-//        titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
-//        mainPanel.add(titleLabel, BorderLayout.NORTH);
-//        mainPanel.setLayout(new FlowLayout());
-//
-//
-//        // Create button panel
-//        JButton backButton = new JButton("Back");
-//        JPanel buttonPanel = new JPanel();
-//        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-//        buttonPanel.setOpaque(false);
-//
-//        // Create buttons
-//        try {
-//
-//            JPanel texts = new JPanel();
-//            texts.setLayout(new BoxLayout(texts, BoxLayout.Y_AXIS));
-//
-//            JLabel catLabel = new JLabel("Category");
-//            JLabel subCatLabel = new JLabel("Sub Category");
-//            JLabel subSubCatLabel = new JLabel("Sub Sub Category");
-//            JLabel manuLabel = new JLabel("Manufacturer");
-//            JLabel quanLabel = new JLabel("Quantity");
-//            JLabel minQuanLabel = new JLabel("Minimum Quantity");
-//            JLabel weightLabel = new JLabel("Weight");
-//            JLabel dateLabel = new JLabel("Date  (DD/MM/YYYY)");
-//
-//            JTextField category = new JTextField();
-//            category.setColumns(15);
-//            JTextField subCategory = new JTextField();
-//            subCategory.setColumns(15);
-//            JTextField subsubCategory = new JTextField();
-//            subsubCategory.setColumns(15);
-//            JTextField manufacturer = new JTextField();
-//            manufacturer.setColumns(15);
-//            JTextField quantity = new JTextField();
-//            quantity.setColumns(15);
-//            JTextField minimumQuantity = new JTextField();
-//            minimumQuantity.setColumns(15);
-//            JTextField weight = new JTextField();
-//            weight.setColumns(15);
-//            JTextField date = new JTextField();
-//            date.setColumns(15);
-//            texts.add(createTextFieldPanel(catLabel, category));
-//            texts.add(createTextFieldPanel(subCatLabel, subCategory));
-//            texts.add(createTextFieldPanel(subSubCatLabel, subsubCategory));
-//            texts.add(createTextFieldPanel(manuLabel, manufacturer));
-//            texts.add(createTextFieldPanel(quanLabel, quantity));
-//            texts.add(createTextFieldPanel(minQuanLabel, minimumQuantity));
-//            texts.add(createTextFieldPanel(weightLabel, weight));
-//            texts.add(createTextFieldPanel(dateLabel, date));
-//            texts.setVisible(true);
-//            mainPanel.add(texts);
-//
-//
-//
-//
-//
-//            JButton submit = createButton("Submit", "/GUI/pictures/stock-manager.jpg");
-//
-//
-//
-//
-//            buttonPanel.add(Box.createHorizontalGlue());
-//            buttonPanel.add(submit);
-//            buttonPanel.add(Box.createHorizontalGlue());
-//
-//            JPanel bottomPanel = new JPanel();
-//            bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-//            bottomPanel.add(backButton);
-//
-//            // Add button panel to the main panel
-//            mainPanel.add(Box.createVerticalStrut(120)); // Adjust the spacing as needed
-//            mainPanel.add(buttonPanel,BorderLayout.CENTER);
-//
-//
-//            mainPanel.add(Box.createVerticalStrut(200));
-//            mainPanel.add(bottomPanel, BorderLayout.SOUTH);
-//
-//
-//            add(mainPanel, BorderLayout.CENTER);
-//            mainPanel.setVisible(true);
-//
-//
-//            submit.addActionListener(new ActionListener() {
-//                public void actionPerformed(ActionEvent e) {
-//
-//                    ArrayList<Boolean> inputChecks = new ArrayList<>();
-//                    String categoryStr = category.getText();
-//                    inputChecks.add(checkIfOnlyLetters(categoryStr));
-//                    String subCategoryStr = subCategory.getText();
-//                    inputChecks.add(checkSubCategory(subCategoryStr));
-//                    String subSubCategoryStr = subsubCategory.getText();
-//                    inputChecks.add(checkSubSubCategory(subSubCategoryStr));
-//                    String manufacturerStr =  manufacturer.getText();
-//                    inputChecks.add(checkIfOnlyLetters(manufacturerStr));
-//
-//                    String quantityStr = quantity.getText();
-//
-//                    inputChecks.add(!quantityStr.equals("") && checkIfPositiveIntegerNumber(quantityStr));
-//
-//                    String weightStr = weight.getText();
-//                    inputChecks.add(checkIfPositiveDoubleNumber(weightStr));
-//
-//                    String minQuantityStr = minimumQuantity.getText();
-//                    inputChecks.add(checkIfPositiveIntegerNumber(minQuantityStr));
-//
-//                    String dateStr = date.getText();
-//                    Date expirationDate = dateInput(dateStr);
-//                    inputChecks.add(expirationDate != null);
-//                    ProductService productService = ProductService.getInstance();
-//                    LocalDate localDate = LocalDate.now();
-//                    for(int i = 0 ; i < 8;i++){
-//                        if(!inputChecks.get(i)) {
-//                            JOptionPane.showMessageDialog(null, "there was a problem with the " + i + " input");
-//                            return;
-//                        }
-//
-//                    }
-//                    if (!productService.addNewProduct(categoryStr, subCategoryStr, subSubCategoryStr, manufacturerStr,
-//                            Integer.parseInt(quantityStr), Integer.parseInt(minQuantityStr), Double.parseDouble(weightStr), expirationDate,localDate)) {
-//                        JOptionPane.showMessageDialog(null,"The product already exist");
-//
-//
-//                    }
-//                    else {
-//                        JOptionPane.showMessageDialog(null,"The new product added");
-//
-//
-//                    }
-//                }
-//            });
-
-//
-//            backButton.addActionListener(new ActionListener() {
-//                public void actionPerformed(ActionEvent e) {
-//                    parent.showDefaultPanelFromChild();
-//                }
-//            });
-//        }catch (IOException e) {
-//            System.out.println(e.getMessage());
-//        }
     private JButton createButton(String text, String imagePath) throws IOException {
         // Create button panel
         int width = 100;
@@ -625,13 +455,16 @@ public class AddNewProductGUI extends JPanel{
          *
          * @return the date entered by the user as a Date object, or null if it is invalid or in the past.
          */
-        if(dateStr.equals("")){
+        if(dateStr.equals("") || !dateStr.contains("/")){
             return null;
         }
         String[] parts = dateStr.split("/");
-        int day = Integer.parseInt(parts[0]);
-        int month = Integer.parseInt(parts[1]);
-        int year = Integer.parseInt(parts[2]);
+        try {
+            int day = Integer.parseInt(parts[0]);
+            int month = Integer.parseInt(parts[1]);
+            int year = Integer.parseInt(parts[2]);
+
+
         if (month < 1 || month > 12) {
             System.out.println("Invalid month");
             return null;
@@ -647,6 +480,9 @@ public class AddNewProductGUI extends JPanel{
         }
         Date dateToReturn = Date.from(date.atStartOfDay().atZone(java.time.ZoneId.systemDefault()).toInstant());
         return dateToReturn;
+        } catch (NumberFormatException e) {
+            return null;
+        }
     }
 
 }

@@ -7,9 +7,7 @@
     <list default="true" id="791a9454-e111-4b33-95de-17326b14e958" name="Changes" comment="Finished class DiscountByCategoryGUI (working!!!)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/AddNewProductGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/AddNewProductGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/DiscountByCategoryGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/DiscountByCategoryGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Resource/MarketDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Resource/MarketDB.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/ProductManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/ProductManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
