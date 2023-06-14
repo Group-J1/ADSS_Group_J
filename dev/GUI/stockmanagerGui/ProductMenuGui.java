@@ -9,6 +9,7 @@ import java.io.IOException;
 
 public class ProductMenuGui extends JPanel{
     private StockManagement parent;
+    private AddNewProductGUI addNewProductGUI;
     private JPanel mainPanel;
 
     public ProductMenuGui(StockManagement parent){
@@ -87,6 +88,7 @@ public class ProductMenuGui extends JPanel{
         addNewProduct.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 //                parent.showDefaultPanelFromChild();
+                openAddNewProduct();
             }
         });
 
@@ -176,8 +178,33 @@ public class ProductMenuGui extends JPanel{
     }
 
     private void removeCurrentChildPanel() {
+        if (addNewProductGUI != null && addNewProductGUI.isShowing()) {
+            remove(addNewProductGUI);
+        }
+//         else if (editSupplierPanel != null && editSupplierPanel.isShowing()) {
+//            remove(editSupplierPanel);
+//        } else if (deleteSupplierPanel != null && deleteSupplierPanel.isShowing()) {
+//            remove(deleteSupplierPanel);
+//        }
 
     }
+
+    public void openAddNewProduct(){
+        mainPanel.setVisible(false);
+
+        if (addNewProductGUI == null) {
+            addNewProductGUI = new AddNewProductGUI(this);
+            addNewProductGUI.setPreferredSize(mainPanel.getSize());
+            addNewProductGUI.setMaximumSize(mainPanel.getMaximumSize());
+            addNewProductGUI.setMinimumSize(mainPanel.getMinimumSize());
+            addNewProductGUI.setSize(mainPanel.getSize());
+        }
+        addNewProductGUI.setVisible(true);
+        add(addNewProductGUI, BorderLayout.CENTER);
+        revalidate();
+        repaint();
+    }
+
 }
 
 
