@@ -1,11 +1,19 @@
 package GUI.stockmanagerGui;
 
+import Stock.Service.ProductService;
+import Supplier_Module.Service.SupplierService;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Scanner;
 
 public class AddNewProductGUI extends JPanel{
 
@@ -119,8 +127,91 @@ public class AddNewProductGUI extends JPanel{
 
             submit.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-//                parent.showDefaultPanelFromChild();
 
+                    ArrayList<Boolean> inputChecks = new ArrayList<>();
+                    String categoryStr = category.getText();
+//                    if (!checkIfOnlyLetters(categoryStr)) {
+//                        System.out.println("your product's category is not a valid string ");
+//                        return;
+//                    }
+                    inputChecks.add(checkIfOnlyLetters(categoryStr));
+//                    System.out.println("Whats is your product's sub-category? ");
+                    String subCategoryStr = subCategory.getText();
+//                    if (!checkSubCategory(subCategoryStr)) {
+//                        System.out.println("your product's subCategory is not a valid string ");
+//                        return;
+//                    }
+                    inputChecks.add(checkSubCategory(subCategoryStr));
+//                    System.out.println("Whats is your product's sub-sub-category, in <double string> format? ");
+                    String subSubCategoryStr = subsubCategory.getText();
+//                    if (!checkSubSubCategory(subSubCategoryStr)) {
+//                        return;
+//                    }
+                    inputChecks.add(checkSubSubCategory(subSubCategoryStr));
+//                    System.out.println("Whats is your product's manufacturer? ");
+                    String manufacturerStr =  manufacturer.getText();
+//                    if (!checkIfOnlyLetters(manufacturerStr)) {
+//                        System.out.println("your product's manufacturer is not a valid string ");
+//                        return;
+//                    }
+                    inputChecks.add(checkIfOnlyLetters(manufacturerStr));
+
+//                    System.out.println("Whats is your product's quantity? ");
+                    String quantityStr = quantity.getText();
+//                    if (!checkIfPositiveIntegerNumber(quantityStr)) {
+//                        System.out.println("your product's quantity is not a positive number ");
+//                        return;
+//                    }
+                    inputChecks.add(!quantityStr.equals("") && checkIfPositiveIntegerNumber(quantityStr));
+
+//                    System.out.println("Whats is your product's weight? ");
+                    String weightStr = weight.getText();
+//                    if (!checkIfPositiveDoubleNumber(weightStr)) {
+//                        System.out.println("your product's weight is not a positive number ");
+//                        return;
+//                    }
+                    inputChecks.add(checkIfPositiveDoubleNumber(weightStr));
+
+
+//                    System.out.println("Whats is your product's minimum quantity? ");
+                    String minQuantityStr = minimumQuantity.getText();
+//                    if (!checkIfPositiveIntegerNumber(minQuantityStr)) {
+//                        System.out.println("your product's minimum quantity is not a positive number ");
+//                        return;
+//                    }
+                    inputChecks.add(checkIfPositiveIntegerNumber(minQuantityStr));
+
+                    String dateStr = date.getText();
+                    Date expirationDate = dateInput(dateStr);
+//                    if (expirationDate == null) {
+//                        return;
+//                    }
+                    inputChecks.add(expirationDate != null);
+                    ProductService productService = ProductService.getInstance();
+                    LocalDate localDate = LocalDate.now();
+                    for(int i = 0 ; i < 8;i++){
+                        if(!inputChecks.get(i)) {
+                            JOptionPane.showMessageDialog(null, "there was a problem with the " + i + " input");
+                            return;
+                        }
+
+                    }
+                    if (!productService.addNewProduct(categoryStr, subCategoryStr, subSubCategoryStr, manufacturerStr,
+                            Integer.parseInt(quantityStr), Integer.parseInt(minQuantityStr), Double.parseDouble(weightStr), expirationDate,localDate)) {
+//                        System.out.println("The product already exist in stock! ");
+                        //TODO: product already exist
+                        JOptionPane.showMessageDialog(null,"The product already exist");
+
+
+                    }
+                    else {
+//                        SupplierService.getSupplierService().updatePeriodOrders(ProductService.getInstance().sendToSupplierAllProductsQuantity(),localDate);
+//                        System.out.println("Product added! ");
+                        //TODO: product added
+                        JOptionPane.showMessageDialog(null,"The new product added");
+
+
+                    }
                 }
             });
 
@@ -194,7 +285,102 @@ public class AddNewProductGUI extends JPanel{
         panel.add(textField, BorderLayout.CENTER);
         return panel;
     }
-
+    Boolean checkIfOnlyLetters(String str) {
+        if(str.equals("")){
+            return false;
+        }
+        return str.matches("[a-zA-Z' ]+");
+    }
+    Boolean checkSubCategory(String subCategoryStr) {
+        if(subCategoryStr.equals("")){
+            return false;
+        }
+        return subCategoryStr.matches("[a-zA-Z0-9% ]+");
+    }
+    Boolean checkSubSubCategory(String subSubCategoryStr) {
+        /**
+         * Checks if a given string matches the format of a sub-sub category.
+         * A sub-sub category should consist of a number followed by a space and a word.
+         * Example: "5 g", "1 l", "10 p".
+         *
+         * @param subSubCategoryStr the sub-sub category string to be checked
+         * @return true if the string matches the format of a sub-sub category, false otherwise
+         */
+        if(subSubCategoryStr.equals("")){
+            return false;
+        }
+        String[] parts = subSubCategoryStr.split(" ");
+        double number;
+        if (parts.length == 2) {
+            try {
+                number = Double.parseDouble(parts[0]);
+                String word = parts[1];
+                if (!word.matches("[a-zA-Z]+")) {
+                    System.out.println("your product's subSubCategory does not match the format.");
+                    return false;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("your product's subSubCategory does not match the format.");
+                return false;
+            }
+        } else {
+            System.out.println("your product's subSubCategory does not match the format.");
+            return false;
+        }
+        return true;
+    }
+    boolean checkIfPositiveDoubleNumber(String number) {
+        try {
+            if(number.equals("")){
+                return false;
+            }
+            double d = Double.parseDouble(number);
+            return d > 0.0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+    Boolean checkIfPositiveIntegerNumber(String number) {
+        if(number.equals("")){
+            return false;
+        }
+        return number.matches("[0-9]+") && Integer.parseInt(number) > 0;
+    }
+    Date dateInput(String dateStr) {
+        /**
+         * Prompts the user to enter a date in the format "dd/MM/yyyy" and returns it as a Date object.
+         * If the date is invalid or in the past, it prints an error message and returns null.
+         *
+         * @return the date entered by the user as a Date object, or null if it is invalid or in the past.
+         */
+//        Scanner input = new Scanner(System.in);
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//
+//        System.out.println("Enter a expiration date in dd/MM/yyyy format:");
+//        String dateStr = input.nextLine();
+        if(dateStr.equals("")){
+            return null;
+        }
+        String[] parts = dateStr.split("/");
+        int day = Integer.parseInt(parts[0]);
+        int month = Integer.parseInt(parts[1]);
+        int year = Integer.parseInt(parts[2]);
+        if (month < 1 || month > 12) {
+            System.out.println("Invalid month");
+            return null;
+        }
+        if (day < 1 || day > 31) {
+            System.out.println("Invalid day");
+            return null;
+        }
+        LocalDate date = LocalDate.of(year, month, day);
+        if (date.isBefore(LocalDate.now())) {
+            System.out.println("The date is not in the future");
+            return null;
+        }
+        Date dateToReturn = Date.from(date.atStartOfDay().atZone(java.time.ZoneId.systemDefault()).toInstant());
+        return dateToReturn;
+    }
 
 
 }

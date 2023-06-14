@@ -4,6 +4,8 @@ import GUI.stockmanagerGui.OrderManagementGui;
 import GUI.stockmanagerGui.StockManagerGUI;
 import GUI.storeGui.StoreManagerGUI;
 import GUI.supplyGui.SupplierGUI;
+import Stock.Business.ProductManager;
+import Stock.Service.ProductService;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -20,6 +22,7 @@ public class MainGUI extends JFrame{
     private StoreManagerGUI storeManagerGUI;
     private StockManagerGUI stockManagerGUI;
     public MainGUI() throws IOException {
+        ProductService.getInstance().setProductManager();
         setTitle("SUPER LEE");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(700, 500);

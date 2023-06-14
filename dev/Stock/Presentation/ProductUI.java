@@ -502,6 +502,7 @@ public class ProductUI {
         LocalDate date = LocalDate.of(year, month, day);
         if (date.isBefore(LocalDate.now())) {
             System.out.println("The date is not in the future");
+            return null;
         }
         Date dateToReturn = Date.from(date.atStartOfDay().atZone(java.time.ZoneId.systemDefault()).toInstant());
         return dateToReturn;

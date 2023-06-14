@@ -15,6 +15,7 @@ public class ProductService {
     //private static final ReportsManager reportsManager = ReportsManager.getInstance();
 
 
+
     private static ProductService instance = null;
     private ProductService() {
         // private constructor
@@ -37,7 +38,7 @@ public class ProductService {
             newProductToSupplier.put(newProductIfSuccessfullyAdded.getCatalogNumber(), minQuantity);
             //functionToSupplierForNewProduct(newProductToSupplier);
         }
-        SupplierService.getSupplierService().updatePeriodOrders(ProductService.getInstance().sendToSupplierAllProductsQuantity(),localDate);
+//        SupplierService.getSupplierService().updatePeriodOrders(ProductService.getInstance().sendToSupplierAllProductsQuantity(),localDate);
         return newProductIfSuccessfullyAdded != null;
     }
 
@@ -117,8 +118,7 @@ public class ProductService {
             }
         }
         ArrayList<String> productsCatalogNumber = new ArrayList<>(),nameList = new ArrayList<>();
-        // מערך של המספר הקטלוגי של המוצרים מתחת למינימום
-        // מפה של המוצרים עם החוסר והכמות של הקו הירוק
+
         if (productManager.getAllProductsUnderMinimumQuantity() != null) {
             productsCatalogNumber = productManager.getAllProductsUnderMinimumQuantity();
             for(String cataltogNumber: productsCatalogNumber){
@@ -132,6 +132,12 @@ public class ProductService {
 
     public String productReport(String catalogNumber){
         return productManager.productReport(catalogNumber);
+    }
+
+    public void setProductManager(){
+        ProductManager.setShortages(new Shortages());
+        ProductManager.setStore(new Store(30));
+        ProductManager.setStorage(new Storage(30));
     }
 
 }
