@@ -7,16 +7,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class MarketMenuGui extends JPanel{
-    private StockManagement parent;
-
-    private DiscountByCategoryGUI discountByCategoryGUI;
+public class DiscountByCategoryGUI extends JPanel{
 
     private JPanel mainPanel;
+    private MarketMenuGui parent;
 
-    public MarketMenuGui(StockManagement parent){
+    public DiscountByCategoryGUI(MarketMenuGui parent){
         this.parent = parent;
-
         setLayout(new BorderLayout());
 
         // Create main panel
@@ -35,7 +32,7 @@ public class MarketMenuGui extends JPanel{
             }
         };
         mainPanel.setLayout(new BorderLayout());
-        JLabel titleLabel = new JLabel("<html>Welcome to Market Menu <br> Please select option :</html>");
+        JLabel titleLabel = new JLabel("<html>Discount By Category</html>");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
         mainPanel.add(titleLabel, BorderLayout.NORTH);
@@ -50,22 +47,36 @@ public class MarketMenuGui extends JPanel{
 
         // Create buttons
         try {
-            JButton discountByCategory = createButton("Discount By Category", "/GUI/pictures/stock-manager.jpg");
-            JButton discountByCatalogNumber = createButton("Discount By Catalog Number", "/GUI/pictures/order_manager.jpg");
-            JButton discountForCategory = createButton("Discount For Category", "/GUI/pictures/order_manager.jpg");
-            JButton addShelves = createButton("Add Shelves", "/GUI/pictures/order_manager.jpg");
 
+            JPanel texts = new JPanel();
+            texts.setLayout(new BoxLayout(texts, BoxLayout.Y_AXIS));
 
+            JLabel categoryLabel = new JLabel("Category");
+            JLabel subCategoryLabel = new JLabel("Sub Category");
+            JLabel subSubCategoryLabel = new JLabel("Sub Sub Category");
+            JLabel discountLabel = new JLabel("Discount");
+
+            JTextField category = new JTextField();
+            category.setColumns(15);
+            JTextField subCategory = new JTextField();
+            subCategory.setColumns(15);
+            JTextField subSubCategory = new JTextField();
+            subSubCategory.setColumns(15);
+            JTextField discount = new JTextField();
+            discount.setColumns(15);
+
+            texts.add(createTextFieldPanel(categoryLabel, category));
+            texts.add(createTextFieldPanel(subCategoryLabel, subCategory));
+            texts.add(createTextFieldPanel(subSubCategoryLabel, subSubCategory));
+            texts.add(createTextFieldPanel(discountLabel, discount));
+            texts.setVisible(true);
+            mainPanel.add(texts);
+
+            JButton submit = createButton("Submit", "/GUI/pictures/stock-manager.jpg");
 
 
             buttonPanel.add(Box.createHorizontalGlue());
-            buttonPanel.add(discountByCategory);
-            buttonPanel.add(Box.createHorizontalStrut(20));
-            buttonPanel.add(discountByCatalogNumber);
-            buttonPanel.add(Box.createHorizontalStrut(20));
-            buttonPanel.add(discountForCategory);
-            buttonPanel.add(Box.createHorizontalStrut(20));
-            buttonPanel.add(addShelves);
+            buttonPanel.add(submit);
             buttonPanel.add(Box.createHorizontalGlue());
 
             JPanel bottomPanel = new JPanel();
@@ -84,40 +95,20 @@ public class MarketMenuGui extends JPanel{
             add(mainPanel, BorderLayout.CENTER);
             mainPanel.setVisible(true);
 
-            discountByCategory.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-//                parent.showDefaultPanelFromChild();
-                    openDiscountByCategory();
-                }
-            });
 
-
-            discountByCatalogNumber.addActionListener(new ActionListener() {
+            submit.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
 //                parent.showDefaultPanelFromChild();
                 }
             });
-
-            discountForCategory.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-//                parent.showDefaultPanelFromChild();
-                }
-            });
-
-            addShelves.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-//                parent.showDefaultPanelFromChild();
-
-                }
-            });
-
 
 
             backButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    parent.showMainPanel();
+                    parent.showDefaultPanelFromChild();
                 }
             });
+
         }catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -164,6 +155,7 @@ public class MarketMenuGui extends JPanel{
         return button;
 
     }
+
     public void showDefaultPanelFromChild() {
         mainPanel.setVisible(true);
         removeCurrentChildPanel();
@@ -172,27 +164,15 @@ public class MarketMenuGui extends JPanel{
     }
 
     private void removeCurrentChildPanel() {
-        if (discountByCategoryGUI != null && discountByCategoryGUI.isShowing()) {
-            remove(discountByCategoryGUI);
-        }
+
+    }
+    private JPanel createTextFieldPanel(JLabel label, JTextField textField) {
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.add(label, BorderLayout.WEST);
+        panel.add(textField, BorderLayout.CENTER);
+        return panel;
     }
 
-    public void openDiscountByCategory(){
-        mainPanel.setVisible(false);
 
-        if (discountByCategoryGUI == null) {
-            discountByCategoryGUI = new DiscountByCategoryGUI(this);
-            discountByCategoryGUI.setPreferredSize(mainPanel.getSize());
-            discountByCategoryGUI.setMaximumSize(mainPanel.getMaximumSize());
-            discountByCategoryGUI.setMinimumSize(mainPanel.getMinimumSize());
-            discountByCategoryGUI.setSize(mainPanel.getSize());
-        }
-        discountByCategoryGUI.setVisible(true);
-        add(discountByCategoryGUI, BorderLayout.CENTER);
-        revalidate();
-        repaint();
-    }
+
 }
-
-
-

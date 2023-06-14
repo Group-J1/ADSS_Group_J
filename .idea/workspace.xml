@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="791a9454-e111-4b33-95de-17326b14e958" name="Changes" comment="added the class of ProductMenuGui.java">
-      <change afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/MarketMenuGui.java" afterDir="false" />
+    <list default="true" id="791a9454-e111-4b33-95de-17326b14e958" name="Changes" comment="added the class of MarketMenuGui">
+      <change afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/DiscountByCategoryGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/StockManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/StockManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/MarketMenuGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/MarketMenuGui.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +108,13 @@
       <option name="project" value="LOCAL" />
       <updated>1686737627472</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL‎00004" summary="added the class of MarketMenuGui">
+      <created>1686740806462</created>
+      <option name="number" value="LOCAL‎00004" />
+      <option name="presentableId" value="LOCAL‎00004" />
+      <updated>1686740806462</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -128,7 +134,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="finished with the stock reports in GUI" />
     <MESSAGE value="added the class of ProductMenuGui.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="added the class of ProductMenuGui.java" />
+    <MESSAGE value="added the class of MarketMenuGui" />
+    <option name="LAST_COMMIT_MESSAGE" value="added the class of MarketMenuGui" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
