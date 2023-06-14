@@ -4,26 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="791a9454-e111-4b33-95de-17326b14e958" name="Changes" comment="">
+    <list default="true" id="791a9454-e111-4b33-95de-17326b14e958" name="Changes" comment="finished with the stock reports in GUI">
+      <change afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/ProductMenuGui.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/storeGui/stockReport/CategoryReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/storeGui/stockReport/CategoryReport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/storeGui/stockReport/MainStockReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/storeGui/stockReport/MainStockReport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/storeGui/stockReport/SpecificProductReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/storeGui/stockReport/SpecificProductReport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/storeGui/stockReport/stockReportsPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/storeGui/stockReport/stockReportsPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/DamagedReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/DamagedReport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/OrderReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/OrderReport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/ProductManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/ProductManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/ReportsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/ReportsManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/Shortages.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/Shortages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/StockReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/StockReport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/Service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/Service/ReportsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Service/ReportsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/StockManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/StockManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Resource/MarketDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Resource/MarketDB.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -41,18 +38,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
-}]]></component>
-  <component name="RunManager">
+}</component>
+  <component name="RunManager" selected="Application.MainGUI">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="ADSS_Group_J" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MainGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="GUI.MainGUI" />
       <module name="ADSS_Group_J" />
@@ -69,6 +73,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainGUI" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -80,8 +85,17 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1686670931739</updated>
-      <workItem from="1686670932833" duration="5106000" />
+      <workItem from="1686670932833" duration="5396000" />
+      <workItem from="1686676484291" duration="6682000" />
     </task>
+    <task id="LOCAL-00001" summary="finished with the stock reports in GUI">
+      <created>1686676134959</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1686676134959</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -97,6 +111,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="finished with the stock reports in GUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished with the stock reports in GUI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

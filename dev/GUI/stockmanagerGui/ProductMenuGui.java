@@ -1,8 +1,5 @@
 package GUI.stockmanagerGui;
 
-import GUI.storeGui.stockReport.SpecificProductReport;
-import GUI.storeGui.stockReport.stockReportsPanel;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -10,13 +7,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class StockManagement extends JPanel {
-    private StockManagerGUI mainGUI;
+public class ProductMenuGui extends JPanel{
+    private StockManagement parent;
     private JPanel mainPanel;
-    private  ProductMenuGui productMenu;
 
-    public StockManagement(StockManagerGUI mainGUI) throws IOException {
-        this.mainGUI = mainGUI;
+    public ProductMenuGui(StockManagement parent){
+        this.parent = parent;
+
         setLayout(new BorderLayout());
 
         // Create main panel
@@ -49,18 +46,26 @@ public class StockManagement extends JPanel {
         buttonPanel.setOpaque(false);
 
         // Create buttons
-        JButton productMenu = createButton("Product Menu", "/GUI/pictures/stock-manager.jpg");
-        JButton reportsMenu = createButton("Reports Menu", "/GUI/pictures/order_manager.jpg");
-        JButton marketMenu = createButton("Market Menu", "/GUI/pictures/order_manager.jpg");
+        try {
+            JButton updateQuantity = createButton("Update Quantity", "/GUI/pictures/stock-manager.jpg");
+            JButton informDefected = createButton("Inform Defected Product", "/GUI/pictures/order_manager.jpg");
+            JButton productInformation = createButton("Product Information", "/GUI/pictures/order_manager.jpg");
+            JButton addNewProduct = createButton("Add New Product", "/GUI/pictures/order_manager.jpg");
+            JButton changeMin = createButton("Change Min Quantity", "/GUI/pictures/order_manager.jpg");
+
 
 
 
         buttonPanel.add(Box.createHorizontalGlue());
-        buttonPanel.add(productMenu);
-        buttonPanel.add(Box.createHorizontalStrut(60));
-        buttonPanel.add(reportsMenu);
-        buttonPanel.add(Box.createHorizontalStrut(60));
-        buttonPanel.add(marketMenu);
+        buttonPanel.add(addNewProduct);
+        buttonPanel.add(Box.createHorizontalStrut(20));
+        buttonPanel.add(updateQuantity);
+        buttonPanel.add(Box.createHorizontalStrut(20));
+        buttonPanel.add(informDefected);
+        buttonPanel.add(Box.createHorizontalStrut(20));
+        buttonPanel.add(productInformation);
+        buttonPanel.add(Box.createHorizontalStrut(20));
+        buttonPanel.add(changeMin);
         buttonPanel.add(Box.createHorizontalGlue());
 
         JPanel bottomPanel = new JPanel();
@@ -77,20 +82,51 @@ public class StockManagement extends JPanel {
 
 
         add(mainPanel, BorderLayout.CENTER);
+        mainPanel.setVisible(true);
 
-        productMenu.addActionListener(new ActionListener() {
+        addNewProduct.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-//                parent.showDefaultPanelFromChild();]
-                openProductMenu();
+//                parent.showDefaultPanelFromChild();
             }
         });
+
+        updateQuantity.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+//                parent.showDefaultPanelFromChild();
+            }
+        });
+
+        informDefected.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+//                parent.showDefaultPanelFromChild();
+            }
+        });
+
+        productInformation.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+//                parent.showDefaultPanelFromChild();
+            }
+        });
+
+        changeMin.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+//                parent.showDefaultPanelFromChild();
+
+            }
+        });
+
 
 
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mainGUI.showDefaultPanelFromChild();
+                parent.showMainPanel();
             }
         });
+        }catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+
 
     }
     private JButton createButton(String text, String imagePath) throws IOException {
@@ -142,33 +178,7 @@ public class StockManagement extends JPanel {
     private void removeCurrentChildPanel() {
 
     }
-    public void showMainPanel() {
-        mainPanel.setVisible(true);
-        if (productMenu != null) {
-            productMenu.setVisible(false);
-        }
-    }
-
-    private void openProductMenu(){
-
-        mainPanel.setVisible(false);
-
-        if (productMenu == null) {
-            productMenu = new ProductMenuGui(this);
-            productMenu.setPreferredSize(mainPanel.getSize());
-            productMenu.setMaximumSize(mainPanel.getMaximumSize());
-            productMenu.setMinimumSize(mainPanel.getMinimumSize());
-            productMenu.setSize(mainPanel.getSize());
-        }
-        productMenu.setVisible(true);
-
-        add(productMenu, BorderLayout.CENTER);
-        revalidate();
-        repaint();
-    }
-//        mainPanel.setVisible(false);
-//        stockPanel.setVisible(true);
-////        add(stockPanel);
-
-
 }
+
+
+
