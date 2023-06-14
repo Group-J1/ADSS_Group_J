@@ -161,7 +161,6 @@ public class StockManagement extends JPanel {
             productMenu.setSize(mainPanel.getSize());
         }
         productMenu.setVisible(true);
-
         add(productMenu, BorderLayout.CENTER);
         revalidate();
         repaint();
