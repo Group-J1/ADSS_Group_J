@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.LinkedList;
 
 public class MainSupplyReport extends JPanel {
     private StoreManagerGUI parent;
@@ -72,7 +73,7 @@ public class MainSupplyReport extends JPanel {
                 int supID = Integer.parseInt(supplierNumber);
 
                 // Get the supplier report
-                String[] lines = SupplyManager.getSupply_manager().getSupplier(supID).getSupplierReport();
+                LinkedList<String> lines = SupplyManager.getSupply_manager().getSupplier(supID).getSupplierReport();
 
                 // Create a new panel for the report
                 //JPanel reportPanel = new JPanel(new BorderLayout());

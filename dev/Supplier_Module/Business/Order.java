@@ -7,6 +7,7 @@ import Supplier_Module.DAO.OrderDAO;
 import Supplier_Module.DAO.Pair;
 
 import java.time.LocalDate;
+import java.util.LinkedList;
 import java.util.Map;
 
 public class Order {
@@ -208,6 +209,36 @@ public class Order {
     public void editProductInOrder(SupplierProduct sp, int amount){
         this.getProducts_list_order().remove(sp);
         this.products_list_order.put(sp,amount);
+    }
+
+    public LinkedList<String> getOrderReport()
+    {
+        LinkedList<String> temp =new LinkedList<>();
+        temp.add("ID:" + this.order_id);
+        temp.add("Supplier id: "+this.supplier.card.getSupplier_number());
+        temp.add("Order date: "+this.startDate.toString());
+        temp.add("Supply date: "+this.supplyDate.toString());
+        int kind=this.kind;
+        switch (kind)
+        {
+            case 0:
+                temp.add("Order kind: history");
+                break;
+            case 1:
+                temp.add("Order kind: on the way");
+                break;
+            case 2:
+                temp.add("Order kind: periodic");
+                break;
+        }
+        temp.add("Products: ");
+        for (Map.Entry<SupplierProduct, Integer> entry : this.products_list_order.entrySet())
+        {
+            SupplierProduct key = entry.getKey();
+            Integer value = entry.getValue();
+            temp.add("Product name: "+key.getProduct_name()+" ,Amount: "+value);
+        }
+        return temp;
     }
 
 }

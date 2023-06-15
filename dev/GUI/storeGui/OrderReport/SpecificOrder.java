@@ -1,6 +1,7 @@
 package GUI.storeGui.OrderReport;
 
 import Supplier_Module.Business.Managers.Order_Manager;
+import Supplier_Module.Business.Managers.SupplyManager;
 import Supplier_Module.Business.Order;
 import Supplier_Module.DAO.OrderDAO;
 
@@ -10,15 +11,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.LinkedList;
 
 public class SpecificOrder extends JPanel {
     private MainOrderReport parent;
     private JPanel mainPanel;
-    public SpecificOrder(MainOrderReport mainOrderReport){
-
+    public SpecificOrder(MainOrderReport mainOrderReport) {
         this.parent = mainOrderReport;
         setLayout(new BorderLayout());
 
+        // Create main panel
         Image background = null;
         try {
             background = ImageIO.read(getClass().getResource("/GUI/pictures/background.jpg"));
@@ -34,86 +36,108 @@ public class SpecificOrder extends JPanel {
             }
         };
         mainPanel.setLayout(new BorderLayout());
-
-        JPanel centerPanel = new JPanel(new GridBagLayout());
-        centerPanel.setOpaque(false);
-
-        GridBagConstraints titleConstraints = new GridBagConstraints();
-        titleConstraints.gridx = 0; // Column index
-        titleConstraints.gridy = 0; // Row index
-        titleConstraints.anchor = GridBagConstraints.NORTH; // Align in the center horizontally
-        titleConstraints.insets = new Insets(10, 0, 10, 0);
-
-        JLabel titleLabel = new JLabel("Order Details");
+        JLabel titleLabel = new JLabel("<html>Order Report <br></html>");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
-
-        centerPanel.add(titleLabel, titleConstraints);
-
-        JPanel watchPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JLabel enterNumberLabel = new JLabel("Please enter the order number you want to watch:");
-        JTextField numberField = new JTextField(10);
-        JButton submitButton = new JButton("Submit");
-
-        watchPanel.add(enterNumberLabel);
-        watchPanel.add(numberField);
-        watchPanel.add(submitButton);
-
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.weighty = 0.5; // Place components vertically in the middle
-        gbc.anchor = GridBagConstraints.NORTH; // Center-align components
-        centerPanel.add(watchPanel, gbc);
-
-        // Add action listener for the submit button
-        submitButton.addActionListener(e -> {
-            String orderNumber = numberField.getText();
-            // Perform delete action based on the supplier number
-            if(!isInteger(orderNumber) || Integer.parseInt(orderNumber) < 0){
-                JOptionPane.showMessageDialog(null, "invalid input!", "ERROR",  JOptionPane.ERROR_MESSAGE);
-            }
-            else if(OrderDAO.getInstance().getOrderById(Integer.parseInt(orderNumber)) == null){//check if the order is in the system
-                JOptionPane.showMessageDialog(null, "there is order with number " + orderNumber , "ERROR",  JOptionPane.ERROR_MESSAGE);
-            }
-            else {
-
-                Order order = OrderDAO.getInstance().getOrderById(Integer.parseInt(orderNumber));
-//                centerPanel.remove(watchPanel);
-                GridBagConstraints gbcDetails = new GridBagConstraints();
-                gbcDetails.gridx = 0;
-                gbcDetails.gridy = 2;
-                gbcDetails.weighty = 0.5; // Place component vertically in the middle
-                gbcDetails.anchor = GridBagConstraints.CENTER; // Center-align component
-                JLabel OrderDetails = new JLabel(order.printOrder());//TODO design later
-                centerPanel.add(OrderDetails, gbcDetails);
+        mainPanel.add(titleLabel, BorderLayout.NORTH);
+        mainPanel.setLayout(new FlowLayout());
 
 
-                revalidate();
-                repaint();
-            }
-        });
-        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        // Create button panel
         JButton backButton = new JButton("Back");
-        bottomPanel.setOpaque(false);
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+        buttonPanel.setOpaque(false);
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         bottomPanel.add(backButton);
-
-        mainPanel.add(centerPanel, BorderLayout.CENTER);
+        mainPanel.add(Box.createVerticalStrut(200));
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
         add(mainPanel, BorderLayout.CENTER);
+
+
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 parent.showDefaultPanelFromChild();
             }
         });
 
+        JLabel enterNumberLabel = new JLabel("Please enter the order id you want to watch:");
+        JTextField numberField = new JTextField(10);
+        JButton submitButton = new JButton("Submit");
+        mainPanel.add(enterNumberLabel);
+        mainPanel.add(numberField);
+        mainPanel.add(submitButton);
+
+        submitButton.addActionListener(e -> {
+            String supplierNumber = numberField.getText();
+            if (isExistOrder(supplierNumber)) {
+                int supID = Integer.parseInt(supplierNumber);
+
+                // Get the supplier report
+                //String[] lines = SupplyManager.getSupply_manager().getSupplier(supID).getSupplierReport();
+
+                LinkedList<String> lines= Order_Manager.getOrder_Manager().getOrderById(supID).getOrderReport();
+
+                // Create a new panel for the report
+                //JPanel reportPanel = new JPanel(new BorderLayout());
+                //reportPanel.setOpaque(false);
+
+                JTextArea textArea = new JTextArea();
+                textArea.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
+
+                // Concatenate the lines with line breaks
+                StringBuilder reportBuilder = new StringBuilder();
+                int longestLineWidth = 0;
+                for (String line : lines) {
+                    reportBuilder.append(line).append("\n");
+                    int lineWidth = SwingUtilities.computeStringWidth(textArea.getFontMetrics(textArea.getFont()), line);
+                    longestLineWidth = Math.max(longestLineWidth, lineWidth);
+                }
+                String reportText = reportBuilder.toString();
+                textArea.setText(reportText);
+                textArea.setPreferredSize(new Dimension(longestLineWidth, textArea.getPreferredSize().height));
+                textArea.setOpaque(false);
+                // Create a scroll pane for the text area
+                //JScrollPane scrollPane = new JScrollPane(textArea);
+
+                //reportPanel.add(scrollPane, BorderLayout.CENTER);
+                mainPanel.add(textArea, BorderLayout.CENTER);
+                //reportPanel.setBackground(new Color(0, 0, 0, 0));
+
+                // Remove the existing components and add the report panel
+                //mainPanel.add(reportPanel, BorderLayout.CENTER);
+                mainPanel.remove(enterNumberLabel);
+                mainPanel.remove(submitButton);
+                mainPanel.remove(numberField);
+                mainPanel.revalidate();
+                mainPanel.repaint();
+            } else {
+
+                JOptionPane.showMessageDialog(null, "Invalid supplier ID. Please try again.");
+            }
+        });
     }
-    public static boolean isInteger(String input) {
-        try {
-            Integer.parseInt(input);
-            return true;
-        } catch (NumberFormatException e) {
+
+    public boolean isPositiveInteger(String input) {
+        if (input == null || input.isEmpty()) {
             return false;
         }
+
+        for (int i = 0; i < input.length(); i++) {
+            if (!Character.isDigit(input.charAt(i))) {
+                return false;
+            }
+        }
+
+        int number = Integer.parseInt(input);
+        return number > 0;
+    }
+
+    public boolean isExistOrder(String input)
+    {
+        if(!isPositiveInteger(input))
+            return false;
+        return Order_Manager.getOrder_Manager().isExistOrder(Integer.parseInt(input));
     }
 }

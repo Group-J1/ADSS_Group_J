@@ -161,5 +161,18 @@ public class SupplierProduct {
         return ans;
     }
 
+    public LinkedList<String> getSupplierProductReport()
+    {
+        LinkedList<String> temp=new LinkedList<>();
+        temp.add("Product name:" + this.product_name);
+        temp.add("Supplier: "+this.supplierID);
+        temp.add("Local key: "+this.local_key);
+        temp.add("Unit price: "+this.unit_price);
+        temp.add("Unit weight: "+this.unit_weight);
+        temp.add("Amount available: "+this.amount_available);
+
+        return temp;
+    }
+
 }
 

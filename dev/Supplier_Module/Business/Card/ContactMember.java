@@ -1,5 +1,7 @@
 package Supplier_Module.Business.Card;
 
+import java.util.LinkedList;
+
 public class ContactMember {
 
     private String phone_number;
@@ -54,6 +56,15 @@ public class ContactMember {
         System.out.println("Name: "+this.name+" Email: "+this.email+ " Phone Number: "+this.phone_number );
     }
 
+    public LinkedList<String> getContactReport()
+    {
+        LinkedList<String> temp=new LinkedList<>();
+        temp.add("Name:" + this.name);
+        temp.add("Phone: "+this.phone_number);
+        temp.add("Mail: "+this.email);
+
+        return temp;
+    }
 
 }
 
