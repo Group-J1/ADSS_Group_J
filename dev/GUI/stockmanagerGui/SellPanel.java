@@ -11,8 +11,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
+
 
 public class SellPanel extends JPanel {
 
@@ -31,7 +30,11 @@ public class SellPanel extends JPanel {
         Font catalogNumberTextFieldNewFont = categoryTextFieldFont.deriveFont(Font.PLAIN, 18);
         catalogNumberTextField.setFont(catalogNumberTextFieldNewFont);
 
-        JLabel filler = new JLabel("");
+        JLabel invalidCatalogNumber = new JLabel("Invalid Catalog Number");
+        Font invalidCatalogNumberFont = invalidCatalogNumber.getFont();
+        Font invalidCatalogNumberNewFont = invalidCatalogNumberFont.deriveFont(Font.PLAIN, 18);
+        invalidCatalogNumber.setFont(invalidCatalogNumberNewFont);
+        invalidCatalogNumber.setForeground(Color.RED);
 
 
         JLabel quantityLabel = new JLabel("Quantity");
@@ -56,8 +59,8 @@ public class SellPanel extends JPanel {
         inputPanel.setLayout(new GridLayout(2, 3, horizontalGap, verticalGap));
         inputPanel.add(catalogNumberLabel);
         inputPanel.add(catalogNumberTextField);
-        inputPanel.add(filler);
-        filler.setVisible(false);
+        inputPanel.add(invalidCatalogNumber);
+        invalidCatalogNumber.setVisible(false);
         inputPanel.add(quantityLabel);
         inputPanel.add(quantityTextField);
         inputPanel.add(invalidQuantityLabel);
@@ -83,29 +86,6 @@ public class SellPanel extends JPanel {
 
 
 
-//        JLabel catalogNumber = new JLabel("Catalog Number");
-//
-//        JTextField catalogNumberLabel = new JTextField();
-//        catalogNumberLabel.setColumns(15);
-//
-//        JLabel quantity = new JLabel("Quantity");
-//        JTextField quantityLabel = new JTextField();
-//        catalogNumberLabel.setColumns(15);
-//        JPanel texts = new JPanel();
-//        texts.setLayout(new BoxLayout(texts, BoxLayout.Y_AXIS));
-//        texts.setOpaque(false);
-//
-//        texts.add(createTextFieldPanel(catalogNumber,catalogNumberLabel));
-//        texts.add(createTextFieldPanel(quantity,quantityLabel));
-//        add(texts,BorderLayout.CENTER);
-//
-//        try {
-//            JButton submit = createButton("Submit", "/GUI/pictures/stock-manager.jpg");
-//            add(submit,BorderLayout.SOUTH);
-//
-//
-//
-//        setVisible(false);
 
         submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -113,26 +93,13 @@ public class SellPanel extends JPanel {
                 ProductService productService = ProductService.getInstance();
                 LocalDate localDate = LocalDate.now();
                 ArrayList<JLabel> inputsArrayList = new ArrayList<>();
+                inputsArrayList.add(invalidCatalogNumber);
                 inputsArrayList.add(invalidQuantityLabel);
                 ArrayList<Boolean> inputChecks = new ArrayList<>();
 
-//                String categoryStr = categoryTextField.getText();
-//                inputChecks.add(checkIfOnlyLetters(categoryStr));
-//                String subCategoryStr = subCategoryTextField.getText();
-//                inputChecks.add(checkSubCategory(subCategoryStr));
-//                String subSubCategoryStr = subSubCategoryTextField.getText();
-//                inputChecks.add(checkSubSubCategory(subSubCategoryStr));
-//                String manufacturerStr = manufacturerTextField.getText();
-//                inputChecks.add(checkIfOnlyLetters(manufacturerStr));
+                inputChecks.add(!catalogNumberTextField.getText().equals(""));
                 String quantityStr = quantityTextField.getText();
                 inputChecks.add(!quantityStr.equals("") && checkIfPositiveIntegerNumber(quantityStr));
-//                String weightStr = weightTextField.getText();
-//                inputChecks.add(checkIfPositiveDoubleNumber(weightStr));
-//                String minQuantityStr = minQuantityTextField.getText();
-//                inputChecks.add(checkIfPositiveIntegerNumber(minQuantityStr));
-//                String dateStr = dateTextField.getText();
-//                Date expirationDate = dateInput(dateStr);
-//                inputChecks.add(expirationDate != null);
 
                 boolean allTrue = !inputChecks.contains(Boolean.FALSE);
 

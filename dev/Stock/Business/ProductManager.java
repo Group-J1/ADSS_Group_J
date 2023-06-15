@@ -130,7 +130,7 @@ public class ProductManager {
     }
 
     // Case 3 at Product's menu
-    public void markAsDamaged(Product defectedProduct, int uniqueCode, String reason){
+    public boolean markAsDamaged(Product defectedProduct, int uniqueCode, String reason){
         if (expDateDAO.isQRfromCatalogNumber(defectedProduct.getCatalogNumber(),uniqueCode)) {
             defectedProduct.markAsDamaged(uniqueCode, reason);
             damagedProductDAO.writeDamagedProduct(uniqueCode,defectedProduct.getCatalogNumber(),reason);
@@ -146,10 +146,12 @@ public class ProductManager {
             }
 //            productDAO.writeProducts();
             damagedProductDAO.writeDamagedProducts();
+            return true;
 
         }
         else {
             System.out.println("the QR is does not belong to this Catalog Number! ");
+            return false;
         }
     }
 

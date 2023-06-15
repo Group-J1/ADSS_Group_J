@@ -4,10 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="791a9454-e111-4b33-95de-17326b14e958" name="Changes" comment="last fixes in AddNewProductGUI.java now should be good....">
+    <list default="true" id="791a9454-e111-4b33-95de-17326b14e958" name="Changes" comment="added the sale function in gui">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/DBConnect/Connect.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DBConnect/Connect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/AddQuantity.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/AddQuantity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/ChangeMinQuantityGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/ChangeMinQuantityGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/InformDefectedGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/InformDefectedGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/ProductInformation.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/ProductInformation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/SellPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/SellPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/UpdateQuantityGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/UpdateQuantityGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/storeGui/stockReport/SpecificProductReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/storeGui/stockReport/SpecificProductReport.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Resource/MarketDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Resource/MarketDB.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/ProductManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/ProductManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Stock/Service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Service/ProductService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,18 +46,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/raananpevzner/IdeaProjects/ADSS_Group_J/dev/Resource",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlite"
+    ]
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/dev/Resource" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.MainGUI">
+    <configuration name="Connect" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="DBConnect.Connect" />
+      <module name="ADSS_Group_J" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="DBConnect.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="ADSS_Group_J" />
@@ -73,6 +105,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainGUI" />
+        <item itemvalue="Application.Connect" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -88,7 +121,8 @@
       <workItem from="1686670932833" duration="5396000" />
       <workItem from="1686676484291" duration="9887000" />
       <workItem from="1686765618850" duration="86000" />
-      <workItem from="1686813716544" duration="3701000" />
+      <workItem from="1686813716544" duration="3991000" />
+      <workItem from="1686818616419" duration="7302000" />
     </task>
     <task id="LOCAL-00001" summary="finished with the stock reports in GUI">
       <created>1686676134959</created>
@@ -137,7 +171,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686764958201</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="added the sale function in gui">
+      <created>1686818411323</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1686818411323</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -161,7 +202,8 @@
     <MESSAGE value="finished the ProductMenuGui.java now there is graphic" />
     <MESSAGE value="Finished class DiscountByCategoryGUI (working!!!)" />
     <MESSAGE value="last fixes in AddNewProductGUI.java now should be good...." />
-    <option name="LAST_COMMIT_MESSAGE" value="last fixes in AddNewProductGUI.java now should be good...." />
+    <MESSAGE value="added the sale function in gui" />
+    <option name="LAST_COMMIT_MESSAGE" value="added the sale function in gui" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

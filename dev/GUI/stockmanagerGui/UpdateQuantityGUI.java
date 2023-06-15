@@ -168,7 +168,8 @@ public class UpdateQuantityGUI extends JPanel {
             backButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     parent.showDefaultPanelFromChild();
-                    currentPanel.setVisible(false);
+                    if(currentPanel != null)
+                        currentPanel.setVisible(false);
                 }
             });
         }catch (IOException e) {

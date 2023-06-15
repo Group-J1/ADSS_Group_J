@@ -63,7 +63,9 @@ public class SpecificProductReport extends JPanel {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 parent.showDefaultPanelFromChild();
-                product_report_.remove(textArea);
+                if (textArea != null) {
+                    product_report_.remove(textArea);
+                }
             }
         });
 

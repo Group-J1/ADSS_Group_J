@@ -70,8 +70,8 @@ public class ProductService {
     }
 
     // ------------ Case 3 in Product UI ------------
-    public void markAsDamaged(Product defectedProduct, int uniqueCode, String reason) {
-        productManager.markAsDamaged(defectedProduct, uniqueCode, reason);
+    public boolean markAsDamaged(Product defectedProduct, int uniqueCode, String reason) {
+        return productManager.markAsDamaged(defectedProduct, uniqueCode, reason);
 
     }
 
