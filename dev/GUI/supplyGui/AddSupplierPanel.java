@@ -1,148 +1,320 @@
 package GUI.supplyGui;
 
 import Supplier_Module.Business.Card.SupplierCard;
+import javax.imageio.ImageIO;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class AddSupplierPanel extends JPanel {
     private SupplierGUI supplierGUI;
+    private JPanel mainPanel;
     public AddSupplierPanel(SupplierGUI supplier) {
         this.supplierGUI = supplier;
         setLayout(new BorderLayout());
 
+        // Create main panel
+        Image background = null;
+        try {
+            background = ImageIO.read(getClass().getResource("/GUI/pictures/background.jpg"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        Image finalBackground = background;
+        mainPanel = new JPanel() {
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(finalBackground, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        mainPanel.setLayout(new BorderLayout());
         JLabel titleLabel = new JLabel("Add Supplier");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
-        add(titleLabel, BorderLayout.NORTH);
+        mainPanel.add(titleLabel, BorderLayout.NORTH);
 
-        // Add components for adding a supplier
 
-        // Example: Add a text field for entering supplier information
-        JTextField supplierNameField = new JTextField();
-        add(supplierNameField, BorderLayout.CENTER);
+        // Create text fields
+        JLabel categoryLabel = new JLabel("Name:");
+        Font categoryLabelFont = categoryLabel.getFont();
+        Font categoryLabelNewFont = categoryLabelFont.deriveFont(Font.BOLD, 14);
+        categoryLabel.setFont(categoryLabelNewFont);
 
-        JButton saveButton = new JButton("Save");
-        add(saveButton, BorderLayout.SOUTH);
+        JTextField categoryTextField = new JTextField();
+        Font categoryTextFieldFont = categoryTextField.getFont();
+        Font categoryTextFieldNewFont = categoryTextFieldFont.deriveFont(Font.BOLD, 14);
+        categoryTextField.setFont(categoryTextFieldNewFont);
 
-        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JLabel invalidCategoryLabel = new JLabel("Invalid Name");
+        Font invalidCategoryLabelFont = invalidCategoryLabel.getFont();
+        Font invalidCategoryLabelNewFont = invalidCategoryLabelFont.deriveFont(Font.PLAIN, 18);
+        invalidCategoryLabel.setFont(invalidCategoryLabelNewFont);
+        invalidCategoryLabel.setForeground(Color.RED);
+
+
+
+        JLabel subCategoryLabel = new JLabel("Address");
+        Font subCategoryLabelFont = subCategoryLabel.getFont();
+        Font subCategoryLabelNewFont = subCategoryLabelFont.deriveFont(Font.PLAIN, 18);
+        subCategoryLabel.setFont(subCategoryLabelNewFont);
+
+        JTextField subCategoryTextField = new JTextField();
+        Font subCategoryTextFieldFont = subCategoryTextField.getFont();
+        Font subCategoryTextFieldNewFont = subCategoryTextFieldFont.deriveFont(Font.PLAIN, 18);
+        subCategoryTextField.setFont(subCategoryTextFieldNewFont);
+
+        JLabel invalidSubCategoryLabel = new JLabel("Invalid Address");
+        Font invalidSubCategoryLabelFont =  invalidSubCategoryLabel.getFont();
+        Font invalidSubCategoryLabelNewFont = invalidSubCategoryLabelFont.deriveFont(Font.PLAIN, 18);
+        invalidSubCategoryLabel.setFont(invalidSubCategoryLabelNewFont);
+        invalidSubCategoryLabel.setForeground(Color.RED);
+
+
+        JLabel subSubCategoryLabel = new JLabel("ID");
+        Font subSubCategoryLabelFont = subSubCategoryLabel.getFont();
+        Font subSubCategoryLabelNewFont = subSubCategoryLabelFont.deriveFont(Font.PLAIN, 18);
+        subSubCategoryLabel.setFont(subSubCategoryLabelNewFont);
+
+        JTextField subSubCategoryTextField = new JTextField();
+        Font subSubCategoryTextFieldFont = subSubCategoryTextField.getFont();
+        Font subSubCategoryTextFieldNewFont = subSubCategoryTextFieldFont.deriveFont(Font.PLAIN, 18);
+        subSubCategoryTextField.setFont(subSubCategoryTextFieldNewFont);
+
+        JLabel invalidSubSubCategoryLabel = new JLabel("Invalid ID");
+        Font invalidSubSubCategoryLabelFont = invalidSubSubCategoryLabel.getFont();
+        Font invalidSubSubCategoryLabelNewFont = invalidSubSubCategoryLabelFont.deriveFont(Font.PLAIN, 18);
+        invalidSubSubCategoryLabel.setFont(invalidSubSubCategoryLabelNewFont);
+        invalidSubSubCategoryLabel.setForeground(Color.RED);
+
+
+        JLabel discountLabel = new JLabel("Bank Account");
+        Font discountLabelFont = discountLabel.getFont();
+        Font discountLabelNewFont = discountLabelFont.deriveFont(Font.PLAIN, 18);
+        discountLabel.setFont(discountLabelNewFont);
+
+        JTextField discountTextField = new JTextField();
+        Font discountTextFieldFont = discountTextField.getFont();
+        Font discountTextFieldNewFont = discountTextFieldFont.deriveFont(Font.PLAIN, 18);
+        discountTextField.setFont(discountTextFieldNewFont);
+
+        JLabel invalidDiscountLabel = new JLabel("Invalid Bank Account");
+        Font invalidDiscountLabelFont = invalidDiscountLabel.getFont();
+        Font invalidDiscountLabelNewFont = invalidDiscountLabelFont.deriveFont(Font.PLAIN, 18);
+        invalidDiscountLabel.setFont(invalidDiscountLabelNewFont);
+        invalidDiscountLabel.setForeground(Color.RED);
+
+        JLabel paymentLabel = new JLabel("Payment Method");
+        Font paymentLabelFont = paymentLabel.getFont();
+        Font paymentLabelNewFont = paymentLabelFont.deriveFont(Font.PLAIN, 18);
+        paymentLabel.setFont(paymentLabelNewFont);
+
+        JTextField paymentTextField = new JTextField();
+        Font paymentTextFieldFont = paymentTextField.getFont();
+        Font paymentTextFieldNewFont = paymentTextFieldFont.deriveFont(Font.PLAIN, 18);
+        paymentTextField.setFont(paymentTextFieldNewFont);
+
+        JLabel invalidPaymentLabel = new JLabel("Invalid Payment Method");
+        Font invalidPaymentLabelFont = invalidPaymentLabel.getFont();
+        Font invalidPaymentLabelNewFont = invalidPaymentLabelFont.deriveFont(Font.PLAIN, 18);
+        invalidPaymentLabel.setFont(invalidPaymentLabelNewFont);
+        invalidPaymentLabel.setForeground(Color.RED);
+
+
+        JPanel inputPanel = new JPanel();
+        int verticalGap = 15; // Set the desired vertical gap between rows
+        int horizontalGap = 10;
+        inputPanel.setLayout(new GridLayout(4, 3, horizontalGap, verticalGap));
+        inputPanel.add(categoryLabel);
+        inputPanel.add(categoryTextField);
+        inputPanel.add(invalidCategoryLabel);
+        invalidCategoryLabel.setVisible(false);
+        inputPanel.add(subCategoryLabel);
+        inputPanel.add(subCategoryTextField);
+        inputPanel.add(invalidSubCategoryLabel);
+        invalidSubCategoryLabel.setVisible(false);
+        inputPanel.add(subSubCategoryLabel);
+        inputPanel.add(subSubCategoryTextField);
+        inputPanel.add(invalidSubSubCategoryLabel);
+        invalidSubSubCategoryLabel.setVisible(false);
+        inputPanel.add(discountLabel);
+        inputPanel.add(discountTextField);
+        inputPanel.add(invalidDiscountLabel);
+        invalidDiscountLabel.setVisible(false);
+
+
+        inputPanel.setOpaque(false);
+
+//        mainPanel.add(inputPanel, BorderLayout.CENTER);
+        JPanel inputWrapperPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        inputWrapperPanel.add(inputPanel);
+        mainPanel.add(inputWrapperPanel, BorderLayout.WEST);
+
+        inputWrapperPanel.setOpaque(false);
+
+        // Create button panel
+        JButton submitButton = new JButton("Submit");
+        //JButton submitButton = createButton("Submit", "/GUI/pictures/stock-manager.jpg");
         JButton backButton = new JButton("Back");
-        bottomPanel.add(backButton);
 
-        add(bottomPanel, BorderLayout.WEST);
+        JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        buttonsPanel.add(submitButton);
+        buttonsPanel.add(backButton);
 
-        // Add action listener for the save button
-        saveButton.addActionListener(e -> {
-            // Handle save action
-        });
+        buttonsPanel.setOpaque(false);
 
-        backButton.addActionListener(e -> {
-            supplierGUI.showDefaultPanelFromChild();
-        });
-    }
-//    public class AddSupplierPanel extends JPanel {
-//        public AddSupplierPanel(SupplierGUI supplierGUI) {
-//            setLayout(new GridLayout(6, 2, 10, 10));
+        mainPanel.add(buttonsPanel, BorderLayout.SOUTH);
+
+        add(mainPanel, BorderLayout.CENTER);
+
+//        submitButton.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {
+                // Handle submit button action
+//                MarketService marketService = MarketService.getInstance();
+//                ArrayList<JLabel> inputsArrayList = new ArrayList<>(Arrays.asList(
+//                        invalidCategoryLabel, invalidSubCategoryLabel, invalidSubSubCategoryLabel, invalidDiscountLabel));
+//                ArrayList<Boolean> inputChecks = new ArrayList<>();
 //
-//            JLabel nameLabel = new JLabel("Name:");
-//            JTextField nameField = new JTextField(20);
+//                String categoryStr = categoryTextField.getText();
+//                inputChecks.add(checkIfOnlyLetters(categoryStr));
+//                String subCategoryStr = subCategoryTextField.getText();
+//                inputChecks.add(checkSubCategory(subCategoryStr));
+//                String subSubCategoryStr = subSubCategoryTextField.getText();
+//                inputChecks.add(checkSubSubCategory(subSubCategoryStr));
+//                String discountStr = discountTextField.getText();
+//                inputChecks.add(checkIfPositiveDoubleNumber(discountStr));
 //
-//            JLabel supplierNumberLabel = new JLabel("Supplier Number:");
-//            JTextField supplierNumberField = new JTextField(20);
+//                boolean allTrue = !inputChecks.contains(Boolean.FALSE);
 //
-//            JLabel companyNumberLabel = new JLabel("Company Number:");
-//            JTextField companyNumberField = new JTextField(20);
-//
-//            JLabel bankAccountLabel = new JLabel("Bank Account:");
-//            JTextField bankAccountField = new JTextField(20);
-//
-//            JLabel addressLabel = new JLabel("Address:");
-//            JTextField addressField = new JTextField(20);
-//
-//            JButton addButton = new JButton("Add");
-//
-//            addButton.addActionListener(new ActionListener() {
-//                @Override
-//                public void actionPerformed(ActionEvent e) {
-//                    String name = nameField.getText();
-//                    int supplierNumber = Integer.parseInt(supplierNumberField.getText());
-//                    int companyNumber = Integer.parseInt(companyNumberField.getText());
-//                    int bankAccount = Integer.parseInt(bankAccountField.getText());
-//                    String address = addressField.getText();
-//
-//                    SupplierCard supplier = new SupplierCard(name, supplierNumber, companyNumber, bankAccount, address);
-//
-//                    // Perform any necessary operations with the supplier object (e.g., add it to a database, etc.)
-//
-//                    // Update the existing screen with the supplier details
-//                    printSupplierDetails(supplier);
+//                if (allTrue) {
+//                    for (JLabel currentInput: inputsArrayList) {
+//                        currentInput.setVisible(false);
+//                    }
+//                    if (marketService.setDiscountForProduct(categoryStr,subCategoryStr,subSubCategoryStr,
+//                            Double.parseDouble(discountStr))) {
+//                        categoryTextField.setText("");
+//                        subCategoryTextField.setText("");
+//                        subSubCategoryTextField.setText("");
+//                        discountTextField.setText("");
+//                        JOptionPane.showMessageDialog(null,"Discount updated");
+//                    }
+//                    else {
+//                        JOptionPane.showMessageDialog(null,"Product Not Found");
+//                    }
 //                }
-//            });
+//                else {
+//                    int index = 0;
+//                    for (boolean currentInputValid : inputChecks) {
+//                        // Perform operations on the 'element' using the index 'index'
+//                        if (!currentInputValid) {
+//                            inputsArrayList.get(index).setVisible(true);
+//                        }
+//                        else {
+//                            inputsArrayList.get(index).setVisible(false);
+//                        }
+//                        index++;
+//                    }
+//                }
+//            }
+//        });
+
+                backButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        invalidCategoryLabel.setVisible(false);
+                        invalidSubCategoryLabel.setVisible(false);
+                        invalidSubSubCategoryLabel.setVisible(false);
+                        invalidDiscountLabel.setVisible(false);
+
+                        categoryTextField.setText("");
+                        subCategoryTextField.setText("");
+                        subSubCategoryTextField.setText("");
+                        discountTextField.setText("");
+
+                        supplierGUI.showDefaultPanelFromChild();
+                    }
+                });
+
+            }
+
+//    public void showDefaultPanelFromChild() {
+//        mainPanel.setVisible(true);
+//        removeCurrentChildPanel();
+//        revalidate();
+//        repaint();
+//    }
 //
-//            add(nameLabel);
-//            add(nameField);
-//            add(supplierNumberLabel);
-//            add(supplierNumberField);
-//            add(companyNumberLabel);
-//            add(companyNumberField);
-//            add(bankAccountLabel);
-//            add(bankAccountField);
-//            add(addressLabel);
-//            add(addressField);
-//            add(new JLabel());
-//            add(addButton);
-//        }
+//    private void removeCurrentChildPanel() {
 //
-//        private void printSupplierDetails(SupplierCard supplier) {
-//            // Clear the existing components
-//            removeAll();
-//
-//            setLayout(new GridLayout(7, 2, 10, 10));
-//
-//            JLabel nameLabel = new JLabel("Name:");
-//            JLabel nameValueLabel = new JLabel(supplier.getSupplier_name());
-//
-//            JLabel supplierNumberLabel = new JLabel("Supplier Number:");
-//            JLabel supplierNumberValueLabel = new JLabel(String.valueOf(supplier.getSupplier_number()));
-//
-////        JLabel companyNumberLabel = new JLabel("Company Number:");
-////        JLabel companyNumberValueLabel = new JLabel(String.valueOf(supplier.getC()));
-//
-//            JLabel bankAccountLabel = new JLabel("Bank Account:");
-//            JLabel bankAccountValueLabel = new JLabel(String.valueOf(supplier.getBank_account()));
-//
-//            JLabel addressLabel = new JLabel("Address:");
-//            JLabel addressValueLabel = new JLabel(supplier.getAddress());
-//
-//            add(nameLabel);
-//            add(nameValueLabel);
-//            add(supplierNumberLabel);
-//            add(supplierNumberValueLabel);
-////        add(companyNumberLabel);
-////        add(companyNumberValueLabel);
-//            add(bankAccountLabel);
-//            add(bankAccountValueLabel);
-//            add(addressLabel);
-//            add(addressValueLabel);
-//
-////            JButton addButton = new JButton("Add Supplier");
-////            addButton.addActionListener(new ActionListener() {
-////                @Override
-////                public void actionPerformed(ActionEvent e) {
-////                    removeAll();
-////                    add(new AddSupplierPanel(SupplierGUI ));
-////                    revalidate();
-////                    repaint();
-////                }
-////            });
-////
-////            add(new JLabel());
-////            add(addButton);
-//
-//            revalidate();
-//            repaint();
-//        }
-    }
+//    }
+
+            private JPanel createTextFieldPanel(JLabel label, JTextField textField) {
+                JPanel panel = new JPanel(new BorderLayout());
+                panel.add(label, BorderLayout.WEST);
+                panel.add(textField, BorderLayout.CENTER);
+                return panel;
+            }
+
+            // All the functions that check if the input is valid
+            Boolean checkIfOnlyLetters(String str) {
+                if (str.equals("")) {
+                    return false;
+                }
+                return str.matches("[a-zA-Z' ]+");
+            }
+
+            Boolean checkSubCategory(String subCategoryStr) {
+                if (subCategoryStr.equals("")) {
+                    return false;
+                }
+                return subCategoryStr.matches("[a-zA-Z0-9% ]+");
+            }
+
+            Boolean checkSubSubCategory(String subSubCategoryStr) {
+                /**
+                 * Checks if a given string matches the format of a sub-sub category.
+                 * A sub-sub category should consist of a number followed by a space and a word.
+                 * Example: "5 g", "1 l", "10 p".
+                 *
+                 * @param subSubCategoryStr the sub-sub category string to be checked
+                 * @return true if the string matches the format of a sub-sub category, false otherwise
+                 */
+                if (subSubCategoryStr.equals("")) {
+                    return false;
+                }
+                String[] parts = subSubCategoryStr.split(" ");
+                double number;
+                if (parts.length == 2) {
+                    try {
+                        number = Double.parseDouble(parts[0]);
+                        String word = parts[1];
+                        if (!word.matches("[a-zA-Z]+")) {
+                            System.out.println("your product's subSubCategory does not match the format.");
+                            return false;
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("your product's subSubCategory does not match the format.");
+                        return false;
+                    }
+                } else {
+                    System.out.println("your product's subSubCategory does not match the format.");
+                    return false;
+                }
+                return true;
+            }
+
+            boolean checkIfPositiveDoubleNumber(String number) {
+                try {
+                    if (number.equals("")) {
+                        return false;
+                    }
+                    double d = Double.parseDouble(number);
+                    return d > 0.0;
+                } catch (NumberFormatException e) {
+                    return false;
+                }
+            }
+        }
 

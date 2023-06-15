@@ -103,6 +103,26 @@ public class SupplierProduct {
                 + amount+ " Catalog Price:" + this.getUnit_price() + " Discount:"+ discount +
                 " Final Price:" + final_p);
     }
+    public String printSupplierProduct(int amount){
+        double discount = 0;
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < this.getDiscounts().size(); i++) {
+            if (this.getDiscounts().get(i).getAmountRange().getMax() >= amount && this.getDiscounts().get(i).getAmountRange().getMin() <= amount) {
+                discount = this.getDiscounts().get(i).getPercentage();
+                break;
+            }
+        }
+
+        double final_p = amount * this.getUnit_price() * (1 - (0.01 * discount));
+
+        sb.append("Product Number: ").append(this.getLocal_key()).append(", Product Name: ").append(this.getProduct_name())
+                .append(", Amount: ").append(amount).append(" Catalog Price: ").append(this.getUnit_price())
+                .append(" Discount: ").append(discount).append(" Final Price: ").append(final_p);
+
+        String labelText = sb.toString();
+        return labelText;
+    }
 
     /**
      * function that print product discounts

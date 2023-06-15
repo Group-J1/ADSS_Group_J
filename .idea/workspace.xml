@@ -4,14 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="747796ef-f56c-4b02-a801-a652f5fd9c16" name="Changes" comment="united">
+    <list default="true" id="747796ef-f56c-4b02-a801-a652f5fd9c16" name="Changes" comment="suppliers gui">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/storeGui/OrderReport/MainOrderReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/storeGui/OrderReport/MainOrderReport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/AddOrderPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/AddOrderPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/DeleteOrderPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/DeleteOrderPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/EditOrderPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/EditOrderPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/OrderManagementGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/OrderManagementGui.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/GUI/storeGui/OrderReport/SpecificOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/storeGui/OrderReport/SpecificOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/supplyGui/DeleteSupplierPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/supplyGui/DeleteSupplierPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/supplyGui/EditSupplierPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/supplyGui/EditSupplierPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/supplyGui/SupplierGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/supplyGui/SupplierGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Presentation/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Presentation/UI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/storeGui/supplyReport/MainSupplyReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/storeGui/supplyReport/MainSupplyReport.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/supplyGui/AddSupplierPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/supplyGui/AddSupplierPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/LoginRegister/Presentation/LoginMenuNew.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/LoginRegister/Presentation/LoginMenuNew.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Resource/MarketDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Resource/MarketDB.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/SupplierProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/SupplierProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Managers/Order_Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Managers/Order_Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Managers/SupplyManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Managers/SupplyManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Supplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Supplier.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,21 +49,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/yuval/IdeaProjects/ADSS_Group_J/dev/GUI&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/reuta/Desktop/לימודים/שנה ג/סמסטר ב/גוי שלנו/ADSS_Group_J/dev/GUI/stockmanagerGui",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\reuta\Desktop\לימודים\שנה ג\סמסטר ב\גוי שלנו\ADSS_Group_J\dev\GUI\stockmanagerGui" />
       <recent name="$PROJECT_DIR$/dev/GUI" />
       <recent name="$PROJECT_DIR$/dev/GUI/pictures" />
     </key>
@@ -112,7 +121,8 @@
       <updated>1686668082790</updated>
       <workItem from="1686720282363" duration="3632000" />
       <workItem from="1686742305186" duration="22095000" />
-      <workItem from="1686809416532" duration="920000" />
+      <workItem from="1686809416532" duration="5727000" />
+      <workItem from="1686816012185" duration="10359000" />
     </task>
     <task id="LOCAL‎-00001" summary="united">
       <created>1686670663200</created>
@@ -121,7 +131,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1686670663200</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL‎-00002" summary="suppliers gui">
+      <created>1686811381627</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL‎-00002" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1686811381627</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -140,6 +157,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="united" />
-    <option name="LAST_COMMIT_MESSAGE" value="united" />
+    <MESSAGE value="suppliers gui" />
+    <option name="LAST_COMMIT_MESSAGE" value="suppliers gui" />
   </component>
 </project>

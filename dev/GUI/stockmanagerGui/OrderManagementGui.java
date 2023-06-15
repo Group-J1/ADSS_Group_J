@@ -1,6 +1,9 @@
 package GUI.stockmanagerGui;
 
 import GUI.MainGUI;
+import LoginRegister.Presentation.LoginMenuNew;
+import Stock.Service.ProductService;
+import Supplier_Module.Service.SupplierService;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -8,6 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.time.LocalDate;
 
 
 public class OrderManagementGui extends JPanel {
@@ -97,6 +101,8 @@ public class OrderManagementGui extends JPanel {
         });
         defaultOrderButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                LocalDate localDate=LoginMenuNew.getInstance().getLocalDate();
+                SupplierService.getSupplierService().updatePeriodOrders(ProductService.getInstance().sendToSupplierAllProductsQuantity(),localDate);
                 JOptionPane.showMessageDialog(null, "There is periodic order for each product!");
             }
         });

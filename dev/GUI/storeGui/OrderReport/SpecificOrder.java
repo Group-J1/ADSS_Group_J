@@ -42,27 +42,27 @@ public class SpecificOrder extends JPanel {
         titleConstraints.anchor = GridBagConstraints.NORTH; // Align in the center horizontally
         titleConstraints.insets = new Insets(10, 0, 10, 0);
 
-        JLabel titleLabel = new JLabel("Delete Supplier");
+        JLabel titleLabel = new JLabel("Order Details");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
 
         centerPanel.add(titleLabel, titleConstraints);
 
-        JPanel deletePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JLabel enterNumberLabel = new JLabel("Please enter the supplier number you want to delete:");
+        JPanel watchPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JLabel enterNumberLabel = new JLabel("Please enter the order number you want to watch:");
         JTextField numberField = new JTextField(10);
         JButton submitButton = new JButton("Submit");
 
-        deletePanel.add(enterNumberLabel);
-        deletePanel.add(numberField);
-        deletePanel.add(submitButton);
+        watchPanel.add(enterNumberLabel);
+        watchPanel.add(numberField);
+        watchPanel.add(submitButton);
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.weighty = 0.5; // Place components vertically in the middle
         gbc.anchor = GridBagConstraints.NORTH; // Center-align components
-        centerPanel.add(deletePanel, gbc);
+        centerPanel.add(watchPanel, gbc);
 
         // Add action listener for the submit button
         submitButton.addActionListener(e -> {
@@ -77,20 +77,28 @@ public class SpecificOrder extends JPanel {
             else {
 
                 Order order = OrderDAO.getInstance().getOrderById(Integer.parseInt(orderNumber));
-                centerPanel.remove(deletePanel);
+//                centerPanel.remove(watchPanel);
                 GridBagConstraints gbcDetails = new GridBagConstraints();
                 gbcDetails.gridx = 0;
                 gbcDetails.gridy = 2;
                 gbcDetails.weighty = 0.5; // Place component vertically in the middle
                 gbcDetails.anchor = GridBagConstraints.CENTER; // Center-align component
-                JLabel supplierDetails = new JLabel("");
-                centerPanel.add(supplierDetails, gbcDetails);
+                JLabel OrderDetails = new JLabel(order.printOrder());//TODO design later
+                centerPanel.add(OrderDetails, gbcDetails);
 
 
                 revalidate();
                 repaint();
             }
         });
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton backButton = new JButton("Back");
+        bottomPanel.setOpaque(false);
+        bottomPanel.add(backButton);
+
+        mainPanel.add(centerPanel, BorderLayout.CENTER);
+        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+        add(mainPanel, BorderLayout.CENTER);
 
     }
     public static boolean isInteger(String input) {

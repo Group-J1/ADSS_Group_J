@@ -133,6 +133,24 @@ public class Order {
         }
         System.out.println("");
     }
+    //
+    public String printOrder(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("--------ORDER-------\n");
+        String name = this.supplier.card.getSupplier_name();
+        String address1 = this.supplier.card.getAddress();
+        int sup_id = this.supplier.card.getSupplier_number();
+        String num = this.supplier.card.getContact_members().get(0).getPhone_number();
+        sb.append("Supplier name: ").append(name).append(", Address: ").append(address1).append(", Order id: ").append(this.order_id).append("\n");
+        sb.append("Supplier id: ").append(sup_id).append(", Start date: ").append(this.startDate.toString()).append(", Supply date: ").append(this.supplyDate).append(", Phone number to Contact: ").append(num).append("\n");
+        for(Map.Entry<SupplierProduct, Integer> iter : this.products_list_order.entrySet()){
+            sb.append(iter.getKey().printSupplierProduct(iter.getValue())).append("\n");
+        }
+
+        String labelText = sb.toString();
+        return labelText;
+    }
+
 
     public int getKind() {
         return kind;

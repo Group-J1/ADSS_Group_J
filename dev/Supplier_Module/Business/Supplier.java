@@ -1,6 +1,7 @@
 package Supplier_Module.Business;
 
 import Supplier_Module.Business.Agreement.Agreement;
+import Supplier_Module.Business.Agreement.SupplierProduct;
 import Supplier_Module.Business.Card.SupplierCard;
 import Supplier_Module.DAO.OrderDAO;
 
@@ -75,6 +76,26 @@ public class Supplier {
     {
         this.card.printCard();
         this.agreement.printAgreement();
+    }
+    ///////////////////////////////////
+    public String[] getSupplierReport()
+    {
+        String report[]=new String[9];
+        report[0]="ID:" + this.card.getSupplier_number();
+        report[1]="Name: "+this.card.getSupplier_name();
+        report[2]="Address: "+this.card.getAddress();
+        report[3]="Bank Account: "+this.card.getBank_account();
+        report[4]="Payment Method: "+this.card.getPayment_method().toString();
+        report[6]="Products: ";
+        for(SupplierProduct p:this.getAgreement().getProductList())
+        {
+            report[6]+=p.getProduct_name()+",";
+        }
+        report[7]="Method Supply: "+this.agreement.getMethodSupply().methodType();
+        report[8]="EOM: "+this.agreement.getEom().toString();
+
+
+        return report;
     }
 
 }
