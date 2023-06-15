@@ -15,9 +15,8 @@ public class EditOrderPanel extends JPanel {
     private JPanel mainPanel;
     private DeleteProductFromOrderPanel deleteProductFromOrderPanel;
     private EditProductFromOrderPanel editProductFromOrderPanel;
-    private JTextField numberField;
-    private JButton deleteButton = null;
-    private JButton editButton = null;
+    private String number;
+
 
     public EditOrderPanel (OrderManagementGui parnet)
     {
@@ -40,119 +39,123 @@ public class EditOrderPanel extends JPanel {
             }
         };
         mainPanel.setLayout(new BorderLayout());
-        JLabel titleLabel = new JLabel("<html>Edit:<br></html>");
+
+        JPanel centerPanel = new JPanel(new GridBagLayout());
+        centerPanel.setOpaque(false);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.NORTH; // Align in the center horizontally
+        gbc.insets = new Insets(10, 0, 10, 0); // Adjust spacing as needed
+
+        JLabel titleLabel = new JLabel("<html>Edit Order:<br></html>");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
-        mainPanel.add(titleLabel, BorderLayout.NORTH);
-        mainPanel.setLayout(new FlowLayout());
+        centerPanel.add(titleLabel, gbc);
 
         // Create button panel
-        JButton backButton = new JButton("Back");
-        JPanel buttonPanel = new JPanel(new GridLayout(10,3,25,25));
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-        buttonPanel.setOpaque(false);
-        buttonPanel.add(Box.createHorizontalGlue());
-        buttonPanel.add(Box.createHorizontalStrut(60));
-        buttonPanel.add(Box.createHorizontalGlue());
-        JPanel bottomPanel = new JPanel();
-        bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        bottomPanel.add(backButton);
-
-        // Add button panel to the main panel
-        mainPanel.add(Box.createVerticalStrut(120)); // Adjust the spacing as needed
-        mainPanel.add(buttonPanel,BorderLayout.CENTER);
-
-
-        mainPanel.add(Box.createVerticalStrut(200));
-        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
-
-        JLabel enterNumberLabel = new JLabel("Please enter the order number :");
-        numberField = new JTextField(10);
+        JPanel editPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JLabel enterNumberLabel = new JLabel("Please enter the supplier number you want to Edit:");
+        JTextField numberField = new JTextField(10);
         JButton submitButton = new JButton("Submit");
 
-        mainPanel.add(enterNumberLabel);
-        mainPanel.add(numberField);
-        mainPanel.add(submitButton);
-        add(mainPanel, BorderLayout.CENTER);
+
+        editPanel.add(enterNumberLabel);
+        editPanel.add(numberField);
+        editPanel.add(submitButton);
+
+        GridBagConstraints gbcd = new GridBagConstraints();
+        gbcd.gridx = 0;
+        gbcd.gridy = 1;
+        gbcd.weighty = 0.5; // Place components vertically in the middle
+        gbcd.anchor = GridBagConstraints.NORTH; // Center-align components
+        centerPanel.add(editPanel, gbcd);
 
 
-        backButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {parnet.showDefaultPanelFromChild();}
-        });
 
 // Add action listener for the submit button
         submitButton.addActionListener(e -> {
-            String supplierNumber = numberField.getText();
-            // Check if valid OrderID todo
-            if(!isExistOrder(supplierNumber)) {
+            String orderNumber = numberField.getText();
+            if(!isExistOrder(orderNumber)) {
                 JOptionPane.showMessageDialog(null, "Invalid order ID");
             }
-//            if (supplierNumber.isEmpty()) {
-//                // Remove buttons if they exist
-//                if (deleteButton != null) {
-//                    buttonPanel.remove(deleteButton);
-//                    deleteButton = null;
-//                }
-//                if (editButton != null) {
-//                    buttonPanel.remove(editButton);
-//                    editButton = null;
-//                }
-//                JOptionPane.showMessageDialog(null, "Invalid order ID");
-
-            else {
-                // Input is valid, add buttons if they haven't been added
-                if (deleteButton == null) {
-                    try {
-                        deleteButton = createButton("Delete Product", "/GUI/pictures/delete.jpg");
-                        deleteButton.addActionListener(new ActionListener() {
-                            public void actionPerformed(ActionEvent e) {
-                                openDeleteProductFromOrderPanel();
-                            }
-                        });
-                        buttonPanel.add(deleteButton);
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
+            else
+            {
+                centerPanel.remove(editPanel);
+                this.number = numberField.getText();
+                JPanel buttonPanel = new JPanel();
+                buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+                buttonPanel.setOpaque(false);
+                JButton editProduct = null;
+                try {
+                    editProduct = createButton("Edit Product","/GUI/pictures/new-supplier.jpg");
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+                JButton deleteProduct = null;
+                try {
+                    deleteProduct = createButton("Delete Product","/GUI/pictures/update.jpg");
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
                 }
 
-                if (editButton == null) {
-                    try {
-                        editButton = createButton("Edit Product", "/GUI/pictures/order-report.jpg");
-                        editButton.addActionListener(new ActionListener() {
-                            public void actionPerformed(ActionEvent e) {
-                                try {
-                                    openEditProductFromOrderPanel();
-                                } catch (IOException ex) {
-                                    throw new RuntimeException(ex);
-                                }
-                            }
-                        });
-                        buttonPanel.add(editButton);
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
+                buttonPanel.add(Box.createHorizontalGlue());
+                buttonPanel.add(editProduct);
+                buttonPanel.add(Box.createHorizontalStrut(20));
+                buttonPanel.add(deleteProduct);
+                buttonPanel.add(Box.createHorizontalGlue());
+
+                gbcd.gridy =1;
+                gbcd.anchor = GridBagConstraints.CENTER;
+                centerPanel.add(buttonPanel, gbcd);
+//                this.supplier = SupplierDAO.getInstance().getSupplier(Integer.parseInt(supplierNumber));//TODO
+
+
+                // Add action listener for the yes button
+                editProduct.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        try {
+                            openEditProductFromOrderPanel();
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     }
-                }
-                // Hide the components
-                enterNumberLabel.setVisible(false);
-                numberField.setVisible(false);
-                submitButton.setVisible(false);
+                });
+
+                deleteProduct.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        openDeleteProductFromOrderPanel();
+                    }
+                });
+
+                // Refresh the panel to show the confirmation panel
+                revalidate();
+                repaint();
             }
-
-            // Update the container and layout
-            buttonPanel.revalidate();
-            buttonPanel.repaint();
-            mainPanel.revalidate();
-            mainPanel.repaint();
         });
 
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton backButton = new JButton("Back");
+        bottomPanel.setOpaque(false);
+        bottomPanel.add(backButton);
+
+        mainPanel.add(centerPanel, BorderLayout.CENTER);
+        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+        add(mainPanel, BorderLayout.CENTER);
+
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                parentPanel.showDefaultPanelFromChild();
+            }
+        });
 
     }
-
     private void openDeleteProductFromOrderPanel() {
         mainPanel.setVisible(false);
 
         if (deleteProductFromOrderPanel == null) {
-            deleteProductFromOrderPanel = new DeleteProductFromOrderPanel(parentPanel, Integer.parseInt(numberField.getText()));
+            deleteProductFromOrderPanel = new DeleteProductFromOrderPanel(parentPanel, Integer.parseInt(number));
             deleteProductFromOrderPanel.setPreferredSize(mainPanel.getSize());
             deleteProductFromOrderPanel.setMaximumSize(mainPanel.getMaximumSize());
             deleteProductFromOrderPanel.setMinimumSize(mainPanel.getMinimumSize());
@@ -168,7 +171,7 @@ public class EditOrderPanel extends JPanel {
         mainPanel.setVisible(false);
 
         if (editProductFromOrderPanel == null) {
-            editProductFromOrderPanel = new EditProductFromOrderPanel(parentPanel,Integer.parseInt(numberField.getText()));
+            editProductFromOrderPanel = new EditProductFromOrderPanel(parentPanel,Integer.parseInt(number));
             editProductFromOrderPanel.setPreferredSize(mainPanel.getSize());
             editProductFromOrderPanel.setMaximumSize(mainPanel.getMaximumSize());
             editProductFromOrderPanel.setMinimumSize(mainPanel.getMinimumSize());
@@ -182,8 +185,8 @@ public class EditOrderPanel extends JPanel {
 
     private JButton createButton(String text, String imagePath) throws IOException {
         // Create button panel
-        int width = 100;
-        int height = 100;
+        int width = 150;
+        int height = 150;
         JPanel buttonPanel = new JPanel(null);
         buttonPanel.setLayout(new BorderLayout());
 //        buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0)); // Remove label margin
@@ -230,9 +233,11 @@ public class EditOrderPanel extends JPanel {
     private void removeCurrentChildPanel() {
         if (deleteProductFromOrderPanel != null && deleteProductFromOrderPanel.isShowing()) {
             remove(deleteProductFromOrderPanel);
+            deleteProductFromOrderPanel =null;
         }
         if (editProductFromOrderPanel != null && editProductFromOrderPanel.isShowing()) {
             remove(editProductFromOrderPanel);
+            editProductFromOrderPanel = null;
         }
     }
 

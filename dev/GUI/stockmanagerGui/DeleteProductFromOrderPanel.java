@@ -40,40 +40,47 @@ public class DeleteProductFromOrderPanel extends JPanel {
             }
         };
         mainPanel.setLayout(new BorderLayout());
+        JPanel centerPanel = new JPanel(new GridBagLayout());
+        centerPanel.setOpaque(false);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.NORTH; // Align in the center horizontally
+        gbc.insets = new Insets(0, 0, 70, 0); // Adjust spacing as needed
+
+
         JLabel titleLabel = new JLabel("<html>Delete Product From Order: <br></html>");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
-        mainPanel.add(titleLabel, BorderLayout.NORTH);
-        mainPanel.setLayout(new FlowLayout());
+        centerPanel.add(titleLabel, gbc);
 
+        JLabel textLabel = new JLabel("select any product you want to delete from the list and press remove");
+        textLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        textLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+        textLabel.setOpaque(true);
+        gbc.gridy =1;
+        gbc.insets = new Insets(40, 0, 20, 0); // Adjust spacing as needed
+        centerPanel.add(textLabel, gbc);
 
-        // Create button panel
-        JButton backButton = new JButton("Back");
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-        buttonPanel.setOpaque(false);
-        JPanel bottomPanel = new JPanel();
-        bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        bottomPanel.add(backButton);
-        mainPanel.add(Box.createVerticalStrut(200));
-        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
-        add(mainPanel, BorderLayout.CENTER);
-
-
-        backButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                parent.showDefaultPanelFromChild();
-            }
-        });
-
-
-        JLabel messageLabel = new JLabel(); // Label to display messages
-        JPanel currectIdScreen= new JPanel();
+        JPanel removePanel = new JPanel();
+        removePanel.setLayout(new BoxLayout(removePanel, BoxLayout.X_AXIS));
 
         // Create and add the new components
         String[] items = getAllProductsNameOfOrder(orderID);
         JComboBox<String> comboBox = new JComboBox<>(items);
         JButton removeButton = new JButton("Remove");
+
+        removePanel.add(comboBox);
+        removePanel.add(Box.createHorizontalStrut(15));
+        removePanel.add(removeButton);
+
+
+        // Add empty borders to create spacing
+
+        gbc.gridy = 2;
+        gbc.insets = new Insets(0, 0, 10, 0); // Adjust spacing as needed
+        centerPanel.add(removePanel, gbc);
 
         removeButton.addActionListener(new ActionListener() {
             @Override
@@ -81,9 +88,10 @@ public class DeleteProductFromOrderPanel extends JPanel {
                 String selectedItem = (String) comboBox.getSelectedItem();
                 // Perform validation or further processing with the selected item and entered text
                 if (selectedItem == null ) {
-                    messageLabel.setText("Please select an item and enter text.");
+                    JOptionPane.showMessageDialog(null, "You need to chose a Product to Remove!");
                 } else {
-                    messageLabel.setText("Selected item: " + selectedItem);
+                    JOptionPane.showMessageDialog(null, selectedItem + "Removed!");
+
                     // Perform the desired action with the selected item and entered text //todo
                     Order order1=Order_Manager.getOrder_Manager().getPeriodOrderById(orderID);
                     SupplierProduct itemToDelete=order1.isProductInOrder(selectedItem);
@@ -94,24 +102,33 @@ public class DeleteProductFromOrderPanel extends JPanel {
                     {
                         OrderDAO.getInstance().Delete(order1);
                         JOptionPane.showMessageDialog(null, "There is no more products in the order \n Order Deleted");
-                        parent.showDefaultPanelFromChild();
+//                        parent.showDefaultPanelFromChild();
+                        centerPanel.remove(comboBox);
                     }
                 }
             }
         });
-        currectIdScreen.add(comboBox);
-        currectIdScreen.add(removeButton);
+        gbc.gridy =3;
+        centerPanel.add(removePanel,gbc);
 
+
+        // Create button panel
+        JButton backButton = new JButton("Back");
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        bottomPanel.setOpaque(false);
+        bottomPanel.add(backButton);
+        mainPanel.add(centerPanel,BorderLayout.CENTER);
+        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+        add(mainPanel,BorderLayout.CENTER);
+
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                parent.showDefaultPanelFromChild();
+            }
+        });
 
         revalidate();
         repaint();
-
-
-        currectIdScreen.add(messageLabel);
-        mainPanel.add(currectIdScreen);
-
-
-
     }
 
     public String[] getAllProductsNameOfOrder(int orderID)

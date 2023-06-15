@@ -38,24 +38,88 @@ public class EditProductFromOrderPanel extends JPanel {
             }
         };
         mainPanel.setLayout(new BorderLayout());
-        JLabel titleLabel = new JLabel("<html>Welcome to Stock Manger <br> Please select option :</html>");
+        JPanel centerPanel = new JPanel(new GridBagLayout());
+        centerPanel.setOpaque(false);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.NORTH; // Align in the center horizontally
+        gbc.insets = new Insets(0, 0, 70, 0); // Adjust spacing as needed
+
+        JLabel titleLabel = new JLabel("Edit Amount of Product");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
         mainPanel.add(titleLabel, BorderLayout.NORTH);
         mainPanel.setLayout(new FlowLayout());
 
+        JLabel textLabel = new JLabel("Select Product From The List And Enter Amount, Later, Press Update");
+        textLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        textLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+        textLabel.setOpaque(true);
+        gbc.gridy =1;
+        gbc.insets = new Insets(40, 0, 20, 0); // Adjust spacing as needed
+        centerPanel.add(textLabel, gbc);
 
-        // Create button panel
+
+        JPanel updatePanel = new JPanel();
+        updatePanel.setLayout(new BoxLayout(updatePanel, BoxLayout.X_AXIS));
+
+        // Create and add the new components
+        String[] items = getAllProductsNameOfOrder(orderID);
+        JComboBox<String> comboBox = new JComboBox<>(items);
+        JTextField newTextfield = new JTextField(7);
+        JButton updateButton = new JButton("update");
+
+        updatePanel.add(comboBox);
+        updatePanel.add(Box.createHorizontalStrut(10));
+        updatePanel.add(newTextfield);
+        updatePanel.add(Box.createHorizontalStrut(10));
+        updatePanel.add(updateButton);
+
+        updateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedItem = (String) comboBox.getSelectedItem();
+                String enteredText = newTextfield.getText();
+                // Perform validation or further processing with the selected item and entered text
+                if (selectedItem == null || enteredText.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "You need to enter valid amount!");
+                } else { //todo: change the amount of the product
+                    Order order1=Order_Manager.getOrder_Manager().getPeriodOrderById(orderID);
+                    int supID= order1.getSupplier_id();
+                    if(isValidAmount(supID,enteredText,selectedItem)) {
+                        int amount = Integer.parseInt(enteredText);
+                        SupplierProduct itemToDelete = order1.isProductInOrder(selectedItem);
+                        Order_Manager.getOrder_Manager().editProductAmount(order1, itemToDelete, amount); // todo
+                        JOptionPane.showMessageDialog(null, selectedItem + "amount updated!!");
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "You need to enter valid amount!");
+                    }
+                }
+            }
+        });
+        gbc.gridy =2;
+        centerPanel.add(updatePanel,gbc);
+
         JButton backButton = new JButton("Back");
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-        buttonPanel.setOpaque(false);
-        JPanel bottomPanel = new JPanel();
-        bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        bottomPanel.add(backButton);
-        mainPanel.add(Box.createVerticalStrut(200));
-        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
-        add(mainPanel, BorderLayout.CENTER);
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        bottomPanel.setOpaque(false);
+
+// Add an empty component to create vertical space above the "Back" button
+        bottomPanel.add(Box.createVerticalStrut(50), BorderLayout.NORTH);
+
+
+// Add the "Back" button to the center of the panel
+        bottomPanel.add(backButton, BorderLayout.CENTER);
+        bottomPanel.add(Box.createVerticalGlue());
+
+
+        mainPanel.add(centerPanel,BorderLayout.CENTER);
+        mainPanel.add(bottomPanel, BorderLayout.PAGE_END);
+        add(mainPanel,BorderLayout.CENTER);
 
 
         backButton.addActionListener(new ActionListener() {
@@ -65,54 +129,8 @@ public class EditProductFromOrderPanel extends JPanel {
         });
 
 
-        JPanel currectIdScreen= new JPanel();
-        // Create and add the new components
-        String[] items = getAllProductsNameOfOrder(orderID);
-        JComboBox<String> comboBox = new JComboBox<>(items);
-        JTextField newTextfield = new JTextField(10);
-        JButton editButton = new JButton("Edit");
-        JLabel messageLabel=new JLabel();
-
-        editButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String selectedItem = (String) comboBox.getSelectedItem();
-                String enteredText = newTextfield.getText();
-                // Perform validation or further processing with the selected item and entered text
-                if (selectedItem == null || enteredText.isEmpty()) {
-                    messageLabel.setText("Please select an item and enter text.");
-                } else { //todo: change the amount of the product
-                    Order order1=Order_Manager.getOrder_Manager().getPeriodOrderById(orderID);
-                    int supID= order1.getSupplier_id();
-                    if(isValidAmount(supID,enteredText,selectedItem))
-                    {
-                        int amount=Integer.parseInt(enteredText);
-                        SupplierProduct itemToDelete=order1.isProductInOrder(selectedItem);
-                        Order_Manager.getOrder_Manager().editProductAmount(order1,itemToDelete,amount); // todo
-                        messageLabel.setText("Selected item: " + selectedItem + " | Entered text: " + enteredText);
-                    }
-                    else
-                    {
-                        messageLabel.setText("Invalid Amount, Please try again");
-                    }
-                }
-            }
-        });
-        currectIdScreen.add(comboBox);
-        currectIdScreen.add(newTextfield);
-        currectIdScreen.add(editButton);
-        currectIdScreen.add(messageLabel);
-
-
-
         revalidate();
         repaint();
-
-
-        mainPanel.add(currectIdScreen);
-
-
-
     }
 
     public String[] getAllProductsNameOfOrder(int orderID)

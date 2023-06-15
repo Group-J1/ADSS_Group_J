@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="efd86a64-a0d8-46c0-83ea-ef453dddf94b" name="Changes" comment="">
+    <list default="true" id="747796ef-f56c-4b02-a801-a652f5fd9c16" name="Changes" comment="supply update2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ADSS_Group_J.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ADSS_Group_J.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/storeGui/OrderReport/SpecificOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/storeGui/OrderReport/SpecificOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/storeGui/supplyReport/MainSupplyReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/storeGui/supplyReport/MainSupplyReport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/SupplierProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/SupplierProduct.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Card/ContactMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Card/ContactMember.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Managers/Order_Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Managers/Order_Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Supplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Supplier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/DeleteProductFromOrderPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/DeleteProductFromOrderPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/EditOrderPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/EditOrderPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/EditProductFromOrderPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/EditProductFromOrderPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Resource/MarketDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Resource/MarketDB.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -25,23 +32,55 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="2RFYsEI2FmVQqNccHmVuOeKOPCv" />
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2R9hDImv2aBezwRnul2XtY9nqBz" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/reuta/Desktop/לימודים/שנה ג/סמסטר ב/גוי שלנו/ADSS_Group_J/dev/GUI/stockmanagerGui&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager">
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\reuta\Desktop\לימודים\שנה ג\סמסטר ב\גוי שלנו\ADSS_Group_J\dev\GUI\stockmanagerGui" />
+      <recent name="$PROJECT_DIR$/dev/GUI" />
+      <recent name="$PROJECT_DIR$/dev/GUI/pictures" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.MainGUI">
+    <configuration name="Connect" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="DBConnect.Connect" />
+      <module name="ADSS_Group_J" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="DBConnect.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="ADSS_Group_J" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MainGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="GUI.MainGUI" />
       <module name="ADSS_Group_J" />
@@ -55,25 +94,91 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="loginRegisterGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GUI.loginRegisterGui.loginRegisterGUI" />
+      <module name="ADSS_Group_J" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="GUI.loginRegisterGui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainGUI" />
+        <item itemvalue="Application.Connect" />
+        <item itemvalue="Application.loginRegisterGUI" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="efd86a64-a0d8-46c0-83ea-ef453dddf94b" name="Changes" comment="" />
-      <created>1686847501304</created>
+      <changelist id="747796ef-f56c-4b02-a801-a652f5fd9c16" name="Changes" comment="united" />
+      <created>1686668082790</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1686847501304</updated>
-      <workItem from="1686847502892" duration="465000" />
+      <updated>1686668082790</updated>
+      <workItem from="1686720282363" duration="3632000" />
+      <workItem from="1686742305186" duration="22095000" />
+      <workItem from="1686809416532" duration="5727000" />
+      <workItem from="1686816012185" duration="17877000" />
     </task>
+    <task id="LOCAL‎-00001" summary="united">
+      <created>1686670663200</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL‎-00001" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1686670663200</updated>
+    </task>
+    <task id="LOCAL‎-00002" summary="suppliers gui">
+      <created>1686811381627</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL‎-00002" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1686811381627</updated>
+    </task>
+    <task id="LOCAL‎-00003" summary="orders and suppliers united">
+      <created>1686837953254</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL‎-00003" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1686837953254</updated>
+    </task>
+    <task id="LOCAL‎-00004" summary="orders update">
+      <created>1686847041593</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL‎-00004" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1686847041593</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="united" />
+    <MESSAGE value="suppliers gui" />
+    <MESSAGE value="orders and suppliers united" />
+    <MESSAGE value="orders update" />
+    <option name="LAST_COMMIT_MESSAGE" value="orders update" />
   </component>
 </project>
