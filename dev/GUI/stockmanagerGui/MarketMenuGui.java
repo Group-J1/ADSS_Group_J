@@ -11,6 +11,8 @@ public class MarketMenuGui extends JPanel{
     private StockManagement parent;
 
     private DiscountByCategoryGUI discountByCategoryGUI;
+    private DiscountByCatalogNumberGUI discountByCatalogNumberGUI;
+
     private JPanel mainPanel;
 
     public MarketMenuGui(StockManagement parent){
@@ -94,6 +96,7 @@ public class MarketMenuGui extends JPanel{
             discountByCatalogNumber.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
 //                parent.showDefaultPanelFromChild();
+                    openDiscountByCatalogNumber();
                 }
             });
 
@@ -174,6 +177,9 @@ public class MarketMenuGui extends JPanel{
         if (discountByCategoryGUI != null && discountByCategoryGUI.isShowing()) {
             remove(discountByCategoryGUI);
         }
+        else if (discountByCatalogNumberGUI != null && discountByCatalogNumberGUI.isShowing()) {
+            remove(discountByCatalogNumberGUI);
+        }
     }
 
     public void openDiscountByCategory(){
@@ -188,6 +194,22 @@ public class MarketMenuGui extends JPanel{
         }
         discountByCategoryGUI.setVisible(true);
         add(discountByCategoryGUI, BorderLayout.CENTER);
+        revalidate();
+        repaint();
+    }
+
+    public void openDiscountByCatalogNumber(){
+        mainPanel.setVisible(false);
+
+        if (discountByCatalogNumberGUI == null) {
+            discountByCatalogNumberGUI = new DiscountByCatalogNumberGUI(this);
+            discountByCatalogNumberGUI.setPreferredSize(mainPanel.getSize());
+            discountByCatalogNumberGUI.setMaximumSize(mainPanel.getMaximumSize());
+            discountByCatalogNumberGUI.setMinimumSize(mainPanel.getMinimumSize());
+            discountByCatalogNumberGUI.setSize(mainPanel.getSize());
+        }
+        discountByCatalogNumberGUI.setVisible(true);
+        add(discountByCatalogNumberGUI, BorderLayout.CENTER);
         revalidate();
         repaint();
     }

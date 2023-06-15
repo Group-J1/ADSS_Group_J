@@ -105,7 +105,7 @@ public class DiscountByCategoryGUI extends JPanel {
         Font discountTextFieldNewFont = discountTextFieldFont.deriveFont(Font.PLAIN, 18);
         discountTextField.setFont(discountTextFieldNewFont);
 
-        JLabel invalidDiscountLabel = new JLabel("Invalid Sub Sub Category");
+        JLabel invalidDiscountLabel = new JLabel("Invalid Discount");
         Font invalidDiscountLabelFont = invalidDiscountLabel.getFont();
         Font invalidDiscountLabelNewFont = invalidDiscountLabelFont.deriveFont(Font.PLAIN, 18);
         invalidDiscountLabel.setFont(invalidDiscountLabelNewFont);
