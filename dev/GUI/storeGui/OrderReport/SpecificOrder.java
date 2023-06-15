@@ -7,6 +7,8 @@ import Supplier_Module.DAO.OrderDAO;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class SpecificOrder extends JPanel {
@@ -99,6 +101,11 @@ public class SpecificOrder extends JPanel {
         mainPanel.add(centerPanel, BorderLayout.CENTER);
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
         add(mainPanel, BorderLayout.CENTER);
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                parent.showDefaultPanelFromChild();
+            }
+        });
 
     }
     public static boolean isInteger(String input) {

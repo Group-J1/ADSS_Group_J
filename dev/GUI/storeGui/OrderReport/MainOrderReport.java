@@ -38,15 +38,22 @@ public class MainOrderReport extends JPanel {
             }
         };
         mainPanel.setLayout(new BorderLayout());
+
+        JPanel centerPanel = new JPanel(new GridBagLayout());
+        centerPanel.setOpaque(false);
+
         JLabel titleLabel = new JLabel("<html>Welcome To Order Report <br> Please select required report  :</html>");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
-        mainPanel.add(titleLabel, BorderLayout.NORTH);
-        mainPanel.setLayout(new FlowLayout());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(10, 0, 10, 0); // Adjust spacing as needed
+        centerPanel.add(titleLabel, gbc);
 
         JButton backButton = new JButton("Back");
         JPanel buttonPanel = new JPanel(new GridLayout(2,2,25,25));
-
         buttonPanel.setOpaque(false);
 
         // Create buttons
@@ -61,19 +68,20 @@ public class MainOrderReport extends JPanel {
         buttonPanel.add(historic_orders);
         buttonPanel.add(specific_order);
 
+        gbc.gridy =1;
+        centerPanel.add(buttonPanel,gbc);
+
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        bottomPanel.setOpaque(false);
         bottomPanel.add(backButton);
 
         // Add button panel to the main panel
-        mainPanel.add(Box.createVerticalStrut(120)); // Adjust the spacing as needed
-        mainPanel.add(buttonPanel,BorderLayout.CENTER);
 
 
-        mainPanel.add(Box.createVerticalStrut(200));
+        mainPanel.add(centerPanel, BorderLayout.CENTER);
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
-
-        add(mainPanel);
+        add(mainPanel, BorderLayout.CENTER);
 
         // Add action listeners
         periodic_order.addActionListener(new ActionListener() {
@@ -200,6 +208,7 @@ public class MainOrderReport extends JPanel {
     private void removeCurrentChildPanel() {
         if (specificOrder != null && specificOrder.isShowing()) {
             remove(specificOrder);
+            specificOrder=null;
         }
     }
 

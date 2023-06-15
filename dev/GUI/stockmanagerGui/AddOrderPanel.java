@@ -3,6 +3,7 @@ package GUI.stockmanagerGui;
 import Supplier_Module.Business.Agreement.SupplierProduct;
 import Supplier_Module.Business.Managers.SupplyManager;
 import Supplier_Module.Business.Supplier;
+import Supplier_Module.DAO.SupplierDAO;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -11,15 +12,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.regex.Pattern;
 
 public class AddOrderPanel extends JPanel {
     private OrderManagementGui parentPanel;
     private JPanel mainPanel;
-    private LinkedList productsOfOrder;
+    private LinkedList<String> productsOfOrder;
 
     public AddOrderPanel(OrderManagementGui parnet) {
         this.parentPanel = parnet;
-        this.productsOfOrder=new LinkedList<>();
+        this.productsOfOrder = new LinkedList<>();
         setLayout(new BorderLayout());
 
         // Create main panel
@@ -38,69 +40,70 @@ public class AddOrderPanel extends JPanel {
             }
         };
         mainPanel.setLayout(new BorderLayout());
-        JLabel titleLabel = new JLabel("<html>Create a new periodic order:<br></html>");
+
+        JPanel centerPanel = new JPanel(new GridBagLayout());
+        centerPanel.setOpaque(false);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.NORTH; // Align in the center horizontally
+        gbc.insets = new Insets(10, 0, 10, 0);
+
+        JLabel titleLabel = new JLabel("Create a new periodic order:");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
-        mainPanel.add(titleLabel, BorderLayout.NORTH);
-        mainPanel.setLayout(new FlowLayout());
+        centerPanel.add(titleLabel, gbc);
 
-        // Create button panel
-        JButton backButton = new JButton("Back");
-        JPanel buttonPanel = new JPanel(new GridLayout(10, 3, 25, 25));
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-        buttonPanel.setOpaque(false);
-        buttonPanel.add(Box.createHorizontalGlue());
-        buttonPanel.add(Box.createHorizontalStrut(60));
-        buttonPanel.add(Box.createHorizontalGlue());
-        JPanel bottomPanel = new JPanel();
-        bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        bottomPanel.add(backButton);
-
-        // Add button panel to the main panel
-        mainPanel.add(Box.createVerticalStrut(120)); // Adjust the spacing as needed
-        mainPanel.add(buttonPanel, BorderLayout.CENTER);
-
-
-        mainPanel.add(Box.createVerticalStrut(200));
-        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
-
-        JLabel enterNumberLabel = new JLabel("Enter the supplier id you want to order from him :");
-        JTextField numberField = new JTextField(10);
+        JPanel addPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JLabel enterNumberLabel = new JLabel("Please enter supplier number:");
+        JTextField numberField = new JTextField(12);
         JButton submitButton = new JButton("Submit");
 
-        mainPanel.add(enterNumberLabel);
-        mainPanel.add(numberField);
-        mainPanel.add(submitButton);
-        add(mainPanel, BorderLayout.CENTER);
+        addPanel.add(enterNumberLabel);
+        addPanel.add(numberField);
+        addPanel.add(submitButton);
 
+        GridBagConstraints gbcd = new GridBagConstraints();
+        gbcd.gridx = 0;
+        gbcd.gridy = 1;
+        gbcd.weighty = 0.5; // Place components vertically in the middle
+        gbcd.anchor = GridBagConstraints.NORTH; // Center-align components
+        centerPanel.add(addPanel, gbcd);
 
-        backButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                parnet.showDefaultPanelFromChild();
-            }
-        });
 
 
 // Add action listener for the submit button
         submitButton.addActionListener(e -> {
             String supplierNumber = numberField.getText();
-            if (isPositiveInteger(supplierNumber)) {
-                // Remove the existing components
-                mainPanel.remove(enterNumberLabel);
-                mainPanel.remove(numberField);
-                mainPanel.remove(submitButton);
+            // Perform delete action based on the supplier number
+            if (!isPositiveInteger(supplierNumber)) {
+                JOptionPane.showMessageDialog(null, "invalid input!", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else if (SupplierDAO.getInstance().getSupplier(Integer.parseInt(supplierNumber)) == null) {//check if the supplier number exist
+                JOptionPane.showMessageDialog(null, "there is no supplier with id" + supplierNumber, "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else if (SupplierDAO.getInstance().getSupplier(Integer.parseInt(supplierNumber)).getAgreement().getProductList().size()==0 ){
+                JOptionPane.showMessageDialog(null, "this supplier doesn't has products!", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else {
+                centerPanel.remove(addPanel);
 
-                // Create new components
-                int supID=Integer.parseInt(supplierNumber);
-                String[] items= getProductOfSupplier(supID);
+                // Add action listener for the yes button
+                int supID = Integer.parseInt(supplierNumber);
+                String[] items = getProductOfSupplier(supID);
                 JComboBox<String> itemComboBox = new JComboBox<>(items);
                 JTextField textBox = new JTextField(10);
                 JButton addToCartButton = new JButton("Add to Cart");
 
                 // Add new components to the main panel
-                mainPanel.add(itemComboBox);
-                mainPanel.add(textBox);
-                mainPanel.add(addToCartButton);
+                JPanel inputPanel = new JPanel();
+                int verticalGap = 15; // Set the desired vertical gap between rows
+                int horizontalGap = 7;
+                inputPanel.setLayout(new GridLayout(1, 3, horizontalGap, verticalGap));
+                inputPanel.add(itemComboBox);
+                inputPanel.add(textBox);
+                inputPanel.add(addToCartButton);
+                inputPanel.setOpaque(false);
+                gbcd.gridy = 1;
+                gbcd.anchor = GridBagConstraints.CENTER;
+                centerPanel.add(inputPanel, gbcd);
 
                 // Add action listener for the addToCartButton
                 addToCartButton.addActionListener(actionEvent -> {
@@ -108,8 +111,7 @@ public class AddOrderPanel extends JPanel {
                     String quantity = textBox.getText();
 
                     // Perform input validation for the new components
-                    if (isValidAmount(supID,quantity,item))
-                    {
+                    if (isValidAmount(supID, quantity, item)) {
                         // Perform success logic here
                         productsOfOrder.add(item);
                         itemComboBox.removeItem(item);
@@ -123,14 +125,13 @@ public class AddOrderPanel extends JPanel {
                 });
 
                 // Update the container and layout
-                JButton createOrderButton = new JButton("Create the order");
-                mainPanel.add(createOrderButton);
+                JButton createOrderButton = new JButton("Finish and create Period order");
+                gbcd.gridy =2;
+                centerPanel.add(createOrderButton, gbcd);
                 createOrderButton.addActionListener(actionEvent -> {
-                    if(productsOfOrder.isEmpty()){
+                    if (productsOfOrder.isEmpty()) {
                         JOptionPane.showMessageDialog(null, "There is no products in the order");
-                    }
-                    else
-                    {
+                    } else {
                         //todo create the order to dao
 
                         JOptionPane.showMessageDialog(null, "Order add successfully");
@@ -139,19 +140,25 @@ public class AddOrderPanel extends JPanel {
                 });
 
 
-
-                mainPanel.revalidate();
-                mainPanel.repaint();
-            }
-            else
-            {
-                // Perform error logic for invalid input
-                JOptionPane.showMessageDialog(null, "Invalid supplier ID. Please try again.");
+                revalidate();
+                repaint();
             }
 
         });
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton backButton = new JButton("Back");
+        bottomPanel.setOpaque(false);
+        bottomPanel.add(backButton);
 
+        mainPanel.add(centerPanel, BorderLayout.CENTER);
+        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+        add(mainPanel, BorderLayout.CENTER);
 
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                parentPanel.showDefaultPanelFromChild();
+            }
+        });
     }
 
 
