@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="791a9454-e111-4b33-95de-17326b14e958" name="Changes" comment="Finished class DiscountByCategoryGUI (working!!!)">
+    <list default="true" id="791a9454-e111-4b33-95de-17326b14e958" name="Changes" comment="last fixes in AddNewProductGUI.java now should be good....">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/AddNewProductGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/AddNewProductGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/SellPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/SellPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Resource/MarketDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Resource/MarketDB.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Service/ProductService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,6 +87,8 @@
       <updated>1686670931739</updated>
       <workItem from="1686670932833" duration="5396000" />
       <workItem from="1686676484291" duration="9887000" />
+      <workItem from="1686765618850" duration="86000" />
+      <workItem from="1686813716544" duration="3701000" />
     </task>
     <task id="LOCAL-00001" summary="finished with the stock reports in GUI">
       <created>1686676134959</created>
@@ -127,7 +130,14 @@
       <option name="presentableId" value="LOCAL‎00006" />
       <updated>1686760803276</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="last fixes in AddNewProductGUI.java now should be good....">
+      <created>1686764958201</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1686764958201</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -150,7 +160,8 @@
     <MESSAGE value="added the class of MarketMenuGui" />
     <MESSAGE value="finished the ProductMenuGui.java now there is graphic" />
     <MESSAGE value="Finished class DiscountByCategoryGUI (working!!!)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished class DiscountByCategoryGUI (working!!!)" />
+    <MESSAGE value="last fixes in AddNewProductGUI.java now should be good...." />
+    <option name="LAST_COMMIT_MESSAGE" value="last fixes in AddNewProductGUI.java now should be good...." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

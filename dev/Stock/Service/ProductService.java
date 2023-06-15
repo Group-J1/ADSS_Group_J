@@ -54,12 +54,14 @@ public class ProductService {
     }
 
     // ------------ Case 2.2 in Product UI ------------
-    public void sellProductsByUniqueCode(Product soldProduct, int quantitySold, LocalDate localDate) {
+    public boolean sellProductsByUniqueCode(Product soldProduct, int quantitySold, LocalDate localDate) {
         if (productManager.sellProductsByUniqueCode(soldProduct, quantitySold)) {
             Shortages shortagesForSupplier = new Shortages();
 
-            SupplierService.getSupplierService().lackReport(shortagesForSupplier.getMissing(),localDate);
-                        };
+//            SupplierService.getSupplierService().lackReport(shortagesForSupplier.getMissing(),localDate);
+            return true;
+                        }
+        return false;
     }
 
     // ------------ Helper function for Case 3 in Product UI ------------
