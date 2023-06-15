@@ -1,25 +1,27 @@
 package GUI.supplyGui;
 
 import GUI.MainGUI;
+import GUI.loginRegisterGui.loginRegisterGUI;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class SupplierGUI extends JPanel {
-    private MainGUI mainGUI;
+    private loginRegisterGUI loginRegisterGUI;
     private JPanel mainPanel;
+
+    private MainGUI mainGUI;
     private AddSupplierPanel addSupplierPanel;
     private EditSupplierPanel editSupplierPanel;
     private DeleteSupplierPanel deleteSupplierPanel;
 
-    public SupplierGUI(MainGUI mainGUI)throws IOException  {
+    public SupplierGUI(loginRegisterGUI loginRegisterGUI, MainGUI mainGUI)throws IOException  {
         this.mainGUI = mainGUI;
+        this.loginRegisterGUI = loginRegisterGUI;
         setLayout(new BorderLayout());
 
         // Create main panel
@@ -44,8 +46,11 @@ public class SupplierGUI extends JPanel {
         mainPanel.add(titleLabel, BorderLayout.NORTH);
         mainPanel.setLayout(new FlowLayout());
 
+        String back = "back" ;
+        if(loginRegisterGUI != null)
+            back = "Disconnect";
         // Create button panel
-        JButton backButton = new JButton("Back");
+        JButton backButton = new JButton(back);
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
         buttonPanel.setOpaque(false);
@@ -99,9 +104,13 @@ public class SupplierGUI extends JPanel {
         });
 
         backButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {
+                if(loginRegisterGUI != null)
+                    loginRegisterGUI.showMainPanel();
+                else{
                     mainGUI.showMainPanel();
                 }
+            }
         });
     }
     private JButton createButton(String text, String imagePath) throws IOException {

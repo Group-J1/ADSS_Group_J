@@ -2,21 +2,15 @@ package GUI.loginRegisterGui;
 
 import GUI.MainGUI;
 import GUI.stockmanagerGui.StockManagerGUI;
-import GUI.storeGui.StoreManagerGUI;
 import GUI.supplyGui.SupplierGUI;
 import LoginRegister.Business.LoginManager;
 import LoginRegister.Business.RegisterManager;
-import LoginRegister.Presentation.StoreManagerMenu;
-import Stock.Presentation.StockMainUI;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.Console;
 import java.io.IOException;
 
 public class loginRegisterGUI extends JFrame {
@@ -26,14 +20,13 @@ public class loginRegisterGUI extends JFrame {
     private JPanel mainPanel;
 
     private SupplierGUI supplierGUI;
-    private StoreManagerGUI storeManagerGUI;
+    //    private StoreManagerGUI storeManagerGUI;
     private StockManagerGUI stockManagerGUI;
 
 
-    //    public loginRegisterGUI(MainGUI mainGUI) throws IOException {
+    //    public LoginRegisterGUI(MainGUI mainGUI) throws IOException {
     public loginRegisterGUI() throws IOException {
 
-        mainGUI = new MainGUI();
         setTitle("SUPER LEE");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 650);
@@ -151,22 +144,24 @@ public class loginRegisterGUI extends JFrame {
                     String errorMessage = loginManager.login(userName,password,role);
                     if (errorMessage.equals("")) {
 //                        System.out.println("Connected");
-                        mainPanel.setVisible(false);
+//                        mainPanel.setVisible(false);
                         if (role.toLowerCase().equals("stock manager")) {
                             // show StockManagerGUI
-//                            try {
-//                                mainGUI.setVisible(true);
-////                                openStockManager();
-//                            }
-//                            catch (IOException ex) {
-//                                throw new RuntimeException(ex);
-//                            }
+                            try {
+//                                stockManagerGUI.setVisible(true);
+                                openStockManager();
+                            }
+                            catch (IOException ex) {
+                                throw new RuntimeException(ex);
+
+                            }
+
 
                         }
                         else if (role.toLowerCase().equals("supplier manager")) {
                             // show SupplierManagerGUI
                             try {
-                                mainGUI.setVisible(true);
+//                                mainGUI.setVisible(true);
                                 openSupplierManager();
                             } catch (IOException ex) {
                                 throw new RuntimeException(ex);
@@ -175,7 +170,7 @@ public class loginRegisterGUI extends JFrame {
                         else {
 //                          // show storeManagerGUI
                             try {
-                                mainGUI.setVisible(true);
+//                                mainGUI.setVisible(true);
 //                                mainGUI.openStoreManager();
                                 openStoreManager();
                             } catch (IOException ex) {
@@ -205,6 +200,8 @@ public class loginRegisterGUI extends JFrame {
                 password = new String(pass);
                 //password = passwordField.getText();
                 role = (String)comboBox.getSelectedItem();
+                if(role != null)
+                    role = role.toLowerCase();
                 if (!checkIfUsernameValid(userName)) {
                     // raise box of invalid username
                     JOptionPane.showMessageDialog(null, "The username must contains only letters and numbers! ");
@@ -285,33 +282,62 @@ public class loginRegisterGUI extends JFrame {
         });
     }
     private void openSupplierManager() throws IOException {          // used to be private
-        if (supplierGUI == null) {
-//            supplierGUI = new SupplierGUI(this);
-//            layeredPane.add(supplierGUI, 1);
-        }
-
-        supplierGUI.setVisible(true);
         mainPanel.setVisible(false);
+
+        if (supplierGUI == null) {
+            supplierGUI = new SupplierGUI(this,null);
+            supplierGUI.setPreferredSize(mainPanel.getSize());
+            supplierGUI.setMaximumSize(mainPanel.getMaximumSize());
+            supplierGUI.setMinimumSize(mainPanel.getMinimumSize());
+            supplierGUI.setSize(mainPanel.getSize());
+        }
+        supplierGUI.setVisible(true);
+        add(supplierGUI, BorderLayout.CENTER);
+        revalidate();
+        repaint();
     }
     private void openStoreManager() throws IOException {             // used to be private
-        if (storeManagerGUI == null) {
-//            storeManagerGUI = new StoreManagerGUI(this);
-//            layeredPane.add(storeManagerGUI, 1);
-        }
-
-        storeManagerGUI.setVisible(true);
         mainPanel.setVisible(false);
+
+        if (mainGUI == null) {
+            mainGUI = new MainGUI(this);
+            mainGUI.setPreferredSize(mainPanel.getSize());
+            mainGUI.setMaximumSize(mainPanel.getMaximumSize());
+            mainGUI.setMinimumSize(mainPanel.getMinimumSize());
+            mainGUI.setSize(mainPanel.getSize());
+        }
+        mainGUI.setVisible(true);
+        add(mainGUI, BorderLayout.CENTER);
+        revalidate();
+        repaint();
     }
 
     private void openStockManager() throws IOException {            // used to be private
-        if (stockManagerGUI == null) {
-//            stockManagerGUI = new StockManagerGUI(this);
-//            layeredPane.add(stockManagerGUI, JLayeredPane.POPUP_LAYER);
-        }
-
-        stockManagerGUI.setVisible(true);
         mainPanel.setVisible(false);
+
+        if (stockManagerGUI == null) {
+            stockManagerGUI = new StockManagerGUI(this,null);
+            stockManagerGUI.setPreferredSize(mainPanel.getSize());
+            stockManagerGUI.setMaximumSize(mainPanel.getMaximumSize());
+            stockManagerGUI.setMinimumSize(mainPanel.getMinimumSize());
+            stockManagerGUI.setSize(mainPanel.getSize());
+        }
+        stockManagerGUI.setVisible(true);
+        add(stockManagerGUI, BorderLayout.CENTER);
+        revalidate();
+        repaint();
+    }
+    public void showMainPanel() {
+        mainPanel.setVisible(true);
+        if (supplierGUI != null) {
+            supplierGUI.setVisible(false);
+        }
+        if (mainGUI != null) {
+            mainGUI.setVisible(false);
+        }
+        if (stockManagerGUI != null) {
+            stockManagerGUI.setVisible(false);
+        }
+        // Hide other screens if necessary
     }
 }
-
-

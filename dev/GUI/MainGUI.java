@@ -1,10 +1,9 @@
 package GUI;
 
-import GUI.stockmanagerGui.OrderManagementGui;
+import GUI.loginRegisterGui.loginRegisterGUI;
 import GUI.stockmanagerGui.StockManagerGUI;
 import GUI.storeGui.StoreManagerGUI;
 import GUI.supplyGui.SupplierGUI;
-import Stock.Business.ProductManager;
 import Stock.Service.ProductService;
 
 import javax.imageio.ImageIO;
@@ -14,23 +13,27 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class MainGUI extends JFrame{
+public class MainGUI extends JPanel{
+
+    private loginRegisterGUI parent;
 
     private JLayeredPane layeredPane;
     private JPanel mainPanel;
     private SupplierGUI supplierGUI;
     private StoreManagerGUI storeManagerGUI;
     private StockManagerGUI stockManagerGUI;
-    public MainGUI() throws IOException {
+    public MainGUI(loginRegisterGUI loginRegisterGUI) throws IOException {
+        parent = loginRegisterGUI;
         ProductService.getInstance().setProductManager();
-        setTitle("SUPER LEE");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(700, 500);
+//        setTitle("SUPER LEE");
+//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        setSize(700, 500);
 
         // Create layered pane
-        layeredPane = new JLayeredPane();
-        layeredPane.setLayout(new BorderLayout());
-        getContentPane().add(layeredPane);
+//        layeredPane = new JLayeredPane();
+//        layeredPane.setLayout(new BorderLayout());
+//        getContentPane().add(layeredPane);
+        setLayout(new BorderLayout());
         Image background = ImageIO.read(getClass().getResource("/GUI/pictures/background.jpg"));
         // Create main panel
         mainPanel = new JPanel(){
@@ -41,15 +44,26 @@ public class MainGUI extends JFrame{
         };
         /////
         mainPanel.setLayout(new BorderLayout());
+        JLabel titleLabel = new JLabel("<html>Store manager <br> Please select option :</html>");
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
+        mainPanel.add(titleLabel, BorderLayout.NORTH);
+        mainPanel.setLayout(new FlowLayout());
         //////
 
-        JLabel label1 = new JLabel("<html>Welcome to Super Lee store! <br>What is your role?</html>");
-        label1.setHorizontalAlignment(SwingConstants.CENTER);
-//        label1.setForeground(Color.WHITE);
-        Font font = new Font("Comic Sans MS", Font.BOLD, 24);
-        label1.setFont(font);
+        JButton backButton = new JButton("Disconnect");
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        bottomPanel.add(backButton);
 
-        mainPanel.add(label1, BorderLayout.NORTH);
+//        JLabel label1 = new JLabel("<html>Welcome to Super Lee store! <br>What is your role?</html>");
+//        label1.setHorizontalAlignment(SwingConstants.CENTER);
+////        label1.setForeground(Color.WHITE);
+//        Font font = new Font("Comic Sans MS", Font.BOLD, 24);
+//        label1.setFont(font);
+
+//        mainPanel.add(label1, BorderLayout.NORTH);
+        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
         mainPanel.setLayout(new FlowLayout());
 
 
@@ -74,19 +88,32 @@ public class MainGUI extends JFrame{
         // Add button panel to the main panel
         mainPanel.add(Box.createVerticalStrut(150)); // Adjust the spacing as needed
 
-        mainPanel.add(buttonPanel,BorderLayout.CENTER);
+        mainPanel.add(buttonPanel,BorderLayout.SOUTH);
 
         // Add main panel to the MainGUI panel
-//        add(mainPanel, BorderLayout.CENTER);
+        add(mainPanel ,BorderLayout.CENTER);
 //    }
 
 
 
-        layeredPane.setLayer(mainPanel, JLayeredPane.DEFAULT_LAYER);
-        layeredPane.add(mainPanel);
+//        layeredPane.setLayer(mainPanel, JLayeredPane.DEFAULT_LAYER);
+//        add(mainPanel);
+        setPreferredSize(getSize());
+        setMaximumSize(getMaximumSize());
+        setMinimumSize(getMinimumSize());
+        setSize(getSize());
+//        add(layeredPane,BorderLayout.CENTER);
+        setVisible(true);
 
 
 
+
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                parent.showMainPanel();
+
+            }
+        });
         // Add action listeners
         supplierManagerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -156,32 +183,57 @@ public class MainGUI extends JFrame{
     }
 
     private void openSupplierManager() throws IOException {
-        if (supplierGUI == null) {
-            supplierGUI = new SupplierGUI(this);
-            layeredPane.add(supplierGUI, 1);
-        }
-
-        supplierGUI.setVisible(true);
         mainPanel.setVisible(false);
+
+        if (supplierGUI == null) {
+            supplierGUI = new SupplierGUI(null,this);
+            supplierGUI.setPreferredSize(mainPanel.getSize());
+            supplierGUI.setMaximumSize(mainPanel.getMaximumSize());
+            supplierGUI.setMinimumSize(mainPanel.getMinimumSize());
+            supplierGUI.setSize(mainPanel.getSize());
+        }
+        supplierGUI.setVisible(true);
+        add(supplierGUI, BorderLayout.CENTER);
+        revalidate();
+        repaint();
     }
     private void openStoreManager() throws IOException {
+        mainPanel.setVisible(false);
+
         if (storeManagerGUI == null) {
             storeManagerGUI = new StoreManagerGUI(this);
-            layeredPane.add(storeManagerGUI, 1);
+            storeManagerGUI.setPreferredSize(mainPanel.getSize());
+            storeManagerGUI.setMaximumSize(mainPanel.getMaximumSize());
+            storeManagerGUI.setMinimumSize(mainPanel.getMinimumSize());
+            storeManagerGUI.setSize(mainPanel.getSize());
         }
-
         storeManagerGUI.setVisible(true);
-        mainPanel.setVisible(false);
+        add(storeManagerGUI, BorderLayout.CENTER);
+        revalidate();
+        repaint();
     }
 
     private void openStockManager() throws IOException {
-        if (stockManagerGUI == null) {
-            stockManagerGUI = new StockManagerGUI(this);
-            layeredPane.add(stockManagerGUI, 1);
-        }
-
-        stockManagerGUI.setVisible(true);
+//        if (stockManagerGUI == null) {
+//            stockManagerGUI = new StockManagerGUI(this);
+//            layeredPane.add(stockManagerGUI, 1);
+//        }
+//
+//        stockManagerGUI.setVisible(true);
+//        mainPanel.setVisible(false);
         mainPanel.setVisible(false);
+
+        if (stockManagerGUI == null) {
+            stockManagerGUI = new StockManagerGUI(null,this);
+            stockManagerGUI.setPreferredSize(mainPanel.getSize());
+            stockManagerGUI.setMaximumSize(mainPanel.getMaximumSize());
+            stockManagerGUI.setMinimumSize(mainPanel.getMinimumSize());
+            stockManagerGUI.setSize(mainPanel.getSize());
+        }
+        stockManagerGUI.setVisible(true);
+        add(stockManagerGUI, BorderLayout.CENTER);
+        revalidate();
+        repaint();
     }
 
     // Add methods to open other screens and handle back button
@@ -200,19 +252,19 @@ public class MainGUI extends JFrame{
         // Hide other screens if necessary
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                MainGUI mainGUI = null;
-                try {
-                    mainGUI = new MainGUI();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                mainGUI.setVisible(true);
-            }
-        });
-    }
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(new Runnable() {
+//            public void run() {
+//                MainGUI mainGUI = null;
+//                try {
+//                    mainGUI = new MainGUI();
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                }
+//                mainGUI.setVisible(true);
+//            }
+//        });
+//    }
 
 
 }

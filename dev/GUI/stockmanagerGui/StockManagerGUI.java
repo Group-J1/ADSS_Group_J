@@ -1,12 +1,7 @@
 package GUI.stockmanagerGui;
 
 import GUI.MainGUI;
-import Stock.Business.Chain;
-import Stock.Business.Market;
-import Stock.Business.MarketManager;
-import Stock.Business.ProductManager;
-import Stock.Service.ProductService;
-import Stock.DataAccess.ProductDetailsDAO;
+import GUI.loginRegisterGui.loginRegisterGUI;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -16,16 +11,24 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
+import Stock.Business.Chain;
+import Stock.Business.Market;
+import Stock.Business.MarketManager;
+import Stock.Business.ProductManager;
+import Stock.Service.ProductService;
+import Stock.DataAccess.ProductDetailsDAO;
 
 public class StockManagerGUI extends JPanel {
+    private loginRegisterGUI loginRegisterGUI;
     private MainGUI mainGUI;
     private JPanel mainPanel;
     private OrderManagementGui orderManagementGui;
     private StockManagement stockManagement;
 
-    public StockManagerGUI(MainGUI mainGUI) throws IOException {
+    public StockManagerGUI(loginRegisterGUI loginRegisterGUI, MainGUI mainGUI) throws IOException {
         startMenu();
         this.mainGUI = mainGUI;
+        this.loginRegisterGUI = loginRegisterGUI;
         setLayout(new BorderLayout());
 
         // Create main panel
@@ -51,8 +54,11 @@ public class StockManagerGUI extends JPanel {
         mainPanel.setLayout(new FlowLayout());
 
 
+        String back = "back" ;
+        if(loginRegisterGUI != null)
+            back = "Disconnect";
         // Create button panel
-        JButton backButton = new JButton("Back");
+        JButton backButton = new JButton(back);
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
         buttonPanel.setOpaque(false);
@@ -107,7 +113,11 @@ public class StockManagerGUI extends JPanel {
 
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mainGUI.showMainPanel();
+                if(loginRegisterGUI != null)
+                    loginRegisterGUI.showMainPanel();
+                else{
+                    mainGUI.showMainPanel();
+                }
             }
         });
     }
@@ -198,7 +208,6 @@ public class StockManagerGUI extends JPanel {
             remove(stockManagement);
         }
     }
-
 
     public void startMenu() {
         /**
