@@ -5,14 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="791a9454-e111-4b33-95de-17326b14e958" name="Changes" comment="finished the functions in ProductMenuGui">
+      <change afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/AddShelvesToMarketGUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/DiscountForCategoryGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/ChangeMinQuantityGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/ChangeMinQuantityGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/InformDefectedGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/InformDefectedGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/ProductInformation.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/ProductInformation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/ProductMenuGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/ProductMenuGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/StockManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/StockManagement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/UpdateQuantityGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/UpdateQuantityGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/DiscountByCatalogNumberGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/DiscountByCatalogNumberGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/DiscountByCategoryGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/DiscountByCategoryGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/MarketMenuGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/MarketMenuGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/StockManagerGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/StockManagerGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Resource/MarketDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Resource/MarketDB.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Presentation/MarketUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Presentation/MarketUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Presentation/StockMainUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Presentation/StockMainUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,8 +103,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainGUI" />
-        <item itemvalue="Application.Connect" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Connect" />
       </list>
     </recent_temporary>
   </component>

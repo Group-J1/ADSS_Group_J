@@ -67,10 +67,13 @@ public class MarketUI {
         if (!checkSubSubCategory(subSubCategoryStr)) {
             return;
         }
-        System.out.println("Whats is the product's discount? ");
+        System.out.println("Whats is the product's discount? between 0 to 1 ");
         discount = input.nextLine();
         if (!checkIfPositiveDoubleNumber(discount)) {
             System.out.println("your discount is not a positive number ");
+            return;
+        }if(0 > Double.parseDouble(discount) || Double.parseDouble(discount) > 1){
+            System.out.println("your discount is not between 0 to 1 ");
             return;
         }
         if (marketService.setDiscountForProduct(categoryStr,subCategoryStr,subSubCategoryStr,Double.parseDouble(discount))) {
@@ -85,10 +88,13 @@ public class MarketUI {
         String catalogNumber,discount;
         System.out.println("Whats is the catalog number? ");
         catalogNumber = input.nextLine();
-        System.out.println("Whats is the product's discount? ");
+        System.out.println("Whats is the product's discount? between 0 to 1 ");
         discount = input.nextLine();
         if (!checkIfPositiveDoubleNumber(discount)) {
             System.out.println("your discount is not a positive number ");
+            return;
+        }if(0 > Double.parseDouble(discount) || Double.parseDouble(discount) > 1){
+            System.out.println("your discount is not between 0 to 1 ");
             return;
         }
         if (marketService.setDiscountForProduct(catalogNumber,Double.parseDouble(discount))) {

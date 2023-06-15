@@ -11,12 +11,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class DiscountByCategoryGUI extends JPanel {
+public class DiscountForCategoryGUI extends JPanel {
 
     private JPanel mainPanel;
     private MarketMenuGui parent;
 
-    public DiscountByCategoryGUI(MarketMenuGui parent) {
+    public DiscountForCategoryGUI(MarketMenuGui parent) {
         this.parent = parent;
         setLayout(new BorderLayout());
 
@@ -36,7 +36,7 @@ public class DiscountByCategoryGUI extends JPanel {
             }
         };
         mainPanel.setLayout(new BorderLayout());
-        JLabel titleLabel = new JLabel("<html>Discount By Category <br><br> </html>");
+        JLabel titleLabel = new JLabel("<html>Discount For Category <br><br> </html>");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
         mainPanel.add(titleLabel, BorderLayout.NORTH);
@@ -60,41 +60,6 @@ public class DiscountByCategoryGUI extends JPanel {
         invalidCategoryLabel.setForeground(Color.RED);
 
 
-
-        JLabel subCategoryLabel = new JLabel("Sub Category");
-        Font subCategoryLabelFont = subCategoryLabel.getFont();
-        Font subCategoryLabelNewFont = subCategoryLabelFont.deriveFont(Font.PLAIN, 18);
-        subCategoryLabel.setFont(subCategoryLabelNewFont);
-
-        JTextField subCategoryTextField = new JTextField();
-        Font subCategoryTextFieldFont = subCategoryTextField.getFont();
-        Font subCategoryTextFieldNewFont = subCategoryTextFieldFont.deriveFont(Font.PLAIN, 18);
-        subCategoryTextField.setFont(subCategoryTextFieldNewFont);
-
-        JLabel invalidSubCategoryLabel = new JLabel("Invalid Sub Category");
-        Font invalidSubCategoryLabelFont =  invalidSubCategoryLabel.getFont();
-        Font invalidSubCategoryLabelNewFont = invalidSubCategoryLabelFont.deriveFont(Font.PLAIN, 18);
-        invalidSubCategoryLabel.setFont(invalidSubCategoryLabelNewFont);
-        invalidSubCategoryLabel.setForeground(Color.RED);
-
-
-        JLabel subSubCategoryLabel = new JLabel("Sub Sub Category");
-        Font subSubCategoryLabelFont = subSubCategoryLabel.getFont();
-        Font subSubCategoryLabelNewFont = subSubCategoryLabelFont.deriveFont(Font.PLAIN, 18);
-        subSubCategoryLabel.setFont(subSubCategoryLabelNewFont);
-
-        JTextField subSubCategoryTextField = new JTextField();
-        Font subSubCategoryTextFieldFont = subSubCategoryTextField.getFont();
-        Font subSubCategoryTextFieldNewFont = subSubCategoryTextFieldFont.deriveFont(Font.PLAIN, 18);
-        subSubCategoryTextField.setFont(subSubCategoryTextFieldNewFont);
-
-        JLabel invalidSubSubCategoryLabel = new JLabel("Invalid Sub Sub Category");
-        Font invalidSubSubCategoryLabelFont = invalidSubSubCategoryLabel.getFont();
-        Font invalidSubSubCategoryLabelNewFont = invalidSubSubCategoryLabelFont.deriveFont(Font.PLAIN, 18);
-        invalidSubSubCategoryLabel.setFont(invalidSubSubCategoryLabelNewFont);
-        invalidSubSubCategoryLabel.setForeground(Color.RED);
-
-
         JLabel discountLabel = new JLabel("Discount");
         Font discountLabelFont = discountLabel.getFont();
         Font discountLabelNewFont = discountLabelFont.deriveFont(Font.PLAIN, 18);
@@ -115,28 +80,18 @@ public class DiscountByCategoryGUI extends JPanel {
         JPanel inputPanel = new JPanel();
         int verticalGap = 35; // Set the desired vertical gap between rows
         int horizontalGap = 15;
-        inputPanel.setLayout(new GridLayout(4, 3, horizontalGap, verticalGap));
+        inputPanel.setLayout(new GridLayout(2, 3, horizontalGap, verticalGap));
         inputPanel.add(categoryLabel);
         inputPanel.add(categoryTextField);
         inputPanel.add(invalidCategoryLabel);
         invalidCategoryLabel.setVisible(false);
-        inputPanel.add(subCategoryLabel);
-        inputPanel.add(subCategoryTextField);
-        inputPanel.add(invalidSubCategoryLabel);
-        invalidSubCategoryLabel.setVisible(false);
-        inputPanel.add(subSubCategoryLabel);
-        inputPanel.add(subSubCategoryTextField);
-        inputPanel.add(invalidSubSubCategoryLabel);
-        invalidSubSubCategoryLabel.setVisible(false);
         inputPanel.add(discountLabel);
         inputPanel.add(discountTextField);
         inputPanel.add(invalidDiscountLabel);
         invalidDiscountLabel.setVisible(false);
 
-
         inputPanel.setOpaque(false);
 
-//        mainPanel.add(inputPanel, BorderLayout.CENTER);
         JPanel inputWrapperPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         inputWrapperPanel.add(inputPanel);
         mainPanel.add(inputWrapperPanel, BorderLayout.WEST);
@@ -163,15 +118,11 @@ public class DiscountByCategoryGUI extends JPanel {
                 // Handle submit button action
                 MarketService marketService = MarketService.getInstance();
                 ArrayList<JLabel> inputsArrayList = new ArrayList<>(Arrays.asList(
-                        invalidCategoryLabel, invalidSubCategoryLabel, invalidSubSubCategoryLabel, invalidDiscountLabel));
+                        invalidCategoryLabel, invalidDiscountLabel));
                 ArrayList<Boolean> inputChecks = new ArrayList<>();
 
                 String categoryStr = categoryTextField.getText();
                 inputChecks.add(checkIfOnlyLetters(categoryStr));
-                String subCategoryStr = subCategoryTextField.getText();
-                inputChecks.add(checkSubCategory(subCategoryStr));
-                String subSubCategoryStr = subSubCategoryTextField.getText();
-                inputChecks.add(checkSubSubCategory(subSubCategoryStr));
                 String discountStr = discountTextField.getText();
                 inputChecks.add(checkIfPositiveDoubleNumber(discountStr) &&
                         !(0 > Double.parseDouble(discountStr) || Double.parseDouble(discountStr) > 1));
@@ -182,16 +133,13 @@ public class DiscountByCategoryGUI extends JPanel {
                     for (JLabel currentInput: inputsArrayList) {
                         currentInput.setVisible(false);
                     }
-                    if (marketService.setDiscountForProduct(categoryStr,subCategoryStr,subSubCategoryStr,
-                            Double.parseDouble(discountStr))) {
+                    if (marketService.setDiscountForCategory(categoryStr,Double.parseDouble(discountStr))) {
                         categoryTextField.setText("");
-                        subCategoryTextField.setText("");
-                        subSubCategoryTextField.setText("");
                         discountTextField.setText("");
                         JOptionPane.showMessageDialog(null,"Discount updated");
                     }
                     else {
-                        JOptionPane.showMessageDialog(null,"Product Not Found");
+                        JOptionPane.showMessageDialog(null,"Category Not Found");
                     }
                 }
                 else {
@@ -213,13 +161,9 @@ public class DiscountByCategoryGUI extends JPanel {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 invalidCategoryLabel.setVisible(false);
-                invalidSubCategoryLabel.setVisible(false);
-                invalidSubSubCategoryLabel.setVisible(false);
                 invalidDiscountLabel.setVisible(false);
 
                 categoryTextField.setText("");
-                subCategoryTextField.setText("");
-                subSubCategoryTextField.setText("");
                 discountTextField.setText("");
 
                 parent.showDefaultPanelFromChild();
@@ -253,44 +197,7 @@ public class DiscountByCategoryGUI extends JPanel {
         }
         return str.matches("[a-zA-Z' ]+");
     }
-    Boolean checkSubCategory(String subCategoryStr) {
-        if(subCategoryStr.equals("")){
-            return false;
-        }
-        return subCategoryStr.matches("[a-zA-Z0-9% ]+");
-    }
-    Boolean checkSubSubCategory(String subSubCategoryStr) {
-        /**
-         * Checks if a given string matches the format of a sub-sub category.
-         * A sub-sub category should consist of a number followed by a space and a word.
-         * Example: "5 g", "1 l", "10 p".
-         *
-         * @param subSubCategoryStr the sub-sub category string to be checked
-         * @return true if the string matches the format of a sub-sub category, false otherwise
-         */
-        if(subSubCategoryStr.equals("")){
-            return false;
-        }
-        String[] parts = subSubCategoryStr.split(" ");
-        double number;
-        if (parts.length == 2) {
-            try {
-                number = Double.parseDouble(parts[0]);
-                String word = parts[1];
-                if (!word.matches("[a-zA-Z]+")) {
-                    System.out.println("your product's subSubCategory does not match the format.");
-                    return false;
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("your product's subSubCategory does not match the format.");
-                return false;
-            }
-        } else {
-            System.out.println("your product's subSubCategory does not match the format.");
-            return false;
-        }
-        return true;
-    }
+
     boolean checkIfPositiveDoubleNumber(String number) {
         try {
             if(number.equals("")){

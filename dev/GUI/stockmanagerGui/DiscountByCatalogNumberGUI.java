@@ -124,7 +124,8 @@ public class DiscountByCatalogNumberGUI extends JPanel {
                 String catalogNumberStr = catalogNumberTextField.getText();
                 inputChecks.add(!catalogNumberStr.isEmpty());
                 String discountStr = discountTextField.getText();
-                inputChecks.add(checkIfPositiveDoubleNumber(discountStr));
+                inputChecks.add(checkIfPositiveDoubleNumber(discountStr) &&
+                        !(0 > Double.parseDouble(discountStr) || Double.parseDouble(discountStr) > 1));
 
                 boolean allTrue = !inputChecks.contains(Boolean.FALSE);
 

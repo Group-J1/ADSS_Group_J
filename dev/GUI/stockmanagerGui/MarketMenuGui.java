@@ -12,6 +12,10 @@ public class MarketMenuGui extends JPanel{
 
     private DiscountByCategoryGUI discountByCategoryGUI;
     private DiscountByCatalogNumberGUI discountByCatalogNumberGUI;
+    private DiscountForCategoryGUI discountForCategoryGUI;
+    private AddShelvesToMarketGUI addShelvesToMarketGUI;
+
+
 
     private JPanel mainPanel;
 
@@ -103,16 +107,17 @@ public class MarketMenuGui extends JPanel{
             discountForCategory.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
 //                parent.showDefaultPanelFromChild();
+                    openDiscountForCategory();
                 }
             });
 
             addShelves.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
 //                parent.showDefaultPanelFromChild();
+                    openAddShelvesToMarket();
 
                 }
             });
-
 
 
             backButton.addActionListener(new ActionListener() {
@@ -180,6 +185,12 @@ public class MarketMenuGui extends JPanel{
         else if (discountByCatalogNumberGUI != null && discountByCatalogNumberGUI.isShowing()) {
             remove(discountByCatalogNumberGUI);
         }
+        else if (discountForCategoryGUI != null && discountForCategoryGUI.isShowing()) {
+            remove(discountForCategoryGUI);
+        }
+        else if (addShelvesToMarketGUI != null && addShelvesToMarketGUI.isShowing()) {
+            remove(addShelvesToMarketGUI);
+        }
     }
 
     public void openDiscountByCategory(){
@@ -210,6 +221,38 @@ public class MarketMenuGui extends JPanel{
         }
         discountByCatalogNumberGUI.setVisible(true);
         add(discountByCatalogNumberGUI, BorderLayout.CENTER);
+        revalidate();
+        repaint();
+    }
+
+    public void openDiscountForCategory(){
+        mainPanel.setVisible(false);
+
+        if (discountForCategoryGUI == null) {
+            discountForCategoryGUI = new DiscountForCategoryGUI(this);
+            discountForCategoryGUI.setPreferredSize(mainPanel.getSize());
+            discountForCategoryGUI.setMaximumSize(mainPanel.getMaximumSize());
+            discountForCategoryGUI.setMinimumSize(mainPanel.getMinimumSize());
+            discountForCategoryGUI.setSize(mainPanel.getSize());
+        }
+        discountForCategoryGUI.setVisible(true);
+        add(discountForCategoryGUI, BorderLayout.CENTER);
+        revalidate();
+        repaint();
+    }
+
+    public void openAddShelvesToMarket(){
+        mainPanel.setVisible(false);
+
+        if (addShelvesToMarketGUI == null) {
+            addShelvesToMarketGUI = new AddShelvesToMarketGUI(this);
+            addShelvesToMarketGUI.setPreferredSize(mainPanel.getSize());
+            addShelvesToMarketGUI.setMaximumSize(mainPanel.getMaximumSize());
+            addShelvesToMarketGUI.setMinimumSize(mainPanel.getMinimumSize());
+            addShelvesToMarketGUI.setSize(mainPanel.getSize());
+        }
+        addShelvesToMarketGUI.setVisible(true);
+        add(addShelvesToMarketGUI, BorderLayout.CENTER);
         revalidate();
         repaint();
     }

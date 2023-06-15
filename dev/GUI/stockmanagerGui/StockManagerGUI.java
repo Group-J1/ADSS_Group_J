@@ -1,6 +1,12 @@
 package GUI.stockmanagerGui;
 
 import GUI.MainGUI;
+import Stock.Business.Chain;
+import Stock.Business.Market;
+import Stock.Business.MarketManager;
+import Stock.Business.ProductManager;
+import Stock.Service.ProductService;
+import Stock.DataAccess.ProductDetailsDAO;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -8,6 +14,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Scanner;
 
 public class StockManagerGUI extends JPanel {
     private MainGUI mainGUI;
@@ -16,6 +24,7 @@ public class StockManagerGUI extends JPanel {
     private StockManagement stockManagement;
 
     public StockManagerGUI(MainGUI mainGUI) throws IOException {
+        startMenu();
         this.mainGUI = mainGUI;
         setLayout(new BorderLayout());
 
@@ -188,5 +197,48 @@ public class StockManagerGUI extends JPanel {
         } else if (stockManagement != null && stockManagement.isShowing()) {
             remove(stockManagement);
         }
+    }
+
+
+    public void startMenu() {
+        /**
+         * Displays the initial menu for selecting the market to manage and entering the number of shelves.
+         * Prompts the user to create a default market and then displays the stock menu for managing products.
+         */
+        Chain chain;
+        Market market;
+        String numOfMarkets;
+        String numOfShelves = "";
+        String numOfMarketToManagement;
+        Scanner input = new Scanner(System.in);
+        boolean running;
+
+        if (ProductDetailsDAO.getNumberOfMarketsInChain() != 0 && ProductDetailsDAO.getManagedMarket() != 0 &&
+                ProductDetailsDAO.getNumOfShelves() != 0) {
+            chain = new Chain(ProductDetailsDAO.getNumberOfMarketsInChain());
+            market = new Market(ProductDetailsDAO.getNumOfShelves());
+            numOfMarketToManagement = Integer.toString(ProductDetailsDAO.getManagedMarket());
+            ProductManager.setStore(market.getStore());
+            ProductManager.setStorage(market.getStorage());
+            ProductManager.setShortages(market.getShortages());
+            MarketManager.setMarket(market);
+            ProductService.getInstance().sendToSupplierAllProductsQuantity();
+        }
+        else {
+            numOfMarkets = "1";
+            numOfShelves = "30";
+            numOfMarketToManagement = "1";
+            chain = new Chain(Integer.parseInt(numOfMarkets));
+            ProductDetailsDAO.setNumberOfMarketsInChain(Integer.parseInt(numOfMarkets));
+            ProductDetailsDAO.setManagedMarket(Integer.parseInt(numOfMarketToManagement));
+        }
+        market = new Market(Integer.parseInt(numOfShelves));
+        ProductDetailsDAO.setNumOfShelves(Integer.parseInt(numOfShelves));
+        ProductDetailsDAO.getInstance().saveDetails();
+        ProductManager.getInstance();
+        ProductManager.setShortages(market.getShortages());
+        ProductManager.setStorage(market.getStorage());
+        ProductManager.setStore(market.getStore());
+        MarketManager.setMarket(market);
     }
 }
