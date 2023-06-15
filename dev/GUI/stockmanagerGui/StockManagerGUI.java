@@ -208,10 +208,8 @@ public class StockManagerGUI extends JPanel {
         Chain chain;
         Market market;
         String numOfMarkets;
-        String numOfShelves = "";
+        String numOfShelves = "30";
         String numOfMarketToManagement;
-        Scanner input = new Scanner(System.in);
-        boolean running;
 
         if (ProductDetailsDAO.getNumberOfMarketsInChain() != 0 && ProductDetailsDAO.getManagedMarket() != 0 &&
                 ProductDetailsDAO.getNumOfShelves() != 0) {
@@ -226,7 +224,6 @@ public class StockManagerGUI extends JPanel {
         }
         else {
             numOfMarkets = "1";
-            numOfShelves = "30";
             numOfMarketToManagement = "1";
             chain = new Chain(Integer.parseInt(numOfMarkets));
             ProductDetailsDAO.setNumberOfMarketsInChain(Integer.parseInt(numOfMarkets));
