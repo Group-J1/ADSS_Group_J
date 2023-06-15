@@ -36,47 +36,47 @@ public class SpecificOrder extends JPanel {
             }
         };
         mainPanel.setLayout(new BorderLayout());
+
+        JPanel centerPanel = new JPanel(new GridBagLayout());
+        centerPanel.setOpaque(false);
+
+        GridBagConstraints titleConstraints = new GridBagConstraints();
+        titleConstraints.gridx = 0; // Column index
+        titleConstraints.gridy = 0; // Row index
+        titleConstraints.anchor = GridBagConstraints.NORTH; // Align in the center horizontally
+        titleConstraints.insets = new Insets(10, 0, 10, 0);
+
         JLabel titleLabel = new JLabel("<html>Order Report <br></html>");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
-        mainPanel.add(titleLabel, BorderLayout.NORTH);
-        mainPanel.setLayout(new FlowLayout());
+        centerPanel.add(titleLabel, titleConstraints);
 
 
         // Create button panel
-        JButton backButton = new JButton("Back");
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-        buttonPanel.setOpaque(false);
-        JPanel bottomPanel = new JPanel();
-        bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        bottomPanel.add(backButton);
-        mainPanel.add(Box.createVerticalStrut(200));
-        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
-        add(mainPanel, BorderLayout.CENTER);
-
-
-        backButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                parent.showDefaultPanelFromChild();
-            }
-        });
+        JPanel watchPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
         JLabel enterNumberLabel = new JLabel("Please enter the order id you want to watch:");
         JTextField numberField = new JTextField(10);
         JButton submitButton = new JButton("Submit");
-        mainPanel.add(enterNumberLabel);
-        mainPanel.add(numberField);
-        mainPanel.add(submitButton);
+
+        watchPanel.add(enterNumberLabel);
+        watchPanel.add(numberField);
+        watchPanel.add(submitButton);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weighty = 0.5; // Place components vertically in the middle
+        gbc.anchor = GridBagConstraints.NORTH; // Center-align components
+        centerPanel.add(watchPanel, gbc);
 
         submitButton.addActionListener(e -> {
             String supplierNumber = numberField.getText();
             if (isExistOrder(supplierNumber)) {
+                centerPanel.remove(watchPanel);
                 int supID = Integer.parseInt(supplierNumber);
-
                 // Get the supplier report
                 //String[] lines = SupplyManager.getSupply_manager().getSupplier(supID).getSupplierReport();
-
                 LinkedList<String> lines= Order_Manager.getOrder_Manager().getOrderById(supID).getOrderReport();
 
                 // Create a new panel for the report
@@ -97,24 +97,39 @@ public class SpecificOrder extends JPanel {
                 String reportText = reportBuilder.toString();
                 textArea.setText(reportText);
                 textArea.setPreferredSize(new Dimension(longestLineWidth, textArea.getPreferredSize().height));
-                textArea.setOpaque(false);
+                textArea.setOpaque(true);
+                textArea.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Set border line
+
                 // Create a scroll pane for the text area
                 //JScrollPane scrollPane = new JScrollPane(textArea);
 
                 //reportPanel.add(scrollPane, BorderLayout.CENTER);
-                mainPanel.add(textArea, BorderLayout.CENTER);
+                gbc.gridy = 1;
+                gbc.anchor = GridBagConstraints.CENTER;
+                centerPanel.add(textArea, gbc);
                 //reportPanel.setBackground(new Color(0, 0, 0, 0));
 
                 // Remove the existing components and add the report panel
                 //mainPanel.add(reportPanel, BorderLayout.CENTER);
-                mainPanel.remove(enterNumberLabel);
-                mainPanel.remove(submitButton);
-                mainPanel.remove(numberField);
                 mainPanel.revalidate();
                 mainPanel.repaint();
             } else {
 
                 JOptionPane.showMessageDialog(null, "Invalid supplier ID. Please try again.");
+            }
+        });
+
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton backButton = new JButton("Back");
+        bottomPanel.setOpaque(false);
+        bottomPanel.add(backButton);
+
+        mainPanel.add(centerPanel,BorderLayout.CENTER);
+        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+        add(mainPanel, BorderLayout.CENTER);
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                parent.showDefaultPanelFromChild();
             }
         });
     }

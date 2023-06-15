@@ -105,16 +105,15 @@ public class EditProductFromOrderPanel extends JPanel {
         centerPanel.add(updatePanel,gbc);
 
         JButton backButton = new JButton("Back");
-        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.Y_AXIS));
+        bottomPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         bottomPanel.setOpaque(false);
 
-// Add an empty component to create vertical space above the "Back" button
-        bottomPanel.add(Box.createVerticalStrut(50), BorderLayout.NORTH);
 
+        bottomPanel.add(Box.createVerticalStrut(50));
+        bottomPanel.add(backButton);
 
-// Add the "Back" button to the center of the panel
-        bottomPanel.add(backButton, BorderLayout.CENTER);
-        bottomPanel.add(Box.createVerticalGlue());
 
 
         mainPanel.add(centerPanel,BorderLayout.CENTER);
