@@ -18,7 +18,7 @@ public class ProductInformation extends JPanel {
             this.parent = mainStockReport;
             setLayout(new BorderLayout());
 
-            JLabel titleLabel = new JLabel("Product Report");
+            JLabel titleLabel = new JLabel("Product Information");
             titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
             titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
             add(titleLabel, BorderLayout.NORTH);

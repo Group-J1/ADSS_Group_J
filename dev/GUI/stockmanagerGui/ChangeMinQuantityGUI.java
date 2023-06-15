@@ -38,7 +38,7 @@ public class ChangeMinQuantityGUI extends JPanel {
             }
         };
         mainPanel.setLayout(new BorderLayout());
-        JLabel titleLabel = new JLabel("<html>Inform Defected Product <br><br> </html>");
+        JLabel titleLabel = new JLabel("<html>Change minimum quantity for product <br><br> </html>");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
         mainPanel.add(titleLabel, BorderLayout.NORTH);

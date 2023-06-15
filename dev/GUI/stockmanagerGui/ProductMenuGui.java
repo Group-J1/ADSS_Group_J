@@ -40,7 +40,7 @@ public class ProductMenuGui extends JPanel{
             }
         };
         mainPanel.setLayout(new BorderLayout());
-        JLabel titleLabel = new JLabel("<html>Welcome to Order Management <br> Please select option :</html>");
+        JLabel titleLabel = new JLabel("<html>Welcome to product menu <br> Please select option :</html>");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
         mainPanel.add(titleLabel, BorderLayout.NORTH);
@@ -89,7 +89,7 @@ public class ProductMenuGui extends JPanel{
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 
 
-        add(mainPanel, BorderLayout.CENTER);
+        add(mainPanel);
         mainPanel.setVisible(true);
 
         addNewProduct.addActionListener(new ActionListener() {
@@ -133,7 +133,8 @@ public class ProductMenuGui extends JPanel{
 
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                parent.showMainPanel();
+//                parent.showMainPanel();
+                parent.showDefaultPanelFromChild();
             }
         });
         }catch (IOException e) {

@@ -36,7 +36,7 @@ public class StockManagement extends JPanel {
             }
         };
         mainPanel.setLayout(new BorderLayout());
-        JLabel titleLabel = new JLabel("<html>Welcome to Order Management <br> Please select option :</html>");
+        JLabel titleLabel = new JLabel("<html>Welcome to Stock Management <br> Please select option :</html>");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
         mainPanel.add(titleLabel, BorderLayout.NORTH);

@@ -4,19 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="791a9454-e111-4b33-95de-17326b14e958" name="Changes" comment="added the sale function in gui">
+    <list default="true" id="791a9454-e111-4b33-95de-17326b14e958" name="Changes" comment="finished the functions in ProductMenuGui">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/DBConnect/Connect.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DBConnect/Connect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/AddQuantity.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/AddQuantity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/ChangeMinQuantityGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/ChangeMinQuantityGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/InformDefectedGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/InformDefectedGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/ProductInformation.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/ProductInformation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/SellPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/SellPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/ProductMenuGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/ProductMenuGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/StockManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/StockManagement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/UpdateQuantityGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/UpdateQuantityGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/storeGui/stockReport/SpecificProductReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/storeGui/stockReport/SpecificProductReport.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Resource/MarketDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Resource/MarketDB.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/Business/ProductManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Business/ProductManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Stock/Service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Service/ProductService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,23 +42,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/raananpevzner/IdeaProjects/ADSS_Group_J/dev/Resource",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/raananpevzner/IdeaProjects/ADSS_Group_J/dev/Resource&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "sqlite"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;sqlite&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/dev/Resource" />
@@ -122,7 +118,8 @@
       <workItem from="1686676484291" duration="9887000" />
       <workItem from="1686765618850" duration="86000" />
       <workItem from="1686813716544" duration="3991000" />
-      <workItem from="1686818616419" duration="7302000" />
+      <workItem from="1686818616419" duration="7835000" />
+      <workItem from="1686843500088" duration="727000" />
     </task>
     <task id="LOCAL-00001" summary="finished with the stock reports in GUI">
       <created>1686676134959</created>
@@ -178,7 +175,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686818411323</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="finished the functions in ProductMenuGui">
+      <created>1686834456538</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1686834456538</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -203,7 +207,8 @@
     <MESSAGE value="Finished class DiscountByCategoryGUI (working!!!)" />
     <MESSAGE value="last fixes in AddNewProductGUI.java now should be good...." />
     <MESSAGE value="added the sale function in gui" />
-    <option name="LAST_COMMIT_MESSAGE" value="added the sale function in gui" />
+    <MESSAGE value="finished the functions in ProductMenuGui" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished the functions in ProductMenuGui" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
