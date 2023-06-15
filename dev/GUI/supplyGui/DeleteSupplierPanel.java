@@ -28,11 +28,22 @@ public class DeleteSupplierPanel extends JPanel {
                 g.drawImage(finalBackground, 0, 0, getWidth(), getHeight(), this);
             }
         };
+        mainPanel.setLayout(new BorderLayout());
+
+        JPanel centerPanel = new JPanel(new GridBagLayout());
+        centerPanel.setOpaque(false);
+
+        GridBagConstraints titleConstraints = new GridBagConstraints();
+        titleConstraints.gridx = 0; // Column index
+        titleConstraints.gridy = 0; // Row index
+        titleConstraints.anchor = GridBagConstraints.NORTH; // Align in the center horizontally
+        titleConstraints.insets = new Insets(10, 0, 10, 0);
 
         JLabel titleLabel = new JLabel("Delete Supplier");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
-        add(titleLabel, BorderLayout.NORTH);
+
+        centerPanel.add(titleLabel, titleConstraints);
 
         JPanel deletePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JLabel enterNumberLabel = new JLabel("Please enter the supplier number you want to delete:");
@@ -43,54 +54,99 @@ public class DeleteSupplierPanel extends JPanel {
         deletePanel.add(numberField);
         deletePanel.add(submitButton);
 
-        add(deletePanel, BorderLayout.CENTER);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weighty = 0.5; // Place components vertically in the middle
+        gbc.anchor = GridBagConstraints.NORTH; // Center-align components
+        centerPanel.add(deletePanel, gbc);
 
         // Add action listener for the submit button
         submitButton.addActionListener(e -> {
             String supplierNumber = numberField.getText();
             // Perform delete action based on the supplier number
+            if(!isInteger(supplierNumber) || Integer.parseInt(supplierNumber) < 0){
+                JOptionPane.showMessageDialog(null, "invalid input!", "ERROR",  JOptionPane.ERROR_MESSAGE);
+            }
+            else if(supplierNumber.equals( " " )){//check if the supplier is in the system
+                JOptionPane.showMessageDialog(null, "there is no supplier with " + supplierNumber + "number", "ERROR",  JOptionPane.ERROR_MESSAGE);
+            }
+            else if(supplierNumber.equals("this supplier has period order")){
+                JOptionPane.showMessageDialog(null, "this supplier has period order!", "ERROR",  JOptionPane.ERROR_MESSAGE);
+            }
+            else {
+                centerPanel.remove(deletePanel);
+                GridBagConstraints gbcDetails = new GridBagConstraints();
+                gbcDetails.gridx = 0;
+                gbcDetails.gridy = 1;
+                gbcDetails.weighty = 0.5; // Place component vertically in the middle
+                gbcDetails.anchor = GridBagConstraints.CENTER; // Center-align component
+                JLabel supplierDetails = new JLabel("Supplier details");
+                centerPanel.add(supplierDetails, gbcDetails);;
 
-            // Example: Print a message on the panel
-            JTextArea messageArea = new JTextArea();
-            messageArea.setEditable(false);
-            messageArea.append("Are you sure you want to delete supplier " + supplierNumber + "?\n");
-            JButton yesButton = new JButton("Yes");
-            JButton noButton = new JButton("No");
+                // Example: Print a message on the panel
+                JTextArea messageArea = new JTextArea();
+                messageArea.setEditable(false);
+                messageArea.append("Are you sure you want to delete supplier " + supplierNumber + "?\n");
+                JButton yesButton = new JButton("Yes");
+                JButton noButton = new JButton("No");
 
-            JPanel confirmationPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-            confirmationPanel.add(messageArea);
-            confirmationPanel.add(yesButton);
-            confirmationPanel.add(noButton);
+                JPanel confirmationPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+                confirmationPanel.add(messageArea);
+                confirmationPanel.add(yesButton);
+                confirmationPanel.add(noButton);
 
-            add(confirmationPanel, BorderLayout.SOUTH);
+                GridBagConstraints gbcConfirmation = new GridBagConstraints();
+                gbcConfirmation.gridx = 0;
+                gbcConfirmation.gridy = 2;
+                gbcConfirmation.weighty = 0.5; // Place component at the bottom
+                gbcConfirmation.anchor = GridBagConstraints.PAGE_END; // Align component to the bottom
+                gbcConfirmation.insets = new Insets(10, 0, 10, 0); // Add some spacing
+                centerPanel.add(confirmationPanel, gbcConfirmation);
 
-            // Add action listener for the yes button
-            yesButton.addActionListener(yesEvent -> {
-                // Perform delete confirmation action
-                JOptionPane.showMessageDialog(null, "Supplier " + supplierNumber + " has been deleted.");
-            });
+                // Add action listener for the yes button
+                yesButton.addActionListener(yesEvent -> {
+                    // Perform delete confirmation action
+                    JOptionPane.showMessageDialog(null, "Supplier " + supplierNumber + " has been deleted.");
+                });
 
-            // Add action listener for the no button
-            noButton.addActionListener(noEvent -> {
-                // Perform cancel action
-                JOptionPane.showMessageDialog(null, "Deletion canceled.");
-            });
+                // Add action listener for the no button
+                noButton.addActionListener(noEvent -> {
+                    // Perform cancel action
+                    JOptionPane.showMessageDialog(null, "Deletion canceled.");
+                });
 
-            // Refresh the panel to show the confirmation panel
-            revalidate();
-            repaint();
+                // Refresh the panel to show the confirmation panel
+                revalidate();
+                repaint();
+            }
         });
-        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton backButton = new JButton("Back");
+        bottomPanel.setOpaque(false);
         bottomPanel.add(backButton);
 
-        add(bottomPanel, BorderLayout.WEST);
+//        mainPanel.add(bottomPanel, BorderLayout.WEST);
+//        add(mainPanel,BorderLayout.CENTER);
+        mainPanel.add(centerPanel,BorderLayout.CENTER);
+        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+        add(mainPanel, BorderLayout.CENTER);
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 parent.showDefaultPanelFromChild();
             }
         });
 
+    }
+
+    public static boolean isInteger(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
  }
 

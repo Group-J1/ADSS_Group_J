@@ -336,7 +336,6 @@ public class UI {
                         }
                         break;
                     }
-
                 }
 
                 case 2:{

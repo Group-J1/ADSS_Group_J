@@ -38,16 +38,25 @@ public class SupplierGUI extends JPanel {
             }
         };
         mainPanel.setLayout(new BorderLayout());
+        ////
+        JPanel centerPanel = new JPanel(new GridBagLayout());
+        centerPanel.setOpaque(false);
+
         JLabel titleLabel = new JLabel("<html>Responsible for supplier relations <br> Please select option :</html>");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
-        mainPanel.add(titleLabel, BorderLayout.NORTH);
-        mainPanel.setLayout(new FlowLayout());
+//        mainPanel.add(titleLabel);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(20, 0, 20, 0); // Adjust spacing as needed
+        centerPanel.add(titleLabel, gbc);
+
 
         // Create button panel
         JButton backButton = new JButton("Back");
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
         buttonPanel.setOpaque(false);
 
         // Create buttons
@@ -62,19 +71,22 @@ public class SupplierGUI extends JPanel {
         buttonPanel.add(Box.createHorizontalStrut(20));
         buttonPanel.add(deleteSupplierButton);
         buttonPanel.add(Box.createHorizontalGlue());
+        gbc.gridy = 1;
+        centerPanel.add(buttonPanel, gbc);
+
+//        mainPanel.add(buttonPanel);
 
 
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        bottomPanel.setOpaque(false);
         bottomPanel.add(backButton);
 
-        // Add button panel to the main panel
-        mainPanel.add(Box.createVerticalStrut(120)); // Adjust the spacing as needed
-        mainPanel.add(buttonPanel,BorderLayout.CENTER);
 
 
-        mainPanel.add(Box.createVerticalStrut(200));
+        mainPanel.add(centerPanel, BorderLayout.CENTER);
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+
 
 
         add(mainPanel, BorderLayout.CENTER);
@@ -199,10 +211,13 @@ public class SupplierGUI extends JPanel {
     private void removeCurrentChildPanel() {
         if (addSupplierPanel != null && addSupplierPanel.isShowing()) {
             remove(addSupplierPanel);
+            addSupplierPanel = null;
         } else if (editSupplierPanel != null && editSupplierPanel.isShowing()) {
             remove(editSupplierPanel);
+            editSupplierPanel = null;
         } else if (deleteSupplierPanel != null && deleteSupplierPanel.isShowing()) {
             remove(deleteSupplierPanel);
+            deleteSupplierPanel = null;
         }
     }
 
