@@ -4,6 +4,7 @@ package LoginRegister.Presentation;
 import LoginRegister.Business.LoginManager;
 import LoginRegister.Business.RegisterManager;
 import Stock.Presentation.StockMainUI;
+import Stock.Presentation.StockManagerUI;
 import Supplier_Module.Presentation.UI;
 
 import java.time.LocalDate;
@@ -45,9 +46,9 @@ public class LoginMenuNew {
         String choice = "1";
         while (choice != "3") {
             System.out.println("Choose which option you want to enter");
-            System.out.println("1. I want to register");
-            System.out.println("2. I want to login");
-            System.out.println("3. Exit");
+            System.out.println("1) I want to register");
+            System.out.println("2) I want to login");
+            System.out.println("3) Exit");
             choice = input.nextLine();
             switch (choice) {
                 case "1": {
@@ -65,8 +66,8 @@ public class LoginMenuNew {
                     String errorMessage = loginManager.login(username,password,role);
                     if (errorMessage.equals("")) {
                         if (role.equals("stock manager")) {
-                            StockMainUI stockMainUi = new StockMainUI();
-                            stockMainUi.startMenu(localDate);
+                            StockManagerUI stockManagerUi = new StockManagerUI(localDate);
+                            stockManagerUi.startMenu();
                         }
                         else if (role.equals("supplier manager")) {
                             ui.beginSupplierMenu(localDate.plusDays(0));
