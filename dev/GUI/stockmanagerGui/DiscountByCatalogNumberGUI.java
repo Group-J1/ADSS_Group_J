@@ -36,7 +36,7 @@ public class DiscountByCatalogNumberGUI extends JPanel {
             }
         };
         mainPanel.setLayout(new BorderLayout());
-        JLabel titleLabel = new JLabel("<html>Discount By Catalog Number <br><br> </html>");
+        JLabel titleLabel = new JLabel("<html><br> Discount By Catalog Number <br><br> </html>");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
         mainPanel.add(titleLabel, BorderLayout.NORTH);
@@ -108,6 +108,7 @@ public class DiscountByCatalogNumberGUI extends JPanel {
         buttonsPanel.add(backButton);
 
         buttonsPanel.setOpaque(false);
+        buttonsPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 15, 0)); // 10 is the top padding
 
         mainPanel.add(buttonsPanel, BorderLayout.SOUTH);
 

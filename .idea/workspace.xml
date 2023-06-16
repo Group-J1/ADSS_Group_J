@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7c3a8884-9649-4f1f-aebb-a7db22ade177" name="Changes" comment="Finished design MarketMenuGui">
+    <list default="true" id="7c3a8884-9649-4f1f-aebb-a7db22ade177" name="Changes" comment="Finished design DiscountForCategoryGUI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/AddShelvesToMarketGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/AddShelvesToMarketGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/DiscountByCatalogNumberGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/DiscountByCatalogNumberGUI.java" afterDir="false" />
@@ -101,7 +101,13 @@
       <option name="presentableId" value="LOCAL‎00003" />
       <updated>1686903391916</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL‎00004" summary="Finished design DiscountForCategoryGUI">
+      <created>1686904965428</created>
+      <option name="number" value="LOCAL‎00004" />
+      <option name="presentableId" value="LOCAL‎00004" />
+      <updated>1686904965428</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -130,6 +136,7 @@
     <MESSAGE value="Fixed add shelves option in GUI" />
     <MESSAGE value="Connect loginRegisterGUI to other mains" />
     <MESSAGE value="Finished design MarketMenuGui" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished design MarketMenuGui" />
+    <MESSAGE value="Finished design DiscountForCategoryGUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished design DiscountForCategoryGUI" />
   </component>
 </project>
