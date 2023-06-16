@@ -285,7 +285,7 @@ public class loginRegisterGUI extends JFrame {
 
     }
 
-    public static void main(String[] args) {
+    public void run() {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 loginRegisterGUI login;
