@@ -54,7 +54,7 @@ public class SellPanel extends JPanel {
         invalidQuantityLabel.setForeground(Color.RED);
 
         JPanel inputPanel = new JPanel();
-        int verticalGap = 15; // Set the desired vertical gap between rows
+        int verticalGap = 35; // Set the desired vertical gap between rows
         int horizontalGap = 15;
         inputPanel.setLayout(new GridLayout(2, 3, horizontalGap, verticalGap));
         inputPanel.add(catalogNumberLabel);

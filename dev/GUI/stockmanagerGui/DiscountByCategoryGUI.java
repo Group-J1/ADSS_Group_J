@@ -113,7 +113,7 @@ public class DiscountByCategoryGUI extends JPanel {
 
 
         JPanel inputPanel = new JPanel();
-        int verticalGap = 35; // Set the desired vertical gap between rows
+        int verticalGap = 30; // Set the desired vertical gap between rows
         int horizontalGap = 15;
         inputPanel.setLayout(new GridLayout(4, 3, horizontalGap, verticalGap));
         inputPanel.add(categoryLabel);

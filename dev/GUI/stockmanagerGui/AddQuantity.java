@@ -111,8 +111,8 @@ public class AddQuantity extends JPanel {
 
 
         JPanel inputPanel = new JPanel();
-        int verticalGap = 15; // Set the desired vertical gap between rows
-        int horizontalGap = 5;
+        int verticalGap = 30; // Set the desired vertical gap between rows
+        int horizontalGap = 15;
         inputPanel.setLayout(new GridLayout(5, 3, horizontalGap, verticalGap));
         inputPanel.add(categoryLabel);
         inputPanel.add(categoryTextField);

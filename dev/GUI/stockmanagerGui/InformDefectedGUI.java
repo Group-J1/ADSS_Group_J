@@ -39,7 +39,7 @@ public class InformDefectedGUI extends JPanel {
             }
         };
         mainPanel.setLayout(new BorderLayout());
-        JLabel titleLabel = new JLabel("<html>Inform Defected Product :<br><br> </html>");
+        JLabel titleLabel = new JLabel("<html><br>Inform Defected Product :<br><br> </html>");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
         mainPanel.add(titleLabel, BorderLayout.NORTH);
@@ -47,14 +47,14 @@ public class InformDefectedGUI extends JPanel {
 
         // Create text fields
         JLabel catalogNumber = new JLabel("Catalog Number");
-        Font categoryLabelFont = catalogNumber.getFont();
-        Font categoryLabelNewFont = categoryLabelFont.deriveFont(Font.PLAIN, 20);
-        catalogNumber.setFont(categoryLabelNewFont);
+        Font catalogNumberLabelFont = catalogNumber.getFont();
+        Font catalogNumberLabelNewFont = catalogNumberLabelFont.deriveFont(Font.PLAIN, 18);
+        catalogNumber.setFont(catalogNumberLabelNewFont);
 
         JTextField catalogNumberTextField = new JTextField();
-        Font categoryTextFieldFont = catalogNumberTextField.getFont();
-        Font categoryTextFieldNewFont = categoryTextFieldFont.deriveFont(Font.PLAIN, 20);
-        catalogNumberTextField.setFont(categoryTextFieldNewFont);
+        Font catalogNumberTextFieldFont = catalogNumberTextField.getFont();
+        Font catalogNumberTextFieldNewFont = catalogNumberTextFieldFont.deriveFont(Font.PLAIN, 18);
+        catalogNumberTextField.setFont(catalogNumberTextFieldNewFont);
 
         JLabel invalidCatalogNumber = new JLabel("Invalid Catalog Number");
         Font invalidCatalogNumberFont = invalidCatalogNumber.getFont();
@@ -65,17 +65,17 @@ public class InformDefectedGUI extends JPanel {
 
 
         JLabel barcode = new JLabel("Barcode");
-        Font subCategoryLabelFont = barcode.getFont();
-        Font subCategoryLabelNewFont = subCategoryLabelFont.deriveFont(Font.PLAIN, 20);
-        barcode.setFont(subCategoryLabelNewFont);
+        Font barcodeLabelFont = barcode.getFont();
+        Font barcodeLabelNewFont = barcodeLabelFont.deriveFont(Font.PLAIN, 18);
+        barcode.setFont(barcodeLabelNewFont);
 
         JTextField barcodeTextField = new JTextField();
-        Font subCategoryTextFieldFont = barcodeTextField.getFont();
-        Font subCategoryTextFieldNewFont = subCategoryTextFieldFont.deriveFont(Font.PLAIN, 20);
-        barcodeTextField.setFont(subCategoryTextFieldNewFont);
+        Font barcodeTextFieldFont = barcodeTextField.getFont();
+        Font barcodeTextFieldNewFont = barcodeTextFieldFont.deriveFont(Font.PLAIN, 18);
+        barcodeTextField.setFont(barcodeTextFieldNewFont);
 
         JLabel invalidBarcode = new JLabel("Invalid Barcode");
-        Font invalidBarcodeFont = invalidCatalogNumber.getFont();
+        Font invalidBarcodeFont = invalidBarcode.getFont();
         Font invalidBarcodeNewFont = invalidBarcodeFont.deriveFont(Font.PLAIN, 18);
         invalidBarcode.setFont(invalidBarcodeNewFont);
         invalidBarcode.setForeground(Color.RED);
@@ -83,17 +83,17 @@ public class InformDefectedGUI extends JPanel {
 
 
         JLabel reason = new JLabel("Reason");
-        Font subSubCategoryLabelFont = reason.getFont();
-        Font subSubCategoryLabelNewFont = subSubCategoryLabelFont.deriveFont(Font.PLAIN, 20);
-        reason.setFont(subSubCategoryLabelNewFont);
+        Font reasonLabelFont = reason.getFont();
+        Font reasonLabelNewFont = reasonLabelFont.deriveFont(Font.PLAIN, 20);
+        reason.setFont(reasonLabelNewFont);
 
         JTextField reasonTextField = new JTextField();
-        Font subSubCategoryTextFieldFont = reasonTextField.getFont();
-        Font subSubCategoryTextFieldNewFont = subSubCategoryTextFieldFont.deriveFont(Font.PLAIN, 20);
-        reasonTextField.setFont(subSubCategoryTextFieldNewFont);
+        Font reasonTextFieldFont = reasonTextField.getFont();
+        Font reasonTextFieldNewFont = reasonTextFieldFont.deriveFont(Font.PLAIN, 20);
+        reasonTextField.setFont(reasonTextFieldNewFont);
 
         JLabel invalidReason = new JLabel("Invalid Reason");
-        Font invalidReasonFont = invalidCatalogNumber.getFont();
+        Font invalidReasonFont = invalidReason.getFont();
         Font invalidReasonNewFont = invalidReasonFont.deriveFont(Font.PLAIN, 18);
         invalidReason.setFont(invalidReasonNewFont);
         invalidReason.setForeground(Color.RED);
@@ -101,10 +101,9 @@ public class InformDefectedGUI extends JPanel {
 
 
 
-
         JPanel inputPanel = new JPanel();
-        int verticalGap = 40; // Set the desired vertical gap between rows
-        int horizontalGap = 30;
+        int verticalGap = 45; // Set the desired vertical gap between rows
+        int horizontalGap = 15;
         inputPanel.setLayout(new GridLayout(3, 3, horizontalGap, verticalGap));
         inputPanel.add(catalogNumber);
         inputPanel.add(catalogNumberTextField);
@@ -122,9 +121,9 @@ public class InformDefectedGUI extends JPanel {
         inputPanel.setOpaque(false);
 
 //        mainPanel.add(inputPanel, BorderLayout.CENTER);
-        JPanel inputWrapperPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel inputWrapperPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         inputWrapperPanel.add(inputPanel);
-        mainPanel.add(inputWrapperPanel, BorderLayout.CENTER);
+        mainPanel.add(inputWrapperPanel, BorderLayout.WEST);
 
         inputWrapperPanel.setOpaque(false);
 
@@ -205,53 +204,12 @@ public class InformDefectedGUI extends JPanel {
 
 
                 catalogNumberTextField.setText("");
-                barcode.setText("");
+                barcodeTextField.setText("");
                 reasonTextField.setText("");
 
                 parent.showDefaultPanelFromChild();
             }
         });
-
-    }
-
-
-    private JButton createButton(String text, String imagePath) throws IOException {
-        // Create button panel
-        int width = 100;
-        int height = 100;
-        JPanel buttonPanel = new JPanel(null);
-        buttonPanel.setLayout(new BorderLayout());
-//        buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0)); // Remove label margin
-
-        // Create image label
-        JLabel imageLabel = new JLabel();
-        Image image = ImageIO.read(getClass().getResource(imagePath));
-        Image small_image = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        ImageIcon imageIcon = new ImageIcon(small_image);
-        imageLabel.setIcon(imageIcon);
-        imageLabel.setBounds(0, 0, width, height);
-        imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        buttonPanel.add(imageLabel, BorderLayout.CENTER);
-
-        // Create text label
-        Font buttonFont = new Font("Tahoma", Font.BOLD, 12);
-        JLabel textLabel = new JLabel(text);
-        textLabel.setFont(buttonFont);
-        textLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        buttonPanel.add(textLabel, BorderLayout.SOUTH);
-
-        // Create button
-        JButton button = new JButton();
-        button.setLayout(new BorderLayout());
-        button.add(buttonPanel, BorderLayout.CENTER);
-        button.setFocusPainted(false);
-        button.setVerticalAlignment(SwingConstants.TOP); // Adjust vertical alignment
-        button.setVerticalTextPosition(SwingConstants.BOTTOM); // Adjust vertical text position
-        button.setHorizontalTextPosition(SwingConstants.CENTER); // Adjust horizontal text position
-        button.setMargin(new Insets(0, 0, 0, 0)); // Set the margin to zer
-
-
-        return button;
 
     }
 

@@ -115,7 +115,7 @@ public class MarketMenuGui extends JPanel{
     }
     private JButton createButton(String text, String imagePath) throws IOException {
         // Create button panel
-        int width = 150;
+        int width = 172;
         int height = 150;
         JPanel buttonPanel = new JPanel(null);
         buttonPanel.setLayout(new BorderLayout());

@@ -39,7 +39,7 @@ public class AddNewProductGUI extends JPanel{
             }
         };
         mainPanel.setLayout(new BorderLayout());
-        JLabel titleLabel = new JLabel("<html>Add New Product <br> </html>");
+        JLabel titleLabel = new JLabel("<html><br>Add New Product<br> </html>");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
         mainPanel.add(titleLabel, BorderLayout.NORTH);
@@ -182,7 +182,7 @@ public class AddNewProductGUI extends JPanel{
 
 
         JPanel inputPanel = new JPanel();
-        int verticalGap = 15; // Set the desired vertical gap between rows
+        int verticalGap = 17; // Set the desired vertical gap between rows
         int horizontalGap = 15;
         inputPanel.setLayout(new GridLayout(8, 3, horizontalGap, verticalGap));
         inputPanel.add(categoryLabel);
@@ -235,6 +235,7 @@ public class AddNewProductGUI extends JPanel{
         buttonsPanel.add(backButton);
 
         buttonsPanel.setOpaque(false);
+        buttonsPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 15, 0)); // 10 is the top padding
 
         mainPanel.add(buttonsPanel, BorderLayout.SOUTH);
 

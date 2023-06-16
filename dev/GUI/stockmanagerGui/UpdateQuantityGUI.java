@@ -38,7 +38,7 @@ public class UpdateQuantityGUI extends JPanel {
             }
         };
         mainPanel.setLayout(new BorderLayout());
-        JLabel titleLabel = new JLabel("<html>Update Quantity:<br> </html>");
+        JLabel titleLabel = new JLabel("<html><br>Update Quantity:<br><br> </html>");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
         mainPanel.add(titleLabel, BorderLayout.NORTH);
@@ -124,6 +124,7 @@ public class UpdateQuantityGUI extends JPanel {
 
             mainPanel.add(Box.createVerticalStrut(120)); // Adjust the spacing as needed
 //            mainPanel.add(buttonPanel,BorderLayout.EAST);
+            buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 15, 0)); // 10 is the top padding
             mainPanel.add(buttonPanel, BorderLayout.SOUTH);
             buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
 

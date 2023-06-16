@@ -79,7 +79,11 @@ public class StockManagement extends JPanel {
         productMenu.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 //                parent.showDefaultPanelFromChild();]
-                openProductMenu();
+                try {
+                    openProductMenu();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
 
@@ -165,7 +169,7 @@ public class StockManagement extends JPanel {
         }
     }
 
-    private void openProductMenu(){
+    private void openProductMenu() throws IOException {
 
         mainPanel.setVisible(false);
 
