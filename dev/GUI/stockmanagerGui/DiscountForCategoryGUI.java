@@ -48,7 +48,7 @@ public class DiscountForCategoryGUI extends JPanel {
         Font categoryLabelNewFont = categoryLabelFont.deriveFont(Font.PLAIN, 18);
         categoryLabel.setFont(categoryLabelNewFont);
 
-        JTextField categoryTextField = new JTextField();
+        JTextField categoryTextField = new JTextField(12);
         Font categoryTextFieldFont = categoryTextField.getFont();
         Font categoryTextFieldNewFont = categoryTextFieldFont.deriveFont(Font.PLAIN, 18);
         categoryTextField.setFont(categoryTextFieldNewFont);
@@ -65,7 +65,7 @@ public class DiscountForCategoryGUI extends JPanel {
         Font discountLabelNewFont = discountLabelFont.deriveFont(Font.PLAIN, 18);
         discountLabel.setFont(discountLabelNewFont);
 
-        JTextField discountTextField = new JTextField();
+        JTextField discountTextField = new JTextField(12);
         Font discountTextFieldFont = discountTextField.getFont();
         Font discountTextFieldNewFont = discountTextFieldFont.deriveFont(Font.PLAIN, 18);
         discountTextField.setFont(discountTextFieldNewFont);

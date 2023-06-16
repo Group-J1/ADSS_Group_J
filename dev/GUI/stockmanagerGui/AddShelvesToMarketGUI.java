@@ -48,7 +48,7 @@ public class AddShelvesToMarketGUI extends JPanel {
         Font extraShelvesLabelNewFont = extraShelvesLabelFont.deriveFont(Font.PLAIN, 18);
         extraShelvesLabel.setFont(extraShelvesLabelNewFont);
 
-        JTextField extraShelvesTextField = new JTextField();
+        JTextField extraShelvesTextField = new JTextField(12);
         Font extraShelvesTextFieldFont = extraShelvesTextField.getFont();
         Font extraShelvesTextFieldNewFont = extraShelvesTextFieldFont.deriveFont(Font.PLAIN, 18);
         extraShelvesTextField.setFont(extraShelvesTextFieldNewFont);
@@ -61,8 +61,8 @@ public class AddShelvesToMarketGUI extends JPanel {
 
 
         JPanel inputPanel = new JPanel();
-        int verticalGap = 0; // Set the desired vertical gap between rows
-        int horizontalGap = 5;
+        int verticalGap = 35; // Set the desired vertical gap between rows
+        int horizontalGap = 15;
         inputPanel.setLayout(new GridLayout(1, 3, horizontalGap, verticalGap));
         inputPanel.add(extraShelvesLabel);
         inputPanel.add(extraShelvesTextField);

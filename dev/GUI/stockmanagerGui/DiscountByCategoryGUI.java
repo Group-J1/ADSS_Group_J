@@ -48,7 +48,7 @@ public class DiscountByCategoryGUI extends JPanel {
         Font categoryLabelNewFont = categoryLabelFont.deriveFont(Font.PLAIN, 18);
         categoryLabel.setFont(categoryLabelNewFont);
 
-        JTextField categoryTextField = new JTextField();
+        JTextField categoryTextField = new JTextField(12);
         Font categoryTextFieldFont = categoryTextField.getFont();
         Font categoryTextFieldNewFont = categoryTextFieldFont.deriveFont(Font.PLAIN, 18);
         categoryTextField.setFont(categoryTextFieldNewFont);
@@ -66,7 +66,7 @@ public class DiscountByCategoryGUI extends JPanel {
         Font subCategoryLabelNewFont = subCategoryLabelFont.deriveFont(Font.PLAIN, 18);
         subCategoryLabel.setFont(subCategoryLabelNewFont);
 
-        JTextField subCategoryTextField = new JTextField();
+        JTextField subCategoryTextField = new JTextField(12);
         Font subCategoryTextFieldFont = subCategoryTextField.getFont();
         Font subCategoryTextFieldNewFont = subCategoryTextFieldFont.deriveFont(Font.PLAIN, 18);
         subCategoryTextField.setFont(subCategoryTextFieldNewFont);
@@ -83,7 +83,7 @@ public class DiscountByCategoryGUI extends JPanel {
         Font subSubCategoryLabelNewFont = subSubCategoryLabelFont.deriveFont(Font.PLAIN, 18);
         subSubCategoryLabel.setFont(subSubCategoryLabelNewFont);
 
-        JTextField subSubCategoryTextField = new JTextField();
+        JTextField subSubCategoryTextField = new JTextField(12);
         Font subSubCategoryTextFieldFont = subSubCategoryTextField.getFont();
         Font subSubCategoryTextFieldNewFont = subSubCategoryTextFieldFont.deriveFont(Font.PLAIN, 18);
         subSubCategoryTextField.setFont(subSubCategoryTextFieldNewFont);
@@ -100,7 +100,7 @@ public class DiscountByCategoryGUI extends JPanel {
         Font discountLabelNewFont = discountLabelFont.deriveFont(Font.PLAIN, 18);
         discountLabel.setFont(discountLabelNewFont);
 
-        JTextField discountTextField = new JTextField();
+        JTextField discountTextField = new JTextField(12);
         Font discountTextFieldFont = discountTextField.getFont();
         Font discountTextFieldNewFont = discountTextFieldFont.deriveFont(Font.PLAIN, 18);
         discountTextField.setFont(discountTextFieldNewFont);
