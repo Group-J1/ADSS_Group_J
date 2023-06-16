@@ -155,7 +155,7 @@ public class StockManagement extends JPanel {
         if (productMenu != null && productMenu.isShowing()) {
             remove(productMenu);
         }
-        if (marketMenu != null && marketMenu.isShowing()) {
+        else if (marketMenu != null && marketMenu.isShowing()) {
             remove(marketMenu);
         }
     }

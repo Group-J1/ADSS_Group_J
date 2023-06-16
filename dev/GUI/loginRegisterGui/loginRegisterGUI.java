@@ -29,6 +29,7 @@ public class loginRegisterGUI extends JFrame {
     //    public LoginRegisterGUI(MainGUI mainGUI) throws IOException {
     public loginRegisterGUI() throws IOException {
 
+        setResizable(false);
         setTitle("SUPER LEE");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 650);

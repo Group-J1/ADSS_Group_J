@@ -20,9 +20,10 @@ public class MainStockReport extends JPanel {
     private SpecificProductReport specificProductReport;
 
     public MainStockReport(StoreManagerGUI storeManagerGUI) throws IOException {
-        setLayout(new BorderLayout());
         this.mainGUI = storeManagerGUI;
         setLayout(new BorderLayout());
+
+        // Create main panel
         Image background = null;
         try {
             background = ImageIO.read(getClass().getResource("/GUI/pictures/background.jpg"));
@@ -38,17 +39,11 @@ public class MainStockReport extends JPanel {
             }
         };
         mainPanel.setLayout(new BorderLayout());
-        JLabel titleLabel = new JLabel("<html>Welcome To Stock Report <br> Please select required report  :</html>");
+        JLabel titleLabel = new JLabel("<html><br>Welcome To Stock Report <br> Please select required report  :</html>");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
         mainPanel.add(titleLabel, BorderLayout.NORTH);
-        mainPanel.setLayout(new FlowLayout());
 
-        JButton backButton = new JButton("Back");
-        JPanel buttonPanel = new JPanel(new GridLayout(2,3,35,35));
-
-//        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-        buttonPanel.setOpaque(false);
 
         // Create buttons
         JButton DamageReport = createButton("Damage Report", "/GUI/pictures/supply.JPG");
@@ -58,31 +53,37 @@ public class MainStockReport extends JPanel {
         JButton CategoryReport = createButton("Category Report", "/GUI/pictures/stock-manager.jpg");
         JButton SpecificProduct = createButton("Product Report", "/GUI/pictures/stock-manager.jpg");
 
-        // Add buttons to the button panel
-//        buttonPanel.add(Box.createHorizontalGlue());
-        buttonPanel.add(DamageReport);
-//        buttonPanel.add(Box.createHorizontalStrut(20));
-        buttonPanel.add(ShortagesReport);
-//        buttonPanel.add(Box.createHorizontalStrut(20));
-        buttonPanel.add(OrderReport);
-        buttonPanel.add(StockReport);
-        buttonPanel.add(CategoryReport);
-        buttonPanel.add(SpecificProduct);
-//        buttonPanel.add(Box.createHorizontalGlue());
+        JPanel menuPanel = new JPanel();
+        int verticalGap = 35; // Set the desired vertical gap between rows
+        int horizontalGap = 45;
+        menuPanel.setLayout(new GridLayout(2, 3, horizontalGap, verticalGap));
+        menuPanel.add(DamageReport);
+        menuPanel.add(ShortagesReport);
+        menuPanel.add(OrderReport);
+        menuPanel.add(StockReport);
+        menuPanel.add(CategoryReport);
+        menuPanel.add(SpecificProduct);
 
-        JPanel bottomPanel = new JPanel();
-        bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        bottomPanel.add(backButton);
+        menuPanel.setOpaque(false);
 
-        // Add button panel to the main panel
-        mainPanel.add(Box.createVerticalStrut(120)); // Adjust the spacing as needed
-        mainPanel.add(buttonPanel,BorderLayout.CENTER);
+        JPanel mainWrapperPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        mainWrapperPanel.add(menuPanel);
+        mainWrapperPanel.setBorder(BorderFactory.createEmptyBorder(40, 0, 0, 0)); // 10 is the top padding
+        mainPanel.add(mainWrapperPanel, BorderLayout.CENTER);
+
+        mainWrapperPanel.setOpaque(false);
 
 
-        mainPanel.add(Box.createVerticalStrut(200));
-        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+        JButton backButton = new JButton("Back");
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        buttonPanel.add(backButton);
 
-        add(mainPanel);
+        buttonPanel.setOpaque(false);
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 15, 0)); // 10 is the top padding
+
+        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+
+        add(mainPanel, BorderLayout.CENTER);
 
 
         // Add action listeners
@@ -130,8 +131,8 @@ public class MainStockReport extends JPanel {
     }
     private JButton createButton(String text, String imagePath) throws IOException {
         // Create button panel
-        int width = 120;
-        int height = 120;
+        int width = 150;
+        int height = 150;
         JPanel buttonPanel = new JPanel(null);
         buttonPanel.setLayout(new BorderLayout());
 
@@ -146,7 +147,7 @@ public class MainStockReport extends JPanel {
         buttonPanel.add(imageLabel, BorderLayout.CENTER);
 
         // Create text label
-        Font buttonFont = new Font("Tahoma", Font.BOLD, 14);
+        Font buttonFont = new Font("Tahoma", Font.BOLD, 12);
         JLabel textLabel = new JLabel(text);
         textLabel.setFont(buttonFont);
         textLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -160,9 +161,25 @@ public class MainStockReport extends JPanel {
         button.setVerticalAlignment(SwingConstants.TOP); // Adjust vertical alignment
         button.setVerticalTextPosition(SwingConstants.BOTTOM); // Adjust vertical text position
         button.setHorizontalTextPosition(SwingConstants.CENTER); // Adjust horizontal text position
-        button.setMargin(new Insets(0, 0, 0, 0)); // Set the margin to zer
+        button.setMargin(new Insets(0, 0, 0, 0)); // Set the margin to zero
 
         return button;
+    }
+
+    public void showDefaultPanelFromChild() {
+        mainPanel.setVisible(true);
+        removeCurrentChildPanel();
+        revalidate();
+        repaint();
+    }
+
+    private void removeCurrentChildPanel() {
+        if (categoryReport != null && categoryReport.isShowing()) {
+            remove(categoryReport);
+        }
+        else if (specificProductReport != null && specificProductReport.isShowing()) {
+            remove(specificProductReport);
+        }
     }
 
     private void openDamageReport() {
@@ -172,11 +189,11 @@ public class MainStockReport extends JPanel {
 
         mainPanel.setVisible(false);
         stockPanel.setVisible(true);
-//        add(stockPanel);
         revalidate();
         repaint();
 
     }
+
     private void openShortagesReports() throws IOException {
         //open new frame if this report
         String shortages = ReportsService.getInstance().getShortagesReport();
@@ -184,10 +201,10 @@ public class MainStockReport extends JPanel {
 
         mainPanel.setVisible(false);
         stockPanel.setVisible(true);
-//        add(stockPanel);
         revalidate();
         repaint();
     }
+
     private void openOrderReport()  {
         //open new frame if this report
         String orderReport = ReportsService.getInstance().getOrderReport();
@@ -195,43 +212,22 @@ public class MainStockReport extends JPanel {
 
         mainPanel.setVisible(false);
         stockPanel.setVisible(true);
-//        add(stockPanel);
         revalidate();
         repaint();
     }
     private void openStockReport()  {
         //open new frame if this report
-
         String stock = ReportsService.getInstance().getStockReport();
         stockReportsPanel stockPanel = new stockReportsPanel(this,stock);
 
         mainPanel.setVisible(false);
         stockPanel.setVisible(true);
-//        add(stockPanel);
         revalidate();
         repaint();
-
-//        JPanel stockRep = new JPanel();
-//        JTextArea textArea = new JTextArea(stock.toString());
-//        stockRep.add(textArea);
-//        JButton back = new JButton("Back");
-//
-//        stockRep.add(back);
-//
-//        mainGUI.add(stockRep);
-//        mainPanel.setVisible(false);
-//        stockRep.setVisible(true);
-//        back.setVisible(true);
-//        back.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {
-//                stockRep.setVisible(false);
-//                mainPanel.setVisible(true);
-//            }
-//        });
-//
     }
+
     private void openCategoryReport()  {
-        //new frame of categry name
+        //new frame of category name
         mainPanel.setVisible(false);
 
         if (categoryReport == null) {
@@ -246,7 +242,8 @@ public class MainStockReport extends JPanel {
         revalidate();
         repaint();
     }
-        //open new frame if this report
+
+    //open new frame if this report
     private void openSpecificProductReport()  {
         //new frame of product name
         //open new frame if this report
@@ -263,23 +260,6 @@ public class MainStockReport extends JPanel {
         add(specificProductReport, BorderLayout.CENTER);
         revalidate();
         repaint();
-    }
-
-    // Add methods to open other screens and handle back button
-
-    public void showDefaultPanelFromChild() {
-        mainPanel.setVisible(true);
-        removeCurrentChildPanel();
-        revalidate();
-        repaint();
-    }
-
-    private void removeCurrentChildPanel() {
-        if (categoryReport != null && categoryReport.isShowing()) {
-            remove(categoryReport);
-        } else if (specificProductReport != null && specificProductReport.isShowing()) {
-            remove(specificProductReport);
-        }
     }
 }
 

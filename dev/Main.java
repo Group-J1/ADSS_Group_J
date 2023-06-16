@@ -7,12 +7,6 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-//    public static void main(String[] args) {
-//        //StoreManagerMenu storeManagerMenu = StoreManagerMenu.getLoginMenu();
-//        //storeManagerMenu.begin();
-//        LoginMenuNew loginMenuNew = LoginMenuNew.getInstance();
-//        loginMenuNew.begin();
-//    }
 
     public static void main(String[] args) {
 

@@ -13,7 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class MainGUI extends JPanel{
+public class MainGUI extends JPanel {
 
     private loginRegisterGUI parent;
 
@@ -22,98 +22,67 @@ public class MainGUI extends JPanel{
     private SupplierGUI supplierGUI;
     private StoreManagerGUI storeManagerGUI;
     private StockManagerGUI stockManagerGUI;
-    public MainGUI(loginRegisterGUI loginRegisterGUI) throws IOException {
-        parent = loginRegisterGUI;
-        ProductService.getInstance().setProductManager();
-//        setTitle("SUPER LEE");
-//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        setSize(700, 500);
 
-        // Create layered pane
-//        layeredPane = new JLayeredPane();
-//        layeredPane.setLayout(new BorderLayout());
-//        getContentPane().add(layeredPane);
+    public MainGUI(loginRegisterGUI loginRegisterGUI) throws IOException {
+        ProductService.getInstance().setProductManager();
+
+        parent = loginRegisterGUI;
         setLayout(new BorderLayout());
-        Image background = ImageIO.read(getClass().getResource("/GUI/pictures/background.jpg"));
+
         // Create main panel
-        mainPanel = new JPanel(){
+        Image background = null;
+        try {
+            background = ImageIO.read(getClass().getResource("/GUI/pictures/background.jpg"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        Image finalBackground = background;
+        mainPanel = new JPanel() {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
+                g.drawImage(finalBackground, 0, 0, getWidth(), getHeight(), this);
             }
         };
-        /////
         mainPanel.setLayout(new BorderLayout());
-        JLabel titleLabel = new JLabel("<html>Store manager <br> Please select option :</html>");
+        JLabel titleLabel = new JLabel("<html><br>Store manager <br> Please select option :</html>");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
         mainPanel.add(titleLabel, BorderLayout.NORTH);
-        mainPanel.setLayout(new FlowLayout());
-        //////
-
-        JButton backButton = new JButton("Disconnect");
-        JPanel bottomPanel = new JPanel();
-        bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        bottomPanel.add(backButton);
-
-//        JLabel label1 = new JLabel("<html>Welcome to Super Lee store! <br>What is your role?</html>");
-//        label1.setHorizontalAlignment(SwingConstants.CENTER);
-////        label1.setForeground(Color.WHITE);
-//        Font font = new Font("Comic Sans MS", Font.BOLD, 24);
-//        label1.setFont(font);
-
-//        mainPanel.add(label1, BorderLayout.NORTH);
-        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
-        mainPanel.setLayout(new FlowLayout());
-
-
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-        buttonPanel.setOpaque(false);
 
         // Create buttons
         JButton supplierManagerButton = createButton("suppliers Relation", "/GUI/pictures/supply.JPG");
         JButton storeManagerButton = createButton("Store Manager", "/GUI/pictures/store-manager.jpg");
         JButton stockManagerButton = createButton("Stock Manager", "/GUI/pictures/stock-manager.jpg");
 
-        // Add buttons to the button panel
-        buttonPanel.add(Box.createHorizontalGlue());
-        buttonPanel.add(supplierManagerButton);
-        buttonPanel.add(Box.createHorizontalStrut(20));
-        buttonPanel.add(storeManagerButton);
-        buttonPanel.add(Box.createHorizontalStrut(20));
-        buttonPanel.add(stockManagerButton);
-        buttonPanel.add(Box.createHorizontalGlue());
+        JPanel menuPanel = new JPanel();
+        int verticalGap = 35; // Set the desired vertical gap between rows
+        int horizontalGap = 15;
+        menuPanel.setLayout(new GridLayout(1, 3, horizontalGap, verticalGap));
+        menuPanel.add(supplierManagerButton);
+        menuPanel.add(storeManagerButton);
+        menuPanel.add(stockManagerButton);
 
-        // Add button panel to the main panel
-        mainPanel.add(Box.createVerticalStrut(150)); // Adjust the spacing as needed
+        menuPanel.setOpaque(false);
 
-        mainPanel.add(buttonPanel,BorderLayout.SOUTH);
+        JPanel mainWrapperPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        mainWrapperPanel.add(menuPanel);
+        mainWrapperPanel.setBorder(BorderFactory.createEmptyBorder(120, 0, 0, 0)); // 10 is the top padding
+        mainPanel.add(mainWrapperPanel, BorderLayout.CENTER);
 
-        // Add main panel to the MainGUI panel
-        add(mainPanel ,BorderLayout.CENTER);
-//    }
+        mainWrapperPanel.setOpaque(false);
 
+        JButton backButton = new JButton("Disconnect");
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        buttonPanel.add(backButton);
 
+        buttonPanel.setOpaque(false);
+        buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 15, 0)); // 10 is the top padding
 
-//        layeredPane.setLayer(mainPanel, JLayeredPane.DEFAULT_LAYER);
-//        add(mainPanel);
-        setPreferredSize(getSize());
-        setMaximumSize(getMaximumSize());
-        setMinimumSize(getMinimumSize());
-        setSize(getSize());
-//        add(layeredPane,BorderLayout.CENTER);
-        setVisible(true);
+        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
+        add(mainPanel, BorderLayout.CENTER);
 
-
-
-        backButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                parent.showMainPanel();
-
-            }
-        });
         // Add action listeners
         supplierManagerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -143,27 +112,34 @@ public class MainGUI extends JPanel{
                 }
             }
         });
+
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                parent.showMainPanel();
+
+            }
+        });
     }
+
     private JButton createButton(String text, String imagePath) throws IOException {
         // Create button panel
-        int width = 150;
+        int width = 172;
         int height = 150;
-        JPanel buttonPanel = new JPanel(new FlowLayout());
+        JPanel buttonPanel = new JPanel(null);
         buttonPanel.setLayout(new BorderLayout());
-
 
         // Create image label
         JLabel imageLabel = new JLabel();
-        Image image =ImageIO.read(getClass().getResource(imagePath));
+        Image image = ImageIO.read(getClass().getResource(imagePath));
         Image small_image = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
         ImageIcon imageIcon = new ImageIcon(small_image);
         imageLabel.setIcon(imageIcon);
-        imageLabel.setBounds(0,0,width,height);
+        imageLabel.setBounds(0, 0, width, height);
         imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
         buttonPanel.add(imageLabel, BorderLayout.CENTER);
 
         // Create text label
-        Font buttonFont = new Font("Tahoma", Font.BOLD, 16);
+        Font buttonFont = new Font("Tahoma", Font.BOLD, 12);
         JLabel textLabel = new JLabel(text);
         textLabel.setFont(buttonFont);
         textLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -177,7 +153,7 @@ public class MainGUI extends JPanel{
         button.setVerticalAlignment(SwingConstants.TOP); // Adjust vertical alignment
         button.setVerticalTextPosition(SwingConstants.BOTTOM); // Adjust vertical text position
         button.setHorizontalTextPosition(SwingConstants.CENTER); // Adjust horizontal text position
-        button.setMargin(new Insets(0, 0, 0, 0)); // Set the margin to zer
+        button.setMargin(new Insets(0, 0, 0, 0)); // Set the margin to zero
 
         return button;
     }
@@ -186,7 +162,7 @@ public class MainGUI extends JPanel{
         mainPanel.setVisible(false);
 
         if (supplierGUI == null) {
-            supplierGUI = new SupplierGUI(null,this);
+            supplierGUI = new SupplierGUI(null, this);
             supplierGUI.setPreferredSize(mainPanel.getSize());
             supplierGUI.setMaximumSize(mainPanel.getMaximumSize());
             supplierGUI.setMinimumSize(mainPanel.getMinimumSize());
@@ -197,6 +173,7 @@ public class MainGUI extends JPanel{
         revalidate();
         repaint();
     }
+
     private void openStoreManager() throws IOException {
         mainPanel.setVisible(false);
 
@@ -214,17 +191,10 @@ public class MainGUI extends JPanel{
     }
 
     private void openStockManager() throws IOException {
-//        if (stockManagerGUI == null) {
-//            stockManagerGUI = new StockManagerGUI(this);
-//            layeredPane.add(stockManagerGUI, 1);
-//        }
-//
-//        stockManagerGUI.setVisible(true);
-//        mainPanel.setVisible(false);
         mainPanel.setVisible(false);
 
         if (stockManagerGUI == null) {
-            stockManagerGUI = new StockManagerGUI(null,this);
+            stockManagerGUI = new StockManagerGUI(null, this);
             stockManagerGUI.setPreferredSize(mainPanel.getSize());
             stockManagerGUI.setMaximumSize(mainPanel.getMaximumSize());
             stockManagerGUI.setMinimumSize(mainPanel.getMinimumSize());
@@ -235,8 +205,6 @@ public class MainGUI extends JPanel{
         revalidate();
         repaint();
     }
-
-    // Add methods to open other screens and handle back button
 
     public void showMainPanel() {
         mainPanel.setVisible(true);
@@ -249,22 +217,5 @@ public class MainGUI extends JPanel{
         if (stockManagerGUI != null) {
             stockManagerGUI.setVisible(false);
         }
-        // Hide other screens if necessary
     }
-
-//    public static void main(String[] args) {
-//        SwingUtilities.invokeLater(new Runnable() {
-//            public void run() {
-//                MainGUI mainGUI = null;
-//                try {
-//                    mainGUI = new MainGUI();
-//                } catch (IOException e) {
-//                    throw new RuntimeException(e);
-//                }
-//                mainGUI.setVisible(true);
-//            }
-//        });
-//    }
-
-
 }

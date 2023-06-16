@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class MarketMenuGui extends JPanel{
+public class MarketMenuGui extends JPanel {
     private StockManagement parent;
 
     private DiscountByCategoryGUI discountByCategoryGUI;
@@ -19,7 +19,6 @@ public class MarketMenuGui extends JPanel{
 
     public MarketMenuGui(StockManagement parent) throws IOException {
         this.parent = parent;
-
         setLayout(new BorderLayout());
 
         // Create main panel
@@ -31,7 +30,7 @@ public class MarketMenuGui extends JPanel{
         }
 
         Image finalBackground = background;
-        mainPanel = new JPanel(){
+        mainPanel = new JPanel() {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 g.drawImage(finalBackground, 0, 0, getWidth(), getHeight(), this);
@@ -77,42 +76,43 @@ public class MarketMenuGui extends JPanel{
 
         add(mainPanel, BorderLayout.CENTER);
 
-            discountByCategory.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
+        discountByCategory.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 //                parent.showDefaultPanelFromChild();
-                    openDiscountByCategory();
-                }
-            });
+                openDiscountByCategory();
+            }
+        });
 
-            discountByCatalogNumber.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
+        discountByCatalogNumber.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 //                parent.showDefaultPanelFromChild();
-                    openDiscountByCatalogNumber();
-                }
-            });
+                openDiscountByCatalogNumber();
+            }
+        });
 
-            discountForCategory.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
+        discountForCategory.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 //                parent.showDefaultPanelFromChild();
-                    openDiscountForCategory();
-                }
-            });
+                openDiscountForCategory();
+            }
+        });
 
-            addShelves.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
+        addShelves.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 //                parent.showDefaultPanelFromChild();
-                    openAddShelvesToMarket();
+                openAddShelvesToMarket();
 
-                }
-            });
+            }
+        });
 
-            backButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    parent.showMainPanel();
-                }
-            });
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                parent.showMainPanel();
+            }
+        });
 
     }
+
     private JButton createButton(String text, String imagePath) throws IOException {
         // Create button panel
         int width = 172;
@@ -126,7 +126,7 @@ public class MarketMenuGui extends JPanel{
         Image small_image = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
         ImageIcon imageIcon = new ImageIcon(small_image);
         imageLabel.setIcon(imageIcon);
-        imageLabel.setBounds(0,0,width,height);
+        imageLabel.setBounds(0, 0, width, height);
         imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
         buttonPanel.add(imageLabel, BorderLayout.CENTER);
 
@@ -147,9 +147,7 @@ public class MarketMenuGui extends JPanel{
         button.setHorizontalTextPosition(SwingConstants.CENTER); // Adjust horizontal text position
         button.setMargin(new Insets(0, 0, 0, 0)); // Set the margin to zero
 
-
         return button;
-
     }
 
     public void showDefaultPanelFromChild() {
@@ -162,19 +160,16 @@ public class MarketMenuGui extends JPanel{
     private void removeCurrentChildPanel() {
         if (discountByCategoryGUI != null && discountByCategoryGUI.isShowing()) {
             remove(discountByCategoryGUI);
-        }
-        else if (discountByCatalogNumberGUI != null && discountByCatalogNumberGUI.isShowing()) {
+        } else if (discountByCatalogNumberGUI != null && discountByCatalogNumberGUI.isShowing()) {
             remove(discountByCatalogNumberGUI);
-        }
-        else if (discountForCategoryGUI != null && discountForCategoryGUI.isShowing()) {
+        } else if (discountForCategoryGUI != null && discountForCategoryGUI.isShowing()) {
             remove(discountForCategoryGUI);
-        }
-        else if (addShelvesToMarketGUI != null && addShelvesToMarketGUI.isShowing()) {
+        } else if (addShelvesToMarketGUI != null && addShelvesToMarketGUI.isShowing()) {
             remove(addShelvesToMarketGUI);
         }
     }
 
-    public void openDiscountByCategory(){
+    public void openDiscountByCategory() {
         mainPanel.setVisible(false);
 
         if (discountByCategoryGUI == null) {
@@ -190,7 +185,7 @@ public class MarketMenuGui extends JPanel{
         repaint();
     }
 
-    public void openDiscountByCatalogNumber(){
+    public void openDiscountByCatalogNumber() {
         mainPanel.setVisible(false);
 
         if (discountByCatalogNumberGUI == null) {
@@ -206,7 +201,7 @@ public class MarketMenuGui extends JPanel{
         repaint();
     }
 
-    public void openDiscountForCategory(){
+    public void openDiscountForCategory() {
         mainPanel.setVisible(false);
 
         if (discountForCategoryGUI == null) {
@@ -222,7 +217,7 @@ public class MarketMenuGui extends JPanel{
         repaint();
     }
 
-    public void openAddShelvesToMarket(){
+    public void openAddShelvesToMarket() {
         mainPanel.setVisible(false);
 
         if (addShelvesToMarketGUI == null) {
