@@ -1,5 +1,7 @@
 package Supplier_Module.Business.Agreement;
 import Supplier_Module.Business.Discount.PrecentageDiscount;
+import Supplier_Module.Business.Discount.Range;
+
 import java.util.LinkedList;
 
 public class SupplierProduct {
@@ -36,6 +38,20 @@ public class SupplierProduct {
         this.discounts = discounts;
         this.supplierID=supplierID;
 
+    }
+
+    public SupplierProduct(String product_name, int local_key, double unit_weight, double unit_price, int amount_available, double discount,int supplierID) {
+        this.product_name = product_name;
+        this.local_key = local_key;
+        this.unit_weight = unit_weight;
+        this.unit_price = unit_price;
+        this.amount_available = amount_available;
+        Range r= new Range(0,amount_available);
+        PrecentageDiscount p=new PrecentageDiscount(r,discount);
+        LinkedList<PrecentageDiscount> temp=new LinkedList<>();
+        temp.add(p);
+        this.discounts=temp;
+        this.supplierID=supplierID;
     }
 
     /**

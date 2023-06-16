@@ -1,6 +1,10 @@
 package GUI.supplyGui;
 
+import Supplier_Module.Business.Card.ContactMember;
 import Supplier_Module.Business.Card.SupplierCard;
+import Supplier_Module.Business.Managers.SupplyManager;
+import Supplier_Module.Business.Supplier;
+import Supplier_Module.DAO.ContactMemberDAO;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -8,6 +12,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.regex.Pattern;
 
 public class DeleteContactGui extends JPanel {
@@ -71,20 +76,37 @@ public class DeleteContactGui extends JPanel {
         // Add action listener for the submit button
         submitButton.addActionListener(e -> {
             String phone_number = numberField.getText();
-            // Perform delete action based on the supplier number
-            if (!isInteger(phone_number)|| Integer.parseInt(phone_number) < 0) {
-                JOptionPane.showMessageDialog(null, "invalid input!", "ERROR", JOptionPane.ERROR_MESSAGE);
-            } else if (phone_number.equals(" ")) {//check if the supplier has this contact member
-                JOptionPane.showMessageDialog(null, "there is no contact member with this number to"  + this.supplierCard.getSupplier_name() , "ERROR", JOptionPane.ERROR_MESSAGE);
-            } else {
+            if(isExistContact(this.supplierCard,phone_number))
+            {
+                /////////////////////////////////////////////////////////////////////////
+                LinkedList<String> lines = getContact(this.supplierCard,phone_number).getContactReport();
+                StringBuilder reportBuilder = new StringBuilder();
+                JTextArea textArea = new JTextArea();
+                textArea.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
+
+                // Concatenate the lines with line breaks
+                //StringBuilder reportBuilder = new StringBuilder();
+                int longestLineWidth = 0;
+                for (String line : lines) {
+                    reportBuilder.append(line).append("\n");
+                    int lineWidth = SwingUtilities.computeStringWidth(textArea.getFontMetrics(textArea.getFont()), line);
+                    longestLineWidth = Math.max(longestLineWidth, lineWidth);
+                }
+                String reportText = reportBuilder.toString();
+                textArea.setText(reportText);
+                textArea.setPreferredSize(new Dimension(longestLineWidth, textArea.getPreferredSize().height));
+                textArea.setOpaque(false);
+                /////////////////////////////////////////////////////////////////////////
+
                 centerPanel.remove(deletePanel);
                 GridBagConstraints gbcDetails = new GridBagConstraints();
                 gbcDetails.gridx = 0;
                 gbcDetails.gridy = 1;
                 gbcDetails.weighty = 0.5; // Place component vertically in the middle
                 gbcDetails.anchor = GridBagConstraints.CENTER; // Center-align component
-                JLabel contactDetails = new JLabel("product details");
-                centerPanel.add(contactDetails, gbcDetails);
+                JLabel contactDetails = new JLabel(reportText);
+                //centerPanel.add(contactDetails, gbcDetails);
+                centerPanel.add(textArea, gbcDetails);
 
                 // Example: Print a message on the panel
                 JTextArea messageArea = new JTextArea();
@@ -109,6 +131,7 @@ public class DeleteContactGui extends JPanel {
                 // Add action listener for the yes button
                 yesButton.addActionListener(yesEvent -> {
                     // Perform delete confirmation action
+                    SupplyManager.getSupply_manager().removeContact_members(this.supplierCard,phone_number);
                     JOptionPane.showMessageDialog(null, "contact member has been deleted.");
                 });
 
@@ -122,6 +145,11 @@ public class DeleteContactGui extends JPanel {
                 revalidate();
                 repaint();
             }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "invalid input!", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+
         });
 
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -149,5 +177,27 @@ public class DeleteContactGui extends JPanel {
             return false;
         }
     }
+
+    public boolean isExistContact(SupplierCard supplierCard, String phoneNumber)
+    {
+       for(ContactMember c: supplierCard.getContact_members())
+       {
+           if(c.getPhone_number().equals(phoneNumber))
+               return true;
+       }
+        return false;
+    }
+
+    public ContactMember getContact(SupplierCard supplierCard, String phoneNumber)
+    {
+        for(ContactMember c: supplierCard.getContact_members())
+        {
+            if(c.getPhone_number().equals(phoneNumber))
+                return c;
+        }
+        return null;
+    }
+
+
 
 }

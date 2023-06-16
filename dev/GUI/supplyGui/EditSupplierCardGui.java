@@ -1,5 +1,6 @@
 package GUI.supplyGui;
 
+import Supplier_Module.Business.Managers.SupplyManager;
 import Supplier_Module.Business.Supplier;
 
 import javax.imageio.ImageIO;
@@ -52,6 +53,7 @@ public class EditSupplierCardGui extends JPanel {
         Font subCategoryTextFieldNewFont = addressTextFieldFont.deriveFont(Font.PLAIN, 18);
         addressTextField.setFont(subCategoryTextFieldNewFont);
         JButton updateAddressButton = new JButton("update");
+
 
         JLabel BankLabel = new JLabel("Bank Account");
         Font bankLabelFont = BankLabel.getFont();
@@ -147,6 +149,54 @@ public class EditSupplierCardGui extends JPanel {
                 mainGUI.showDefaultPanelFromChild();
             }
         });
+
+        updateAddressButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                SupplyManager.getSupply_manager().setAddress(supplier.getCard(), addressTextField.getText());
+                JOptionPane.showMessageDialog(null, "Address updated!");
+            }
+        });
+
+        updateBankButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(isPositiveInteger(bankTextField.getText()))
+                {
+                    int bankAccount=Integer.parseInt(bankTextField.getText());
+                    SupplyManager.getSupply_manager().setBank_account(supplier1.getCard(),bankAccount);
+                    JOptionPane.showMessageDialog(null, "Bank Account updated!");
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Invalid Bank Account!");
+                }
+
+            }
+        });
+
+        updatePaymentMethodButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(paymentTextField.getText().equals("bit"))
+                {
+                    SupplyManager.getSupply_manager().setPayment_method(supplier1.getCard(),2);
+                    JOptionPane.showMessageDialog(null, "Payment Method updated!");
+                }
+                else if (paymentTextField.getText().equals("cash")) {
+                    SupplyManager.getSupply_manager().setPayment_method(supplier1.getCard(),1);
+                    JOptionPane.showMessageDialog(null, "Payment Method updated!");
+
+                }
+                else if (paymentTextField.getText().equals("credit card"))
+                {
+                    SupplyManager.getSupply_manager().setPayment_method(supplier1.getCard(),3);
+                    JOptionPane.showMessageDialog(null, "Payment Method updated!");
+
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Invalid input");
+                }
+            }
+        });
     }
 
     private void openEditMembersPanel() throws IOException {
@@ -178,5 +228,20 @@ public class EditSupplierCardGui extends JPanel {
             remove(contactMamberGui);
             contactMamberGui = null;
         }
+    }
+
+    public boolean isPositiveInteger(String input) {
+        if (input == null || input.isEmpty()) {
+            return false;
+        }
+
+        for (int i = 0; i < input.length(); i++) {
+            if (!Character.isDigit(input.charAt(i))) {
+                return false;
+            }
+        }
+
+        int number = Integer.parseInt(input);
+        return number > 0;
     }
 }

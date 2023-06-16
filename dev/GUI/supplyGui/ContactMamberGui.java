@@ -20,6 +20,7 @@ public class ContactMamberGui extends JPanel {
     public ContactMamberGui(EditSupplierCardGui editSupplierCardGui, Supplier supplier1) throws IOException {
         this.parent = editSupplierCardGui;
         this.supplier = supplier1;
+        this.supplierCard=supplier1.getCard();
         setLayout(new BorderLayout());
 
         Image background = null;
