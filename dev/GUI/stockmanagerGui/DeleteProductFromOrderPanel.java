@@ -90,19 +90,18 @@ public class DeleteProductFromOrderPanel extends JPanel {
                 if (selectedItem == null ) {
                     JOptionPane.showMessageDialog(null, "You need to chose a Product to Remove!");
                 } else {
-                    JOptionPane.showMessageDialog(null, selectedItem + "Removed!");
+                    JOptionPane.showMessageDialog(null, selectedItem + " Removed!");
 
-                    // Perform the desired action with the selected item and entered text //todo
+                    // Perform the desired action with the selected item and entered text
                     Order order1=Order_Manager.getOrder_Manager().getPeriodOrderById(orderID);
                     SupplierProduct itemToDelete=order1.isProductInOrder(selectedItem);
                     Order_Manager.getOrder_Manager().deleteProductFromOrder(order1,itemToDelete);
                     // Remove the selected item from the JComboBox
                     comboBox.removeItem(selectedItem);
-                    if(comboBox.getItemCount()==0) // todo: delete the order and go back to the prev page
+                    if(comboBox.getItemCount()==0) //
                     {
                         OrderDAO.getInstance().Delete(order1);
                         JOptionPane.showMessageDialog(null, "There is no more products in the order \n Order Deleted");
-//                        parent.showDefaultPanelFromChild();
                         centerPanel.remove(comboBox);
                     }
                 }

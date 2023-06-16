@@ -1,6 +1,8 @@
 package GUI.stockmanagerGui;
 
+import LoginRegister.Presentation.LoginMenuNew;
 import Supplier_Module.Business.Agreement.SupplierProduct;
+import Supplier_Module.Business.Managers.Order_Manager;
 import Supplier_Module.Business.Managers.SupplyManager;
 import Supplier_Module.Business.Supplier;
 import Supplier_Module.DAO.SupplierDAO;
@@ -11,17 +13,21 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Locale;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public class AddOrderPanel extends JPanel {
     private OrderManagementGui parentPanel;
     private JPanel mainPanel;
-    private LinkedList<String> productsOfOrder;
+    private Map<SupplierProduct, Integer> productsOfOrder;
 
     public AddOrderPanel(OrderManagementGui parnet) {
         this.parentPanel = parnet;
-        this.productsOfOrder = new LinkedList<>();
+        this.productsOfOrder = new HashMap<>();
         setLayout(new BorderLayout());
 
         // Create main panel
@@ -88,6 +94,7 @@ public class AddOrderPanel extends JPanel {
                 // Add action listener for the yes button
                 int supID = Integer.parseInt(supplierNumber);
                 String[] items = getProductOfSupplier(supID);
+                Supplier supplier = SupplierDAO.getInstance().getSupplier(supID);
                 JComboBox<String> itemComboBox = new JComboBox<>(items);
                 JTextField textBox = new JTextField(10);
                 JButton addToCartButton = new JButton("Add to Cart");
@@ -113,7 +120,9 @@ public class AddOrderPanel extends JPanel {
                     // Perform input validation for the new components
                     if (isValidAmount(supID, quantity, item)) {
                         // Perform success logic here
-                        productsOfOrder.add(item);
+                        SupplierProduct sp = supplier.getAgreement().getProduct(item);
+                        int amount = Integer.parseInt(quantity);
+                        productsOfOrder.put(sp,amount);
                         itemComboBox.removeItem(item);
                         JOptionPane.showMessageDialog(null, "Successfully added to cart");
                         // Initialize as needed
@@ -132,9 +141,13 @@ public class AddOrderPanel extends JPanel {
                     if (productsOfOrder.isEmpty()) {
                         JOptionPane.showMessageDialog(null, "There is no products in the order");
                     } else {
-                        //todo create the order to dao
-
+                        Map<Supplier,Map<SupplierProduct,Integer>> order_map = new HashMap<>();
+                        order_map.put(supplier,productsOfOrder);
+                        LoginMenuNew.getInstance();
+                        LocalDate localDate = LoginMenuNew.getLocalDate();
+                        Order_Manager.getOrder_Manager().current_orders(order_map,localDate);
                         JOptionPane.showMessageDialog(null, "Order add successfully");
+                        createOrderButton.setVisible(false);
                     }
 
                 });

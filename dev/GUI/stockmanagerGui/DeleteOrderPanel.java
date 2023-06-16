@@ -1,6 +1,7 @@
 package GUI.stockmanagerGui;
 
 import Supplier_Module.Business.Managers.Order_Manager;
+import Supplier_Module.Business.Managers.SupplyManager;
 import Supplier_Module.Business.Order;
 import Supplier_Module.DAO.OrderDAO;
 
@@ -10,6 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.LinkedList;
 
 public class DeleteOrderPanel extends JPanel {
     private OrderManagementGui parent;
@@ -80,8 +82,28 @@ public class DeleteOrderPanel extends JPanel {
                 gbcDetails.gridy = 1;
                 gbcDetails.weighty = 0.5; // Place component vertically in the middle
                 gbcDetails.anchor = GridBagConstraints.CENTER; // Center-align component
-                JLabel supplierDetails = new JLabel("Order details");
-                centerPanel.add(supplierDetails, gbcDetails);
+                ///////////////////
+                int order_id= Integer.parseInt(orderNumber);
+                LinkedList<String> lines = Order_Manager.getOrder_Manager().getOrderById(order_id).getOrderReport();
+                JTextArea textArea = new JTextArea();
+                textArea.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
+
+                // Concatenate the lines with line breaks
+                StringBuilder reportBuilder = new StringBuilder();
+                int longestLineWidth = 0;
+                for (String line : lines) {
+                    reportBuilder.append(line).append("\n");
+                    int lineWidth = SwingUtilities.computeStringWidth(textArea.getFontMetrics(textArea.getFont()), line);
+                    longestLineWidth = Math.max(longestLineWidth, lineWidth);
+                }
+                String reportText = reportBuilder.toString();
+                textArea.setText(reportText);
+                textArea.setPreferredSize(new Dimension(longestLineWidth, textArea.getPreferredSize().height));
+                textArea.setOpaque(true);
+                textArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                textArea.setEditable(false);
+
+                centerPanel.add(textArea, gbcDetails);
 
                 // Example: Print a message on the panel
                 JTextArea messageArea = new JTextArea();
@@ -106,6 +128,7 @@ public class DeleteOrderPanel extends JPanel {
                 // Add action listener for the yes button
                 yesButton.addActionListener(yesEvent -> {
                     // Perform delete confirmation action
+                    //TODO add delete function in the CLI and here
                     JOptionPane.showMessageDialog(null, "Order " + orderNumber + " has been deleted.");
                 });
 

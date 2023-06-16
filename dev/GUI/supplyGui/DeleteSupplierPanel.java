@@ -97,6 +97,7 @@ public class DeleteSupplierPanel extends JPanel {
                     textArea.setPreferredSize(new Dimension(longestLineWidth, textArea.getPreferredSize().height));
                     textArea.setOpaque(true);
                     textArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                    textArea.setEditable(false);
                     centerPanel.add(textArea, gbc);
                     //////////////////////////////////////////////////////////////////////
 
@@ -128,6 +129,7 @@ public class DeleteSupplierPanel extends JPanel {
                         Supplier supToRemove= SupplyManager.getSupply_manager().getSupplier(Integer.parseInt(supplierNumber));
                         SupplyManager.getSupply_manager().removeSupplier(supToRemove);
                         JOptionPane.showMessageDialog(null, "Supplier " + supplierNumber + " has been deleted.");
+                        confirmationPanel.setVisible(false);
                     });
 
                     // Add action listener for the no button

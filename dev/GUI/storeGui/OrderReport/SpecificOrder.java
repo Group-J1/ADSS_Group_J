@@ -99,7 +99,7 @@ public class SpecificOrder extends JPanel {
                 textArea.setPreferredSize(new Dimension(longestLineWidth, textArea.getPreferredSize().height));
                 textArea.setOpaque(true);
                 textArea.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Set border line
-
+                textArea.setEditable(false);
                 // Create a scroll pane for the text area
                 //JScrollPane scrollPane = new JScrollPane(textArea);
 

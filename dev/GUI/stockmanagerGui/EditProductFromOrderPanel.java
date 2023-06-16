@@ -85,7 +85,7 @@ public class EditProductFromOrderPanel extends JPanel {
                 // Perform validation or further processing with the selected item and entered text
                 if (selectedItem == null || enteredText.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "You need to enter valid amount!");
-                } else { //todo: change the amount of the product
+                } else {
                     Order order1=Order_Manager.getOrder_Manager().getPeriodOrderById(orderID);
                     int supID= order1.getSupplier_id();
                     if(isValidAmount(supID,enteredText,selectedItem)) {

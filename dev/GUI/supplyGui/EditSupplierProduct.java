@@ -1,6 +1,8 @@
 package GUI.supplyGui;
 
+import Supplier_Module.Business.Agreement.SupplierProduct;
 import Supplier_Module.Business.Supplier;
+import Supplier_Module.DAO.SupplierProductDAO;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -8,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.regex.Pattern;
 
 public class EditSupplierProduct extends JPanel {
@@ -71,16 +74,26 @@ public class EditSupplierProduct extends JPanel {
         submitButton.addActionListener(e -> {
             String product_name = numberField.getText();
             // Perform delete action based on the supplier number
-            Pattern pattern = Pattern.compile("^[a-zA-Z]+$");
-            if(!pattern.matcher(product_name).matches()){
+//            Pattern pattern = Pattern.compile("^[a-zA-Z]+$");
+            SupplierProduct supplierProduct =null;
+            LinkedList<SupplierProduct> temp = supplier.getAgreement().getProductList();
+            boolean found = false;
+            for(SupplierProduct sp : temp){
+                if(sp.getProduct_name().equals(product_name)){
+                    found =true;
+                    supplierProduct = sp;
+                    break;
+                }
+            }
+            if(!found){
                 JOptionPane.showMessageDialog(null, "invalid input!", "ERROR",  JOptionPane.ERROR_MESSAGE);
             }
-            else if(product_name.equals( " " )){//check if the supplier has this product
-                JOptionPane.showMessageDialog(null, "there is no "+ product_name + " that "+ this.supplier.getCard().getSupplier_name() + "can supply", "ERROR",  JOptionPane.ERROR_MESSAGE);
-            }
-            else if(product_name.equals("this product is in period order")){
-                JOptionPane.showMessageDialog(null, "this supplier has period order!", "ERROR",  JOptionPane.ERROR_MESSAGE);
-            }
+//            else if(product_name.equals( " " )){//check if the supplier has this product
+//                JOptionPane.showMessageDialog(null, "there is no "+ product_name + " that "+ this.supplier.getCard().getSupplier_name() + "can supply", "ERROR",  JOptionPane.ERROR_MESSAGE);
+//            }
+//            else if(product_name.equals("this product is in period order")){
+//                JOptionPane.showMessageDialog(null, "this supplier has period order!", "ERROR",  JOptionPane.ERROR_MESSAGE);
+//            }
             else {
                 mainPanel.remove(editPanel);
 
@@ -131,10 +144,12 @@ public class EditSupplierProduct extends JPanel {
                 update1Button.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         String amount = nameLabelTextField.getText();
-                        if(!isInteger(amount) || Integer.parseInt(amount) <0 || Integer.parseInt(amount) > supplier.getAgreement().getProduct(product_name).getAmount_available()){
+                        if(!isInteger(amount) || Integer.parseInt(amount) <0){
                             JOptionPane.showMessageDialog(null, "amount is not valid!");
                         }
                         else {
+                            int amount1 = Integer.parseInt(amount);
+                            SupplierProductDAO.getInstance().UpdateAmount(supplier.getCard().getSupplier_number(),product_name,amount1);
                             JOptionPane.showMessageDialog(null, "product " + product_name + " amount has been update to " + nameLabelTextField.getText());
                         }
                     }
@@ -147,7 +162,10 @@ public class EditSupplierProduct extends JPanel {
                             JOptionPane.showMessageDialog(null, "price is not valid!");
                         }
                         else {
+                            Double price1 = Double.parseDouble(price);
+                            SupplierProductDAO.getInstance().UpdatePrice(supplier.getCard().getSupplier_number(),product_name,price1);
                             JOptionPane.showMessageDialog(null, "product " + product_name + " price has been update to " + idTextField.getText());
+
                         }
                     }
                 });

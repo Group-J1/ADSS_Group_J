@@ -1,6 +1,10 @@
 package GUI.supplyGui;
 
+import Supplier_Module.Business.Agreement.SupplierProduct;
+import Supplier_Module.Business.Managers.Order_Manager;
+import Supplier_Module.Business.Managers.SupplyManager;
 import Supplier_Module.Business.Supplier;
+import Supplier_Module.DAO.OrderDAO;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -8,6 +12,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.regex.Pattern;
 
 public class DeleteSupplieProduct extends JPanel {
@@ -72,15 +77,21 @@ public class DeleteSupplieProduct extends JPanel {
         submitButton.addActionListener(e -> {
             String product_name = numberField.getText();
             // Perform delete action based on the supplier number
-            Pattern pattern = Pattern.compile("^[a-zA-Z]+$");
-            if(!pattern.matcher(product_name).matches()){
+            SupplierProduct supplierProduct =null;
+            LinkedList<SupplierProduct> temp = supplier.getAgreement().getProductList();
+            boolean found = false;
+            for(SupplierProduct sp : temp){
+                if(sp.getProduct_name().equals(product_name)){
+                    found =true;
+                    supplierProduct = sp;
+                    break;
+                }
+            }
+            if(!found){
                 JOptionPane.showMessageDialog(null, "invalid input!", "ERROR",  JOptionPane.ERROR_MESSAGE);
             }
-            else if(product_name.equals( " " )){//check if the supplier has this product
-                JOptionPane.showMessageDialog(null, "there is no "+ product_name + " that "+ this.supplier.getCard().getSupplier_name() + "can supply", "ERROR",  JOptionPane.ERROR_MESSAGE);
-            }
-            else if(product_name.equals("this product is in period order")){
-                JOptionPane.showMessageDialog(null, "this supplier has period order!", "ERROR",  JOptionPane.ERROR_MESSAGE);
+            else if(OrderDAO.getInstance().isProductInPeriodOrder(product_name,supplier.getAgreement().getSupplier_number())){
+                JOptionPane.showMessageDialog(null, "this product is already include in agreement to super lee period order", "ERROR",  JOptionPane.ERROR_MESSAGE);
             }
             else {
                 centerPanel.remove(deletePanel);
@@ -89,8 +100,33 @@ public class DeleteSupplieProduct extends JPanel {
                 gbcDetails.gridy = 1;
                 gbcDetails.weighty = 0.5; // Place component vertically in the middle
                 gbcDetails.anchor = GridBagConstraints.CENTER; // Center-align component
-                JLabel supplierDetails = new JLabel("product details");
-                centerPanel.add(supplierDetails, gbcDetails);;
+
+                // Get the supplier report
+                //String[] lines = SupplyManager.getSupply_manager().getSupplier(supID).getSupplierReport();
+                LinkedList<String> lines= supplierProduct.getSupplierProductReport();
+
+                // Create a new panel for the report
+                //JPanel reportPanel = new JPanel(new BorderLayout());
+                //reportPanel.setOpaque(false);
+
+                JTextArea textArea = new JTextArea();
+                textArea.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
+
+                // Concatenate the lines with line breaks
+                StringBuilder reportBuilder = new StringBuilder();
+                int longestLineWidth = 0;
+                for (String line : lines) {
+                    reportBuilder.append(line).append("\n");
+                    int lineWidth = SwingUtilities.computeStringWidth(textArea.getFontMetrics(textArea.getFont()), line);
+                    longestLineWidth = Math.max(longestLineWidth, lineWidth);
+                }
+                String reportText = reportBuilder.toString();
+                textArea.setText(reportText);
+                textArea.setPreferredSize(new Dimension(longestLineWidth, textArea.getPreferredSize().height));
+                textArea.setOpaque(true);
+                textArea.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Set border line
+                centerPanel.add(textArea, gbcDetails);
+                textArea.setEditable(false);
 
                 // Example: Print a message on the panel
                 JTextArea messageArea = new JTextArea();
@@ -115,6 +151,8 @@ public class DeleteSupplieProduct extends JPanel {
                 // Add action listener for the yes button
                 yesButton.addActionListener(yesEvent -> {
                     // Perform delete confirmation action
+                    String temp2=supplier.getAgreement().removeProductFromAgreement(product_name);
+                    SupplyManager.getSupply_manager().deleteProductFromSupplier(supplier.getCard().getSupplier_number(),temp2);
                     JOptionPane.showMessageDialog(null, "product " + product_name + " has been deleted.");
                 });
 
