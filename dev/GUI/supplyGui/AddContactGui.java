@@ -1,6 +1,8 @@
 package GUI.supplyGui;
 
+import Supplier_Module.Business.Card.ContactMember;
 import Supplier_Module.Business.Card.SupplierCard;
+import Supplier_Module.Business.Managers.SupplyManager;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -42,7 +44,7 @@ public class AddContactGui extends JPanel {
 
 
         // Create text fields
-        JLabel nameLabel = new JLabel("Name:");
+        JLabel nameLabel = new JLabel("Phone number:");
         Font nameLabelFont = nameLabel.getFont();
         Font nameLabelNewFont = nameLabelFont.deriveFont(Font.BOLD, 14);
         nameLabel.setFont(nameLabelNewFont);
@@ -52,7 +54,7 @@ public class AddContactGui extends JPanel {
         Font nameTextFieldNewFont = nameLabelTextFieldFont.deriveFont(Font.BOLD, 14);
         nameLabelTextField.setFont(nameTextFieldNewFont);
 
-        JLabel invalidNameLabel = new JLabel("Invalid Name");
+        JLabel invalidNameLabel = new JLabel("Invalid Phone number");
         Font invalidNameLabelFont = invalidNameLabel.getFont();
         Font invalidNameLabelNewFont = invalidNameLabelFont.deriveFont(Font.PLAIN, 18);
         invalidNameLabel.setFont(invalidNameLabelNewFont);
@@ -70,14 +72,14 @@ public class AddContactGui extends JPanel {
         Font mailTextFieldNewFont = mailTextFieldFont.deriveFont(Font.PLAIN, 18);
         mailTextField.setFont(mailTextFieldNewFont);
 
-        JLabel invalidmailLabel = new JLabel("Invalid Address");
+        JLabel invalidmailLabel = new JLabel("Invalid Mail");
         Font invalidmailLabelFont =  invalidmailLabel.getFont();
         Font invalidmailLabelNewFont = invalidmailLabelFont.deriveFont(Font.PLAIN, 18);
         invalidmailLabel.setFont(invalidmailLabelNewFont);
         invalidmailLabel.setForeground(Color.RED);
 
 
-        JLabel idLabel = new JLabel("ID");
+        JLabel idLabel = new JLabel("Name");
         Font idLabelFont = idLabel.getFont();
         Font idLabelNewFont = idLabelFont.deriveFont(Font.PLAIN, 18);
         idLabel.setFont(idLabelNewFont);
@@ -87,7 +89,7 @@ public class AddContactGui extends JPanel {
         Font idTextFieldNewFont = idTextFieldFont.deriveFont(Font.PLAIN, 18);
         idTextField.setFont(idTextFieldNewFont);
 
-        JLabel invalidIDLabel = new JLabel("Invalid ID");
+        JLabel invalidIDLabel = new JLabel("Invalid Name");
         Font invalidIDLabelFont = invalidIDLabel.getFont();
         Font invalidIDLabelNewFont = invalidIDLabelFont.deriveFont(Font.PLAIN, 18);
         invalidIDLabel.setFont(invalidIDLabelNewFont);
@@ -136,56 +138,66 @@ public class AddContactGui extends JPanel {
 
         add(mainPanel, BorderLayout.CENTER);
 
-//        submitButton.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {
-        // Handle submit button action
-//                MarketService marketService = MarketService.getInstance();
-//                ArrayList<JLabel> inputsArrayList = new ArrayList<>(Arrays.asList(
-//                        invalidCategoryLabel, invalidSubCategoryLabel, invalidSubSubCategoryLabel, invalidDiscountLabel));
-//                ArrayList<Boolean> inputChecks = new ArrayList<>();
 //
-//                String categoryStr = categoryTextField.getText();
-//                inputChecks.add(checkIfOnlyLetters(categoryStr));
-//                String subCategoryStr = subCategoryTextField.getText();
-//                inputChecks.add(checkSubCategory(subCategoryStr));
-//                String subSubCategoryStr = subSubCategoryTextField.getText();
-//                inputChecks.add(checkSubSubCategory(subSubCategoryStr));
-//                String discountStr = discountTextField.getText();
-//                inputChecks.add(checkIfPositiveDoubleNumber(discountStr));
+        submitButton.addActionListener(e -> {
+            invalidmailLabel.setVisible(false);
+            invalidNameLabel.setVisible(false);
+            invalidIDLabel.setVisible(false);
+            int counterProblem=0;
+
+            String phone_number = nameLabelTextField.getText();
+            if(!isExistContact(this.supplierCard,phone_number))
+            {
+                if(!isPositiveInteger(phone_number))
+                {
+                    invalidNameLabel.setVisible(true);
+                    counterProblem++;
+                }
+                if(idTextField.getText().length()==0)
+                {
+                    invalidIDLabel.setVisible(true);
+                    counterProblem++;
+
+                }
+                if(mailTextField.getText().length()==0)
+                {
+                    invalidmailLabel.setVisible(true);
+                    counterProblem++;
+                }
+
+                if(counterProblem==0)
+                {
+                    ContactMember c = new ContactMember(phone_number,idTextField.getText(),mailTextField.getText() , this.supplierCard.getSupplier_number());
+                        this.supplierCard.addContact_members(c);
+                        JOptionPane.showMessageDialog(null, "Contact Member added successfully!!", "Success",JOptionPane.WARNING_MESSAGE);
+
+                }
+//                if(idTextField.getText().length()>0)
+//                {
+//                    if(mailTextField.getText().length()>0)
+//                    {
+//                        ContactMember c = new ContactMember(phone_number,idTextField.getText(),mailTextField.getText() , this.supplierCard.getSupplier_number());
+//                        this.supplierCard.addContact_members(c);
+//                        JOptionPane.showMessageDialog(null, "Contact Member added successfully!!", "ERROR", JOptionPane.ERROR_MESSAGE);
 //
-//                boolean allTrue = !inputChecks.contains(Boolean.FALSE);
-//
-//                if (allTrue) {
-//                    for (JLabel currentInput: inputsArrayList) {
-//                        currentInput.setVisible(false);
 //                    }
-//                    if (marketService.setDiscountForProduct(categoryStr,subCategoryStr,subSubCategoryStr,
-//                            Double.parseDouble(discountStr))) {
-//                        categoryTextField.setText("");
-//                        subCategoryTextField.setText("");
-//                        subSubCategoryTextField.setText("");
-//                        discountTextField.setText("");
-//                        JOptionPane.showMessageDialog(null,"Discount updated");
-//                    }
-//                    else {
-//                        JOptionPane.showMessageDialog(null,"Product Not Found");
+//                    else
+//                    {
+//                        JOptionPane.showMessageDialog(null, "invalid Email input!", "ERROR", JOptionPane.ERROR_MESSAGE);
+//
 //                    }
 //                }
-//                else {
-//                    int index = 0;
-//                    for (boolean currentInputValid : inputChecks) {
-//                        // Perform operations on the 'element' using the index 'index'
-//                        if (!currentInputValid) {
-//                            inputsArrayList.get(index).setVisible(true);
-//                        }
-//                        else {
-//                            inputsArrayList.get(index).setVisible(false);
-//                        }
-//                        index++;
-//                    }
+//                else
+//                {
+//                    JOptionPane.showMessageDialog(null, "invalid Name input!", "ERROR", JOptionPane.ERROR_MESSAGE);
 //                }
-//            }
-//        });
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "there is contact member with this number", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+
+        });
 
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -259,16 +271,29 @@ public class AddContactGui extends JPanel {
         return true;
     }
 
-    boolean checkIfPositiveDoubleNumber(String number) {
-        try {
-            if (number.equals("")) {
-                return false;
-            }
-            double d = Double.parseDouble(number);
-            return d > 0.0;
-        } catch (NumberFormatException e) {
+    public boolean isPositiveInteger(String input) {
+        if (input == null || input.isEmpty()) {
             return false;
         }
+
+        for (int i = 0; i < input.length(); i++) {
+            if (!Character.isDigit(input.charAt(i))) {
+                return false;
+            }
+        }
+
+        int number = Integer.parseInt(input);
+        return number > 0;
+    }
+
+    public boolean isExistContact(SupplierCard supplierCard, String phoneNumber)
+    {
+        for(ContactMember c: supplierCard.getContact_members())
+        {
+            if(c.getPhone_number().equals(phoneNumber))
+                return true;
+        }
+        return false;
     }
 }
 

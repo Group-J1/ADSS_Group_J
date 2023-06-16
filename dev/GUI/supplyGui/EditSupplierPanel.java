@@ -1,5 +1,6 @@
 package GUI.supplyGui;
 
+import Supplier_Module.Business.Managers.SupplyManager;
 import Supplier_Module.Business.Supplier;
 import Supplier_Module.DAO.SupplierDAO;
 import Supplier_Module.DAO.SupplierProductDAO;
@@ -73,16 +74,9 @@ public class EditSupplierPanel extends JPanel {
         submitButton.addActionListener(e -> {
             String supplierNumber = numberField.getText();
             // Perform delete action based on the supplier number
-            if(!isInteger(supplierNumber) || Integer.parseInt(supplierNumber) < 0){
-                JOptionPane.showMessageDialog(null, "invalid input!", "ERROR",  JOptionPane.ERROR_MESSAGE);
-            }
-            else if(supplierNumber.equals( " " )){//check if the supplier is in the system
-                JOptionPane.showMessageDialog(null, "there is no supplier with " + supplierNumber + "number", "ERROR",  JOptionPane.ERROR_MESSAGE);
-            }
-            else if(supplierNumber.equals("this supplier has period order")){
-                JOptionPane.showMessageDialog(null, "this supplier has period order!", "ERROR",  JOptionPane.ERROR_MESSAGE);
-            }
-            else {
+            if(isExistSupplier(supplierNumber))
+            {
+                this.supplier=SupplyManager.getSupply_manager().getSupplier(Integer.parseInt(supplierNumber));
                 centerPanel.remove(editPanel);
                 JPanel buttonPanel = new JPanel();
                 buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
@@ -136,6 +130,9 @@ public class EditSupplierPanel extends JPanel {
                 // Refresh the panel to show the confirmation panel
                 revalidate();
                 repaint();
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Invalid Supplier!", "ERROR",  JOptionPane.ERROR_MESSAGE);
             }
         });
 
@@ -241,12 +238,27 @@ public class EditSupplierPanel extends JPanel {
         }
     }
 
-    public static boolean isInteger(String input) {
-        try {
-            Integer.parseInt(input);
-            return true;
-        } catch (NumberFormatException e) {
+
+    public boolean isPositiveInteger(String input) {
+        if (input == null || input.isEmpty()) {
             return false;
         }
+
+        for (int i = 0; i < input.length(); i++) {
+            if (!Character.isDigit(input.charAt(i))) {
+                return false;
+            }
+        }
+
+        int number = Integer.parseInt(input);
+        return number > 0;
+    }
+
+    public boolean isExistSupplier(String input)
+    {
+        if(!isPositiveInteger(input))
+            return false;
+        return SupplyManager.getSupply_manager().isExist(Integer.parseInt(input));
+
     }
 }
