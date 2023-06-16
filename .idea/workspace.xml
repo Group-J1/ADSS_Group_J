@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7c3a8884-9649-4f1f-aebb-a7db22ade177" name="Changes" comment="Fixed add shelves option in GUI">
+    <list default="true" id="7c3a8884-9649-4f1f-aebb-a7db22ade177" name="Changes" comment="Connect loginRegisterGUI to other mains">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ADSS_Group_J.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ADSS_Group_J.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/MainGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/MainGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/loginRegisterGui/loginRegisterGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/loginRegisterGui/loginRegisterGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/StockManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/StockManagement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/StockManagerGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/StockManagerGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/supplyGui/SupplierGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/supplyGui/SupplierGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Resource/MarketDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Resource/MarketDB.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -86,7 +83,13 @@
       <option name="presentableId" value="LOCAL‎00001" />
       <updated>1686851264032</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL‎00002" summary="Connect loginRegisterGUI to other mains">
+      <created>1686854602990</created>
+      <option name="number" value="LOCAL‎00002" />
+      <option name="presentableId" value="LOCAL‎00002" />
+      <updated>1686854602990</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -113,6 +116,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fixed add shelves option in GUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed add shelves option in GUI" />
+    <MESSAGE value="Connect loginRegisterGUI to other mains" />
+    <option name="LAST_COMMIT_MESSAGE" value="Connect loginRegisterGUI to other mains" />
   </component>
 </project>
