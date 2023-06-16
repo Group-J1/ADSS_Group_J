@@ -91,18 +91,18 @@ public class Connect {
         try {
             loadSupplier();
 //            Connect.disconnect();
-//            String createTableQuery = "CREATE TABLE SupplierManagerUsers ("
-//                    + "username VARCHAR(255) PRIMARY KEY NOT NULL,"
-//                    + "password VARCHAR(255) NOT NULL)";
-//
-//            String createTableQuery1 = "CREATE TABLE StockManagerUsers ("
-//                    + "username VARCHAR(255) PRIMARY KEY NOT NULL,"
-//                    + "password VARCHAR(255) NOT NULL)";
+            String createTableQuery = "CREATE TABLE SupplierManagerUsers ("
+                    + "username VARCHAR(255) PRIMARY KEY NOT NULL,"
+                    + "password VARCHAR(255) NOT NULL)";
+
+            String createTableQuery1 = "CREATE TABLE StockManagerUsers ("
+                    + "username VARCHAR(255) PRIMARY KEY NOT NULL,"
+                    + "password VARCHAR(255) NOT NULL)";
 
             Connection conn = getConnection();
             Statement stmt = conn.createStatement();
-//            stmt.executeUpdate(createTableQuery);
-//            stmt.executeUpdate(createTableQuery1);
+            stmt.executeUpdate(createTableQuery);
+            stmt.executeUpdate(createTableQuery1);
 
 //            String createTableQuery = "CREATE TABLE SupplierManagerUsers ("
 //                    + "username VARCHAR(255) PRIMARY KEY NOT NULL,"
