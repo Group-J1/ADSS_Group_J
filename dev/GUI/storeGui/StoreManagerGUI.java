@@ -209,10 +209,13 @@ public class StoreManagerGUI extends JPanel {
     private void removeCurrentChildPanel() {
         if (mainSupplyReport != null && mainSupplyReport.isShowing()) {
             remove(mainSupplyReport);
+            mainSupplyReport = null;
         } else if (mainOrderReport != null && mainOrderReport.isShowing()) {
             remove(mainOrderReport);
+            mainOrderReport = null;
         } else if (mainStockReport != null && mainStockReport.isShowing()) {
             remove(mainStockReport);
+            mainStockReport = null;
         }
     }
 }

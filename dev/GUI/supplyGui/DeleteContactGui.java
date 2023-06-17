@@ -133,6 +133,8 @@ public class DeleteContactGui extends JPanel {
                     // Perform delete confirmation action
                     SupplyManager.getSupply_manager().removeContact_members(this.supplierCard,phone_number);
                     JOptionPane.showMessageDialog(null, "contact member has been deleted.");
+                    confirmationPanel.setVisible(false);
+
                 });
 
                 // Add action listener for the no button

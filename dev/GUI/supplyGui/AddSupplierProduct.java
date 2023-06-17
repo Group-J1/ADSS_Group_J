@@ -160,7 +160,7 @@ public class AddSupplierProduct extends JPanel {
         Font maxRangeTextFieldNewFont = maxRangeLabelTextFieldFont.deriveFont(Font.BOLD, 14);
         maxRangeLabelTextField.setFont(maxRangeTextFieldNewFont);
 
-        JLabel invalidmaxRangeLabel = new JLabel("Invalid Name");
+        JLabel invalidmaxRangeLabel = new JLabel("Invalid Max amount");
         Font invalidmaxRangeLabelFont = invalidmaxRangeLabel.getFont();
         Font invalidmaxRangeLabelNewFont = invalidmaxRangeLabelFont.deriveFont(Font.PLAIN, 14);
         invalidmaxRangeLabel.setFont(invalidmaxRangeLabelNewFont);
@@ -176,7 +176,7 @@ public class AddSupplierProduct extends JPanel {
         Font discountTextFieldNewFont = discountLabelTextFieldFont.deriveFont(Font.BOLD, 14);
         discountLabelTextField.setFont(discountTextFieldNewFont);
 
-        JLabel invalidDiscountLabel = new JLabel("Invalid Name");
+        JLabel invalidDiscountLabel = new JLabel("Invalid Discount");
         Font invalidDiscountLabelFont = invalidDiscountLabel.getFont();
         Font invalidDiscountLabelNewFont = invalidDiscountLabelFont.deriveFont(Font.PLAIN, 14);
         invalidDiscountLabel.setFont(invalidDiscountLabelNewFont);
@@ -250,6 +250,9 @@ public class AddSupplierProduct extends JPanel {
                     discounts.add(discount1);
                     int new_min_range = max_range+1;
                     minRangeLabelTextField.setText(String.valueOf(new_min_range));
+                    JOptionPane.showMessageDialog(null, "Discount added successfully! ");
+
+
 
 
                 }
@@ -333,6 +336,9 @@ public class AddSupplierProduct extends JPanel {
                     double weight1 = Double.parseDouble(weight);
                     double price1 = Double.parseDouble(price);
                     int amount1 = Integer.parseInt(amount);
+                    if(discounts.get(discounts.size()-1).getAmountRange().getMax() < amount1){
+                        discounts.get(discounts.size()-1).getAmountRange().setMax(amount1);
+                    }
                     SupplierProduct sp = new SupplierProduct(name,ID,weight1,price1,amount1,discounts,supplier.getCard().getSupplier_number());
                     SupplyManager.getSupply_manager().addProductToAgreement(supplier.getAgreement(),sp, 0);
                     String productName=name;
@@ -344,7 +350,7 @@ public class AddSupplierProduct extends JPanel {
                     {
                         SupplyManager.getSupply_manager().addSupplierByProduct(productName,supplier,false);
                     }
-                    JOptionPane.showMessageDialog(null, "Product"+ name+ "added to " + supplier.getCard().getSupplier_name());
+                    JOptionPane.showMessageDialog(null, "Product "+ name+ " added to " + supplier.getCard().getSupplier_name());
 
                 }
             }

@@ -56,7 +56,7 @@ public class EditOrderPanel extends JPanel {
 
         // Create button panel
         JPanel editPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JLabel enterNumberLabel = new JLabel("Please enter the supplier number you want to Edit:");
+        JLabel enterNumberLabel = new JLabel("Please enter the Order number you want to Edit:");
         JTextField numberField = new JTextField(10);
         JButton submitButton = new JButton("Submit");
 

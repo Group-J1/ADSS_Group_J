@@ -1,5 +1,6 @@
 package GUI.stockmanagerGui;
 
+import LoginRegister.Presentation.LoginMenuNew;
 import Supplier_Module.Business.Managers.Order_Manager;
 import Supplier_Module.Business.Managers.SupplyManager;
 import Supplier_Module.Business.Order;
@@ -69,13 +70,17 @@ public class DeleteOrderPanel extends JPanel {
         centerPanel.add(deletePanel, gbc);
 
         submitButton.addActionListener(e -> {
+            LoginMenuNew.getInstance();
             String orderNumber = numberField.getText();
             // Perform delete action based on the supplier number
             if (!isInteger(orderNumber) || Integer.parseInt(orderNumber) < 0) {
                 JOptionPane.showMessageDialog(null, "invalid input!", "ERROR", JOptionPane.ERROR_MESSAGE);
             } else if (!isExistOrder(orderNumber)) {//check if the order is in the system
-                JOptionPane.showMessageDialog(null, "there is no Order with number" + orderNumber, "ERROR", JOptionPane.ERROR_MESSAGE);
-            } else {
+                JOptionPane.showMessageDialog(null, "there is no Order with number " + orderNumber, "ERROR", JOptionPane.ERROR_MESSAGE);
+            }else if(Order_Manager.getOrder_Manager().getOrderById(Integer.parseInt(orderNumber)).getSupplyDate().minusDays(1).equals(LoginMenuNew.getLocalDate())){ //if the supply date is tomorrow don't allow to delete the order
+                JOptionPane.showMessageDialog(null, "this Order supply date is less then 24 hours, therefore can't be deleted!", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+            else {
                 centerPanel.remove(deletePanel);
                 GridBagConstraints gbcDetails = new GridBagConstraints();
                 gbcDetails.gridx = 0;
@@ -109,6 +114,7 @@ public class DeleteOrderPanel extends JPanel {
                 JTextArea messageArea = new JTextArea();
                 messageArea.setEditable(false);
                 messageArea.append("Are you sure you want to delete Order " + orderNumber + "?\n");
+                messageArea.setFont(new Font("Tahoma", Font.BOLD, 12));
                 JButton yesButton = new JButton("Yes");
                 JButton noButton = new JButton("No");
 
@@ -128,7 +134,7 @@ public class DeleteOrderPanel extends JPanel {
                 // Add action listener for the yes button
                 yesButton.addActionListener(yesEvent -> {
                     // Perform delete confirmation action
-                    //TODO add delete function in the CLI and here
+                    OrderDAO.getInstance().Delete(OrderDAO.getInstance().getOrderById(order_id));
                     JOptionPane.showMessageDialog(null, "Order " + orderNumber + " has been deleted.");
                 });
 

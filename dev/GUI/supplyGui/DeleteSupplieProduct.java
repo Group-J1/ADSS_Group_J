@@ -154,6 +154,7 @@ public class DeleteSupplieProduct extends JPanel {
                     String temp2=supplier.getAgreement().removeProductFromAgreement(product_name);
                     SupplyManager.getSupply_manager().deleteProductFromSupplier(supplier.getCard().getSupplier_number(),temp2);
                     JOptionPane.showMessageDialog(null, "product " + product_name + " has been deleted.");
+                    centerPanel.setVisible(false);
                 });
 
                 // Add action listener for the no button

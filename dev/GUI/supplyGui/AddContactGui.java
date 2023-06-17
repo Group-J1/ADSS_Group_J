@@ -3,6 +3,7 @@ package GUI.supplyGui;
 import Supplier_Module.Business.Card.ContactMember;
 import Supplier_Module.Business.Card.SupplierCard;
 import Supplier_Module.Business.Managers.SupplyManager;
+import Supplier_Module.DAO.ContactMemberDAO;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -10,6 +11,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddContactGui extends JPanel {
     private ContactMamberGui parent;
@@ -146,7 +149,7 @@ public class AddContactGui extends JPanel {
             int counterProblem=0;
 
             String phone_number = nameLabelTextField.getText();
-            if(!isExistContact(this.supplierCard,phone_number))
+            if(!isExistContact(phone_number))
             {
                 if(!isPositiveInteger(phone_number))
                 {
@@ -286,9 +289,10 @@ public class AddContactGui extends JPanel {
         return number > 0;
     }
 
-    public boolean isExistContact(SupplierCard supplierCard, String phoneNumber)
+    public boolean isExistContact( String phoneNumber)
     {
-        for(ContactMember c: supplierCard.getContact_members())
+        List<ContactMember> list = new ArrayList<>(ContactMemberDAO.getInstance().getAllContacts());
+        for(ContactMember c: list)
         {
             if(c.getPhone_number().equals(phoneNumber))
                 return true;

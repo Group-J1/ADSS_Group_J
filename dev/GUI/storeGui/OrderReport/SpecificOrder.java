@@ -115,7 +115,7 @@ public class SpecificOrder extends JPanel {
                 mainPanel.repaint();
             } else {
 
-                JOptionPane.showMessageDialog(null, "Invalid supplier ID. Please try again.");
+                JOptionPane.showMessageDialog(null, "Invalid Order ID. Please try again.");
             }
         });
 
