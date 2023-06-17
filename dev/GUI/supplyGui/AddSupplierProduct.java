@@ -3,6 +3,7 @@ package GUI.supplyGui;
 import Supplier_Module.Business.Agreement.SupplierProduct;
 import Supplier_Module.Business.Discount.PrecentageDiscount;
 import Supplier_Module.Business.Discount.Range;
+import Supplier_Module.Business.Managers.SupplyManager;
 import Supplier_Module.Business.Supplier;
 import Supplier_Module.DAO.Pair;
 
@@ -310,7 +311,7 @@ public class AddSupplierProduct extends JPanel {
                     mistake_counter++;
                     invalidIDLabel.setVisible(true);
                 }
-                if(!checkIfOnlyLetters(name)){
+                if(!isValidString(name)){
                     mistake_counter++;
                     invalidNameLabel.setVisible(true);
                 }
@@ -333,7 +334,16 @@ public class AddSupplierProduct extends JPanel {
                     double price1 = Double.parseDouble(price);
                     int amount1 = Integer.parseInt(amount);
                     SupplierProduct sp = new SupplierProduct(name,ID,weight1,price1,amount1,discounts,supplier.getCard().getSupplier_number());
-                    //TODO how to add it to database and special map?????
+                    SupplyManager.getSupply_manager().addProductToAgreement(supplier.getAgreement(),sp, 0);
+                    String productName=name;
+                    if(SupplyManager.getSupply_manager().isThisProductAlreadyInSystem(productName))
+                    {
+                        SupplyManager.getSupply_manager().addSupplierByProduct(productName,supplier,true);
+                    }
+                    else
+                    {
+                        SupplyManager.getSupply_manager().addSupplierByProduct(productName,supplier,false);
+                    }
                     JOptionPane.showMessageDialog(null, "Product"+ name+ "added to " + supplier.getCard().getSupplier_name());
 
                 }
@@ -377,6 +387,13 @@ public class AddSupplierProduct extends JPanel {
             return false;
         }
         return str.matches("[a-zA-Z' ]+");
+    }
+    public boolean isValidString(String input) {
+        // Regular expression pattern
+        String pattern = "^[a-zA-Z0-9\\.]+$";
+
+        // Check if the input matches the pattern
+        return input.matches(pattern);
     }
 
 

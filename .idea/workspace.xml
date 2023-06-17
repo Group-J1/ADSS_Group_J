@@ -4,19 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="747796ef-f56c-4b02-a801-a652f5fd9c16" name="Changes" comment="supply order update">
+    <list default="true" id="747796ef-f56c-4b02-a801-a652f5fd9c16" name="Changes" comment="final git except delete Period order">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/AddOrderPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/AddOrderPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/DeleteOrderPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/DeleteOrderPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/DeleteProductFromOrderPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/DeleteProductFromOrderPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/storeGui/OrderReport/SpecificOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/storeGui/OrderReport/SpecificOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/supplyGui/AddSupplierPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/supplyGui/AddSupplierPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/GUI/supplyGui/AddSupplierProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/supplyGui/AddSupplierProduct.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/supplyGui/DeleteSupplieProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/supplyGui/DeleteSupplieProduct.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/supplyGui/DeleteSupplierPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/supplyGui/DeleteSupplierPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/supplyGui/EditSupplierProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/supplyGui/EditSupplierProduct.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Resource/MarketDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Resource/MarketDB.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/Agreement.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/Agreement.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +57,7 @@
       <recent name="$PROJECT_DIR$/dev/GUI/pictures" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.MainGUI">
+  <component name="RunManager" selected="Application.Connect">
     <configuration name="Connect" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DBConnect.Connect" />
       <module name="ADSS_Group_J" />
@@ -115,8 +106,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MainGUI" />
         <item itemvalue="Application.Connect" />
+        <item itemvalue="Application.MainGUI" />
         <item itemvalue="Application.loginRegisterGUI" />
         <item itemvalue="Application.Main" />
       </list>
@@ -134,6 +125,7 @@
       <workItem from="1686742305186" duration="22095000" />
       <workItem from="1686809416532" duration="5727000" />
       <workItem from="1686816012185" duration="17877000" />
+      <workItem from="1686979527856" duration="1218000" />
     </task>
     <task id="LOCAL‎-00001" summary="united">
       <created>1686670663200</created>
@@ -170,7 +162,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1686856897295</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL‎-00006" summary="final git except delete Period order">
+      <created>1686936356110</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL‎-00006" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1686936356110</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -193,6 +192,7 @@
     <MESSAGE value="orders and suppliers united" />
     <MESSAGE value="orders update" />
     <MESSAGE value="supply order update" />
-    <option name="LAST_COMMIT_MESSAGE" value="supply order update" />
+    <MESSAGE value="final git except delete Period order" />
+    <option name="LAST_COMMIT_MESSAGE" value="final git except delete Period order" />
   </component>
 </project>
