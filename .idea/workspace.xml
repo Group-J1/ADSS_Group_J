@@ -4,19 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="747796ef-f56c-4b02-a801-a652f5fd9c16" name="Changes" comment="final gui">
+    <list default="true" id="747796ef-f56c-4b02-a801-a652f5fd9c16" name="Changes" comment="final gui including all">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/DeleteOrderPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/DeleteOrderPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/EditOrderPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/stockmanagerGui/EditOrderPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/storeGui/OrderReport/SpecificOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/storeGui/OrderReport/SpecificOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/storeGui/StoreManagerGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/storeGui/StoreManagerGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/supplyGui/AddContactGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/supplyGui/AddContactGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/supplyGui/AddSupplierProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/supplyGui/AddSupplierProduct.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/supplyGui/DeleteContactGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/supplyGui/DeleteContactGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/GUI/supplyGui/DeleteSupplieProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/supplyGui/DeleteSupplieProduct.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/supplyGui/AddSupplierPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/supplyGui/AddSupplierPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Resource/MarketDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Resource/MarketDB.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Discount/Range.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Discount/Range.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Presentation/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Presentation/UI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/Agreement.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Business/Agreement/Agreement.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +58,7 @@
       <recent name="$PROJECT_DIR$/dev/GUI/pictures" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Connect">
+  <component name="RunManager" selected="Application.MainGUI">
     <configuration name="Connect" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DBConnect.Connect" />
       <module name="ADSS_Group_J" />
@@ -115,8 +107,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Connect" />
         <item itemvalue="Application.MainGUI" />
+        <item itemvalue="Application.Connect" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.loginRegisterGUI" />
       </list>
@@ -135,7 +127,8 @@
       <workItem from="1686809416532" duration="5727000" />
       <workItem from="1686816012185" duration="17877000" />
       <workItem from="1686979527856" duration="1419000" />
-      <workItem from="1686987041969" duration="3624000" />
+      <workItem from="1686987041969" duration="3716000" />
+      <workItem from="1686991425760" duration="1904000" />
     </task>
     <task id="LOCAL‎-00001" summary="united">
       <created>1686670663200</created>
@@ -186,7 +179,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1686980929097</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL‎-00008" summary="final gui including all">
+      <created>1686990754367</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL‎-00008" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1686990754367</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -211,6 +211,7 @@
     <MESSAGE value="supply order update" />
     <MESSAGE value="final git except delete Period order" />
     <MESSAGE value="final gui" />
-    <option name="LAST_COMMIT_MESSAGE" value="final gui" />
+    <MESSAGE value="final gui including all" />
+    <option name="LAST_COMMIT_MESSAGE" value="final gui including all" />
   </component>
 </project>

@@ -8,6 +8,8 @@ import Supplier_Module.Business.Agreement.MethodSupply.MethodSupply;
 import Supplier_Module.Business.Card.ContactMember;
 import Supplier_Module.Business.Card.SupplierCard;
 import Supplier_Module.Business.Defs.Payment_method;
+import Supplier_Module.Business.Discount.PrecentageDiscount;
+import Supplier_Module.Business.Discount.Range;
 import Supplier_Module.Business.Managers.SupplyManager;
 import Supplier_Module.Business.Supplier;
 import Supplier_Module.DAO.SupplierDAO;
@@ -30,8 +32,11 @@ public class AddSupplierPanel extends JPanel {
     private int supplyDays =0;
     private int mistake_counter =0;
     private MethodSupply methodSupply;
+    private LinkedList<PrecentageDiscount> discounts;
     public AddSupplierPanel(SupplierGUI supplier) {
         this.supplierGUI = supplier;
+        discounts = new LinkedList<>();
+
         setLayout(new BorderLayout());
 
         // Create main panel
@@ -52,7 +57,7 @@ public class AddSupplierPanel extends JPanel {
         mainPanel.setLayout(new BorderLayout());
         JLabel titleLabel = new JLabel("Add Supplier");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
+        titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
         mainPanel.add(titleLabel, BorderLayout.NORTH);
 
 
@@ -60,17 +65,17 @@ public class AddSupplierPanel extends JPanel {
         //Supplier Name
         JLabel categoryLabel = new JLabel("Name:");
         Font categoryLabelFont = categoryLabel.getFont();
-        Font categoryLabelNewFont = categoryLabelFont.deriveFont(Font.BOLD, 18);
+        Font categoryLabelNewFont = categoryLabelFont.deriveFont(Font.BOLD, 12);
         categoryLabel.setFont(categoryLabelNewFont);
 
         JTextField categoryTextField = new JTextField();
         Font categoryTextFieldFont = categoryTextField.getFont();
-        Font categoryTextFieldNewFont = categoryTextFieldFont.deriveFont(Font.BOLD, 18);
+        Font categoryTextFieldNewFont = categoryTextFieldFont.deriveFont(Font.BOLD, 12);
         categoryTextField.setFont(categoryTextFieldNewFont);
 
         JLabel invalidCategoryLabel = new JLabel("Invalid Name");
         Font invalidCategoryLabelFont = invalidCategoryLabel.getFont();
-        Font invalidCategoryLabelNewFont = invalidCategoryLabelFont.deriveFont(Font.PLAIN, 18);
+        Font invalidCategoryLabelNewFont = invalidCategoryLabelFont.deriveFont(Font.PLAIN, 12);
         invalidCategoryLabel.setFont(invalidCategoryLabelNewFont);
         invalidCategoryLabel.setForeground(Color.RED);
 
@@ -78,58 +83,58 @@ public class AddSupplierPanel extends JPanel {
         //Supplier Address
         JLabel subCategoryLabel = new JLabel("Address");
         Font subCategoryLabelFont = subCategoryLabel.getFont();
-        Font subCategoryLabelNewFont = subCategoryLabelFont.deriveFont(Font.BOLD, 18);
+        Font subCategoryLabelNewFont = subCategoryLabelFont.deriveFont(Font.BOLD, 12);
         subCategoryLabel.setFont(subCategoryLabelNewFont);
 
         JTextField subCategoryTextField = new JTextField();
         Font subCategoryTextFieldFont = subCategoryTextField.getFont();
-        Font subCategoryTextFieldNewFont = subCategoryTextFieldFont.deriveFont(Font.BOLD, 18);
+        Font subCategoryTextFieldNewFont = subCategoryTextFieldFont.deriveFont(Font.BOLD, 12);
         subCategoryTextField.setFont(subCategoryTextFieldNewFont);
 
         JLabel invalidSubCategoryLabel = new JLabel("Invalid Address");
         Font invalidSubCategoryLabelFont =  invalidSubCategoryLabel.getFont();
-        Font invalidSubCategoryLabelNewFont = invalidSubCategoryLabelFont.deriveFont(Font.BOLD, 18);
+        Font invalidSubCategoryLabelNewFont = invalidSubCategoryLabelFont.deriveFont(Font.BOLD, 12);
         invalidSubCategoryLabel.setFont(invalidSubCategoryLabelNewFont);
         invalidSubCategoryLabel.setForeground(Color.RED);
 
         //Supplier ID
         JLabel subSubCategoryLabel = new JLabel("ID");
         Font subSubCategoryLabelFont = subSubCategoryLabel.getFont();
-        Font subSubCategoryLabelNewFont = subSubCategoryLabelFont.deriveFont(Font.BOLD, 18);
+        Font subSubCategoryLabelNewFont = subSubCategoryLabelFont.deriveFont(Font.BOLD, 12);
         subSubCategoryLabel.setFont(subSubCategoryLabelNewFont);
 
         JTextField subSubCategoryTextField = new JTextField();
         Font subSubCategoryTextFieldFont = subSubCategoryTextField.getFont();
-        Font subSubCategoryTextFieldNewFont = subSubCategoryTextFieldFont.deriveFont(Font.BOLD, 18);
+        Font subSubCategoryTextFieldNewFont = subSubCategoryTextFieldFont.deriveFont(Font.BOLD, 12);
         subSubCategoryTextField.setFont(subSubCategoryTextFieldNewFont);
 
         JLabel invalidSubSubCategoryLabel = new JLabel("Invalid ID");
         Font invalidSubSubCategoryLabelFont = invalidSubSubCategoryLabel.getFont();
-        Font invalidSubSubCategoryLabelNewFont = invalidSubSubCategoryLabelFont.deriveFont(Font.BOLD, 18);
+        Font invalidSubSubCategoryLabelNewFont = invalidSubSubCategoryLabelFont.deriveFont(Font.BOLD, 12);
         invalidSubSubCategoryLabel.setFont(invalidSubSubCategoryLabelNewFont);
         invalidSubSubCategoryLabel.setForeground(Color.RED);
 
         //Supplier Bank
-        JLabel discountLabel = new JLabel("Bank Account");
-        Font discountLabelFont = discountLabel.getFont();
-        Font discountLabelNewFont = discountLabelFont.deriveFont(Font.BOLD, 18);
-        discountLabel.setFont(discountLabelNewFont);
+        JLabel bankLabel = new JLabel("Bank Account");
+        Font bankLabelFont = bankLabel.getFont();
+        Font bankLabelNewFont = bankLabelFont.deriveFont(Font.BOLD, 12);
+        bankLabel.setFont(bankLabelNewFont);
 
-        JTextField discountTextField = new JTextField();
-        Font discountTextFieldFont = discountTextField.getFont();
-        Font discountTextFieldNewFont = discountTextFieldFont.deriveFont(Font.BOLD, 18);
-        discountTextField.setFont(discountTextFieldNewFont);
+        JTextField bankTextField = new JTextField();
+        Font bankTextFieldFont = bankTextField.getFont();
+        Font bankTextFieldNewFont = bankTextFieldFont.deriveFont(Font.BOLD, 12);
+        bankTextField.setFont(bankTextFieldNewFont);
 
-        JLabel invalidDiscountLabel = new JLabel("Invalid Bank Account");
-        Font invalidDiscountLabelFont = invalidDiscountLabel.getFont();
-        Font invalidDiscountLabelNewFont = invalidDiscountLabelFont.deriveFont(Font.BOLD, 18);
-        invalidDiscountLabel.setFont(invalidDiscountLabelNewFont);
-        invalidDiscountLabel.setForeground(Color.RED);
+        JLabel invalidBankLabel = new JLabel("Invalid Bank Account");
+        Font invalidBankLabelFont = invalidBankLabel.getFont();
+        Font invalidBankLabelNewFont = invalidBankLabelFont.deriveFont(Font.BOLD, 12);
+        invalidBankLabel.setFont(invalidBankLabelNewFont);
+        invalidBankLabel.setForeground(Color.RED);
 
         //Supplier Payment
         JLabel paymentLabel = new JLabel("Payment Method");
         Font paymentLabelFont = paymentLabel.getFont();
-        Font paymentLabelNewFont = paymentLabelFont.deriveFont(Font.BOLD, 18);
+        Font paymentLabelNewFont = paymentLabelFont.deriveFont(Font.BOLD, 12);
         paymentLabel.setFont(paymentLabelNewFont);
 
         String[] items = {"bit", "cash", "credit card"};
@@ -142,58 +147,104 @@ public class AddSupplierPanel extends JPanel {
         //Supplier Contact Name
         JLabel ContactName = new JLabel("Contact Member name");
         Font contactNametLabelFont = ContactName.getFont();
-        Font ContactNameLabelNewFont = contactNametLabelFont.deriveFont(Font.BOLD, 18);
+        Font ContactNameLabelNewFont = contactNametLabelFont.deriveFont(Font.BOLD, 12);
         ContactName.setFont(ContactNameLabelNewFont);
 
         JTextField memberNameTextField = new JTextField();
         Font memberNameTextFieldFont = memberNameTextField.getFont();
-        Font memberNameTextFieldNewFont = memberNameTextFieldFont.deriveFont(Font.BOLD, 18);
+        Font memberNameTextFieldNewFont = memberNameTextFieldFont.deriveFont(Font.BOLD, 12);
         memberNameTextField.setFont(memberNameTextFieldNewFont);
 
         JLabel invalidMemberNameLabel = new JLabel("Invalid Member Name");
         Font invalidmemberNameLabelFont = invalidMemberNameLabel.getFont();
-        Font invalidmemberNameLabelNewFont = invalidmemberNameLabelFont.deriveFont(Font.BOLD, 18);
+        Font invalidmemberNameLabelNewFont = invalidmemberNameLabelFont.deriveFont(Font.BOLD, 12);
         invalidMemberNameLabel.setFont(invalidmemberNameLabelNewFont);
         invalidMemberNameLabel.setForeground(Color.RED);
 
         //Supplier Contact mail
         JLabel ContactMail = new JLabel("Contact Member Mail");
         Font contactMailtLabelFont = ContactMail.getFont();
-        Font ContactMailLabelNewFont = contactMailtLabelFont.deriveFont(Font.BOLD, 18);
+        Font ContactMailLabelNewFont = contactMailtLabelFont.deriveFont(Font.BOLD, 12);
         ContactMail.setFont(ContactMailLabelNewFont);
 
         JTextField memberMailTextField = new JTextField();
         Font memberMailTextFieldFont = memberMailTextField.getFont();
-        Font memberMailTextFieldNewFont = memberMailTextFieldFont.deriveFont(Font.BOLD, 18);
+        Font memberMailTextFieldNewFont = memberMailTextFieldFont.deriveFont(Font.BOLD, 12);
         memberMailTextField.setFont(memberMailTextFieldNewFont);
 
         JLabel invalidMemberMailLabel = new JLabel("Invalid Member Mail");
         Font invalidmemberMailLabelFont = invalidMemberMailLabel.getFont();
-        Font invalidmemberMailLabelNewFont = invalidmemberMailLabelFont.deriveFont(Font.BOLD, 18);
+        Font invalidmemberMailLabelNewFont = invalidmemberMailLabelFont.deriveFont(Font.BOLD, 12);
         invalidMemberMailLabel.setFont(invalidmemberMailLabelNewFont);
         invalidMemberMailLabel.setForeground(Color.RED);
 
         //Supplier Contact Phone
         JLabel ContactPhone = new JLabel("Contact Member Phone");
         Font contactPhonetLabelFont = ContactPhone.getFont();
-        Font ContactPhoneLabelNewFont = contactPhonetLabelFont.deriveFont(Font.BOLD, 18);
+        Font ContactPhoneLabelNewFont = contactPhonetLabelFont.deriveFont(Font.BOLD, 12);
         ContactPhone.setFont(ContactPhoneLabelNewFont);
 
         JTextField memberPhoneTextField = new JTextField();
         Font memberPhoneTextFieldFont = memberPhoneTextField.getFont();
-        Font memberPhoneTextFieldNewFont = memberPhoneTextFieldFont.deriveFont(Font.BOLD, 18);
+        Font memberPhoneTextFieldNewFont = memberPhoneTextFieldFont.deriveFont(Font.BOLD, 12);
         memberPhoneTextField.setFont(memberPhoneTextFieldNewFont);
 
         JLabel invalidMemberPhoneLabel = new JLabel("Invalid Member Phone");
         Font invalidmemberPhoneLabelFont = invalidMemberPhoneLabel.getFont();
-        Font invalidmemberPhoneLabelNewFont = invalidmemberPhoneLabelFont.deriveFont(Font.BOLD, 18);
+        Font invalidmemberPhoneLabelNewFont = invalidmemberPhoneLabelFont.deriveFont(Font.BOLD, 12);
         invalidMemberPhoneLabel.setFont(invalidmemberPhoneLabelNewFont);
         invalidMemberPhoneLabel.setForeground(Color.RED);
+        //min range of the discount
+        JLabel minRangeLabel = new JLabel("Min Range of discount");
+        Font minRangeLabelFont = minRangeLabel.getFont();
+        Font minRangeLabelNewFont = minRangeLabelFont.deriveFont(Font.BOLD, 12);
+        minRangeLabel.setFont(minRangeLabelNewFont);
+
+        JTextField minRangeLabelTextField = new JTextField("0");
+        minRangeLabelTextField.setEditable(false);
+        Font minRangeLabelTextFieldFont = minRangeLabelTextField.getFont();
+        Font minRangeTextFieldNewFont = minRangeLabelTextFieldFont.deriveFont(Font.BOLD, 12);
+        minRangeLabelTextField.setFont(minRangeTextFieldNewFont);
+
+        JButton submitDiscount = new JButton("Add Discount");
+
+//top range of the discount
+        JLabel maxRangeLabel = new JLabel("Max Range of discount");
+        Font maxRangeLabelFont = maxRangeLabel.getFont();
+        Font maxRangeLabelNewFont = maxRangeLabelFont.deriveFont(Font.BOLD, 12);
+        maxRangeLabel.setFont(maxRangeLabelNewFont);
+
+        JTextField maxRangeLabelTextField = new JTextField();
+        Font maxRangeLabelTextFieldFont = maxRangeLabelTextField.getFont();
+        Font maxRangeTextFieldNewFont = maxRangeLabelTextFieldFont.deriveFont(Font.BOLD, 12);
+        maxRangeLabelTextField.setFont(maxRangeTextFieldNewFont);
+
+        JLabel invalidmaxRangeLabel = new JLabel("Invalid Max amount");
+        Font invalidmaxRangeLabelFont = invalidmaxRangeLabel.getFont();
+        Font invalidmaxRangeLabelNewFont = invalidmaxRangeLabelFont.deriveFont(Font.PLAIN, 12);
+        invalidmaxRangeLabel.setFont(invalidmaxRangeLabelNewFont);
+        invalidmaxRangeLabel.setForeground(Color.RED);
+        //discount
+        JLabel discountLabel = new JLabel("Discount");
+        Font dixcountLabelFont = discountLabel.getFont();
+        Font discountLabelNewFont = dixcountLabelFont.deriveFont(Font.BOLD, 12);
+        discountLabel.setFont(discountLabelNewFont);
+
+        JTextField discountLabelTextField = new JTextField();
+        Font discountLabelTextFieldFont = discountLabelTextField.getFont();
+        Font discountTextFieldNewFont = discountLabelTextFieldFont.deriveFont(Font.BOLD, 12);
+        discountLabelTextField.setFont(discountTextFieldNewFont);
+
+        JLabel invalidDiscountLabel = new JLabel("Invalid Discount");
+        Font invalidDiscountLabelFont = invalidDiscountLabel.getFont();
+        Font invalidDiscountLabelNewFont = invalidDiscountLabelFont.deriveFont(Font.PLAIN, 12);
+        invalidDiscountLabel.setFont(invalidDiscountLabelNewFont);
+        invalidDiscountLabel.setForeground(Color.RED);
 
         //Supplier Method
         JLabel supplyMethod = new JLabel("Supply Method");
         Font SupplyMethodLabelFont = supplyMethod.getFont();
-        Font SupplyMethodLabelNewFont = SupplyMethodLabelFont.deriveFont(Font.BOLD, 18);
+        Font SupplyMethodLabelNewFont = SupplyMethodLabelFont.deriveFont(Font.BOLD, 12);
         supplyMethod.setFont(SupplyMethodLabelNewFont);
 
         String[] supplyItems = {"Fixed Days", "Super Lee Transport", "Supply Days"};
@@ -204,7 +255,7 @@ public class AddSupplierPanel extends JPanel {
         //if FixDays
         JLabel FixDays = new JLabel("Select Supply Days");
         Font FixDaysLabelFont = FixDays.getFont();
-        Font FixDaysLabelNewFont = FixDaysLabelFont.deriveFont(Font.BOLD, 18);
+        Font FixDaysLabelNewFont = FixDaysLabelFont.deriveFont(Font.BOLD, 12);
         FixDays.setFont(FixDaysLabelNewFont);
 
         String[] daysOfTheWeek = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
@@ -214,17 +265,17 @@ public class AddSupplierPanel extends JPanel {
         //if Supply days
         JLabel SupplyDays = new JLabel("Number of Supply days");
         Font SupplyDaysLabelFont = SupplyDays.getFont();
-        Font SupplyDaysLabelNewFont = SupplyDaysLabelFont.deriveFont(Font.BOLD, 18);
+        Font SupplyDaysLabelNewFont = SupplyDaysLabelFont.deriveFont(Font.BOLD, 12);
         SupplyDays.setFont(SupplyDaysLabelNewFont);
 
         JTextField SupplyDaysTextField = new JTextField();
         Font SupplyDaysTextFieldFont = SupplyDaysTextField.getFont();
-        Font SupplyDaysTextFieldNewFont = SupplyDaysTextFieldFont.deriveFont(Font.BOLD, 18);
+        Font SupplyDaysTextFieldNewFont = SupplyDaysTextFieldFont.deriveFont(Font.BOLD, 12);
         SupplyDaysTextField.setFont(SupplyDaysTextFieldNewFont);
 
         JLabel invalidSupplyDaysLabel = new JLabel("Invalid number of days");
         Font invalidSupplyDaysLabelFont = invalidSupplyDaysLabel.getFont();
-        Font invalidSupplyDaysLabelNewFont = invalidSupplyDaysLabelFont.deriveFont(Font.BOLD, 18);
+        Font invalidSupplyDaysLabelNewFont = invalidSupplyDaysLabelFont.deriveFont(Font.BOLD, 12);
         invalidSupplyDaysLabel.setFont(invalidSupplyDaysLabelNewFont);
         invalidSupplyDaysLabel.setForeground(Color.RED);
 
@@ -235,7 +286,7 @@ public class AddSupplierPanel extends JPanel {
         JPanel inputPanel = new JPanel();
         int verticalGap = 7; // Set the desired vertical gap between rows
         int horizontalGap = 10;
-        inputPanel.setLayout(new GridLayout(11, 3, horizontalGap, verticalGap));
+        inputPanel.setLayout(new GridLayout(14, 3, horizontalGap, verticalGap));
         //add name line
         inputPanel.add(categoryLabel);
         inputPanel.add(categoryTextField);
@@ -252,10 +303,10 @@ public class AddSupplierPanel extends JPanel {
         inputPanel.add(invalidSubSubCategoryLabel);
         invalidSubSubCategoryLabel.setVisible(false);
         //add bank line
-        inputPanel.add(discountLabel);
-        inputPanel.add(discountTextField);
-        inputPanel.add(invalidDiscountLabel);
-        invalidDiscountLabel.setVisible(false);
+        inputPanel.add(bankLabel);
+        inputPanel.add(bankTextField);
+        inputPanel.add(invalidBankLabel);
+        invalidBankLabel.setVisible(false);
         //add payment method line
         inputPanel.add(paymentLabel);
         inputPanel.add(PaymentComboBox);
@@ -276,6 +327,19 @@ public class AddSupplierPanel extends JPanel {
         inputPanel.add(memberPhoneTextField);
         inputPanel.add(invalidMemberPhoneLabel);
         invalidMemberPhoneLabel.setVisible(false);
+        inputPanel.add(minRangeLabel);
+        inputPanel.add(minRangeLabelTextField);
+        inputPanel.add(submitDiscount);
+        //top range discount
+        inputPanel.add(maxRangeLabel);
+        inputPanel.add(maxRangeLabelTextField);
+        inputPanel.add(invalidmaxRangeLabel);
+        invalidmaxRangeLabel.setVisible(false);
+        //discount number
+        inputPanel.add(discountLabel);
+        inputPanel.add(discountLabelTextField);
+        inputPanel.add(invalidDiscountLabel);
+        invalidDiscountLabel.setVisible(false);
         //add supply method line
         inputPanel.add(supplyMethod);
         inputPanel.add(SupplyComboBox);
@@ -295,7 +359,37 @@ public class AddSupplierPanel extends JPanel {
         SupplyDaysTextField.setVisible(false);
         invalidSupplyDaysLabel.setVisible(false);
 
+        submitDiscount.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                invalidmaxRangeLabel.setVisible(false);
+                invalidDiscountLabel.setVisible(false);
+                String max_r = maxRangeLabelTextField.getText();
+                String discount = discountLabelTextField.getText();
+//                String amount = amountLabelTextField.getText();
+//
+                int min_range = Integer.parseInt(minRangeLabelTextField.getText());
+                if(!checkIfPositiveIntNumber(max_r) || Integer.parseInt(max_r) <= min_range ){
+                    invalidmaxRangeLabel.setVisible(true);
+                }
+                else if(!checkIfPositiveDoubleNumber(discount)){
+                    invalidDiscountLabel.setVisible(true);
+                }
+                else{
+                    int max_range  = Integer.parseInt(max_r);
+                    double disc = Double.parseDouble(discount);
+                    Range range = new Range (min_range,max_range);
+                    PrecentageDiscount discount1 = new PrecentageDiscount(range,disc);
+                    discounts.add(discount1);
+                    int new_min_range = max_range+1;
+                    minRangeLabelTextField.setText(String.valueOf(new_min_range));
+                    JOptionPane.showMessageDialog(null, "Discount added successfully! ");
 
+
+
+
+                }
+            }
+        });
 //        invalidMemberPhoneLabel.setVisible(false);
         supplyButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
@@ -308,18 +402,19 @@ public class AddSupplierPanel extends JPanel {
 
                 }
                 else if(SupplyComboBox.getSelectedItem().equals("Super Lee Transport")){
-                    SupplyDays.setVisible(true);
-                    SupplyDaysTextField.setVisible(true);
-                    FixDays.setVisible(false);
-                    daysComboBox.setVisible(false);
-                    daysButton.setVisible(false);
-                }
-                else{
                     SupplyDays.setVisible(false);
                     SupplyDaysTextField.setVisible(false);
                     FixDays.setVisible(false);
                     daysComboBox.setVisible(false);
                     daysButton.setVisible(false);
+                }
+                else{
+                    SupplyDays.setVisible(true);
+                    SupplyDaysTextField.setVisible(true);
+                    FixDays.setVisible(false);
+                    daysComboBox.setVisible(false);
+                    daysButton.setVisible(false);
+
                 }
             }
         });
@@ -341,6 +436,8 @@ public class AddSupplierPanel extends JPanel {
                     daysWeek[5] =1;
                 if(day.equals("Saturday"))
                     daysWeek[6] =1;
+                JOptionPane.showMessageDialog(null,  day + " added as supply day");
+
             }
         });
 
@@ -374,7 +471,7 @@ public class AddSupplierPanel extends JPanel {
                 invalidCategoryLabel.setVisible(false);
                 invalidSubCategoryLabel.setVisible(false);
                 invalidSubSubCategoryLabel.setVisible(false);
-                invalidDiscountLabel.setVisible(false);
+                invalidBankLabel.setVisible(false);
                 invalidPaymentLabel.setVisible(false);
                 invalidMemberNameLabel.setVisible(false);
                 invalidMemberMailLabel.setVisible(false);
@@ -391,7 +488,7 @@ public class AddSupplierPanel extends JPanel {
                 String name = categoryTextField.getText();
                 String address = subCategoryTextField.getText();
                 String id = subSubCategoryTextField.getText();
-                String bank  = discountTextField.getText();
+                String bank  = bankTextField.getText();
                 String payment = (String) PaymentComboBox.getSelectedItem();
                 String contact_name = memberNameTextField.getText();
                 String contact_mail = memberMailTextField.getText();
@@ -442,7 +539,7 @@ public class AddSupplierPanel extends JPanel {
                 }
                 if(!checkIfPositiveInteger(bank)){
                     mistake_counter++;
-                    invalidDiscountLabel.setVisible(true);
+                    invalidBankLabel.setVisible(true);
                 }
                 if(!checkIfOnlyLetters(contact_name)){
                     mistake_counter++;
@@ -466,6 +563,7 @@ public class AddSupplierPanel extends JPanel {
                     LinkedList<String> category = new LinkedList<>();
                     SupplierCard supplierCard = new SupplierCard(name, ID, company, BANK,address,paymentMethod,contact_list,category );
                     Agreement agreement = new Agreement(ID, methodSupply);
+                    agreement.setTotal_orderDiscount(discounts);
                     Supplier s = SupplyManager.getSupply_manager().CreateSupplier(supplierCard,agreement);
                     JOptionPane.showMessageDialog(null, name  + " added successfully!");
 
@@ -506,5 +604,37 @@ public class AddSupplierPanel extends JPanel {
                     return false;
                 }
             }
+    public boolean isValidString(String input) {
+        // Regular expression pattern
+        String pattern = "^[a-zA-Z0-9\\.]+$";
+
+        // Check if the input matches the pattern
+        return input.matches(pattern);
+    }
+
+
+
+    boolean checkIfPositiveDoubleNumber(String number) {
+        try {
+            if (number.equals("")) {
+                return false;
+            }
+            double d = Double.parseDouble(number);
+            return d > 0.0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+    boolean checkIfPositiveIntNumber(String number) {
+        try {
+            if (number.equals("")) {
+                return false;
+            }
+            int d = Integer.parseInt(number);
+            return d > 0.0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
         }
 
