@@ -407,6 +407,76 @@ public class Order_Manager {
         this.orderDAO.updateAndGetOrderTotalPriceById(order.getOrder_id());//update the new price in the table
         System.out.println("Product "+ sp.getProduct_name() + " amount updated successfully!");
     }
+    public boolean isExistOrder(int id)
+    {
+        Map<Integer,Order> orders2=getPeriodic_orders();
+        for(int temp: orders2.keySet())
+        {
+            if(temp==id)
+                return true;
+        }
+        Map<Integer,Order> orders0=getOrders();
+        for(int temp: orders0.keySet())
+        {
+            if(temp==id)
+                return true;
+        }
+        Map<Integer,Order> orders1=getWaiting_orders();
+        for(int temp: orders1.keySet())
+        {
+            if(temp==id)
+                return true;
+        }
+        return false;
+    }
+    public Order getOrderById(int id)
+    {
+        Map<Integer,Order> orders=this.getPeriodic_orders();
+        for(int temp: orders.keySet())
+        {
+            if(temp==id)
+                return orders.get(id);
+        }
+        Map<Integer,Order> orders1=this.getOrders();
+        for(int temp: orders1.keySet())
+        {
+            if(temp==id)
+                return orders.get(id);
+        }
+        Map<Integer,Order> orders2=this.getWaiting_orders();
+        for(int temp: orders2.keySet())
+        {
+            if(temp==id)
+                return orders.get(id);
+        }
+        return null;
+    }
+
+
+    public String[] getAllProductsNameOfOrder(int id)
+    {
+        Order temp= this.getPeriodOrderById(id);
+        Map<SupplierProduct,Integer> allProductsMap= temp.getProducts_list_order();
+        String[] ans= new String[allProductsMap.size()];
+        int index=0;
+        for(SupplierProduct p: allProductsMap.keySet())
+        {
+            ans[index]= p.getProduct_name();
+            index++;
+        }
+        return ans;
+    }
+
+    public Order getPeriodOrderById(int id)
+    {
+        Map<Integer,Order> orders=this.getPeriodic_orders();
+        for(int temp: orders.keySet())
+        {
+            if(temp==id)
+                return orders.get(id);
+        }
+        return null;
+    }
 
 }
 

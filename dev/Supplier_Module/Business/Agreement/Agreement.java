@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class Agreement {
     private LinkedList<SupplierProduct> supplierProductList;
+
     private LinkedList<PrecentageDiscount> total_orderDiscount;
     private MethodSupply methodSupply;
     private EOM eom;
@@ -28,6 +29,14 @@ public class Agreement {
         this.supplier_number=supplier_number;
 
     }
+    public Agreement(int supplier_number, MethodSupply methodSupply1){
+        this.supplierProductList = new LinkedList<>();
+        this.total_orderDiscount= new LinkedList<>();
+        this.methodSupply=methodSupply1;
+        this.eom = EOM.Plus_0;
+        this.supplier_number=supplier_number;
+    }
+
 
     /**constructor
      *
@@ -91,6 +100,9 @@ public class Agreement {
             }
         }
         return null;
+    }
+    public void setTotal_orderDiscount(LinkedList<PrecentageDiscount> total_orderDiscount) {
+        this.total_orderDiscount = total_orderDiscount;
     }
 
     /**function get Product argument and add it to this Agreement

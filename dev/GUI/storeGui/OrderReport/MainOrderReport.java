@@ -1,6 +1,8 @@
 package GUI.storeGui.OrderReport;
 
 import GUI.storeGui.StoreManagerGUI;
+import Supplier_Module.Business.Order;
+import Supplier_Module.DAO.OrderDAO;
 
 
 import javax.imageio.ImageIO;
@@ -9,6 +11,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainOrderReport extends JPanel {
     private StoreManagerGUI mainGUI;
@@ -34,15 +38,22 @@ public class MainOrderReport extends JPanel {
             }
         };
         mainPanel.setLayout(new BorderLayout());
+
+        JPanel centerPanel = new JPanel(new GridBagLayout());
+        centerPanel.setOpaque(false);
+
         JLabel titleLabel = new JLabel("<html>Welcome To Order Report <br> Please select required report  :</html>");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
-        mainPanel.add(titleLabel, BorderLayout.NORTH);
-        mainPanel.setLayout(new FlowLayout());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(10, 0, 10, 0); // Adjust spacing as needed
+        centerPanel.add(titleLabel, gbc);
 
         JButton backButton = new JButton("Back");
         JPanel buttonPanel = new JPanel(new GridLayout(2,2,25,25));
-
         buttonPanel.setOpaque(false);
 
         // Create buttons
@@ -57,39 +68,68 @@ public class MainOrderReport extends JPanel {
         buttonPanel.add(historic_orders);
         buttonPanel.add(specific_order);
 
+        gbc.gridy =1;
+        centerPanel.add(buttonPanel,gbc);
+
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        bottomPanel.setOpaque(false);
         bottomPanel.add(backButton);
 
         // Add button panel to the main panel
-        mainPanel.add(Box.createVerticalStrut(120)); // Adjust the spacing as needed
-        mainPanel.add(buttonPanel,BorderLayout.CENTER);
 
 
-        mainPanel.add(Box.createVerticalStrut(200));
+        mainPanel.add(centerPanel, BorderLayout.CENTER);
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
-
-        add(mainPanel);
+        add(mainPanel, BorderLayout.CENTER);
 
         // Add action listeners
         periodic_order.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                openPeriodic_order();
+                List<Integer> period = new ArrayList<>(OrderDAO.getInstance().getAllOrdersByKind(2).keySet());
+                if (period.size() == 0) {
+                    JOptionPane.showMessageDialog(null, "There isn't Period Orders");
+                } else {
+                    String ans = "";
+                    for (int i = 0; i < period.size() - 1; i++) {
+                        ans += period.get(i) + ",";
+                    }
+                    ans += period.get(period.size() - 1);
+                    JOptionPane.showMessageDialog(null, "Periodic Orders ID: " + ans);
+                }
             }
         });
         on_the_way_orders.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                try {
-                    openOn_the_way_orders();
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
+                List<Integer> lack = new ArrayList<>(OrderDAO.getInstance().getAllOrdersByKind(1).keySet());
+                if(lack.size() ==0){
+                    JOptionPane.showMessageDialog(null, "There isn't On The Way Orders");
+                }
+                else {
+                    String ans = "";
+                    for (int i = 0; i < lack.size() - 1; i++) {
+                        ans += lack.get(i) + ",";
+                    }
+                    ans += lack.get(lack.size() - 1);
+                    JOptionPane.showMessageDialog(null, "On The Way Orders ID: " + ans);
                 }
             }
         });
 
         historic_orders.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                openHistoric_orders();
+                List<Integer> historic = new ArrayList<>(OrderDAO.getInstance().getAllOrdersByKind(0).keySet());
+                if(historic.size() ==0){
+                    JOptionPane.showMessageDialog(null, "There isn't History Orders");
+                }
+                else {
+                    String ans = "";
+                    for (int i = 0; i < historic.size() - 1; i++) {
+                        ans += historic.get(i) + ",";
+                    }
+                    ans += historic.get(historic.size() - 1);
+                    JOptionPane.showMessageDialog(null, "Historic Orders ID: " + ans);
+                }
             }
         });
         specific_order.addActionListener(new ActionListener() {
@@ -141,15 +181,6 @@ public class MainOrderReport extends JPanel {
         return button;
     }
 
-    private void openPeriodic_order() {
-        //open new frame of this report
-    }
-    private void openOn_the_way_orders() throws IOException {
-        //open new frame if this report
-    }
-    private void openHistoric_orders()  {
-        //open new frame if this report
-    }
     private void openSpecific_order()  {
         //new frame of categry name
         mainPanel.setVisible(false);
@@ -177,6 +208,7 @@ public class MainOrderReport extends JPanel {
     private void removeCurrentChildPanel() {
         if (specificOrder != null && specificOrder.isShowing()) {
             remove(specificOrder);
+            specificOrder=null;
         }
     }
 

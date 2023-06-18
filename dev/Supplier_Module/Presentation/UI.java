@@ -46,8 +46,8 @@ public class UI {
 
     public void beginOrderMenu(LocalDate localDate) {
         int choice0 = 0;
-        while (choice0 != 4) {
-            System.out.println("Welcome to Orders Management! \nDo you want to edit periodic order ,create new periodic order or load default periodic? \n1.Edit order  \n2.Add new periodic order \n3.Load best periodic for each product \n4.Exit");
+        while (choice0 != 5) {
+            System.out.println("Welcome to Orders Management! \nDo you want to edit periodic order ,create new periodic, delete periodic order, order or load default periodic? \n1.Edit order  \n2.Add new periodic order \n3.Delete periodic order \n4.Load best periodic for each product \nReturn to login menu");
             choice0 = input.nextInt();
             switch (choice0) {
                 case 1: {
@@ -61,11 +61,14 @@ public class UI {
                     break;
                 }
                 case 3:{
-                    SupplierService.getSupplierService().updatePeriodOrders(ProductService.getInstance().sendToSupplierAllProductsQuantity(),localDate);
-                    System.out.println("Each product updated with the best periodic for it. ");
+                    deletePeriodOrder(localDate);
                     break;
                 }
-                case 4:
+                case 4:{
+                    SupplierService.getSupplierService().updatePeriodOrders(ProductService.getInstance().sendToSupplierAllProductsQuantity(),localDate);
+                    break;
+                }
+                case 5:
                     break;//return to
                 default:
                     System.out.println("This is not valid option!");
@@ -75,7 +78,7 @@ public class UI {
     public void beginSupplierMenu(LocalDate localDate){
         int choice1 = 0;
         while (choice1!=2) {
-            System.out.println("Welcome to Suppliers system! \nDo you want to edit current data,create new data or start over? \n1.Edit existing data  \n2.Exit");
+            System.out.println("Welcome to Suppliers system! \nDo you want to edit current data,create new data or start over? \n1.Edit existing data  \n2.Return to the login menu");
             choice1 = input.nextInt();
             switch (choice1)
             {
@@ -85,7 +88,7 @@ public class UI {
                     mainMenu();
                     break;
 
-                }
+            }
                 case 2:{
                     break;
                 }
@@ -240,6 +243,26 @@ public class UI {
             }
         }
     }
+    public void deletePeriodOrder(LocalDate localDate){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter the Order number you want to delete:");
+        int num = input.nextInt();
+        if(this.order_manager.getPeriodic_orders().containsKey(num)){
+            Order order = this.order_manager.getPeriodic_orders().get(num);
+            if(order.getSupplyDate().minusDays(1).equals(localDate))//if the supply date id tomorrow don't allow to edit the order
+            {
+                System.out.println("This order will provided in less then 24 hours and cant be delete!");
+            }
+            else
+            {
+                OrderDAO.getInstance().Delete(OrderDAO.getInstance().getOrderById(num));
+                System.out.println("Order number " + num + " has been deleted");
+            }
+        }
+        else {
+            System.out.println("There is no periodic order with this number!");
+        }
+    }
 
     public void deleteProductFromOrder(Order order1 , LocalDate localDate){
         Scanner input123 = new Scanner(System.in);
@@ -337,7 +360,6 @@ public class UI {
                         }
                         break;
                     }
-
                 }
 
                 case 2:{

@@ -1,7 +1,6 @@
 package GUI.supplyGui;
 
-import GUI.MainGUI;
-import GUI.loginRegisterGui.loginRegisterGUI;
+import Supplier_Module.Business.Supplier;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -10,21 +9,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class SupplierGUI extends JPanel {
-    private loginRegisterGUI loginRegisterGUI;
+public class EditSupplierAgreemantGui extends JPanel {
+    private EditSupplierPanel parent;
+    private Supplier supplier;
     private JPanel mainPanel;
+    private AddSupplierProduct addSupplierProduct;
+    private  EditSupplierProduct editSupplierProduct;
+    private  DeleteSupplieProduct deleteSupplieProduct;
 
-    private MainGUI mainGUI;
-    private AddSupplierPanel addSupplierPanel;
-    private EditSupplierPanel editSupplierPanel;
-    private DeleteSupplierPanel deleteSupplierPanel;
-
-    public SupplierGUI(loginRegisterGUI loginRegisterGUI, MainGUI mainGUI)throws IOException  {
-        this.mainGUI = mainGUI;
-        this.loginRegisterGUI = loginRegisterGUI;
+    public EditSupplierAgreemantGui(EditSupplierPanel editSupplierPanel, Supplier supplier1) throws IOException {
+        this.parent = editSupplierPanel;
+        this.supplier =supplier1;
         setLayout(new BorderLayout());
 
-        // Create main panel
         Image background = null;
         try {
             background = ImageIO.read(getClass().getResource("/GUI/pictures/background.jpg"));
@@ -39,47 +36,42 @@ public class SupplierGUI extends JPanel {
                 g.drawImage(finalBackground, 0, 0, getWidth(), getHeight(), this);
             }
         };
+
         mainPanel.setLayout(new BorderLayout());
-        ////
+
         JPanel centerPanel = new JPanel(new GridBagLayout());
         centerPanel.setOpaque(false);
 
-        JLabel titleLabel = new JLabel("<html>Responsible for supplier relations <br> Please select option :</html>");
+        JLabel titleLabel = new JLabel("Edit Supplier Agreement");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
-//        mainPanel.add(titleLabel);
+
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.insets = new Insets(20, 0, 20, 0); // Adjust spacing as needed
         centerPanel.add(titleLabel, gbc);
 
-
-        String back = "back" ;
-        if(loginRegisterGUI != null)
-            back = "Disconnect";
-        // Create button panel
-        JButton backButton = new JButton(back);
+        JButton backButton = new JButton("Back");
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
+        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
         buttonPanel.setOpaque(false);
 
         // Create buttons
-        JButton addSupplierButton = createButton("Add Supplier","/GUI/pictures/new-supplier.jpg");
-        JButton editSupplierButton = createButton("Edit Supplier","/GUI/pictures/update.jpg");
-        JButton deleteSupplierButton = createButton("Delete Supplier","/GUI/pictures/delete-supplier.jpg");
+        JButton addProductButton = createButton("Add Product","/GUI/pictures/new-supplier.jpg");
+        JButton editProductButton = createButton("Edit Product","/GUI/pictures/update.jpg");
+        JButton deleteProductButton = createButton("Delete Product","/GUI/pictures/delete-supplier.jpg");
 
         buttonPanel.add(Box.createHorizontalGlue());
-        buttonPanel.add(addSupplierButton);
+        buttonPanel.add(addProductButton);
         buttonPanel.add(Box.createHorizontalStrut(20));
-        buttonPanel.add(editSupplierButton);
+        buttonPanel.add(editProductButton);
         buttonPanel.add(Box.createHorizontalStrut(20));
-        buttonPanel.add(deleteSupplierButton);
+        buttonPanel.add(deleteProductButton);
         buttonPanel.add(Box.createHorizontalGlue());
-        gbc.gridy = 1;
-        centerPanel.add(buttonPanel, gbc);
 
-//        mainPanel.add(buttonPanel);
+        gbc.gridy =1;
+        centerPanel.add(buttonPanel,gbc);
 
 
         JPanel bottomPanel = new JPanel();
@@ -87,43 +79,38 @@ public class SupplierGUI extends JPanel {
         bottomPanel.setOpaque(false);
         bottomPanel.add(backButton);
 
-
-
         mainPanel.add(centerPanel, BorderLayout.CENTER);
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
-
 
 
         add(mainPanel, BorderLayout.CENTER);
 
         // Add action listeners for the buttons
-        addSupplierButton.addActionListener(new ActionListener() {
+        addProductButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                openAddSupplierPanel();
+                openAddProductPanel();
             }
         });
 
-        editSupplierButton.addActionListener(new ActionListener() {
+        editProductButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                openEditSupplierPanel();
+                openEditProductPanel();
             }
         });
 
-        deleteSupplierButton.addActionListener(new ActionListener() {
+        deleteProductButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                openDeleteSupplierPanel();
+                openDeleteProductPanel();
             }
         });
 
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(loginRegisterGUI != null)
-                    loginRegisterGUI.showMainPanel();
-                else{
-                    mainGUI.showMainPanel();
-                }
+                parent.showDefaultPanelFromChild();
             }
         });
+
+
     }
     private JButton createButton(String text, String imagePath) throws IOException {
         // Create button panel
@@ -163,50 +150,49 @@ public class SupplierGUI extends JPanel {
         return button;
     }
 
-    private void openAddSupplierPanel() {
+    private void openAddProductPanel() {
         mainPanel.setVisible(false);
 
-        if (addSupplierPanel == null) {
-            addSupplierPanel = new AddSupplierPanel(this);
-            addSupplierPanel.setPreferredSize(mainPanel.getSize());
-            addSupplierPanel.setMaximumSize(mainPanel.getMaximumSize());
-            addSupplierPanel.setMinimumSize(mainPanel.getMinimumSize());
-            addSupplierPanel.setSize(mainPanel.getSize());
+        if (addSupplierProduct == null) {
+            addSupplierProduct = new AddSupplierProduct(this,supplier);
+            addSupplierProduct.setPreferredSize(mainPanel.getSize());
+            addSupplierProduct.setMaximumSize(mainPanel.getMaximumSize());
+            addSupplierProduct.setMinimumSize(mainPanel.getMinimumSize());
+            addSupplierProduct.setSize(mainPanel.getSize());
         }
 
-        add(addSupplierPanel, BorderLayout.CENTER);
+        add(addSupplierProduct, BorderLayout.CENTER);
         revalidate();
         repaint();
     }
 
-    private void openEditSupplierPanel() {
+    private void openEditProductPanel() {
         mainPanel.setVisible(false);
 
-        if (editSupplierPanel == null) {
-            editSupplierPanel = new EditSupplierPanel(this);
-            editSupplierPanel.setPreferredSize(mainPanel.getSize());
-            editSupplierPanel.setMaximumSize(mainPanel.getMaximumSize());
-            editSupplierPanel.setMinimumSize(mainPanel.getMinimumSize());
-            editSupplierPanel.setSize(mainPanel.getSize());
+        if (editSupplierProduct == null) {
+            editSupplierProduct = new EditSupplierProduct(this, supplier);
+            editSupplierProduct.setPreferredSize(mainPanel.getSize());
+            editSupplierProduct.setMaximumSize(mainPanel.getMaximumSize());
+            editSupplierProduct.setMinimumSize(mainPanel.getMinimumSize());
+            editSupplierProduct.setSize(mainPanel.getSize());
         }
 
-        add(editSupplierPanel, BorderLayout.CENTER);
+        add(editSupplierProduct, BorderLayout.CENTER);
         revalidate();
         repaint();
     }
-
-    private void openDeleteSupplierPanel() {
+    private void openDeleteProductPanel() {
         mainPanel.setVisible(false);
 
-        if (deleteSupplierPanel == null) {
-            deleteSupplierPanel = new DeleteSupplierPanel(this);
-            deleteSupplierPanel.setPreferredSize(mainPanel.getSize());
-            deleteSupplierPanel.setMaximumSize(mainPanel.getMaximumSize());
-            deleteSupplierPanel.setMinimumSize(mainPanel.getMinimumSize());
-            deleteSupplierPanel.setSize(mainPanel.getSize());
+        if (deleteSupplieProduct == null) {
+            deleteSupplieProduct = new DeleteSupplieProduct(this, supplier);
+            deleteSupplieProduct.setPreferredSize(mainPanel.getSize());
+            deleteSupplieProduct.setMaximumSize(mainPanel.getMaximumSize());
+            deleteSupplieProduct.setMinimumSize(mainPanel.getMinimumSize());
+            deleteSupplieProduct.setSize(mainPanel.getSize());
         }
 
-        add(deleteSupplierPanel, BorderLayout.CENTER);
+        add(deleteSupplieProduct, BorderLayout.CENTER);
         revalidate();
         repaint();
     }
@@ -218,15 +204,15 @@ public class SupplierGUI extends JPanel {
     }
 
     private void removeCurrentChildPanel() {
-        if (addSupplierPanel != null && addSupplierPanel.isShowing()) {
-            remove(addSupplierPanel);
-            addSupplierPanel = null;
-        } else if (editSupplierPanel != null && editSupplierPanel.isShowing()) {
-            remove(editSupplierPanel);
-            editSupplierPanel = null;
-        } else if (deleteSupplierPanel != null && deleteSupplierPanel.isShowing()) {
-            remove(deleteSupplierPanel);
-            deleteSupplierPanel = null;
+        if (addSupplierProduct != null && addSupplierProduct.isShowing()) {
+            remove(addSupplierProduct);
+            addSupplierProduct = null;
+        } else if (editSupplierProduct != null && editSupplierProduct.isShowing()) {
+            remove(editSupplierProduct);
+            editSupplierProduct = null;
+        }else if (deleteSupplieProduct != null && deleteSupplieProduct.isShowing()) {
+            remove(deleteSupplieProduct);
+            deleteSupplieProduct = null;
         }
     }
 

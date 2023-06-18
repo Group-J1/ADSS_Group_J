@@ -1,5 +1,7 @@
 package Supplier_Module.Business.Agreement;
 import Supplier_Module.Business.Discount.PrecentageDiscount;
+import Supplier_Module.Business.Discount.Range;
+
 import java.util.LinkedList;
 
 public class SupplierProduct {
@@ -36,6 +38,20 @@ public class SupplierProduct {
         this.discounts = discounts;
         this.supplierID=supplierID;
 
+    }
+
+    public SupplierProduct(String product_name, int local_key, double unit_weight, double unit_price, int amount_available, double discount,int supplierID) {
+        this.product_name = product_name;
+        this.local_key = local_key;
+        this.unit_weight = unit_weight;
+        this.unit_price = unit_price;
+        this.amount_available = amount_available;
+        Range r= new Range(0,amount_available);
+        PrecentageDiscount p=new PrecentageDiscount(r,discount);
+        LinkedList<PrecentageDiscount> temp=new LinkedList<>();
+        temp.add(p);
+        this.discounts=temp;
+        this.supplierID=supplierID;
     }
 
     /**
@@ -103,6 +119,26 @@ public class SupplierProduct {
                 + amount+ " Catalog Price:" + this.getUnit_price() + " Discount:"+ discount +
                 " Final Price:" + final_p);
     }
+    public String printSupplierProduct(int amount){
+        double discount = 0;
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < this.getDiscounts().size(); i++) {
+            if (this.getDiscounts().get(i).getAmountRange().getMax() >= amount && this.getDiscounts().get(i).getAmountRange().getMin() <= amount) {
+                discount = this.getDiscounts().get(i).getPercentage();
+                break;
+            }
+        }
+
+        double final_p = amount * this.getUnit_price() * (1 - (0.01 * discount));
+
+        sb.append("Product Number: ").append(this.getLocal_key()).append(", Product Name: ").append(this.getProduct_name())
+                .append(", Amount: ").append(amount).append(" Catalog Price: ").append(this.getUnit_price())
+                .append(" Discount: ").append(discount).append(" Final Price: ").append(final_p);
+
+        String labelText = sb.toString();
+        return labelText;
+    }
 
     /**
      * function that print product discounts
@@ -139,6 +175,19 @@ public class SupplierProduct {
                 return discount.getPercentage();
         }
         return ans;
+    }
+
+    public LinkedList<String> getSupplierProductReport()
+    {
+        LinkedList<String> temp=new LinkedList<>();
+        temp.add("Product name:" + this.product_name);
+        temp.add("Supplier: "+this.supplierID);
+        temp.add("Local key: "+this.local_key);
+        temp.add("Unit price: "+this.unit_price);
+        temp.add("Unit weight: "+this.unit_weight);
+        temp.add("Amount available: "+this.amount_available);
+
+        return temp;
     }
 
 }

@@ -777,6 +777,19 @@ public class SupplyManager {
             supplierDAO.Delete(supplier);
         }
     }
+    public String[] productsNamesOfSupplier(int id)
+    {
+        Supplier supplier= this.getSupplier(id);
+        LinkedList<SupplierProduct> productList= supplier.getAgreement().getProductList();
+        String[] ans= new String[productList.size()];
+        int index=0;
+        for(SupplierProduct p: productList)
+        {
+            ans[index]=p.getProduct_name();
+            index++;
+        }
+        return ans;
+    }
 
 }
 

@@ -1,9 +1,9 @@
-package GUI.stockmanagerGui;
+package GUI.supplyGui;
 
-import LoginRegister.Presentation.LoginMenuNew;
+import Supplier_Module.Business.Agreement.SupplierProduct;
 import Supplier_Module.Business.Managers.Order_Manager;
 import Supplier_Module.Business.Managers.SupplyManager;
-import Supplier_Module.Business.Order;
+import Supplier_Module.Business.Supplier;
 import Supplier_Module.DAO.OrderDAO;
 
 import javax.imageio.ImageIO;
@@ -13,13 +13,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.regex.Pattern;
 
-public class DeleteOrderPanel extends JPanel {
-    private OrderManagementGui parent;
+public class DeleteSupplieProduct extends JPanel {
+    private EditSupplierAgreemantGui parent;
     private JPanel mainPanel;
+    private Supplier supplier;
+    public DeleteSupplieProduct(EditSupplierAgreemantGui editSupplierAgreemantGui, Supplier supplier1){
+        this.parent = editSupplierAgreemantGui;
+        this.supplier =supplier1;
 
-    public DeleteOrderPanel (OrderManagementGui parent) {
-        this.parent = parent;
         setLayout(new BorderLayout());
 
         // Create main panel
@@ -31,7 +34,7 @@ public class DeleteOrderPanel extends JPanel {
         }
 
         Image finalBackground = background;
-        mainPanel = new JPanel() {
+        mainPanel = new JPanel(){
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 g.drawImage(finalBackground, 0, 0, getWidth(), getHeight(), this);
@@ -41,21 +44,22 @@ public class DeleteOrderPanel extends JPanel {
 
         JPanel centerPanel = new JPanel(new GridBagLayout());
         centerPanel.setOpaque(false);
+
         GridBagConstraints titleConstraints = new GridBagConstraints();
         titleConstraints.gridx = 0; // Column index
         titleConstraints.gridy = 0; // Row index
-        titleConstraints.anchor = GridBagConstraints.NORTH; // Align in the center horizontally
-        titleConstraints.insets = new Insets(10, 0, 10, 0);
+        titleConstraints.anchor = GridBagConstraints.NORTH; // Align in the top vertically
+        titleConstraints.insets = new Insets(10, 0, 10, 0); // Add some top and bottom margin
 
-        JLabel titleLabel = new JLabel("Delete period order :");
+
+        JLabel titleLabel = new JLabel("Delete Supplier Product");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
         centerPanel.add(titleLabel, titleConstraints);
 
-
         JPanel deletePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JLabel enterNumberLabel = new JLabel("Please enter the order number you want to delete:");
-        JTextField numberField = new JTextField(5);
+        JLabel enterNumberLabel = new JLabel("Please enter the supplier Product name you want to delete:");
+        JTextField numberField = new JTextField(20);
         JButton submitButton = new JButton("Submit");
 
         deletePanel.add(enterNumberLabel);
@@ -69,16 +73,25 @@ public class DeleteOrderPanel extends JPanel {
         gbc.anchor = GridBagConstraints.NORTH; // Center-align components
         centerPanel.add(deletePanel, gbc);
 
+        // Add action listener for the submit button
         submitButton.addActionListener(e -> {
-            LoginMenuNew.getInstance();
-            String orderNumber = numberField.getText();
+            String product_name = numberField.getText();
             // Perform delete action based on the supplier number
-            if (!isInteger(orderNumber) || Integer.parseInt(orderNumber) < 0) {
-                JOptionPane.showMessageDialog(null, "invalid input!", "ERROR", JOptionPane.ERROR_MESSAGE);
-            } else if (!isExistOrder(orderNumber)) {//check if the order is in the system
-                JOptionPane.showMessageDialog(null, "there is no Order with number " + orderNumber, "ERROR", JOptionPane.ERROR_MESSAGE);
-            }else if(Order_Manager.getOrder_Manager().getOrderById(Integer.parseInt(orderNumber)).getSupplyDate().minusDays(1).equals(LoginMenuNew.getLocalDate())){ //if the supply date is tomorrow don't allow to delete the order
-                JOptionPane.showMessageDialog(null, "this Order supply date is less then 24 hours, therefore can't be deleted!", "ERROR", JOptionPane.ERROR_MESSAGE);
+            SupplierProduct supplierProduct =null;
+            LinkedList<SupplierProduct> temp = supplier.getAgreement().getProductList();
+            boolean found = false;
+            for(SupplierProduct sp : temp){
+                if(sp.getProduct_name().equals(product_name)){
+                    found =true;
+                    supplierProduct = sp;
+                    break;
+                }
+            }
+            if(!found){
+                JOptionPane.showMessageDialog(null, "invalid input!", "ERROR",  JOptionPane.ERROR_MESSAGE);
+            }
+            else if(OrderDAO.getInstance().isProductInPeriodOrder(product_name,supplier.getAgreement().getSupplier_number())){
+                JOptionPane.showMessageDialog(null, "this product is already include in agreement to super lee period order", "ERROR",  JOptionPane.ERROR_MESSAGE);
             }
             else {
                 centerPanel.remove(deletePanel);
@@ -87,9 +100,15 @@ public class DeleteOrderPanel extends JPanel {
                 gbcDetails.gridy = 1;
                 gbcDetails.weighty = 0.5; // Place component vertically in the middle
                 gbcDetails.anchor = GridBagConstraints.CENTER; // Center-align component
-                ///////////////////
-                int order_id= Integer.parseInt(orderNumber);
-                LinkedList<String> lines = Order_Manager.getOrder_Manager().getOrderById(order_id).getOrderReport();
+
+                // Get the supplier report
+                //String[] lines = SupplyManager.getSupply_manager().getSupplier(supID).getSupplierReport();
+                LinkedList<String> lines= supplierProduct.getSupplierProductReport();
+
+                // Create a new panel for the report
+                //JPanel reportPanel = new JPanel(new BorderLayout());
+                //reportPanel.setOpaque(false);
+
                 JTextArea textArea = new JTextArea();
                 textArea.setFont(new Font("Comic Sans MS", Font.BOLD, 18));
 
@@ -105,16 +124,14 @@ public class DeleteOrderPanel extends JPanel {
                 textArea.setText(reportText);
                 textArea.setPreferredSize(new Dimension(longestLineWidth, textArea.getPreferredSize().height));
                 textArea.setOpaque(true);
-                textArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                textArea.setEditable(false);
-
+                textArea.setBorder(BorderFactory.createLineBorder(Color.BLACK)); // Set border line
                 centerPanel.add(textArea, gbcDetails);
+                textArea.setEditable(false);
 
                 // Example: Print a message on the panel
                 JTextArea messageArea = new JTextArea();
                 messageArea.setEditable(false);
-                messageArea.append("Are you sure you want to delete Order " + orderNumber + "?\n");
-                messageArea.setFont(new Font("Tahoma", Font.BOLD, 12));
+                messageArea.append("Are you sure you want to delete  " + product_name + "?\n");
                 JButton yesButton = new JButton("Yes");
                 JButton noButton = new JButton("No");
 
@@ -134,8 +151,10 @@ public class DeleteOrderPanel extends JPanel {
                 // Add action listener for the yes button
                 yesButton.addActionListener(yesEvent -> {
                     // Perform delete confirmation action
-                    OrderDAO.getInstance().Delete(OrderDAO.getInstance().getOrderById(order_id));
-                    JOptionPane.showMessageDialog(null, "Order " + orderNumber + " has been deleted.");
+                    String temp2=supplier.getAgreement().removeProductFromAgreement(product_name);
+                    SupplyManager.getSupply_manager().deleteProductFromSupplier(supplier.getCard().getSupplier_number(),temp2);
+                    JOptionPane.showMessageDialog(null, "product " + product_name + " has been deleted.");
+                    centerPanel.setVisible(false);
                 });
 
                 // Add action listener for the no button
@@ -149,11 +168,14 @@ public class DeleteOrderPanel extends JPanel {
                 repaint();
             }
         });
+
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JButton backButton = new JButton("Back");
         bottomPanel.setOpaque(false);
         bottomPanel.add(backButton);
 
+//        mainPanel.add(bottomPanel, BorderLayout.WEST);
+//        add(mainPanel,BorderLayout.CENTER);
         mainPanel.add(centerPanel,BorderLayout.CENTER);
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
         add(mainPanel, BorderLayout.CENTER);
@@ -163,38 +185,6 @@ public class DeleteOrderPanel extends JPanel {
                 parent.showDefaultPanelFromChild();
             }
         });
-
-    }
-    public static boolean isInteger(String input) {
-        try {
-            Integer.parseInt(input);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-    public boolean isPositiveInteger(String input) {
-        if (input == null || input.isEmpty())
-        {
-            return false;
-        }
-
-        for (int i = 0; i < input.length(); i++) {
-            if (!Character.isDigit(input.charAt(i))) {
-                return false;
-            }
-        }
-
-        int number = Integer.parseInt(input);
-        return number > 0;
-    }
-    public boolean isExistOrder(String id)
-    {
-        if(!isPositiveInteger(id))
-            return false;
-        else {
-            return Order_Manager.getOrder_Manager().isExistOrder(Integer.parseInt(id));
-        }
     }
 
 }

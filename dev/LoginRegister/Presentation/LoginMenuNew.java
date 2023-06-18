@@ -130,5 +130,9 @@ public class LoginMenuNew {
         return role.equals("stock manager") || role.equals("supplier manager")
                 || role.equals("store manager");
     }
+    public static LocalDate getLocalDate()
+    {
+        return localDate;
+    }
 
 }

@@ -22,4 +22,7 @@ public class Range {
     public int getMax() {
         return max;
     }
+    public void setMax(int new_max){
+        this.max = new_max;
+    }
 }

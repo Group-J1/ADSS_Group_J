@@ -1,6 +1,7 @@
 package Supplier_Module.Business;
 
 import Supplier_Module.Business.Agreement.Agreement;
+import Supplier_Module.Business.Agreement.SupplierProduct;
 import Supplier_Module.Business.Card.SupplierCard;
 import Supplier_Module.DAO.OrderDAO;
 
@@ -75,6 +76,25 @@ public class Supplier {
     {
         this.card.printCard();
         this.agreement.printAgreement();
+    }
+    public LinkedList<String> getSupplierReport()
+    {
+        LinkedList<String> temp=new LinkedList<>();
+        temp.add("ID:" + this.card.getSupplier_number());
+        temp.add("Name: "+this.card.getSupplier_name());
+        temp.add("Address: "+this.card.getAddress());
+        temp.add("Bank Account: "+this.card.getBank_account());
+        temp.add("Payment Method: "+this.card.getPayment_method().toString());
+        temp.add("Products: ");
+        temp.add("Method Supply: "+this.agreement.getMethodSupply().methodType());
+        temp.add("EOM: "+this.agreement.getEom().toString());
+        int index=1;
+        for(SupplierProduct p:this.getAgreement().getProductList())
+        {
+            temp.add("Product "+index+": "+p.getProduct_name());
+            index++;
+        }
+        return temp;
     }
 
 }

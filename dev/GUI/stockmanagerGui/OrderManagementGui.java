@@ -1,6 +1,9 @@
 package GUI.stockmanagerGui;
 
 import GUI.MainGUI;
+import LoginRegister.Presentation.LoginMenuNew;
+import Stock.Service.ProductService;
+import Supplier_Module.Service.SupplierService;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -8,6 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.time.LocalDate;
 
 
 public class OrderManagementGui extends JPanel {
@@ -37,17 +41,24 @@ public class OrderManagementGui extends JPanel {
             }
         };
         mainPanel.setLayout(new BorderLayout());
+
+        JPanel centerPanel = new JPanel(new GridBagLayout());
+        centerPanel.setOpaque(false);
+
         JLabel titleLabel = new JLabel("<html>Welcome to Order Management <br> Please select option :</html>");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
-        mainPanel.add(titleLabel, BorderLayout.NORTH);
-        mainPanel.setLayout(new FlowLayout());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(10, 0, 10, 0); // Adjust spacing as needed
+        centerPanel.add(titleLabel, gbc);
 
 
         // Create button panel
         JButton backButton = new JButton("Back");
-        JPanel buttonPanel = new JPanel(new GridLayout(2,2,25,25));
-
+        JPanel buttonPanel = new JPanel(new GridLayout(2,2,15,15));
         buttonPanel.setOpaque(false);
 
         // Create buttons
@@ -61,17 +72,16 @@ public class OrderManagementGui extends JPanel {
         buttonPanel.add(deleteOrderButton);
         buttonPanel.add(defaultOrderButton);
 
+        gbc.gridy =1;
+        centerPanel.add(buttonPanel,gbc);
+
 
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        bottomPanel.setOpaque(false);
         bottomPanel.add(backButton);
 
-        // Add button panel to the main panel
-        mainPanel.add(Box.createVerticalStrut(120)); // Adjust the spacing as needed
-        mainPanel.add(buttonPanel,BorderLayout.CENTER);
-
-
-        mainPanel.add(Box.createVerticalStrut(200));
+        mainPanel.add(centerPanel, BorderLayout.CENTER);
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 
 
@@ -97,6 +107,8 @@ public class OrderManagementGui extends JPanel {
         });
         defaultOrderButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                LocalDate localDate=LoginMenuNew.getInstance().getLocalDate();
+                SupplierService.getSupplierService().updatePeriodOrders(ProductService.getInstance().sendToSupplierAllProductsQuantity(),localDate);
                 JOptionPane.showMessageDialog(null, "There is periodic order for each product!");
             }
         });
@@ -110,8 +122,8 @@ public class OrderManagementGui extends JPanel {
     }
     private JButton createButton(String text, String imagePath) throws IOException {
         // Create button panel
-        int width = 100;
-        int height = 100;
+        int width = 120;
+        int height = 120;
         JPanel buttonPanel = new JPanel(null);
         buttonPanel.setLayout(new BorderLayout());
 //        buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0)); // Remove label margin
@@ -127,7 +139,7 @@ public class OrderManagementGui extends JPanel {
         buttonPanel.add(imageLabel, BorderLayout.CENTER);
 
         // Create text label
-        Font buttonFont = new Font("Tahoma", Font.BOLD, 12);
+        Font buttonFont = new Font("Tahoma", Font.BOLD, 10);
         JLabel textLabel = new JLabel(text);
         textLabel.setFont(buttonFont);
         textLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -206,10 +218,13 @@ public class OrderManagementGui extends JPanel {
     private void removeCurrentChildPanel() {
         if (addOrderPanel != null && addOrderPanel.isShowing()) {
             remove(addOrderPanel);
+            addOrderPanel =null;
         } else if (editOrderPanel != null && editOrderPanel.isShowing()) {
             remove(editOrderPanel);
+            editOrderPanel =null;
         } else if (deleteOrderPanel != null && deleteOrderPanel.isShowing()) {
             remove(deleteOrderPanel);
+            deleteOrderPanel = null;
         }
     }
 
