@@ -61,10 +61,11 @@ public class CategoryReport extends JPanel {
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 parent.showDefaultPanelFromChild();
-                category_report_.remove(textArea);
+                if (textArea != null) {
+                    category_report_.remove(textArea);
+                }
             }
         });
-
     }
 }
 

@@ -42,10 +42,10 @@ public class MarketMenuGui extends JPanel {
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
         mainPanel.add(titleLabel, BorderLayout.NORTH);
 
-        JButton discountByCategory = createButton("Discount By Category", "/GUI/pictures/stock-manager.jpg");
-        JButton discountByCatalogNumber = createButton("Discount By Catalog Number", "/GUI/pictures/order_manager.jpg");
-        JButton discountForCategory = createButton("Discount For Category", "/GUI/pictures/order_manager.jpg");
-        JButton addShelves = createButton("Add Shelves", "/GUI/pictures/order_manager.jpg");
+        JButton discountByCategory = createButton("Discount By Category", "/GUI/pictures/specific-order.jpg");
+        JButton discountByCatalogNumber = createButton("Discount By Catalog Number", "/GUI/pictures/product-report.jpg");
+        JButton discountForCategory = createButton("Discount For Category", "/GUI/pictures/category-report.jpg");
+        JButton addShelves = createButton("Add Shelves", "/GUI/pictures/supply.JPG");
 
         JPanel menuPanel = new JPanel();
         int verticalGap = 35; // Set the desired vertical gap between rows

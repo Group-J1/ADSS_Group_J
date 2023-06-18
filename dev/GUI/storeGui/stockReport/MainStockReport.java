@@ -46,12 +46,12 @@ public class MainStockReport extends JPanel {
 
 
         // Create buttons
-        JButton DamageReport = createButton("Damage Report", "/GUI/pictures/supply.JPG");
-        JButton ShortagesReport = createButton("Shortages Report", "/GUI/pictures/stock-manager.jpg");
-        JButton OrderReport = createButton("Order Report", "/GUI/pictures/stock-manager.jpg");
-        JButton StockReport = createButton("Stock Report", "/GUI/pictures/supply.JPG");
-        JButton CategoryReport = createButton("Category Report", "/GUI/pictures/stock-manager.jpg");
-        JButton SpecificProduct = createButton("Product Report", "/GUI/pictures/stock-manager.jpg");
+        JButton DamageReport = createButton("Damage Report", "/GUI/pictures/damage-report.jpg");
+        JButton ShortagesReport = createButton("Shortages Report", "/GUI/pictures/missing-report.jpg");
+        JButton OrderReport = createButton("Order Report", "/GUI/pictures/order-report.jpg");
+        JButton StockReport = createButton("Stock Report", "/GUI/pictures/stock-report.jpg");
+        JButton CategoryReport = createButton("Category Report", "/GUI/pictures/category-report.jpg");
+        JButton SpecificProduct = createButton("Product Report", "/GUI/pictures/product-report.jpg");
 
         JPanel menuPanel = new JPanel();
         int verticalGap = 35; // Set the desired vertical gap between rows

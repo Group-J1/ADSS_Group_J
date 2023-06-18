@@ -45,11 +45,11 @@ public class ProductMenuGui extends JPanel{
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
         mainPanel.add(titleLabel, BorderLayout.NORTH);
 
-        JButton addNewProduct = createButton("<html>Add New Product<br>&#8203;</html>", "/GUI/pictures/order_manager.jpg");
-        JButton updateQuantity = createButton("<html>Update Quantity<br>&#8203;</html>", "/GUI/pictures/stock-manager.jpg");
-        JButton informDefected = createButton("<html>Inform Defected<br><center>Product</center></html>", "/GUI/pictures/order_manager.jpg");
-        JButton productInformation = createButton("<html>Product Information<br>&#8203;</html>", "/GUI/pictures/order_manager.jpg");
-        JButton changeMin = createButton("<html>Change Min<br><center>Quantity</center></html>", "/GUI/pictures/order_manager.jpg");
+        JButton addNewProduct = createButton("<html>Add New Product<br>&#8203;</html>", "/GUI/pictures/new-product.jpg");
+        JButton updateQuantity = createButton("<html>Update Quantity<br>&#8203;</html>", "/GUI/pictures/update.jpg");
+        JButton informDefected = createButton("<html>Inform Defected<br><center>Product</center></html>", "/GUI/pictures/damage-report.jpg");
+        JButton productInformation = createButton("<html>Product Information<br>&#8203;</html>", "/GUI/pictures/order-report.jpg");
+        JButton changeMin = createButton("<html>Change Min<br><center>Quantity</center></html>", "/GUI/pictures/historic-orders.jpg");
 
 
         JPanel menuPanel = new JPanel();

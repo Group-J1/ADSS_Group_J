@@ -57,10 +57,10 @@ public class MainOrderReport extends JPanel {
         buttonPanel.setOpaque(false);
 
         // Create buttons
-        JButton periodic_order = createButton(" Period Orders", "/GUI/pictures/supply.JPG");
-        JButton on_the_way_orders = createButton("On The Way Orders", "/GUI/pictures/stock-manager.jpg");
-        JButton historic_orders = createButton("Historic Orders", "/GUI/pictures/stock-manager.jpg");
-        JButton specific_order = createButton("Specific Order", "/GUI/pictures/supply.JPG");
+        JButton periodic_order = createButton(" Period Orders", "/GUI/pictures/period-report.jpg");
+        JButton on_the_way_orders = createButton("On The Way Orders", "/GUI/pictures/on-the-way-report.jpg");
+        JButton historic_orders = createButton("Historic Orders", "/GUI/pictures/historic-orders.jpg");
+        JButton specific_order = createButton("Specific Order", "/GUI/pictures/specific-order.jpg");
 
         // Add buttons to the button panel
         buttonPanel.add(periodic_order);

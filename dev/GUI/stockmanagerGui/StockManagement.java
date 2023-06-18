@@ -42,9 +42,9 @@ public class StockManagement extends JPanel {
         mainPanel.add(titleLabel, BorderLayout.NORTH);
 
         // Create buttons
-        JButton productMenu = createButton("Product Menu", "/GUI/pictures/stock-manager.jpg");
+        JButton productMenu = createButton("Product Menu", "/GUI/pictures/period-report.jpg");
         //JButton reportsMenu = createButton("Reports Menu", "/GUI/pictures/order_manager.jpg");
-        JButton marketMenu = createButton("Market Menu", "/GUI/pictures/order_manager.jpg");
+        JButton marketMenu = createButton("Market Menu", "/GUI/pictures/historic-orders.jpg");
 
 
         JPanel menuPanel = new JPanel();
