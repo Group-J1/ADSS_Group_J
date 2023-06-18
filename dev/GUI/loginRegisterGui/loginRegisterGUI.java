@@ -110,9 +110,7 @@ public class loginRegisterGUI extends JFrame {
         textFieldPanel.setOpaque(false);
         textFieldPanel.add(new JLabel("Username: "));
         textFieldPanel.add(usernameField);
-//        textFieldPanel.add(new JLabel("Password: "));
-//        textFieldPanel.add(passwordField);
-
+        textFieldPanel.add(new JLabel("Password: "));
         textFieldPanel.add(passwordField);
 
         //////////////

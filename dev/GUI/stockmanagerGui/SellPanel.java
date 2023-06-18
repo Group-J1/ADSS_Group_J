@@ -99,7 +99,8 @@ public class SellPanel extends JPanel {
 
                 inputChecks.add(!catalogNumberTextField.getText().equals(""));
                 String quantityStr = quantityTextField.getText();
-                inputChecks.add(!quantityStr.equals("") && checkIfPositiveIntegerNumber(quantityStr));
+                inputChecks.add(!quantityStr.equals("") && checkIfPositiveIntegerNumber(quantityStr) &&
+                        Integer.parseInt(quantityStr) <= 30);
 
                 boolean allTrue = !inputChecks.contains(Boolean.FALSE);
 
@@ -112,7 +113,18 @@ public class SellPanel extends JPanel {
                         if (productService.sellProductsByUniqueCode(product,Integer.parseInt(quantityTextField.getText()),LocalDate.now())) {
                             catalogNumberTextField.setText("");
                             quantityTextField.setText("");
-                            JOptionPane.showMessageDialog(null, quantityTextField.getText() + " " + product.getName() + " sold");
+//                            JOptionPane.showMessageDialog(null, quantityTextField.getText() +
+//                                    " " + product.getName() + " sold");
+                            if(product.getStoreQuantity() + product.getStorageQuantity() == 0){
+                                JOptionPane.showMessageDialog(null, quantityTextField.getText() +
+                                        " " + product.getName() + " sold \n" + "ALERT!!!! the product: " +
+                                        product.getName() + " is in shortage");
+                            }
+                            else if(product.getStoreQuantity() + product.getStorageQuantity() < product.getMinimumQuantity()){
+                                JOptionPane.showMessageDialog(null, quantityTextField.getText() +
+                                        " " + product.getName() + " sold \n" + "ALERT!!!! the product: " +
+                                        product.getName() + " is under the minimum quantity");
+                            }
                         }else {
                             JOptionPane.showMessageDialog(null, "There are not enough " + product.getName());
                         }

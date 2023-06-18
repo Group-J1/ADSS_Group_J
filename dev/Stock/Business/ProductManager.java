@@ -93,7 +93,7 @@ public class ProductManager {
     public void addMoreItemsToProduct(Product product, Date expDate, int quantity){
         product.addMoreItemsToProduct(quantity,expDate);
         if (shortageDAO.isInShortage(product.getCatalogNumber())) {
-            shortageDAO.deleteFromShortages(product.getCatalogNumber());//TODO
+            shortageDAO.deleteFromShortages(product.getCatalogNumber());
         }
         productDAO.writeProducts();
         expDateDAO.writeExpDates();

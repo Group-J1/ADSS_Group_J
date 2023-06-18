@@ -57,10 +57,9 @@ public class ProductService {
     public boolean sellProductsByUniqueCode(Product soldProduct, int quantitySold, LocalDate localDate) {
         if (productManager.sellProductsByUniqueCode(soldProduct, quantitySold)) {
             Shortages shortagesForSupplier = new Shortages();
-
-//            SupplierService.getSupplierService().lackReport(shortagesForSupplier.getMissing(),localDate);
+            SupplierService.getSupplierService().lackReport(shortagesForSupplier.getMissing(),localDate);
             return true;
-                        }
+        }
         return false;
     }
 
