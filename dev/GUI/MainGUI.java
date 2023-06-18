@@ -4,7 +4,9 @@ import GUI.loginRegisterGui.loginRegisterGUI;
 import GUI.stockmanagerGui.StockManagerGUI;
 import GUI.storeGui.StoreManagerGUI;
 import GUI.supplyGui.SupplierGUI;
+import Stock.Presentation.StockMainUI;
 import Stock.Service.ProductService;
+import Supplier_Module.Service.SupplierService;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -12,6 +14,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.HashMap;
 
 public class MainGUI extends JPanel {
 
@@ -23,8 +27,15 @@ public class MainGUI extends JPanel {
     private StoreManagerGUI storeManagerGUI;
     private StockManagerGUI stockManagerGUI;
 
+    static LocalDate localDate;
+
+    static int dayDiff = 0;
+    StockMainUI stockMainUi = new StockMainUI();
+
+
     public MainGUI(loginRegisterGUI loginRegisterGUI) throws IOException {
         ProductService.getInstance().setProductManager();
+        localDate = LocalDate.now();
 
         parent = loginRegisterGUI;
         setLayout(new BorderLayout());
@@ -73,13 +84,16 @@ public class MainGUI extends JPanel {
         mainWrapperPanel.setOpaque(false);
 
         JButton backButton = new JButton("Disconnect");
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        buttonPanel.add(backButton);
+        JButton nextDayButton = new JButton("Next Day");
+        JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        buttonsPanel.add(nextDayButton);
+        buttonsPanel.add(backButton);
 
-        buttonPanel.setOpaque(false);
-        buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 15, 0)); // 10 is the top padding
 
-        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+        buttonsPanel.setOpaque(false);
+        buttonsPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 15, 0)); // 10 is the top padding
+
+        mainPanel.add(buttonsPanel, BorderLayout.SOUTH);
 
         add(mainPanel, BorderLayout.CENTER);
 
@@ -117,6 +131,16 @@ public class MainGUI extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 parent.showMainPanel();
 
+            }
+        });
+
+        nextDayButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //
+                stockMainUi.updateForNextDay(localDate);
+                executeNextDay();
+                String todayDate = localDate.toString();
+                JOptionPane.showMessageDialog(null, "Today is: " + todayDate);
             }
         });
     }
@@ -217,5 +241,12 @@ public class MainGUI extends JPanel {
         if (stockManagerGUI != null) {
             stockManagerGUI.setVisible(false);
         }
+    }
+
+    private void executeNextDay(){
+        localDate = LocalDate.now().plusDays(++dayDiff);
+        HashMap<String,Integer> orderArrived = SupplierService.getSupplierService().SupplyNextDay(localDate);
+        ProductService.getInstance().addMoreItemsToProductsFromSupplier(orderArrived);
+        System.out.println("today: " + localDate.toString());
     }
 }

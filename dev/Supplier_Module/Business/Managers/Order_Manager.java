@@ -441,13 +441,13 @@ public class Order_Manager {
         for(int temp: orders1.keySet())
         {
             if(temp==id)
-                return orders.get(id);
+                return orders1.get(id);
         }
         Map<Integer,Order> orders2=this.getWaiting_orders();
         for(int temp: orders2.keySet())
         {
             if(temp==id)
-                return orders.get(id);
+                return orders2.get(id);
         }
         return null;
     }
