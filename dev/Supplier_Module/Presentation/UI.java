@@ -47,7 +47,7 @@ public class UI {
     public void beginOrderMenu(LocalDate localDate) {
         int choice0 = 0;
         while (choice0 != 4) {
-            System.out.println("Welcome to Orders Management! \nDo you want to edit periodic order ,create new periodic order or load default periodic? \n1.Edit order  \n2.Add new periodic order \n3.Load best periodic for each product \nReturn to login menu");
+            System.out.println("Welcome to Orders Management! \nDo you want to edit periodic order ,create new periodic order or load default periodic? \n1.Edit order  \n2.Add new periodic order \n3.Load best periodic for each product \n4.Exit");
             choice0 = input.nextInt();
             switch (choice0) {
                 case 1: {
@@ -62,6 +62,7 @@ public class UI {
                 }
                 case 3:{
                     SupplierService.getSupplierService().updatePeriodOrders(ProductService.getInstance().sendToSupplierAllProductsQuantity(),localDate);
+                    System.out.println("Each product updated with the best periodic for it. ");
                     break;
                 }
                 case 4:
@@ -74,7 +75,7 @@ public class UI {
     public void beginSupplierMenu(LocalDate localDate){
         int choice1 = 0;
         while (choice1!=2) {
-            System.out.println("Welcome to Suppliers system! \nDo you want to edit current data,create new data or start over? \n1.Edit existing data  \n2.Return to the login menu");
+            System.out.println("Welcome to Suppliers system! \nDo you want to edit current data,create new data or start over? \n1.Edit existing data  \n2.Exit");
             choice1 = input.nextInt();
             switch (choice1)
             {
@@ -84,7 +85,7 @@ public class UI {
                     mainMenu();
                     break;
 
-            }
+                }
                 case 2:{
                     break;
                 }

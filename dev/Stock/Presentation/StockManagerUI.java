@@ -33,7 +33,7 @@ public class StockManagerUI {
 
             switch (choice) {
                 case "1":
-                    // Call GUI function here
+                    // Call CLI function here
                     stockMainUI.startMenu(date);
 //                    System.out.println("Running program through GUI...");
                     break;
@@ -43,14 +43,11 @@ public class StockManagerUI {
 //                    System.out.println("Running program through CLI...");
                     break;
                 case "0":
-                    System.out.println("Exiting...");
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
                     break;
             }
         } while (!choice.equals("0"));
-
-        scanner.close();
     }
 }

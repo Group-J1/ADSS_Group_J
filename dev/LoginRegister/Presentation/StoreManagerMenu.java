@@ -3,6 +3,7 @@ package LoginRegister.Presentation;//import Business.Managers.Order_Manager;
 //import DataAccessLayer.DAO.DBTables;
 
 import Stock.Presentation.StockMainUI;
+import Stock.Presentation.StockManagerUI;
 import Stock.Service.ProductService;
 import Supplier_Module.Presentation.UI;
 import Supplier_Module.Service.SupplierService;
@@ -40,9 +41,9 @@ public class StoreManagerMenu {
             System.out.println("Choose which option you want to enter");
             System.out.println("1. Suppliers");
             System.out.println("2. Stock");
-            System.out.println("3. Manage orders");
-            System.out.println("4. Promote day");
-            System.out.println("5. Exit");
+//            System.out.println("3. Manage orders");
+            System.out.println("3. Promote day");
+            System.out.println("4. Exit");
             choice1 = input.nextInt();
             switch (choice1) {
                 case 1: {
@@ -51,22 +52,17 @@ public class StoreManagerMenu {
                 }
 
                 case 2:{
-                    stockMainUi.startMenu(localDate);
+                    StockManagerUI stockManagerUi = new StockManagerUI(localDate);
+                    stockManagerUi.startMenu();
                     break;
                 }
-                case 3:{
-                    //orders menu
-                    ui.beginOrderMenu(localDate);
-                    break;
-                }
-
-                case 4:
+                case 3:
                 {
                     stockMainUi.updateForNextDay(localDate);
                     executeNextDay();
                     break;
                 }
-                case 5:
+                case 4:
                 {
                     System.out.println("Thanks for using our system! Bye Bye");
                     System.exit(0);

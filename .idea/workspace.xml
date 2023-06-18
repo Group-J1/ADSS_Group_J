@@ -6,9 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="7c3a8884-9649-4f1f-aebb-a7db22ade177" name="Changes" comment="matchced the cli and the gui">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/DBConnect/Connect.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/DBConnect/Connect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/GUI/loginRegisterGui/loginRegisterGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/GUI/loginRegisterGui/loginRegisterGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/LoginRegister/Presentation/StoreManagerMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/LoginRegister/Presentation/StoreManagerMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/Resource/MarketDB.db" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Resource/MarketDB.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Stock/Presentation/StockManagerUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Stock/Presentation/StockManagerUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/Supplier_Module/Presentation/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/dev/Supplier_Module/Presentation/UI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,14 +41,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/Users/raananpevzner/IdeaProjects/ADSS_Group_J/dev/Resource",
-    "node.js.selected.package.tslint": "(autodetect)"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/raananpevzner/IdeaProjects/ADSS_Group_J/dev/Resource&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Connect" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="DBConnect.Connect" />
@@ -60,9 +63,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="ADSS_Group_J" />
+      <option name="PROGRAM_PARAMETERS" value="CLI" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -93,9 +97,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.Connect" />
+      <item itemvalue="Application.loginRegisterGUI" />
+      <item itemvalue="Application.MainGUI" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
         <item itemvalue="Application.MainGUI" />
         <item itemvalue="Application.Connect" />
         <item itemvalue="Application.loginRegisterGUI" />

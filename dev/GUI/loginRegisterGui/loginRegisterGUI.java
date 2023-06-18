@@ -164,12 +164,8 @@ public class loginRegisterGUI extends JFrame {
                     LoginManager loginManager = LoginManager.getInstance();
                     String errorMessage = loginManager.login(userName,password,role);
                     if (errorMessage.equals("")) {
-//                        System.out.println("Connected");
-//                        mainPanel.setVisible(false);
                         if (role.toLowerCase().equals("stock manager")) {
-                            // show StockManagerGUI
                             try {
-//                                stockManagerGUI.setVisible(true);
                                 openStockManager();
                             }
                             catch (IOException ex) {
@@ -291,10 +287,7 @@ public class loginRegisterGUI extends JFrame {
             public void run() {
                 loginRegisterGUI login;
                 try {
-
                     login = new loginRegisterGUI();
-
-
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -302,7 +295,7 @@ public class loginRegisterGUI extends JFrame {
             }
         });
     }
-    private void openSupplierManager() throws IOException {          // used to be private
+    public void openSupplierManager() throws IOException {          // used to be private
         mainPanel.setVisible(false);
 
         if (supplierGUI == null) {
@@ -317,7 +310,7 @@ public class loginRegisterGUI extends JFrame {
         revalidate();
         repaint();
     }
-    private void openStoreManager() throws IOException {             // used to be private
+    public void openStoreManager() throws IOException {             // used to be private
         mainPanel.setVisible(false);
 
         if (mainGUI == null) {
@@ -333,7 +326,7 @@ public class loginRegisterGUI extends JFrame {
         repaint();
     }
 
-    private void openStockManager() throws IOException {            // used to be private
+    public void openStockManager() throws IOException {            // used to be private
         mainPanel.setVisible(false);
 
         if (stockManagerGUI == null) {
