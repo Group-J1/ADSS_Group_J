@@ -47,7 +47,7 @@ public class UI {
     public void beginOrderMenu(LocalDate localDate) {
         int choice0 = 0;
         while (choice0 != 5) {
-            System.out.println("Welcome to Orders Management! \nDo you want to edit periodic order ,create new periodic, delete periodic order, order or load default periodic? \n1.Edit order  \n2.Add new periodic order \n3.Delete periodic order \n4.Load best periodic for each product \nReturn to login menu");
+            System.out.println("Welcome to Orders Management! \nDo you want to edit periodic order ,create new periodic, delete periodic order, order or load default periodic? \n1.Edit order  \n2.Add new periodic order \n3.Delete periodic order \n4.Load best periodic for each product \n5.Exit");
             choice0 = input.nextInt();
             switch (choice0) {
                 case 1: {
@@ -66,6 +66,7 @@ public class UI {
                 }
                 case 4:{
                     SupplierService.getSupplierService().updatePeriodOrders(ProductService.getInstance().sendToSupplierAllProductsQuantity(),localDate);
+                    System.out.println("Each product updated with the best periodic for it. ");
                     break;
                 }
                 case 5:
@@ -78,7 +79,7 @@ public class UI {
     public void beginSupplierMenu(LocalDate localDate){
         int choice1 = 0;
         while (choice1!=2) {
-            System.out.println("Welcome to Suppliers system! \nDo you want to edit current data,create new data or start over? \n1.Edit existing data  \n2.Return to the login menu");
+            System.out.println("Welcome to Suppliers system! \nDo you want to edit current data,create new data or start over? \n1.Edit existing data  \n2.Exit");
             choice1 = input.nextInt();
             switch (choice1)
             {
@@ -88,7 +89,7 @@ public class UI {
                     mainMenu();
                     break;
 
-            }
+                }
                 case 2:{
                     break;
                 }
@@ -377,5 +378,3 @@ public class UI {
         }
     }
 }
-
-

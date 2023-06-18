@@ -15,21 +15,10 @@ public class Main {
 
     public static void main(String[] args) {
 
-//        Scanner scanner = new Scanner(System.in);
-//        String choice;
         UI ui = UI.getUser();
         localDate = LocalDate.now();
 
         int numberOfArguments = args.length;
-
-
-        // Display the menu options
-//        System.out.println("Menu:");
-//        System.out.println("1. Run program through GUI");
-//        System.out.println("2. Run program through CLI");
-//        System.out.println("0. Exit");
-//        System.out.print("Enter your choice: ");
-//        choice = scanner.nextLine();
         if (numberOfArguments > 0 && numberOfArguments < 3) {
             String howToRun = args[0];
             switch (howToRun) {
@@ -119,7 +108,6 @@ public class Main {
                         break;
                     }
             }
-//        scanner.close();
         }
         else {
             System.out.println("Invalid args, please try again.");

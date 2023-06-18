@@ -1,28 +1,29 @@
 package GUI.supplyGui;
 
 import GUI.MainGUI;
-import GUI.loginRegisterGui.loginRegisterGUI;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import GUI.loginRegisterGui.loginRegisterGUI;
 
 public class SupplierGUI extends JPanel {
-    private loginRegisterGUI loginRegisterGUI;
-    private JPanel mainPanel;
-
     private MainGUI mainGUI;
+    private JPanel mainPanel;
     private AddSupplierPanel addSupplierPanel;
     private EditSupplierPanel editSupplierPanel;
     private DeleteSupplierPanel deleteSupplierPanel;
-
+    private loginRegisterGUI loginRegisterGUI;
     public SupplierGUI(loginRegisterGUI loginRegisterGUI, MainGUI mainGUI)throws IOException  {
         this.mainGUI = mainGUI;
         this.loginRegisterGUI = loginRegisterGUI;
         setLayout(new BorderLayout());
+
 
         // Create main panel
         Image background = null;
@@ -54,10 +55,10 @@ public class SupplierGUI extends JPanel {
         gbc.insets = new Insets(20, 0, 20, 0); // Adjust spacing as needed
         centerPanel.add(titleLabel, gbc);
 
-
         String back = "back" ;
         if(loginRegisterGUI != null)
             back = "Disconnect";
+
         // Create button panel
         JButton backButton = new JButton(back);
         JPanel buttonPanel = new JPanel();
@@ -115,6 +116,11 @@ public class SupplierGUI extends JPanel {
             }
         });
 
+//        backButton.addActionListener(new ActionListener() {
+//                public void actionPerformed(ActionEvent e) {
+//                    mainGUI.showMainPanel();
+//                }
+//        });
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(loginRegisterGUI != null)
@@ -125,6 +131,7 @@ public class SupplierGUI extends JPanel {
             }
         });
     }
+
     private JButton createButton(String text, String imagePath) throws IOException {
         // Create button panel
         int width = 150;
