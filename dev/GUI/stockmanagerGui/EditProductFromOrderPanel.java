@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class EditProductFromOrderPanel extends JPanel {
-    //priv//ate EditOrderPanelB parentPanel;
+    //ate EditOrderPanelB parentPanel;
     private OrderManagementGui parentPanel;
     private JPanel mainPanel;
 
@@ -50,8 +50,8 @@ public class EditProductFromOrderPanel extends JPanel {
         JLabel titleLabel = new JLabel("Edit Amount of Product");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
-        mainPanel.add(titleLabel, BorderLayout.NORTH);
-        mainPanel.setLayout(new FlowLayout());
+        centerPanel.add(titleLabel, gbc);
+
 
         JLabel textLabel = new JLabel("Select Product From The List And Enter Amount, Later, Press Update");
         textLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -128,8 +128,8 @@ public class EditProductFromOrderPanel extends JPanel {
         });
 
 
-        revalidate();
-        repaint();
+//        revalidate();
+//        repaint();
     }
 
     public String[] getAllProductsNameOfOrder(int orderID)

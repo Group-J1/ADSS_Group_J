@@ -126,8 +126,8 @@ public class DeleteProductFromOrderPanel extends JPanel {
             }
         });
 
-        revalidate();
-        repaint();
+//        revalidate();
+//        repaint();
     }
 
     public String[] getAllProductsNameOfOrder(int orderID)

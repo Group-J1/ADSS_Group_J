@@ -2,6 +2,7 @@ package GUI.stockmanagerGui;
 
 import Supplier_Module.Business.Managers.Order_Manager;
 import Supplier_Module.Business.Order;
+import Supplier_Module.DAO.OrderDAO;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -77,11 +78,17 @@ public class EditOrderPanel extends JPanel {
 // Add action listener for the submit button
         submitButton.addActionListener(e -> {
             String orderNumber = numberField.getText();
-            if(!isExistOrder(orderNumber)) {
-                JOptionPane.showMessageDialog(null, "Invalid order ID");
+            if (!isExistOrder(orderNumber)) {
+                {
+                    JOptionPane.showMessageDialog(null, "Invalid order ID");
+                }
             }
-            else
-            {
+            else {
+
+                if (OrderDAO.getInstance().getOrderById(Integer.parseInt(orderNumber)).getKind() != 2) {
+                    JOptionPane.showMessageDialog(null, "Invalid order ID");
+                }
+            else{
                 centerPanel.remove(editPanel);
                 this.number = numberField.getText();
                 JPanel buttonPanel = new JPanel();
@@ -89,13 +96,13 @@ public class EditOrderPanel extends JPanel {
                 buttonPanel.setOpaque(false);
                 JButton editProduct = null;
                 try {
-                    editProduct = createButton("Edit Product","/GUI/pictures/new-supplier.jpg");
+                    editProduct = createButton("Edit Product", "/GUI/pictures/new-supplier.jpg");
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
                 JButton deleteProduct = null;
                 try {
-                    deleteProduct = createButton("Delete Product","/GUI/pictures/update.jpg");
+                    deleteProduct = createButton("Delete Product", "/GUI/pictures/update.jpg");
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -106,7 +113,7 @@ public class EditOrderPanel extends JPanel {
                 buttonPanel.add(deleteProduct);
                 buttonPanel.add(Box.createHorizontalGlue());
 
-                gbcd.gridy =1;
+                gbcd.gridy = 1;
                 gbcd.anchor = GridBagConstraints.CENTER;
                 centerPanel.add(buttonPanel, gbcd);
 //                this.supplier = SupplierDAO.getInstance().getSupplier(Integer.parseInt(supplierNumber));//TODO
@@ -133,6 +140,7 @@ public class EditOrderPanel extends JPanel {
                 revalidate();
                 repaint();
             }
+        }
         });
 
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
