@@ -29,9 +29,9 @@ public class Connect {
     }
     public static void connect(){
         try {
-            String url = "jdbc:sqlite:dev/Resource/MarketDB.db";  // change for jar
+//            String url = "jdbc:sqlite:dev/Resource/MarketDB.db";  // change for jar
 
-//            String url = "jdbc:sqlite::Resource:MarketDB.db";  // change for jar
+            String url = "jdbc:sqlite:MarketDB.db";  // change for jar
             connection = DriverManager.getConnection(url);
         }
         catch (SQLException e){

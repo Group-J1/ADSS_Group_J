@@ -5,8 +5,8 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 
 public class DBTables {
-    private static final String DB_URL = "jdbc:sqlite:dev/Resource/MarketDB.db";
-
+//    private static final String DB_URL = "jdbc:sqlite:dev/Resource/MarketDB.db";
+    private static final String DB_URL = "jdbc:sqlite:MarketDB.db";
     public final static String SUPPLIERS = "SUPPLIERS";
         public final static String ITEM_ORDERS = "ITEM_ORDERS";
         public final static String CONTACTS = "CONTACTS";
